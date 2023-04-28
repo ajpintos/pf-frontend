@@ -5,7 +5,6 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  console.log('entre a app')
 
   return (
     <div className="App">
