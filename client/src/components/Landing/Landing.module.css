@@ -1,0 +1,20 @@
+.email {
+  font-size: 1.2rem;
+}
+.contraseña {
+  font-size: 1.2rem;
+}
+
+.ingresar {
+  font-size: 1rem;
+}
+.ingresar:hover {
+  background-color: gray;
+}
+
+.crear {
+  font-size: 1rem;
+}
+.crear:hover {
+  background-color: gray;
+}
