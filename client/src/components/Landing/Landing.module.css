@@ -1,20 +1,166 @@
-.email {
-  font-size: 1.2rem;
+.container {
+  /*  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap; */
+  color: black;
+  background-color: white;
 }
-.contraseña {
-  font-size: 1.2rem;
+.container_inicio {
+  flex-wrap: nowrap;
+}
+.logo {
+  position: relative;
+  left: -7rem;
+  width: 6rem;
+  height: 5rem;
+  border-radius: 1rem;
+  top: 0.5rem;
+}
+.search {
+  position: relative;
+  top: -1rem;
+  left: 2rem;
+  border-radius: 1rem;
+  background-color: rgba(172, 255, 47, 0.752);
+  color: black;
+  font-size: 1.1rem;
+}
+.my_acount {
+  position: relative;
+  top: -1rem;
+  left: 12rem;
+  background-color: white;
+  color: black;
+}
+.whishlist {
+  position: relative;
+  top: -1rem;
+  left: 12.2rem;
+  background-color: white;
+  color: black;
 }
 
-.ingresar {
-  font-size: 1rem;
+.amount {
+  position: relative;
+  top: -1rem;
+  left: 12.4rem;
+  background-color: white;
+  color: black;
 }
-.ingresar:hover {
-  background-color: gray;
+.container_settings {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: brown;
+}
+.home {
+  position: relative;
+  left: 3rem;
+  background-color:brown;
+  color: black;
+}
+.categories {
+  position: relative;
+  left: 3.1rem;
+  background-color:brown;
+  color: black;
+}
+.about_us {
+  position: relative;
+  left: 3.2rem;
+  background-color:brown;
+  color: black;
+}
+.contact_us {
+  position: relative;
+  left: 3.3rem;
+  background-color:brown;
+  color: black;
+}
+.settings {
+  position: relative;
+  margin-left: 35rem;
+  background-color:brown;
+  color: black;
 }
 
-.crear {
-  font-size: 1rem;
+.hero {
+  background-color: yellowgreen;
+  height: 15rem;
+  position: relative;
+  top: -2.1rem;
+  align-items: center;
+  line-height: 40vh;
 }
-.crear:hover {
+.feactured_products {
+  position: relative;
+  top: -1.8rem;
+}
+
+.container_productos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.productos {
+  margin: 3px;
+  width: 13rem;
+  height: 25rem;
+  margin-bottom: 2rem;
+ /*  border: 2px solid greenyellow */;
+  border-radius: 1rem;
+}
+.image_product {
+  width: 100%;
+  border-radius: 0.8rem;
+}
+.name {
+  margin-top: -0.5rem;
+}
+.description {
+  margin-top: -1.2rem;
+  height: 2rem;
+}
+.price {
+  margin-top: -0.5rem;
+}
+.button_cart {
+  background-color: greenyellow;
+  color: black;
+}
+
+.container_final {
+  display: flex;
+  justify-content: space-evenly;
+  height: 13rem;
   background-color: gray;
+  color: white;
+}
+.logo2 {
+  left: -7rem;
+  width: 8rem;
+  height: 7rem;
+  border-radius: 1rem;
+  margin-top: 3.5rem;
+}
+.container_infomation_final {
+  width: 17rem;
+  height: 8rem;
+}
+.container_contact_final {
+  width: 17rem;
+  height: 8rem;
+}
+.container_menu_final {
+  width: 17rem;
+  height: 8rem;
+}
+.copyright {
+  width: 5rem;
+  height: 2.5rem;
+  position: absolute;
+  margin-top: 10rem;
+  left: 36rem;
 }
