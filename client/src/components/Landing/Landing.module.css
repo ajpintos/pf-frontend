@@ -4,6 +4,11 @@
   flex-wrap: nowrap; */
   color: black;
   background-color: white;
+  position: absolute;
+  width: 80%;
+  top: 34%;
+  left: 50%;
+  transform: translate(-50%, -10%);
 }
 .container_inicio {
   flex-wrap: nowrap;
