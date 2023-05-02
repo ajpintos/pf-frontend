@@ -1,7 +1,7 @@
-import s from "./Landing.module.css";
+import s from "./Landing_home.module.css";
 import imgpropia from "../../logo/logo.png";
 
-const Landing = () => {
+const Landing_home = () => {
   const productsArray = [
     {
       name: "Almendras",
@@ -222,4 +222,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default Landing_home;
