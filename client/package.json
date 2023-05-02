@@ -3,10 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://biofresh.shop",
   "scripts": {
     "dev": "vite",
-    "build": "build",
-    "preview": "preview"
+    "build": "vite build",
+    "preview": "preview",
+    "serve": "npm run build && vite preview"
   },
   "dependencies": {
     "axios": "^1.3.6",
