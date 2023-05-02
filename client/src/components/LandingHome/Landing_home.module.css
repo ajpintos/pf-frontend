@@ -5,13 +5,17 @@
   color: black;
   background-color: white;
   position: absolute;
-  width: 80%;
+  width: 100%;
   top: 34%;
   left: 50%;
   transform: translate(-50%, -10%);
 }
 .container_inicio {
+  display: flex;
   flex-wrap: nowrap;
+  height: 10rem;
+  justify-content: center;
+  align-items: center;
 }
 .logo {
   position: relative;
@@ -19,11 +23,11 @@
   width: 6rem;
   height: 5rem;
   border-radius: 1rem;
-  top: 0.5rem;
+  top: 1rem;
 }
 .search {
   position: relative;
-  top: -1rem;
+  top: 1rem;
   left: 2rem;
   border-radius: 1rem;
   background-color: rgba(172, 255, 47, 0.752);
@@ -32,14 +36,14 @@
 }
 .my_acount {
   position: relative;
-  top: -1rem;
+  top: 1rem;
   left: 12rem;
   background-color: white;
   color: black;
 }
 .whishlist {
   position: relative;
-  top: -1rem;
+  top: 1rem;
   left: 12.2rem;
   background-color: white;
   color: black;
@@ -47,47 +51,39 @@
 
 .amount {
   position: relative;
-  top: -1rem;
+  top: 1rem;
   left: 12.4rem;
   background-color: white;
   color: black;
 }
 .container_settings {
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  background-color: brown;
+  background-color: #582f1d;
+  font-weight: bolder;
 }
-.home {
-  position: relative;
-  left: 3rem;
-  background-color:brown;
-  color: black;
-}
-.categories {
-  position: relative;
-  left: 3.1rem;
-  background-color:brown;
-  color: black;
-}
-.about_us {
-  position: relative;
-  left: 3.2rem;
-  background-color:brown;
-  color: black;
-}
-.contact_us {
-  position: relative;
-  left: 3.3rem;
-  background-color:brown;
-  color: black;
-}
+.home,
+.categories,
+.about_us,
+.contact_us,
 .settings {
   position: relative;
-  margin-left: 35rem;
-  background-color:brown;
-  color: black;
+  left: 3rem;
+  background-color: #582f1d;
+  color: #edab5f;
+  font-weight: bolder;  
 }
-
+.settings {
+  margin-left: 34rem;
+}
+.container_settings button:hover {
+  background-color: #edab5f;
+  color: #582f1d;
+  cursor: pointer;
+  border: none;
+}
 .hero {
   background-color: yellowgreen;
   height: 15rem;
