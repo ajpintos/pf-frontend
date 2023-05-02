@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import LandingHome from "./components/LandingHome/LandingHome";
 import About from "./components/About/About";
 import Detail from "./components/Detail/Detail";
+import LoginPage from "./components/LoginPage/LoginPage.jsx";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <header className="App-header">
         <Routes>
           <Route path="/" element={<LandingHome />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/detail" element={<Detail />} />
 

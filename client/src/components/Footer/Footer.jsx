@@ -19,7 +19,7 @@ const Footer = () => {
         <article className={s.container_info}>
           <h4>Group 5 of cohort Pt-10b</h4>
           <p>
-            Juan Cruz M. <br/>
+            Juan Cruz Matanzo <br/>
             Santiago Muller <br/>
             Javier Pintos <br/>
             Mauricio Mendez <br/>

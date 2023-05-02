@@ -1,5 +1,6 @@
 import s from "./Landing_home.module.css";
 import imgpropia from "../../logo/logo.png";
+import {Link} from "react-router-dom";
 import p from "../../helpers/importPictures";
 import Footer from '../Footer/Footer.jsx';
 
@@ -162,7 +163,7 @@ const Landing_home = () => {
         <div className={s.container_inicio}>
           <img src={imgpropia} alt="imagen" className={s.logo} />
           <input type="text" placeholder="Search..." className={s.search} />
-          <button className={s.my_acount}>🙋‍♂️My account</button>
+          <button className={s.my_acount}><Link to="/login">🙋‍♂️My account</Link></button>
           <button className={s.whishlist}>🧡Whishlist</button>
           <button className={s.amount}>🛒AMOUNT</button>
           <br />
