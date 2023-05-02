@@ -101,7 +101,7 @@
   top: -1.8rem;
 }
 
-.container_productos {
+/* .container_productos {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -113,9 +113,9 @@
   margin: 3px;
   width: 13rem;
   height: 25rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; */
  /*  border: 2px solid greenyellow */;
-  border-radius: 1rem;
+  /* border-radius: 1rem;
 }
 .image_product {
   width: 100%;
@@ -134,7 +134,7 @@
 .button_cart {
   background-color: greenyellow;
   color: black;
-}
+} */
 
 .container_final {
   display: flex;
