@@ -1,0 +1,71 @@
+  .footer {
+    background-color: #757575;
+    color: white;
+    display: flex;
+    flex-direction: column;
+
+  }
+  
+  .container_final {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .logoBiofresh {
+    width: 12rem;
+    height: 10rem;
+    border-radius: 1rem;
+    margin: auto;
+  }
+
+  .container_info {
+    width: 17rem;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container_info h4 {
+    font-size: 1.2rem;
+    color: #acff2fc0;
+    color: #63ac05;
+    color: #76b607;
+    color:  #edab5f;
+    color: #582f1d;
+  }
+
+  .container_info p {
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.3rem;
+    color: #edab5f;
+    margin: 0 0.5rem;
+  }
+
+  .container_info ul {
+    list-style: none;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+    padding: 0;
+  }
+
+  .container_info ul li {
+    color: #acff2fc0;
+  }
+
+  .container_info ul li:hover {
+    color: #582f1d;
+    cursor: pointer;
+    background-color: #acff2fc0;
+    width: 6rem;
+    border-radius: 5px;
+  }
+  .copyright {
+    color: #582f1d;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  
