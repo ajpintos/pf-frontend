@@ -1,0 +1,68 @@
+.container{
+    color: black;
+    background-color: white;
+    position: absolute;
+    width: 90%;
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.title{
+    /* text-shadow: 3px 3px 2px #0c0c0c, -1px -1px 0px gray, 1px -1px 0px gray, -1px 1px 0px gray;
+    color: Yellowgreen; */
+}
+.container2{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    width: 90%;
+    margin: 15px auto;
+    justify-items: center;
+}
+.price{
+    font-size: 20px;
+    justify-items:start !important;
+    margin: 10px 10px;
+}
+/* .contInf{
+    align-self:first baseline;
+    justify-items: center;
+} */
+.cantidad{
+    width: 39px;
+    margin: 10px 10px;
+}
+.contInf p{
+    /* margin: 15px; */
+    /* background: linear-gradient(45deg, #e6e1e1, #9b999912); */
+    padding: 5px;
+    text-align: start;
+}
+.btn{
+    color: rgb(243, 250, 244);
+    background-color: Yellowgreen;
+    /* padding: 5px 15px; */
+    border-radius: 5px;
+    cursor: pointer;
+    /* font-size: 1.0em; */
+    width: 150px;
+    height: 36px;
+    margin: 10px 0px;
+}
+.btn:hover{
+    color: yellowgreen;
+    background-color:brown;
+}
+.divTable{
+    max-height: 120px;
+    overflow : auto;
+}
+.table{
+    width: 90%;
+    font-size: small
+}
+.table tr{
+    height: 15px ;
+}
