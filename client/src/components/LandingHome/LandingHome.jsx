@@ -3,6 +3,7 @@ import imgpropia from "../../logo/logo.png";
 import {Link} from "react-router-dom";
 import CardContainer from "../CardContainer/CardContainer.jsx";
 import Footer from '../Footer/Footer.jsx';
+import NavBar from "../NavBar/NavBar";
 
 const Landing_home = () => {
   
@@ -24,15 +25,8 @@ const Landing_home = () => {
         </div>
 
         {/* Sección de NavBar y Settings */}
-        <div className={s.container_settings}>
-          <div className={s.navBar}> 
-            <button className={s.home}>HOME</button>
-            <button className={s.categories}>CATEGORIES</button>
-            <button className={s.about_us}>ABOUT US</button>
-            <button className={s.contact_us}>CONTACT US</button>
-          </div>
-          <button className={s.settings}>SETTINGS</button>
-        </div>
+
+        <NavBar/>
 
         {/* Sección Hero */}
         <h1 className={s.hero}>HERO</h1>
