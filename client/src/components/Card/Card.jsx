@@ -10,7 +10,7 @@ function Card ({ name , image , description , price , stock }) {
                     <img src={image} alt={name} className={styles.image_product}/>
                     <h4 className={styles.name}>{name}</h4>
                     <h5 className={styles.stock}>STOCK: {stock}</h5>
-                    <h5 className={styles.price}>PRICE: {price}</h5>
+                    <h5 className={styles.price}>PRICE: ${price}</h5>
                     <h6 className={styles.description}>{description}</h6>
                     <button className={styles.button_cart}>Add to Cart</button>
                 </div>
