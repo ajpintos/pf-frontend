@@ -9,10 +9,7 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.title{
-    /* text-shadow: 3px 3px 2px #0c0c0c, -1px -1px 0px gray, 1px -1px 0px gray, -1px 1px 0px gray;
-    color: Yellowgreen; */
-}
+
 .container2{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -31,8 +28,18 @@
     justify-items: center;
 } */
 .cantidad{
-    width: 39px;
-    margin: 10px 10px;
+    width: 42px;
+    margin: 10px 20px;
+    border: 1px solid yellowgreen;
+    height: 24px;
+    border-radius: 6px;
+    text-align: center;
+}
+.contInfTitle{
+    align-self: flex-start;
+}
+.contInf{
+    align-self: flex-end;
 }
 .contInf p{
     /* margin: 15px; */
@@ -43,7 +50,7 @@
 .btn{
     color: rgb(243, 250, 244);
     background-color: Yellowgreen;
-    /* padding: 5px 15px; */
+    padding: 5px 15px;
     border-radius: 5px;
     cursor: pointer;
     /* font-size: 1.0em; */
@@ -53,7 +60,7 @@
 }
 .btn:hover{
     color: yellowgreen;
-    background-color:brown;
+    background-color:#582f1d;
 }
 .divTable{
     max-height: 120px;
