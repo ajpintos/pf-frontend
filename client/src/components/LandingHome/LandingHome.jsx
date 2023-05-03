@@ -29,7 +29,10 @@ const Landing_home = () => {
         <NavBar/>
 
         {/* Sección Hero */}
-        <h1 className={s.hero}>HERO</h1>
+        <div className={s.hero}>
+        <h1 className={s.text}>HERO</h1>
+      </div>
+
 
       </header>
 
