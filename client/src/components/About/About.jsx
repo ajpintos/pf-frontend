@@ -1,9 +1,12 @@
+import NavBar from '../NavBar/NavBar';
 import s from './About.module.css'
 const About=()=>{
 
     return(
         <div className={s.container}>
         <h1>About Us</h1>
+        
+        <NavBar/>
 
         <div className={s.container2}>
             <h2>Acerca de nuestro proyecto</h2>

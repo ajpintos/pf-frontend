@@ -9,7 +9,7 @@ function CardContainer () {
   const [products, setProducts] = useState([]);
 
   const callApi = async () => {
-    const api = await axios("http://localhost:3001/products")
+    const api = await axios("/products")
     const apiData = api.data;
     setProducts(apiData);
     return products;

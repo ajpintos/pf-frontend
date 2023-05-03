@@ -1,0 +1,33 @@
+.container_settings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #582f1d;
+    font-weight: bolder;
+}
+.home,
+.categories,
+.about_us,
+.contact_us,
+.settings {
+    position: relative;
+    background-color: #582f1d;
+    color: #edab5f;
+    font-weight: bolder;
+    margin-top: 5px;
+    margin-bottom: 5px;  
+}
+.home, .categories, .about_us, .contact_us {
+    margin-left: 15px;
+}
+
+.settings {
+    margin-right: 10px;
+}
+.container_settings button:hover {
+    background-color: #edab5f;
+    color: #582f1d;
+    cursor: pointer;
+    border: none;
+}

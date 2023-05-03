@@ -4,6 +4,8 @@ import LandingHome from "./components/LandingHome/LandingHome";
 import About from "./components/About/About";
 import Detail from "./components/Detail/Detail";
 import LoginPage from "./components/LoginPage/LoginPage.jsx";
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:3001";
 
 function App() {
   return (
