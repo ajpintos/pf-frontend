@@ -1,4 +1,4 @@
-.container{
+/* .container{
     color: black;
     background-color: white;
     position: absolute;
@@ -23,10 +23,7 @@
     justify-items:start !important;
     margin: 10px 10px;
 }
-/* .contInf{
-    align-self:first baseline;
-    justify-items: center;
-} */
+
 .cantidad{
     width: 42px;
     margin: 10px 20px;
@@ -42,8 +39,6 @@
     align-self: flex-end;
 }
 .contInf p{
-    /* margin: 15px; */
-    /* background: linear-gradient(45deg, #e6e1e1, #9b999912); */
     padding: 5px;
     text-align: start;
 }
@@ -53,7 +48,7 @@
     padding: 5px 15px;
     border-radius: 5px;
     cursor: pointer;
-    /* font-size: 1.0em; */
+    
     width: 150px;
     height: 36px;
     margin: 10px 0px;
@@ -72,4 +67,9 @@
 }
 .table tr{
     height: 15px ;
+} */
+
+.container {
+  width: 100vw;
+  height: 100vw;
 }
