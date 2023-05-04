@@ -36,6 +36,7 @@ function RegisterPage(props) {
                 <br/>
                 <button type="submit">Register</button>
             </form>
+            {/* comentario lalalal*/}
         </div>
         <Footer/>
     </>);
