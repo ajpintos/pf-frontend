@@ -10,7 +10,7 @@ import NavBar from "../NavBar/NavBar";
 const Detail = () => {
   const { id } = useParams();
   const [product, setProduct] = React.useState({});
-  
+  const [cant, setCant]= React.useState(1)
 
   const getProductForId = async () => {
     try {
@@ -32,7 +32,9 @@ const Detail = () => {
 
 
 
-  const validacion = () => {};
+  const validacion = (e) => {
+    setCant(e.target.value)
+  };
 
   return (
     <div className={style.container}>
@@ -60,6 +62,7 @@ const Detail = () => {
               <input
                 type="number"
                 className={style.cantidad}
+                value={cant}
                 min={1}
                 max={product.stock}
                 onChange={validacion}
