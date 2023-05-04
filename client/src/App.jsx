@@ -8,6 +8,7 @@ import Settings from "./components/Settings/Settings.jsx";
 import Contact from "./components/Contact/Contact.jsx";
 import Categories from "./components/Categories/Categories.jsx";
 import axios from "axios";
+//axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
 
 function App() {
