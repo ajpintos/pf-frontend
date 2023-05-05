@@ -117,54 +117,61 @@ function Contact() {
             {/* </div> */}
           </div>
 
-          <div class="col border border-info border-1">
-            <div class="container col border border-primary border-1 mt-5">
-              <div class="row border border- border-1">
-                <h5 class="col-md-6 text-start border border-secondary border-1">
-                  BioFresh
-                </h5>
-                <div class="col-m-4 border border-secondary border-1 text-start small ">
+          <div class="col ">
+            <div class="container col  mt-5">
+              <div class="row ">
+                <h5 class="col-md-6 text-start ">BioFresh</h5>
+                <div class="col-m-4  text-start small ">
                   Si tienes alguna duda sobre algún producto. quieres contarnos
                   sobre un evento o simplemente quieres escribirnos, déianos tu
                   mensaje aquí!
                 </div>
 
                 <div class="row text-white">" "</div>
-                <h5 className="col-md-4 border border-secondary border-1 border">
-                  Contáctanos
-                </h5>
+                <h5 className="col-md-4 ">Contáctanos</h5>
                 <br />
-                <div class="d-flex flex-wrap  border border-primary border-1 border">
+                <div class="d-flex flex-wrap  ">
                   <div class="row text-white ">" "</div>
 
-                  <h6 class="col border border-danger border-1 border">
-                    <img src={phone} alt="" width="40px" height="40px" />
-                    <div>
-                      Telefono
-                      <br />
-                      <h7 /* class="col border border-secondary border-3 border" */
-                      >
-                        3007476099
-                      </h7>
+                  <h6 class="col  text-start">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <img src={phone} alt="" height="60px" class="col " />
+                        <p class="col   text-center " height="60px">
+                          Telefono 3007476099
+                        </p>
+                      </div>
                     </div>
                   </h6>
 
-                  <h6 class="col-md-6 border border-secondary border-1 border">
-                    <img src={direccion} alt="" width="40px" height="40px" />
-                    Direccion
-                    <br />
-                    <h7 class="col border border-secondary border-1 border">
-                      Carrera 33 # ejemplo
-                    </h7>
+                  <h6 class="col-md-6  border-1 border">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <img
+                          class="col "
+                          src={direccion}
+                          alt=""
+                          height="60px"
+                        />
+                        <p class="col   text-center ">
+                          Direccion carrera 23-42-123
+                        </p>
+                      </div>
+                    </div>
                   </h6>
 
-                  <h6 class="col-md-6 border border-secondary border-1 border">
-                    <img src={email} alt="" width="40px" height="40px" />
-                    Email
-                    <br />
-                    <h7 class="col border border-secondary border-1 border">
-                      Biofresh@gmail.com
-                    </h7>
+                  <h6 class="col  border">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <img
+                          class="col-md-2 border-2"
+                          src={email}
+                          alt=""
+                          height="60px"
+                        />
+                        <p class="col text-start ">biofresh@gmail.com</p>
+                      </div>
+                    </div>
                   </h6>
                 </div>
               </div>
