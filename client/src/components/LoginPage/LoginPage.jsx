@@ -7,9 +7,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import validate from "../RegisterPage/validate/validate.js";
+import loginValidate from "./validate/loginValidate.js";
 
-function LoginPage(props){
+function LoginPage(){
 
 //! Estado local para guardar los datos del formulario
 const [form, setForm] = useState({
@@ -17,16 +17,15 @@ const [form, setForm] = useState({
     password: "",
 })
 
-//! Estado local para guardar los errores de validación del formulario
+/*//! Estado local para guardar los errores de validación del formulario
 const [errors, setErrors] = useState({
     email: "",
-    password: "",
-})
+    password: ""
+})*/
 
 const submitHandler = (event) => {
     event.preventDefault()
     const response = axios.get("/users", form)
-    console.log("Este es el contenido del form", form)
         .then(res => alert("User logged successfully!")
             .catch(err => alert(err)))
 }
@@ -37,7 +36,7 @@ const changeHandler = (event) => {
     const value = event.target.value;
     //! Elimina id delay de la validación
     setForm({...form, [property]: value});
-    setErrors(validate({...form, [property]: value}));
+    // setErrors(loginValidate({...form, [property]: value}));
 }
 
 return (<>
@@ -46,7 +45,7 @@ return (<>
             <Form onSubmit={submitHandler}>
                 <h2>Login</h2>
                 <Row className="mb-3">
-                    <Form.Group as={Col} controlId="formEmail">
+                    <Form.Group as={Col} controlIdEmail="Email">
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="email" placeholder="Enter email" id="email" name="email"
                                       value={form.email}
@@ -54,7 +53,7 @@ return (<>
                     </Form.Group>
                     <br/>
 
-                    <Form.Group as={Col} controlId="formPassword">
+                    <Form.Group as={Col} controlIdPassword="Password">
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Enter Password" id="password" name="password"
                                       value={form.password}

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from './RegisterPage.module.css';
 import Footer from '../Footer/Footer.jsx';
 import axios from "axios";
-import validate from "./validate/validate.js";
+import registerValidate from "./validate/registerValidate.js";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
@@ -51,7 +51,7 @@ function RegisterPage(props) {
         const value = event.target.value;
         //! Elimina id delay de la validación
         setForm({...form, [property]: value});
-        setErrors(validate({...form, [property]: value}));
+        setErrors(registerValidate({...form, [property]: value}));
     }
 
     return (<>
