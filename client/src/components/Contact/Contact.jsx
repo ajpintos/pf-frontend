@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Contact.module.css";
 import { useState } from "react";
-import validate from "./validate";
+import validate from "./validate.js";
 
 function Contact() {
   const navigate = useNavigate();
@@ -45,33 +45,39 @@ function Contact() {
             <h2>Dejanos tu mensaje</h2>
             <div>
               Nombres y Apellidos
-              <input
+              <input class='form-control'
                 type="text"
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-              ></input>
+              />
+              <div> <span className={styles.error}>
+                {errors.name ? errors.name : null}
+              </span></div>
             </div>
             <div>
               Email
-              <input type="text" name="email" value={form.email}></input>
+              <input type="text" name="email" class='form-control  ' rows="3" value={form.email} onChange={handleChange}/>
               <span className={styles.error}>
                 {errors.email ? errors.email : null}
               </span>
             </div>
             <div>
-              Celular
-              <input type="text" name="phone" value={form.phone}></input>
-              <span className={styles.error}>
+              <label class='form-label'>Celular</label>
+              <input type="text" name="phone" 
+                  class='form-control' value={form.phone} 
+                  maxlength="20" onChange={handleChange}/>
+             <div><span className={styles.error}>
                 {errors.phone ? errors.phone : null}
-              </span>
+              </span></div> 
             </div>
             <div>
               Mensaje
-              <input type="text" name="mensaje" value={form.message}></input>
-              <span className={styles.error}>
+              <textarea class="form-control" rows="3"onChange={handleChange} ></textarea>
+              <div><span className={styles.error}>
                 {errors.message ? errors.message : null}
-              </span>
+              </span></div>
+             
             </div>
             <button> Enviar</button>
           </div>
