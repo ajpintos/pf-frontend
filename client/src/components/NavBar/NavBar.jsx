@@ -12,7 +12,7 @@ export default function NavBar () {
                 <Link to={'/about'}><button className={s.about_us}>ABOUT US</button></Link>
                 <Link to={'/contact'}><button className={s.contact_us}>CONTACT US</button></Link>
             </div>
-            <Link to={'/settings'}><button className={s.settings}>SETTINGS</button></Link>
+            {/* <Link to={'/settings'}><button className={s.settings}>SETTINGS</button></Link> */}
         </div>
     )
 }

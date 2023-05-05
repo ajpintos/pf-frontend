@@ -31,3 +31,8 @@
     cursor: pointer;
     border: none;
 }
+
+.posSticky {
+    position: sticky;
+    top: 0;
+}
