@@ -120,56 +120,51 @@ function Contact() {
           <div class="col ">
             <div class="container col  mt-5">
               <div class="row ">
-                <h5 class="col-md-6 text-start ">BioFresh</h5>
-                <div class="col-m-4  text-start small ">
+                <h3 class="col-md-6 text-start ">BioFresh</h3>
+                <div class="col-m-4  text-start small  mt-3">
                   Si tienes alguna duda sobre algún producto. quieres contarnos
                   sobre un evento o simplemente quieres escribirnos, déianos tu
                   mensaje aquí!
                 </div>
 
                 <div class="row text-white">" "</div>
-                <h5 className="col-md-4 ">Contáctanos</h5>
+                <h4 className="col-md-4 mt-3">Contáctanos</h4>
                 <br />
-                <div class="d-flex flex-wrap  ">
-                  <div class="row text-white ">" "</div>
-
-                  <h6 class="col  text-start">
+                <div class="d-flex flex-wrap   mt-3 ">
+                  <h6 class="col  text-start ">
                     <div class="container-fluid">
-                      <div class="row">
-                        <img src={phone} alt="" height="60px" class="col " />
-                        <p class="col   text-center " height="60px">
+                      <div class="row ">
+                        <img src={phone} alt="" height="60px" class="col-4  " />
+                        <label class="col-7 p-2" height="60px ">
                           Telefono 3007476099
-                        </p>
+                        </label>
                       </div>
                     </div>
                   </h6>
 
-                  <h6 class="col-md-6  border-1 border">
+                  <h6 class="col-md-6  ">
                     <div class="container-fluid">
-                      <div class="row">
+                      <div class="row ">
                         <img
-                          class="col "
+                          class="col-4 "
                           src={direccion}
                           alt=""
                           height="60px"
                         />
-                        <p class="col   text-center ">
+                        <label class="col  text-start ">
                           Direccion carrera 23-42-123
-                        </p>
+                        </label>
                       </div>
                     </div>
                   </h6>
 
-                  <h6 class="col  border">
+                  <h6 class="col-8   mt-4">
                     <div class="container-fluid">
                       <div class="row">
-                        <img
-                          class="col-md-2 border-2"
-                          src={email}
-                          alt=""
-                          height="60px"
-                        />
-                        <p class="col text-start ">biofresh@gmail.com</p>
+                        <img class="col-3 " src={email} alt="" height="60px" />
+                        <label class="col-7 text-start   mt-2  ">
+                          Email biofresh@gmail.com
+                        </label>
                       </div>
                     </div>
                   </h6>
