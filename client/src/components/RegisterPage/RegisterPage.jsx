@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styles from './RegisterPage.module.css';
 import Footer from '../Footer/Footer.jsx';
 import axios from "axios";
+import validate from "./validate/validate.js";
 
 function RegisterPage(props) {
 
@@ -9,8 +10,8 @@ function RegisterPage(props) {
     const [form, setForm] = useState({
         email: "",
         password: "",
-        first_name: "",
-        last_name: "",
+        firstname: "",
+        lastname: "",
         address: "",
         cp: "",
         city: "",
@@ -22,8 +23,8 @@ function RegisterPage(props) {
     const [errors, setErrors] = useState({
         email: "",
         password: "",
-        first_name: "",
-        last_name: "",
+        firstname: "",
+        lastname: "",
         address: "",
         cp: "",
         city: "",
@@ -34,6 +35,7 @@ function RegisterPage(props) {
     const submitHandler = (event) => {
         event.preventDefault()
         const response = axios.post("/users", form)
+        console.log("Este es el contenido del form",form)
             .then(res => alert("User added successfully!")
                 .catch(err => alert(err)))
     }
@@ -52,19 +54,24 @@ function RegisterPage(props) {
             <form onSubmit={submitHandler} className={styles.box}>
                 <h2>Register</h2>
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email" value={form.email} onChange={changeHandler}/>
+                <input type="email" id="email" name="email" placeholder="Email" value={form.email}
+                       onChange={changeHandler}/>
                 <br/>
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password" value={form.password} onChange={changeHandler}/>
+                <input type="password" id="password" name="password" placeholder="Password" value={form.password}
+                       onChange={changeHandler}/>
                 <br/>
-                <label htmlFor="first_name">First Name</label>
-                <input type="first_name" id="first_name" name="first_name" placeholder="First Name" value={form.first_name} onChange={changeHandler}/>
+                <label htmlFor="firstname">First Name</label>
+                <input type="firstname" id="firstname" name="firstname" placeholder="First Name"
+                       value={form.firstname} onChange={changeHandler}/>
                 <br/>
-                <label htmlFor="last_name">Last Name</label>
-                <input type="last_name" id="last_name" name="last_name" placeholder="Last Name" value={form.first_name} onChange={changeHandler}/>
+                <label htmlFor="lastname">Last Name</label>
+                <input type="lastname" id="lastname" name="lastname" placeholder="Last Name" value={form.lastname}
+                       onChange={changeHandler}/>
                 <br/>
                 <label htmlFor="address">Address</label>
-                <input type="address" id="address" name="address" placeholder="Address" value={form.address} onChange={changeHandler}/>
+                <input type="address" id="address" name="address" placeholder="Address" value={form.address}
+                       onChange={changeHandler}/>
                 <br/>
                 <label htmlFor="cp">Zip Code</label>
                 <input type="cp" id="cp" name="cp" placeholder="Zip Code" value={form.cp} onChange={changeHandler}/>
@@ -73,10 +80,12 @@ function RegisterPage(props) {
                 <input type="city" id="city" name="city" placeholder="City" value={form.city} onChange={changeHandler}/>
                 <br/>
                 <label htmlFor="country">Country</label>
-                <input type="country" id="country" name="country" placeholder="Country" value={form.country} onChange={changeHandler}/>
+                <input type="country" id="country" name="country" placeholder="Country" value={form.country}
+                       onChange={changeHandler}/>
                 <br/>
                 <label htmlFor="phone">Phone</label>
-                <input type="phone" id="phone" name="phone" placeholder="Phone" value={form.phone} onChange={changeHandler}/>
+                <input type="phone" id="phone" name="phone" placeholder="Phone" value={form.phone}
+                       onChange={changeHandler}/>
                 <br/>
                 <button type="submit">Register</button>
             </form>
