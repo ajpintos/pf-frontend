@@ -45,61 +45,87 @@ function Contact() {
             <h2>Dejanos tu mensaje</h2>
             <div>
               Nombres y Apellidos
-              <input class='form-control'
+              <input
+                class="form-control"
                 type="text"
                 name="name"
                 value={form.name}
                 onChange={handleChange}
               />
-              <div> <span className={styles.error}>
-                {errors.name ? errors.name : null}
-              </span></div>
+              <div>
+                {" "}
+                <span className={styles.error}>
+                  {errors.name ? errors.name : null}
+                </span>
+              </div>
             </div>
             <div>
               Email
-              <input type="text" name="email" class='form-control  ' rows="3" value={form.email} onChange={handleChange}/>
+              <input
+                type="text"
+                name="email"
+                class="form-control  "
+                rows="3"
+                value={form.email}
+                onChange={handleChange}
+              />
               <span className={styles.error}>
                 {errors.email ? errors.email : null}
               </span>
             </div>
             <div>
-              <label class='form-label'>Celular</label>
-              <input type="text" name="phone" 
-                  class='form-control' value={form.phone} 
-                  maxlength="20" onChange={handleChange}/>
-             <div><span className={styles.error}>
-                {errors.phone ? errors.phone : null}
-              </span></div> 
+              <label class="form-label">Celular</label>
+              <input
+                type="text"
+                name="phone"
+                class="form-control"
+                value={form.phone}
+                maxlength="20"
+                onChange={handleChange}
+              />
+              <div>
+                <span className={styles.error}>
+                  {errors.phone ? errors.phone : null}
+                </span>
+              </div>
             </div>
             <div>
               Mensaje
-              <textarea class="form-control" rows="3"onChange={handleChange} ></textarea>
-              <div><span className={styles.error}>
-                {errors.message ? errors.message : null}
-              </span></div>
-             
+              <textarea
+                class="form-control"
+                rows="3"
+                onChange={handleChange}
+                name="message"
+              ></textarea>
+              <div>
+                <span className={styles.error}>
+                  {errors.message ? errors.message : null}
+                </span>
+              </div>
             </div>
             <button> Enviar</button>
           </div>
 
-          <div class="col">
-            <h3>BioFresh</h3>
-            <div>
-              Si tienes alguna duda sobre algún producto. quieres contarnos
-              sobre un evento o simplemente quieres escribirnos, déianos tu
-              mensaje aquí!
+          <div class="col border border-secondary">
+            <div class="row border border-danger">
+              <div></div>
+              <h3>BioFresh</h3>
+              <div>
+                Si tienes alguna duda sobre algún producto. quieres contarnos
+                sobre un evento o simplemente quieres escribirnos, déianos tu
+                mensaje aquí!
+              </div>
+
+              <h2>Contáctanos</h2>
+
+              <h3 class="row border border-primary">Telefono : </h3>
+              <div class="row border border-primary ">3007476099</div>
+              <h3 class="col border border-secondary">Direccion</h3>
+              <div class="col border border-danger">Carrera 33 # ejemplo</div>
+              <h3 class="row">Email</h3>
+              <div class="row">Biofresh@gmail.com</div>
             </div>
-
-            <h2>Contáctanos</h2>
-
-            <h3>Telefono : </h3>
-            <div>3007476099</div>
-            <h3>Direccion</h3>
-            <div>Carrera 33 # ejemplo</div>
-            <h3>Email</h3>
-            <div>Biofresh@gmail.com</div>
           </div>
-
           <br />
           <h1></h1>
         </div>

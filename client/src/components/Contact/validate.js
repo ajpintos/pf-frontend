@@ -2,9 +2,9 @@ const validate = (form) => {
   const errors = {};
 
   const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-  const regexPhone= /^[0-9]*(.?)[ 0-9]+$/
+  const regexPhone = /^[0-9]*(.?)[ 0-9]+$/;
 
-  if (form.name==='') {
+  if (form.name === "") {
     errors.name = "No debe estar vacio";
   }
   if (!regexEmail.test(form.email)) {
@@ -13,10 +13,10 @@ const validate = (form) => {
   if (!regexPhone.test(form.phone)) {
     errors.phone = "Solo numeros ";
   }
-  if (!form.message) {
+  if (form.message.length === 0) {
     errors.message = "No debe estar vacio";
   }
-  return errors
+  return errors;
 };
 
 export default validate;
