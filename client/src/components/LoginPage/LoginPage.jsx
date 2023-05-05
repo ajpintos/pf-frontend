@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 import Footer from '../Footer/Footer.jsx';
 import NavBar from "../NavBar/NavBar.jsx";
@@ -7,7 +8,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import loginValidate from "./validate/loginValidate.js";
+// import loginValidate from "./validate/loginValidate.js";
 
 function LoginPage(){
 
@@ -17,18 +18,19 @@ const [form, setForm] = useState({
     password: "",
 })
 
-/*//! Estado local para guardar los errores de validación del formulario
-const [errors, setErrors] = useState({
-    email: "",
-    password: ""
-})*/
+// Estado local para guardar los errores de validación del formulario
+// const [errors, setErrors] = useState({
+//     email: "",
+//     password: ""
+// })
 
 const submitHandler = (event) => {
     event.preventDefault()
-    const response = axios.get("/users", form)
-        .then(res => alert("User logged successfully!")
-            .catch(err => alert(err)))
+    axios.post("/users/login", form)
+        .then(res => alert("Login successfully!"))
+        .catch(err => alert(err))
 }
+
 
 
 const changeHandler = (event) => {
@@ -45,26 +47,33 @@ return (<>
             <Form onSubmit={submitHandler}>
                 <h2>Login</h2>
                 <Row className="mb-3">
-                    <Form.Group as={Col} controlIdEmail="Email">
+                    <Form.Group as={Col} controlidemail="Email">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" id="email" name="email"
-                                      value={form.email}
-                                      onChange={changeHandler}/>
+                        <Form.Control 
+                            type="email" 
+                            placeholder="Enter email" id="email" name="email"
+                            value={form.email}
+                            onChange={changeHandler}
+                        />
                     </Form.Group>
                     <br/>
 
-                    <Form.Group as={Col} controlIdPassword="Password">
+                    <Form.Group as={Col} controlidpassword="Password">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Enter Password" id="password" name="password"
-                                      value={form.password}
-                                      onChange={changeHandler}/>
+                        <Form.Control 
+                            type="password" 
+                            placeholder="Enter Password" 
+                            id="password" 
+                            name="password"
+                            value={form.password}
+                            onChange={changeHandler}
+                        />
                     </Form.Group>
                 </Row>
                 <br/>
-                <Button variant="success" type="submit">
-                    Login
-                </Button>
+                <Button variant="success" type="submit">Login</Button>
             </Form>
+            <Link to={"/register"}>Register Now</Link>
         </div>
 
         <Footer/>
