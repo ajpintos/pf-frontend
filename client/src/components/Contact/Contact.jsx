@@ -34,47 +34,54 @@ function Contact() {
   };
 
   return (
-    <div className={styles.container_Principal}>
+    <div class='container'>
       <button onClick={() => navigate("/")}>Back to Home</button>
 
       {/* <NavBar /> */}
 
-      <div class="border  container-fluid">
-        <div class="row">
-          <div class="col">
+      <div >
+        <div class="row  g-3 ">
+          <div class="col-md-6 col-xm-12 g-5 p-5 border" >
             <h2>Dejanos tu mensaje</h2>
-            <div>
-              Nombres y Apellidos
+          
+            <div >
+              <label htmlFor="name">Nombres y Apellidos</label>
               <input
                 class="form-control"
                 type="text"
                 name="name"
+                id="name"
                 value={form.name}
                 onChange={handleChange}
+                aria-label="Nombre"
               />
-              <div>
-                {" "}
+              <div>                
                 <span className={styles.error}>
                   {errors.name ? errors.name : null}
                 </span>
               </div>
             </div>
-            <div>
-              Email
-              <input
-                type="text"
-                name="email"
-                class="form-control  "
-                rows="3"
-                value={form.email}
-                onChange={handleChange}
-              />
-              <span className={styles.error}>
-                {errors.email ? errors.email : null}
-              </span>
+
+
+   
+            <div class="row  g-3">
+              <div class="col-md-6 col-xm-12 p-3">
+             
+                <input
+                  type="text"
+                  name="email"
+                  class="form-control  "
+                  rows="3"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                />
+                <span className={styles.error}>
+                  {errors.email ? errors.email : null}
+                </span>
             </div>
-            <div>
-              <label class="form-label">Celular</label>
+            <div class="col-md-6 col-xm-12 p-3">
+              
               <input
                 type="text"
                 name="phone"
@@ -82,6 +89,7 @@ function Contact() {
                 value={form.phone}
                 maxlength="20"
                 onChange={handleChange}
+                placeholder="Celular" aria-label="Celular"
               />
               <div>
                 <span className={styles.error}>
@@ -89,7 +97,8 @@ function Contact() {
                 </span>
               </div>
             </div>
-            <div>
+            </div>
+            <div >
               Mensaje
               <textarea
                 class="form-control"
@@ -97,18 +106,20 @@ function Contact() {
                 onChange={handleChange}
                 name="message"
               ></textarea>
-              <div>
+               <div class='row p-3'>
                 <span className={styles.error}>
                   {errors.message ? errors.message : null}
                 </span>
               </div>
             </div>
-            <button> Enviar</button>
+            {/* <div class='row p-3'> */}
+            <button class='btn btn-primary' > Enviar</button>
+            {/* </div> */}
           </div>
 
-          <div class="col border border-secondary">
+          <div class="col-md-6 col-xm-12 g-3" >
             <div class="row border border-danger">
-              <div></div>
+             
               <h3>BioFresh</h3>
               <div>
                 Si tienes alguna duda sobre algún producto. quieres contarnos
@@ -117,9 +128,10 @@ function Contact() {
               </div>
 
               <h2>Contáctanos</h2>
-
-              <h3 class="row border border-primary">Telefono : </h3>
-              <div class="row border border-primary ">3007476099</div>
+              <div class="row  g-3">
+              <h3 class="col border border-primary">Telefono : </h3>
+              <div class="col border border-primary"> 3007476099 </div>
+             </div>
               <h3 class="col border border-secondary">Direccion</h3>
               <div class="col border border-danger">Carrera 33 # ejemplo</div>
               <h3 class="row">Email</h3>
