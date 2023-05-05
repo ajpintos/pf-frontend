@@ -37,7 +37,7 @@ const Detail = () => {
       <div class="container">
         <NavBar />
       </div>
-      <div class="border border-danger container-fluid">
+      <div class="border  container-fluid">
         <div class="row">
           <div class="col">
             <img
