@@ -37,6 +37,7 @@ function Contact() {
       })
     );
   };
+  
   const sendEmail=(e)=>{
     e.preventDefault();
     console.log(form)
@@ -48,7 +49,8 @@ function Contact() {
         .then((result) => {
             console.log(result.text);
         }, (error) => {
-            console.log(error.text);
+            console.log(error.message);
+            window.alert(error.message);
         });
     
    } 
@@ -180,7 +182,7 @@ function Contact() {
                       <div className="row">
                         <img className="col-3 " src={email} alt="" height="60px" />
                         <label className="col-7 text-start   mt-2  ">
-                          Email biofresh@gmail.com
+                          Email: contact.biofresh.shop@gmail.com
                         </label>
                       </div>
                     </div>
