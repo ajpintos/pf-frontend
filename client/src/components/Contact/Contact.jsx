@@ -6,6 +6,7 @@ import direccion from "./img/direccion.png";
 import email from "./img/email.jpg";
 import { useState } from "react";
 import validate from "./validate.js";
+import Form from "react-bootstrap/Form";
 
 function Contact() {
   const navigate = useNavigate();
@@ -46,75 +47,76 @@ function Contact() {
         <div class="row  g-3 ">
           <div class="col-md-6 col-xm-12 g-5 p-5 border">
             <h2>Dejanos tu mensaje</h2>
-
-            <div>
-              <label htmlFor="name">Nombres y Apellidos</label>
-              <input
-                class="form-control"
-                type="text"
-                name="name"
-                id="name"
-                value={form.name}
-                onChange={handleChange}
-                aria-label="Nombre"
-              />
+            <Form>
               <div>
-                <span className={styles.error}>
-                  {errors.name ? errors.name : null}
-                </span>
-              </div>
-            </div>
-
-            <div class="row  g-3">
-              <div class="col-md-6 col-xm-12 p-3">
-                <input
+                <Form.Label htmlFor="name">Nombres y Apellidos</Form.Label>
+                <Form.Control
+                  className="form-control"
                   type="text"
-                  name="email"
-                  class="form-control  "
-                  rows="3"
-                  value={form.email}
+                  name="name"
+                  id="name"
+                  value={form.name}
                   onChange={handleChange}
-                  placeholder="Email"
-                />
-                <span className={styles.error}>
-                  {errors.email ? errors.email : null}
-                </span>
-              </div>
-              <div class="col-md-6 col-xm-12 p-3">
-                <input
-                  type="text"
-                  name="phone"
-                  class="form-control"
-                  value={form.phone}
-                  maxlength="20"
-                  onChange={handleChange}
-                  placeholder="Celular"
-                  aria-label="Celular"
+                  aria-label="Nombre"
                 />
                 <div>
                   <span className={styles.error}>
-                    {errors.phone ? errors.phone : null}
+                    {errors.name ? errors.name : null}
                   </span>
                 </div>
               </div>
-            </div>
-            <div>
-              Mensaje
-              <textarea
-                class="form-control"
-                rows="3"
-                onChange={handleChange}
-                name="message"
-              ></textarea>
-              <div class="row p-3">
-                <span className={styles.error}>
-                  {errors.message ? errors.message : null}
-                </span>
+
+              <div class="row  g-3">
+                <div class="col-md-6 col-xm-12 p-3">
+                  <Form.Control
+                    type="text"
+                    name="email"
+                    class="form-control  "
+                    rows="3"
+                    value={form.email}
+                    onChange={handleChange}
+                    placeholder="Email"
+                  />
+                  <span className={styles.error}>
+                    {errors.email ? errors.email : null}
+                  </span>
+                </div>
+                <div class="col-md-6 col-xm-12 p-3">
+                  <Form.Control
+                    type="text"
+                    name="phone"
+                    class="form-control"
+                    value={form.phone}
+                    maxlength="20"
+                    onChange={handleChange}
+                    placeholder="Celular"
+                    aria-label="Celular"
+                  />
+                  <div>
+                    <span className={styles.error}>
+                      {errors.phone ? errors.phone : null}
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
-            {/* <div class='row p-3'> */}
-            <button class="btn btn-primary"> Enviar</button>
-            {/* </div> */}
+              <div>
+                Mensaje
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  onChange={handleChange}
+                  name="message"
+                ></textarea>
+                <div class="row p-3">
+                  <span className={styles.error}>
+                    {errors.message ? errors.message : null}
+                  </span>
+                </div>
+              </div>
+              {/* <div class='row p-3'> */}
+              <button class="btn btn-primary"> Enviar</button>
+              {/* </div> */}
+            </Form>
           </div>
 
           <div class="col ">
@@ -176,12 +178,6 @@ function Contact() {
           <h1></h1>
         </div>
       </div>
-      <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-        crossorigin="anonymous"
-      ></link>
     </div>
   );
 }
