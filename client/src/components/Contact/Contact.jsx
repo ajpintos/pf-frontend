@@ -7,6 +7,7 @@ import email from "./img/email.jpg";
 import { useState } from "react";
 import validate from "./validate.js";
 import Form from "react-bootstrap/Form";
+import emailjs from '@emailjs/browser';
 
 function Contact() {
   const navigate = useNavigate();
@@ -36,18 +37,32 @@ function Contact() {
       })
     );
   };
-
+  const sendEmail=(e)=>{
+    e.preventDefault();
+    console.log(form)
+     const serviceID = 'service_e5hd1wt';
+    const templateID = 'contact_form';
+    const key_public='gEu_FBDo_Q0lvhmwA'
+  
+    emailjs.sendForm(serviceID, templateID, form, key_public)
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+    
+   } 
   return (
-    <div class="container">
+    <div className="container">
       <button onClick={() => navigate("/")}>Back to Home</button>
 
       {/* <NavBar /> */}
 
       <div>
-        <div class="row  g-3 ">
-          <div class="col-md-6 col-xm-12 g-5 p-5 border">
+        <div className="row  g-3 ">
+          <div className="col-md-6 col-xm-12 g-5 p-5 border">
             <h2>Dejanos tu mensaje</h2>
-            <Form>
+            <Form onSubmit={sendEmail}>
               <div>
                 <Form.Label htmlFor="name">Nombres y Apellidos</Form.Label>
                 <Form.Control
@@ -66,12 +81,12 @@ function Contact() {
                 </div>
               </div>
 
-              <div class="row  g-3">
-                <div class="col-md-6 col-xm-12 p-3">
+              <div className="row  g-3">
+                <div className="col-md-6 col-xm-12 p-3">
                   <Form.Control
                     type="text"
                     name="email"
-                    class="form-control  "
+                    className="form-control  "
                     rows="3"
                     value={form.email}
                     onChange={handleChange}
@@ -81,13 +96,13 @@ function Contact() {
                     {errors.email ? errors.email : null}
                   </span>
                 </div>
-                <div class="col-md-6 col-xm-12 p-3">
+                <div className="col-md-6 col-xm-12 p-3">
                   <Form.Control
                     type="text"
                     name="phone"
-                    class="form-control"
+                    className="form-control"
                     value={form.phone}
-                    maxlength="20"
+                    maxLength="20"
                     onChange={handleChange}
                     placeholder="Celular"
                     aria-label="Celular"
@@ -102,69 +117,69 @@ function Contact() {
               <div>
                 Mensaje
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   rows="3"
                   onChange={handleChange}
                   name="message"
                 ></textarea>
-                <div class="row p-3">
+                <div className="row p-3">
                   <span className={styles.error}>
                     {errors.message ? errors.message : null}
                   </span>
                 </div>
               </div>
-              {/* <div class='row p-3'> */}
-              <button class="btn btn-primary"> Enviar</button>
+              {/* <div className='row p-3'> */}
+              <button className="btn btn-primary"> Enviar</button>
               {/* </div> */}
             </Form>
           </div>
 
-          <div class="col ">
-            <div class="container col  mt-5">
-              <div class="row ">
-                <h3 class="col-md-6 text-start ">BioFresh</h3>
-                <div class="col-m-4  text-start small  mt-3">
+          <div className="col ">
+            <div className="container col  mt-5">
+              <div className="row ">
+                <h3 className="col-md-6 text-start ">BioFresh</h3>
+                <div className="col-m-4  text-start small  mt-3">
                   Si tienes alguna duda sobre algún producto. quieres contarnos
                   sobre un evento o simplemente quieres escribirnos, déianos tu
                   mensaje aquí!
                 </div>
 
-                <div class="row text-white">" "</div>
+                <div className="row text-white">" "</div>
                 <h4 className="col-md-4 mt-3">Contáctanos</h4>
                 <br />
-                <div class="d-flex flex-wrap   mt-3 ">
-                  <h6 class="col  text-start ">
-                    <div class="container-fluid">
-                      <div class="row ">
-                        <img src={phone} alt="" height="60px" class="col-4  " />
-                        <label class="col-7 p-2" height="60px ">
+                <div className="d-flex flex-wrap   mt-3 ">
+                  <h6 className="col  text-start ">
+                    <div className="container-fluid">
+                      <div className="row ">
+                        <img src={phone} alt="" height="60px" className="col-4  " />
+                        <label className="col-7 p-2" height="60px ">
                           Telefono 3007476099
                         </label>
                       </div>
                     </div>
                   </h6>
 
-                  <h6 class="col-md-6  ">
-                    <div class="container-fluid">
-                      <div class="row ">
+                  <h6 className="col-md-6  ">
+                    <div className="container-fluid">
+                      <div className="row ">
                         <img
-                          class="col-4 "
+                          className="col-4 "
                           src={direccion}
                           alt=""
                           height="60px"
                         />
-                        <label class="col  text-start ">
+                        <label className="col  text-start ">
                           Direccion carrera 23-42-123
                         </label>
                       </div>
                     </div>
                   </h6>
 
-                  <h6 class="col-8   mt-4">
-                    <div class="container-fluid">
-                      <div class="row">
-                        <img class="col-3 " src={email} alt="" height="60px" />
-                        <label class="col-7 text-start   mt-2  ">
+                  <h6 className="col-8   mt-4">
+                    <div className="container-fluid">
+                      <div className="row">
+                        <img className="col-3 " src={email} alt="" height="60px" />
+                        <label className="col-7 text-start   mt-2  ">
                           Email biofresh@gmail.com
                         </label>
                       </div>
