@@ -1,3 +1,4 @@
+import { LOGIN_USER } from "./types/loginUser";
 import { GET_ALLCATEGORIES } from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
 
@@ -7,7 +8,8 @@ const initialState = {
   showProducts: [],
   nameProducts: '',
   flagProducts: false,
-  allCategories: []
+  allCategories: [],
+  user: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -32,6 +34,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allCategories: action.payload,
       }
+    case LOGIN_USER:{
+      return {
+        ...state,
+        user: action.payload
+      }
+    }
     default:
       return {...state};
   };
