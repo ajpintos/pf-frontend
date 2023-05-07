@@ -10,6 +10,7 @@ import { getProducts } from "../../Redux/actions/actionsProducts";
 import { getCategories } from "../../Redux/actions/actionsCategories";
 import imgpropia from "../../logo/logo.png";
 import s from "./Landing_home.module.css";
+import Stack from "react-bootstrap/esm/Stack.js";
 
 const Landing_home = () => {
 
@@ -42,18 +43,18 @@ const Landing_home = () => {
           <figure className='col-6 col-sm-5 col-md-4 col-lg-3'>
             <img src={imgpropia} alt="Biofresh Logo" className='img-fluid w-50 p-0' />
           </figure>
-          <Link to="/login" className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-6">🙋‍♂️</Link>
-          <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🧡</Link>
-          <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🛒</Link>
+          <Link to="/login" className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-6">🙋‍♂️ MyAcc</Link>
+          <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
+          <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🛒 Cart</Link>
         </div>
 
         {/* Sección de NavBar y Settings */}
 
-        <div className="d-flex flex-row justify-content-around" styled={'background-color: rgb(88, 47, 29)'}>
+        <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
           <NavBar/>
-          <SearchBar/>
           <Settings />
-        </div>
+        </Stack>  
+
 
         {/* Sección Hero */}
         <div className={s.hero}>
@@ -62,6 +63,7 @@ const Landing_home = () => {
       </header>
 
       {/* Sección Cards */}
+      <SearchBar/>
       <CardContainer flagChange={flagChange} changeFlag={changeFlag} /> 
 
       {/* Footer */}

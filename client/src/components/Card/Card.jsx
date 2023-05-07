@@ -14,8 +14,8 @@ function Card({ id, name, image, description, price, stock }) {
             <h5 className="card-title">{name}</h5>
             <p className="card-text">{description}</p>
             <div className="row">
-              <Button className="col-xs-3 offset-xs-1 col-sm-5 offset-sm-1 col-md-6 offset-md-0 col-lg-7 offset-lg-0"   variant="primary">Add to Cart</Button>
-              <Link to={`/detail/${id}`} className='col-xs-2 offset-xs-5 col-sm-3 offset-sm-2 col-md-4 offset-md-2 col-lg-4 offset-lg-1 rounded bg-danger text-light text-center p-2'>Detail</Link>
+              <Button variant="success" className="col-xs-3 offset-xs-1 col-sm-5 offset-sm-1 col-md-6 offset-md-0 col-lg-7 offset-lg-0">Add to Cart</Button>
+              <Link to={`/detail/${id}`} className='col-xs-2 offset-xs-5 col-sm-3 offset-sm-2 col-md-4 offset-md-2 col-lg-4 offset-lg-1 rounded bg-warning text-light text-center p-2'>Info</Link>
             </div>
           </div>
         </div>

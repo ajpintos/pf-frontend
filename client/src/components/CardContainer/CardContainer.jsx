@@ -47,7 +47,7 @@ function CardContainer({ flagChange, changeFlag }) {
     <Container fluid >
       <section className="row mt-3 mb-3">
         <h2 className="col-xs-12 text-center"  >FEATURED PRODUCTS</h2>
-        { flagProducts && <Button className="col-sx-1" onClick={changeProducts}>All Products</Button>}
+        { flagProducts && <Button variant="success" className="col-sx-1" onClick={changeProducts}>All Products</Button>}
       </section>
       <section className="row">
         {products.length > 0 && products.map((product) => (

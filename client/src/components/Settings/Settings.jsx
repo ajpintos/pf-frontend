@@ -1,4 +1,5 @@
 import React from "react";
+import imgTools from "../../assets/tools.svg";
 // import { useNavigate } from "react-router-dom";
 
 function Settings() {
@@ -6,11 +7,9 @@ function Settings() {
     // const navigate = useNavigate();
 
     return (
-        <div>
-            <p>Settings</p>
-            {/* <button onClick={() => navigate("/")}>Back to Home</button>
-            <h1>Working in progres...</h1> */}
-        </div>
+        <figure className="col-1">
+            <img src={imgTools} alt="Settings" className="img-fluid bg-light border" />
+        </figure>
     )
 }
 
