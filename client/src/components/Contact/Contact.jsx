@@ -79,14 +79,14 @@ function Contact() {
   return (
     <div className="container">
       <NavBar />
-      <button onClick={() => navigate("/")}>Back to Home</button>
+      {/* <button onClick={() => navigate("/")}>Back to Home</button> */}
 
       <div>
-        <div className="row   ">
-          <div className="col-md-6 col-xm-12 border">
-            <h2>Dejanos tu mensaje</h2>
+        <div className="row mt-3  ">
+          <div className="col-md-6 col-xm-12 border pt-3">
+            <h3>Dejanos tu mensaje</h3>
             <Form onSubmit={sendEmail} id="formToSend">
-              <Form.Group className="mb-3">
+              <Form.Group className="my-1 pb-2">
                 
                 <FloatingLabel
                     controlId="floatingInputName"
@@ -110,18 +110,16 @@ function Contact() {
                 </div>
               </Form.Group>
 
-              <div className="row">
-                <Form.Group className="col-md-6 col-xm-12 mb-3 ">
+              <div className="row ">
+                <Form.Group className="col-md-6 col-xm-12 my-1 pb-2 ">
                 <FloatingLabel
                     controlId="floatingInputEmail"
-                    label="Email"
-                    className="mb-3"
+                    label="Email"                    
                   >
                   <Form.Control
                     type="text"
                     name="email"
                     className="form-control  "
-                    rows="3"
                     value={form.email}
                     onChange={handleChange}
                     placeholder="Email"
@@ -132,18 +130,17 @@ function Contact() {
                     {errors.email ? errors.email : null}
                   </span></div>
                 </Form.Group>
-                <Form.Group className="col-md-6 col-xm-12 mb-3">
+                <Form.Group className="col-md-6 col-xm-12 my-1 pb-2">
                 <FloatingLabel
                     controlId="floatingInputPhone"
                     label="Phone"
-                    className="mb-3"
                   >
                   <Form.Control
                     type="text"
                     name="phone"
                     className="form-control"
                     value={form.phone}
-                    maxLength="20"
+                    maxLength="15"
                     onChange={handleChange}
                     placeholder="Celular"
                     aria-label="Celular"
@@ -157,50 +154,51 @@ function Contact() {
                   </div>
                 </Form.Group>
               </div>
-              <Form.Group className="mb-3">
+              <Form.Group className="my-1 pb-2 mb-3">
                {/* <Form.Label htmlFor="message">Mensaje</Form.Label>  */}
                <FloatingLabel
                   controlId="floatingTextarea"
                   label="Mensaje"
-                  className="mb-3"
+                  className="mb-6"
                 >
                 <Form.Control
                   as="textarea"
                   className="form-control"
-                  rows="3"
+                  rows={5}
                   onChange={handleChange}
                   name="message"
                   value={form.message}
                   placeholder="Mensaje"
+                  height='200px'
                 />
                </FloatingLabel>
-                <div className="row p-1">
+                <div className="row my-0">
                   <span className={styles.error}>
                     {errors.message ? errors.message : null}
                   </span>
                 </div>
               </Form.Group>
-              {/* <div className='row p-3'> */}
+             
               <button className="btn btn-primary" type="submit">                
                 Enviar
               </button>
-              {/* </div> */}
+             
               <p className={styles.error}>{errorMessage}</p>
               <p className={styles.success}>{successMessage}</p>
             </Form>
           </div>
 
           <div className="col ">
-            <div className="container col  mt-5">
+            <div className="container col  mt-3">
               <div className="row ">
-                <h3 className="col-md-6 text-start ">BioFresh</h3>
+                <h2 className="col-md-6 text-start ">BioFresh</h2>
                 <div className="col-m-4  text-start small  mt-3">
                   Si tienes alguna duda sobre algún producto. quieres contarnos
                   sobre un evento o simplemente quieres escribirnos, déianos tu
                   mensaje aquí!
                 </div>
 
-                <div className="row text-white">" "</div>
+                {/* <div className="row text-white">" "</div> */}
                 <h4 className="col-md-4 mt-3">Contáctanos</h4>
                 <br />
                 <div className="d-flex flex-wrap   mt-3 ">
@@ -211,7 +209,7 @@ function Contact() {
                           src={phone}
                           alt=""
                           height="60px"
-                          className="col-4  "
+                          className="col-4"
                         />
                         <label className="col-7 p-2" height="60px ">
                           Telefono 3007476099
@@ -255,8 +253,8 @@ function Contact() {
               </div>
             </div>
           </div>
-          <br />
-          <h1></h1>
+          {/* <br /> */}
+          {/* <h1></h1> */}
         </div>
       </div>
     </div>
