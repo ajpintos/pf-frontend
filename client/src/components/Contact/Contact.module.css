@@ -4,6 +4,9 @@
 .error {
   color: red;
 }
+.success{
+  color:limegreen
+}
 .divInputs{
   justify-content: flex-start;
 }

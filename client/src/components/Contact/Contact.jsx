@@ -8,10 +8,13 @@ import { useState } from "react";
 import validate from "./validate.js";
 import Form from "react-bootstrap/Form";
 import emailjs from "@emailjs/browser";
+import NavBar from "../NavBar/NavBar";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+
 
 function Contact() {
   const navigate = useNavigate();
-  const Dom = document.getElementById("1");
+  const Dom = document.getElementById("formToSend");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -25,6 +28,8 @@ function Contact() {
     phone: "",
     message: "",
   });
+  const [successMessage, setSuccessMessage]=useState('')
+  const [errorMessage, setErrorMessage]=useState('')
 
   const handleChange = (event) => {
     setForm({
@@ -37,54 +42,82 @@ function Contact() {
         [event.target.name]: event.target.value,
       })
     );
+    setSuccessMessage('');
+    setErrorMessage('');
   };
   const sendEmail = (e) => {
     e.preventDefault();
-    const serviceID = "service_e5hd1wt";
-    const templateID = "contact_form";
-    const key_public = "gEu_FBDo_Q0lvhmwA";
+    setSuccessMessage('');
+    setErrorMessage('');
 
-    emailjs.sendForm(serviceID, templateID, Dom, key_public).then(
-      (result) => {
-        console.log(result.text);
-      },
-      (error) => {
-        console.log(error.text);
-      }
-    );
+    if(!errors.name&&form.name&&!errors.message&&form.message&&!errors.email&&form.email&&!errors.phone&&form.phone){
+      
+        const serviceID = "service_e5hd1wt";
+        const templateID = "contact_form";
+        const key_public = "gEu_FBDo_Q0lvhmwA";
+        emailjs.sendForm(serviceID, templateID, Dom, key_public).then(
+          (result) => {
+            console.log(result.text);            
+            setSuccessMessage('Mensaje enviado con exito');
+            setForm({
+              name: "",
+              email: "",
+              phone: "",
+              message: "",
+            });
+          },
+          (error) => {
+            console.log(error.text);
+            setErrorMessage('Error al enviar el mensaje');
+          }
+        );
+        }
+        else{
+          setErrorMessage('Debe completar los campos correctamente');
+          return}
   };
   return (
     <div className="container">
+      <NavBar />
       <button onClick={() => navigate("/")}>Back to Home</button>
 
-      {/* <NavBar /> */}
-
       <div>
-        <div className="row  g-3 ">
-          <div className="col-md-6 col-xm-12 g-5 p-5 border">
+        <div className="row   ">
+          <div className="col-md-6 col-xm-12 border">
             <h2>Dejanos tu mensaje</h2>
-            <form onSubmit={sendEmail} id="1">
-              <div>
-                <label htmlFor="name">Nombres y Apellidos</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="name"
-                  id="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  aria-label="Nombre"
-                />
+            <Form onSubmit={sendEmail} id="formToSend">
+              <Form.Group className="mb-3">
+                
+                <FloatingLabel
+                    controlId="floatingInputName"
+                    label="Nombres y Apellidos"
+                    // className="mb-3"
+                  >
+                    <Form.Control
+                      className="form-control"
+                      type="text"
+                      name="name"                     
+                      value={form.name}
+                      onChange={handleChange}
+                      aria-label="Nombre"
+                      placeholder="Nombres y Apellidos"
+                    />
+                </FloatingLabel>
                 <div>
                   <span className={styles.error}>
                     {errors.name ? errors.name : null}
                   </span>
                 </div>
-              </div>
+              </Form.Group>
 
-              <div className="row  g-3">
-                <div className="col-md-6 col-xm-12 p-3">
-                  <input
+              <div className="row">
+                <Form.Group className="col-md-6 col-xm-12 mb-3 ">
+                <FloatingLabel
+                    controlId="floatingInputEmail"
+                    label="Email"
+                    className="mb-3"
+                  >
+                  <Form.Control
                     type="text"
                     name="email"
                     className="form-control  "
@@ -93,12 +126,19 @@ function Contact() {
                     onChange={handleChange}
                     placeholder="Email"
                   />
+                   </FloatingLabel>
+                   <div>
                   <span className={styles.error}>
                     {errors.email ? errors.email : null}
-                  </span>
-                </div>
-                <div className="col-md-6 col-xm-12 p-3">
-                  <input
+                  </span></div>
+                </Form.Group>
+                <Form.Group className="col-md-6 col-xm-12 mb-3">
+                <FloatingLabel
+                    controlId="floatingInputPhone"
+                    label="Phone"
+                    className="mb-3"
+                  >
+                  <Form.Control
                     type="text"
                     name="phone"
                     className="form-control"
@@ -108,35 +148,46 @@ function Contact() {
                     placeholder="Celular"
                     aria-label="Celular"
                   />
+                   </FloatingLabel>
                   <div>
                     <span className={styles.error}>
                       {errors.phone ? errors.phone : null}
                     </span>
+                    
                   </div>
-                </div>
+                </Form.Group>
               </div>
-              <div>
-                Mensaje
-                <textarea
+              <Form.Group className="mb-3">
+               {/* <Form.Label htmlFor="message">Mensaje</Form.Label>  */}
+               <FloatingLabel
+                  controlId="floatingTextarea"
+                  label="Mensaje"
+                  className="mb-3"
+                >
+                <Form.Control
+                  as="textarea"
                   className="form-control"
                   rows="3"
                   onChange={handleChange}
                   name="message"
                   value={form.message}
-                ></textarea>
-                <div className="row p-3">
+                  placeholder="Mensaje"
+                />
+               </FloatingLabel>
+                <div className="row p-1">
                   <span className={styles.error}>
                     {errors.message ? errors.message : null}
                   </span>
                 </div>
-              </div>
+              </Form.Group>
               {/* <div className='row p-3'> */}
-              <button className="btn btn-primary" type="submit">
-                {" "}
+              <button className="btn btn-primary" type="submit">                
                 Enviar
               </button>
               {/* </div> */}
-            </form>
+              <p className={styles.error}>{errorMessage}</p>
+              <p className={styles.success}>{successMessage}</p>
+            </Form>
           </div>
 
           <div className="col ">
@@ -195,7 +246,7 @@ function Contact() {
                           height="60px"
                         />
                         <label className="col-7 text-start   mt-2  ">
-                          Email biofresh@gmail.com
+                          Email:  contact.biofresh.shop@gmail.com
                         </label>
                       </div>
                     </div>
