@@ -7,10 +7,11 @@ import email from "./img/email.jpg";
 import { useState } from "react";
 import validate from "./validate.js";
 import Form from "react-bootstrap/Form";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
 function Contact() {
   const navigate = useNavigate();
+  const Dom = document.getElementById("1");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -37,23 +38,21 @@ function Contact() {
       })
     );
   };
-  
-  const sendEmail=(e)=>{
+  const sendEmail = (e) => {
     e.preventDefault();
-    console.log(form)
-     const serviceID = 'service_e5hd1wt';
-    const templateID = 'contact_form';
-    const key_public='gEu_FBDo_Q0lvhmwA'
-  
-    emailjs.sendForm(serviceID, templateID, form, key_public)
-        .then((result) => {
-            console.log(result.text);
-        }, (error) => {
-            console.log(error.message);
-            window.alert(error.message);
-        });
-    
-   } 
+    const serviceID = "service_e5hd1wt";
+    const templateID = "contact_form";
+    const key_public = "gEu_FBDo_Q0lvhmwA";
+
+    emailjs.sendForm(serviceID, templateID, Dom, key_public).then(
+      (result) => {
+        console.log(result.text);
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
+  };
   return (
     <div className="container">
       <button onClick={() => navigate("/")}>Back to Home</button>
@@ -64,10 +63,10 @@ function Contact() {
         <div className="row  g-3 ">
           <div className="col-md-6 col-xm-12 g-5 p-5 border">
             <h2>Dejanos tu mensaje</h2>
-            <Form onSubmit={sendEmail}>
+            <form onSubmit={sendEmail} id="1">
               <div>
-                <Form.Label htmlFor="name">Nombres y Apellidos</Form.Label>
-                <Form.Control
+                <label htmlFor="name">Nombres y Apellidos</label>
+                <input
                   className="form-control"
                   type="text"
                   name="name"
@@ -85,7 +84,7 @@ function Contact() {
 
               <div className="row  g-3">
                 <div className="col-md-6 col-xm-12 p-3">
-                  <Form.Control
+                  <input
                     type="text"
                     name="email"
                     className="form-control  "
@@ -99,7 +98,7 @@ function Contact() {
                   </span>
                 </div>
                 <div className="col-md-6 col-xm-12 p-3">
-                  <Form.Control
+                  <input
                     type="text"
                     name="phone"
                     className="form-control"
@@ -123,6 +122,7 @@ function Contact() {
                   rows="3"
                   onChange={handleChange}
                   name="message"
+                  value={form.message}
                 ></textarea>
                 <div className="row p-3">
                   <span className={styles.error}>
@@ -131,9 +131,12 @@ function Contact() {
                 </div>
               </div>
               {/* <div className='row p-3'> */}
-              <button className="btn btn-primary"> Enviar</button>
+              <button className="btn btn-primary" type="submit">
+                {" "}
+                Enviar
+              </button>
               {/* </div> */}
-            </Form>
+            </form>
           </div>
 
           <div className="col ">
@@ -153,7 +156,12 @@ function Contact() {
                   <h6 className="col  text-start ">
                     <div className="container-fluid">
                       <div className="row ">
-                        <img src={phone} alt="" height="60px" className="col-4  " />
+                        <img
+                          src={phone}
+                          alt=""
+                          height="60px"
+                          className="col-4  "
+                        />
                         <label className="col-7 p-2" height="60px ">
                           Telefono 3007476099
                         </label>
@@ -180,9 +188,14 @@ function Contact() {
                   <h6 className="col-8   mt-4">
                     <div className="container-fluid">
                       <div className="row">
-                        <img className="col-3 " src={email} alt="" height="60px" />
+                        <img
+                          className="col-3 "
+                          src={email}
+                          alt=""
+                          height="60px"
+                        />
                         <label className="col-7 text-start   mt-2  ">
-                          Email: contact.biofresh.shop@gmail.com
+                          Email biofresh@gmail.com
                         </label>
                       </div>
                     </div>
