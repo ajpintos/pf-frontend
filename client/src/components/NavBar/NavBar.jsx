@@ -85,16 +85,16 @@ export default function NavBar () {
             
             <ul>
                 <Link to='/store' className={s.categories}>CATEGORIES</Link>
-                {categoriesList.map(c => {
+                {/* {categoriesList.map(c => {
                     return(
                         <li><Link to={`/store/:${c.id}`}>{c.name}</Link></li>
                     )
-                })}
+                })} */}
             </ul>
             <Link to='/about' className={'s.about_us'}>ABOUT US</Link>
             <Link to='/contact' className={'s.contact_us'}>CONTACT US</Link>
         </div>
-        <Link to='/settings' className={'s.settings'}>SETTINGS</Link>
+        {/* <Link to='/settings' className={'s.settings'}>SETTINGS</Link> */}
     </div>
     )
 }

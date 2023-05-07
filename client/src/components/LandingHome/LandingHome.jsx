@@ -1,13 +1,36 @@
-import s from "./Landing_home.module.css";
-import imgpropia from "../../logo/logo.png";
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 import CardContainer from "../CardContainer/CardContainer.jsx";
 import Footer from "../Footer/Footer.jsx";
 import NavBar from "../NavBar/NavBar";
 import Settings from "../Settings/Settings";
 import SearchBar from "../SearchBar/SearchBar";
+import { getProducts } from "../../Redux/actions/actionsProducts";
+import { getCategories } from "../../Redux/actions/actionsCategories";
+import imgpropia from "../../logo/logo.png";
+import s from "./Landing_home.module.css";
 
 const Landing_home = () => {
+
+  const dispatch = useDispatch();
+
+  const [ flagChange, setFlagChange ] = useState(false);
+
+  const changeFlag = (flag) => {
+    setFlagChange(flag);
+  }
+
+  const loadingData = async () => {
+    const all_Products = await getProducts();
+    dispatch(all_Products);
+    const all_Categories = await getCategories();
+    dispatch(all_Categories);
+  };
+
+  useEffect(()=>{
+    loadingData();
+  },[]);
   
   return (
     <div className="container-fluid">
@@ -19,7 +42,6 @@ const Landing_home = () => {
           <figure className='col-6 col-sm-5 col-md-4 col-lg-3'>
             <img src={imgpropia} alt="Biofresh Logo" className='img-fluid w-50 p-0' />
           </figure>
-          {/* <SearchBar/> */}
           <Link to="/login" className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-6">🙋‍♂️</Link>
           <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🧡</Link>
           <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🛒</Link>
@@ -27,7 +49,7 @@ const Landing_home = () => {
 
         {/* Sección de NavBar y Settings */}
 
-        <div className="d-flex flex-row justify-content-around bg-success">
+        <div className="d-flex flex-row justify-content-around" styled={'background-color: rgb(88, 47, 29)'}>
           <NavBar/>
           <SearchBar/>
           <Settings />
@@ -35,15 +57,12 @@ const Landing_home = () => {
 
         {/* Sección Hero */}
         <div className={s.hero}>
-          <h1 className={s.text}>HERO</h1>
+          <h1 className={s.text}>The Best and Healthiest you find here</h1>
         </div>
       </header>
 
       {/* Sección Cards */}
-      <section>
-        <h2 className={s.feactured_products}>FEATURED PRODUCTS</h2>
-        <CardContainer/>
-      </section>
+      <CardContainer flagChange={flagChange} changeFlag={changeFlag} /> 
 
       {/* Footer */}
       <Footer />
