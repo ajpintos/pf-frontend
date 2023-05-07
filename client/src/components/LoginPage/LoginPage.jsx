@@ -1,4 +1,5 @@
 import React, { useState , useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 import Footer from '../Footer/Footer.jsx';
@@ -15,10 +16,11 @@ import { userLogin } from '../../Redux/actions/actionsUserLogin.js';
 function LoginPage(){
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     //! Estado local para guardar los datos del formulario
     const [form, setForm] = useState({
-       email: "",
+        email: "",
         password: "",
     })
 
@@ -28,6 +30,8 @@ function LoginPage(){
         //     .then(res => alert("Login successfully!"))
         //     .catch(err => alert(err))
         dispatch(userLogin(form));
+        navigate("/");
+
     }
 
     const changeHandler = (event) => {
@@ -36,6 +40,10 @@ function LoginPage(){
     //! Elimina id delay de la validación
     setForm({...form, [property]: value});
 }
+
+useEffect(() => {
+
+},[])
 
 return (<>
         <NavBar/>
