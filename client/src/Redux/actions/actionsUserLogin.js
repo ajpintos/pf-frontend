@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN_USER } from "../types/loginUser.js";
+import { LOGIN_USER , ALL_USERS } from "../types/loginUser.js";
 
 export const userLogin = (email, password) => {
     return async function (dispatch) {
@@ -9,9 +9,23 @@ export const userLogin = (email, password) => {
                 type: LOGIN_USER,
                 payload: user.data
             });
-            
+
         } catch (error) {
             return { error: error.message };
         }
     }
 };
+
+export const allUsers = () => {
+    return async function (dispatch) {
+        try {
+            const allUserDB = await axios('/users');
+            return dispatch({
+                type: ALL_USERS,
+                payload: allUserDB.data
+            })
+        } catch (error) {
+            return { error: error.message };
+        }
+    }
+}
