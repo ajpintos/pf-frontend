@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
+import { addFavorites, deleteFavorites } from "../../Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 function Card({ id, name, image, description, price, stock }) {
+
+
+  const [isFav, setIsFav] = React.useState(false);
+
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.favorites);
+
+  useEffect(() => {
+    state.forEach((fav) => {
+      if (fav.id === id) {
+        setIsFav(true);
+      }
+    });
+  }, [state, id]);
+
+  const handleFavorite = () => {
+    if (isFav) {
+      setIsFav(false);
+      dispatch(deleteFavorites(id));
+    } else {
+      setIsFav(true);
+      dispatch(addFavorites({ id, name, image, description, price, stock }));
+    }
+  };
+
   return (
     <div className={styles.products}>
       {name ? (
         <div>
+          {isFav ? (
+            <button onClick={handleFavorite}>❤️</button>
+          ) : (
+            <button onClick={handleFavorite}>🤍</button>
+          )}
           <Link to={`/detail/${id}`}>
             <img src={image} alt={name} className={styles.image_product} />
           </Link>
