@@ -23,18 +23,16 @@ function CardContainer() {
   }
 
   const callApi = async () => {
-    if (flagChange) {
+    if (flagProducts) {
       const name_Products = nameProducts;
       const products_ByName = await getProductsByName(name_Products);
       if (products_ByName !== null) {
         dispatch(products_ByName);
-        changeFlag(true);
       };
     } else {
       const all_products = await getProducts();
       if (all_products !== null) {
         dispatch(all_products);
-        changeFlag(false);
       };
     }
   };

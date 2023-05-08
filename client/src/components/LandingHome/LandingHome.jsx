@@ -1,25 +1,18 @@
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import {Link} from "react-router-dom";
-import CardContainer from "../CardContainer/CardContainer.jsx";
-import Footer from "../Footer/Footer.jsx";
+import Title from "../Title/Title.jsx";
 import NavBar from "../NavBar/NavBar";
 import SearchBar from "../SearchBar/SearchBar";
+import CardContainer from "../CardContainer/CardContainer.jsx";
+import Footer from "../Footer/Footer.jsx";
 import { getProducts } from "../../Redux/actions/actionsProducts";
 import { getCategories } from "../../Redux/actions/actionsCategories";
-import imgpropia from "../../logo/logo.png";
 import s from "./Landing_home.module.css";
 import Stack from "react-bootstrap/esm/Stack.js";
 
 const Landing_home = () => {
 
   const dispatch = useDispatch();
-
-  // const [ flagChange, setFlagChange ] = useState(false);
-
-  // const changeFlag = (flag) => {
-  //   setFlagChange(flag);
-  // }
 
   const loadingData = async () => {
     const all_Products = await getProducts();
@@ -38,17 +31,9 @@ const Landing_home = () => {
       {/* Cabecera */}
       <header>
         {/* Sección del logo, login, favoritos y carrito */}
-        <div className="row justtify-content-center align-items-center">
-          <figure className='col-6 col-sm-5 col-md-4 col-lg-3'>
-            <img src={imgpropia} alt="Biofresh Logo" className='img-fluid w-50 p-0' />
-          </figure>
-          <Link to="/login" className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-6">🙋‍♂️ MyAcc</Link>
-          <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
-          <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🛒 Cart</Link>
-        </div>
+        <Title />
 
         {/* Sección de NavBar y Settings */}
-
         <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
           <NavBar/>
         </Stack>  
