@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ALLCATEGORIES } from "../types/typesCategories";
+import { GET_ALLCATEGORIES, FILTER_BY_CATEGORIES } from "../types/typesCategories";
 
 export const getCategories = async () => {
   try {
@@ -9,3 +9,10 @@ export const getCategories = async () => {
     return { error: message.error };
   }
 };
+
+export function filterByCategories(payload){
+  return {
+      type: FILTER_BY_CATEGORIES,
+      payload
+  }
+}

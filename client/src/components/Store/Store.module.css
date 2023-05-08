@@ -1,0 +1,148 @@
+.container {
+    /*  display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap; */
+    color: black;
+    background-color: white;
+    position: absolute;
+    width: 95%;
+    top: 34%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+}
+.container_inicio {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 10rem;
+    justify-content: center;
+    align-items: center;
+}
+.logo {
+    position: relative;
+    left: -7rem;
+    width: 6rem;
+    height: 5rem;
+    border-radius: 1rem;
+    top: 1rem;
+}
+.search {
+    position: relative;
+    top: 1rem;
+    left: 2rem;
+    border-radius: 1rem;
+    background-color: rgba(172, 255, 47, 0.752);
+    color: black;
+    font-size: 1.1rem;
+}
+.my_acount {
+    position: relative;
+    top: 1rem;
+    left: 12rem;
+    background-color: white;
+    color: black;
+}
+.whishlist {
+    position: relative;
+    top: 1rem;
+    left: 12.2rem;
+    background-color: white;
+    color: black;
+}
+  
+.amount {
+    position: relative;
+    top: 1rem;
+    left: 12.4rem;
+    background-color: white;
+    color: black;
+}
+  
+.feactured_products {
+    position: relative;
+    top: -1.8rem;
+}
+  
+.container_final {
+    display: flex;
+    justify-content: space-evenly;
+    height: 13rem;
+    background-color: gray;
+    color: white;
+}
+.logo2 {
+    left: -7rem;
+    width: 8rem;
+    height: 7rem;
+    border-radius: 1rem;
+    margin-top: 3.5rem;
+}
+.container_infomation_final {
+    width: 17rem;
+    height: 8rem;
+}
+.container_contact_final {
+    width: 17rem;
+    height: 8rem;
+}
+.container_menu_final {
+    width: 17rem;
+    height: 8rem;
+}
+.copyright {
+    width: 5rem;
+    height: 2.5rem;
+    position: absolute;
+    margin-top: 10rem;
+    left: 36rem;
+}
+  
+.hero {
+    border: 1px solid black;
+    height: 270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+  
+    animation: change-image 20s infinite;
+}
+@keyframes change-image {
+    0% {
+      background-image: url("../../img/NATURE_2.jpeg"),
+        url("../../img/wp4097439.jpg");
+    }
+    30% {
+      background-image: url("../../img/2i.jpg");
+    }
+    60% {
+      background-image: url("../../img/3.jpg");
+    }
+    100% {
+      background-image: url("../../img/4.jpg");
+      animation-delay: 1s;
+    }
+}
+  
+.text {
+    color: black;
+    background-color: white;
+    border-radius: 1rem;
+}
+
+.filters_and_orders{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.filters_and_orders select {
+    border: none;
+}
+
+.ppp h6 {
+    display: flex;
+    justify-content: end;
+    font-weight:lighter;
+    margin-right: 20px;
+}

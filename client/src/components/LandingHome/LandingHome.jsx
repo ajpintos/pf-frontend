@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 import CardContainer from "../CardContainer/CardContainer.jsx";
 import Footer from "../Footer/Footer.jsx";
 import NavBar from "../NavBar/NavBar";
-import Settings from "../Settings/Settings";
 import SearchBar from "../SearchBar/SearchBar";
 import { getProducts } from "../../Redux/actions/actionsProducts";
 import { getCategories } from "../../Redux/actions/actionsCategories";
@@ -52,7 +51,6 @@ const Landing_home = () => {
 
         <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
           <NavBar/>
-          <Settings />
         </Stack>  
 
 
@@ -64,6 +62,8 @@ const Landing_home = () => {
 
       {/* Sección Cards */}
       <SearchBar/>
+      <hr />
+      <h2 className="col-xs-12 text-center"  >FEATURED PRODUCTS</h2>
       <CardContainer flagChange={flagChange} changeFlag={changeFlag} /> 
 
       {/* Footer */}

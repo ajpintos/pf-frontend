@@ -46,7 +46,6 @@ function CardContainer({ flagChange, changeFlag }) {
   return (
     <Container fluid >
       <section className="row mt-3 mb-3">
-        <h2 className="col-xs-12 text-center"  >FEATURED PRODUCTS</h2>
         { flagProducts && <Button variant="success" className="col-sx-1" onClick={changeProducts}>All Products</Button>}
       </section>
       <section className="row">
@@ -59,6 +58,7 @@ function CardContainer({ flagChange, changeFlag }) {
           description={product.description}
           price={product.price}
           stock={product.stock}
+          categories={product.arrayCategories}
           />
           ))}
       </section>
