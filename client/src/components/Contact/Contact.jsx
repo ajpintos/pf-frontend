@@ -8,10 +8,13 @@ import { useState } from "react";
 import validate from "./validate.js";
 import Form from "react-bootstrap/Form";
 import emailjs from "@emailjs/browser";
+import NavBar from "../NavBar/NavBar";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+
 
 function Contact() {
   const navigate = useNavigate();
-  const Dom = document.getElementById("1");
+  const Dom = document.getElementById("formToSend");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -25,6 +28,8 @@ function Contact() {
     phone: "",
     message: "",
   });
+  const [successMessage, setSuccessMessage]=useState('')
+  const [errorMessage, setErrorMessage]=useState('')
 
   const handleChange = (event) => {
     setForm({
@@ -37,120 +42,164 @@ function Contact() {
         [event.target.name]: event.target.value,
       })
     );
+    setSuccessMessage('');
+    setErrorMessage('');
   };
   const sendEmail = (e) => {
     e.preventDefault();
-    const serviceID = "service_e5hd1wt";
-    const templateID = "contact_form";
-    const key_public = "gEu_FBDo_Q0lvhmwA";
+    setSuccessMessage('');
+    setErrorMessage('');
 
-    emailjs.sendForm(serviceID, templateID, Dom, key_public).then(
-      (result) => {
-        console.log(result.text);
-      },
-      (error) => {
-        console.log(error.text);
-      }
-    );
+    if(!errors.name&&form.name&&!errors.message&&form.message&&!errors.email&&form.email&&!errors.phone&&form.phone){
+      
+        const serviceID = "service_e5hd1wt";
+        const templateID = "contact_form";
+        const key_public = "gEu_FBDo_Q0lvhmwA";
+        emailjs.sendForm(serviceID, templateID, Dom, key_public).then(
+          (result) => {
+            console.log(result.text);            
+            setSuccessMessage('Message sent succesfully');
+            setForm({
+              name: "",
+              email: "",
+              phone: "",
+              message: "",
+            });
+          },
+          (error) => {
+            console.log(error.text);
+            setErrorMessage('Error sending the message');
+          }
+        );
+        }
+        else{
+          setErrorMessage('You must fill in the fields correctly');
+          return}
   };
   return (
     <div className="container">
-      <button onClick={() => navigate("/")}>Back to Home</button>
-
-      {/* <NavBar /> */}
+      <NavBar />
+      {/* <button onClick={() => navigate("/")}>Back to Home</button> */}
 
       <div>
-        <div className="row  g-3 ">
-          <div className="col-md-6 col-xm-12 g-5 p-5 border">
-            <h2>Dejanos tu mensaje</h2>
-            <form onSubmit={sendEmail} id="1">
-              <div>
-                <label htmlFor="name">Nombres y Apellidos</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="name"
-                  id="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  aria-label="Nombre"
-                />
+        <div className="row mt-3  ">
+          <div className="col-md-6 col-xm-12 border pt-3">
+            <h3>Leave us your message</h3>
+            <Form onSubmit={sendEmail} id="formToSend">
+              <Form.Group className="my-1 pb-2">
+                
+                <FloatingLabel
+                    controlId="floatingInputName"
+                    label="First and last names"
+                    // className="mb-3"
+                  >
+                    <Form.Control
+                      className="form-control"
+                      type="text"
+                      name="name"                     
+                      value={form.name}
+                      onChange={handleChange}
+                      aria-label="First and last names"
+                      placeholder="First and last names"
+                    />
+                </FloatingLabel>
                 <div>
                   <span className={styles.error}>
                     {errors.name ? errors.name : null}
                   </span>
                 </div>
-              </div>
+              </Form.Group>
 
-              <div className="row  g-3">
-                <div className="col-md-6 col-xm-12 p-3">
-                  <input
+              <div className="row ">
+                <Form.Group className="col-md-6 col-xm-12 my-1 pb-2 ">
+                <FloatingLabel
+                    controlId="floatingInputEmail"
+                    label="Email"                    
+                  >
+                  <Form.Control
                     type="text"
                     name="email"
                     className="form-control  "
-                    rows="3"
                     value={form.email}
                     onChange={handleChange}
                     placeholder="Email"
                   />
+                   </FloatingLabel>
+                   <div>
                   <span className={styles.error}>
                     {errors.email ? errors.email : null}
-                  </span>
-                </div>
-                <div className="col-md-6 col-xm-12 p-3">
-                  <input
+                  </span></div>
+                </Form.Group>
+                <Form.Group className="col-md-6 col-xm-12 my-1 pb-2">
+                <FloatingLabel
+                    controlId="floatingInputPhone"
+                    label="Phone"
+                  >
+                  <Form.Control
                     type="text"
                     name="phone"
                     className="form-control"
                     value={form.phone}
-                    maxLength="20"
+                    maxLength="15"
                     onChange={handleChange}
-                    placeholder="Celular"
-                    aria-label="Celular"
+                    placeholder="Phone"
+                    aria-label="Phone"
                   />
+                   </FloatingLabel>
                   <div>
                     <span className={styles.error}>
                       {errors.phone ? errors.phone : null}
                     </span>
+                    
                   </div>
-                </div>
+                </Form.Group>
               </div>
-              <div>
-                Mensaje
-                <textarea
+              <Form.Group className="my-1 pb-2 mb-3">
+               {/* <Form.Label htmlFor="message">Mensaje</Form.Label>  */}
+               <FloatingLabel
+                  controlId="floatingTextarea"
+                  label="Message"
+                  className="mb-6"
+                >
+                <Form.Control
+                  as="textarea"
                   className="form-control"
-                  rows="3"
+                  rows={5}
                   onChange={handleChange}
                   name="message"
                   value={form.message}
-                ></textarea>
-                <div className="row p-3">
+                  placeholder="Message"
+                  height='200px'
+                />
+               </FloatingLabel>
+                <div className="row my-0">
                   <span className={styles.error}>
                     {errors.message ? errors.message : null}
                   </span>
                 </div>
-              </div>
-              {/* <div className='row p-3'> */}
-              <button className="btn btn-primary" type="submit">
-                {" "}
-                Enviar
+              </Form.Group>
+             
+              <button className="btn btn-primary" type="submit">                
+                Submit
               </button>
-              {/* </div> */}
-            </form>
+             
+              <p className={styles.error}>{errorMessage}</p>
+              <p className={styles.success}>{successMessage}</p>
+            </Form>
           </div>
 
           <div className="col ">
-            <div className="container col  mt-5">
+            <div className="container col  mt-3">
               <div className="row ">
-                <h3 className="col-md-6 text-start ">BioFresh</h3>
+                <h2 className="col-md-6 text-start ">BioFresh</h2>
                 <div className="col-m-4  text-start small  mt-3">
-                  Si tienes alguna duda sobre algún producto. quieres contarnos
-                  sobre un evento o simplemente quieres escribirnos, déianos tu
-                  mensaje aquí!
+                If you have any questions about a product. You want to tell us
+                  about an event or you just want to write to us, give us your
+                  message here!
                 </div>
 
-                <div className="row text-white">" "</div>
-                <h4 className="col-md-4 mt-3">Contáctanos</h4>
+                {/* <div className="row text-white">" "</div> */}
+                <h4 className="col-md-4 mt-3">Contact us</h4>
                 <br />
                 <div className="d-flex flex-wrap   mt-3 ">
                   <h6 className="col  text-start ">
@@ -160,10 +209,10 @@ function Contact() {
                           src={phone}
                           alt=""
                           height="60px"
-                          className="col-4  "
+                          className="col-4"
                         />
                         <label className="col-7 p-2" height="60px ">
-                          Telefono 3007476099
+                          Phone: 3007476099
                         </label>
                       </div>
                     </div>
@@ -179,7 +228,7 @@ function Contact() {
                           height="60px"
                         />
                         <label className="col  text-start ">
-                          Direccion carrera 23-42-123
+                        Address: street 23 #42-123
                         </label>
                       </div>
                     </div>
@@ -195,7 +244,7 @@ function Contact() {
                           height="60px"
                         />
                         <label className="col-7 text-start   mt-2  ">
-                          Email biofresh@gmail.com
+                          Email:  contact.biofresh.shop@gmail.com
                         </label>
                       </div>
                     </div>
@@ -203,9 +252,7 @@ function Contact() {
                 </div>
               </div>
             </div>
-          </div>
-          <br />
-          <h1></h1>
+          </div>         
         </div>
       </div>
     </div>

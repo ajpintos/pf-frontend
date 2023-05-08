@@ -1,68 +1,27 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
-import { addFavorites, deleteFavorites } from "../../Redux/actions";
-import { useDispatch, useSelector } from "react-redux";
+import Button from "react-bootstrap/esm/Button";
+
 
 function Card({ id, name, image, description, price, stock }) {
-
-
-  const [isFav, setIsFav] = React.useState(false);
-
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state.favorites);
-
-  useEffect(() => {
-    state.forEach((fav) => {
-      if (fav.id === id) {
-        setIsFav(true);
-      }
-    });
-  }, [state, id]);
-
-  const handleFavorite = () => {
-    if (isFav) {
-      setIsFav(false);
-      dispatch(deleteFavorites(id));
-    } else {
-      setIsFav(true);
-      dispatch(addFavorites({ id, name, image, description, price, stock }));
-    }
-  };
-
   return (
-    <div className={styles.products}>
+    <div className="col-xs-8 offset-xs-2 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-1 mb-3">
       {name ? (
-        <div>
-          {isFav ? (
-            <button onClick={handleFavorite}>❤️</button>
-          ) : (
-            <button onClick={handleFavorite}>🤍</button>
-          )}
-          <Link to={`/detail/${id}`}>
-            <img src={image} alt={name} className={styles.image_product} />
-          </Link>
-          <h4 className={styles.name}>{name}</h4>
-          <h5 className={styles.stock}>STOCK: {stock}</h5>
-          <h5 className={styles.price}>PRICE: ${price}</h5>
-          <h6 className={styles.description}>{description}</h6>
-          <button className={styles.button_cart}>Add to Cart</button>
+        <div className="card">
+          <div className="card-body">
+            <img src={image} className="card-img-top img-fluid" alt={name} />
+            <h5 className="card-title">{name}</h5>
+            <p className="card-text">{description}</p>
+            <div className="row">
+              <Button variant="success" className="col-xs-3 offset-xs-1 col-sm-5 offset-sm-1 col-md-6 offset-md-0 col-lg-7 offset-lg-0">Add to Cart</Button>
+              <Link to={`/detail/${id}`} className='col-xs-2 offset-xs-5 col-sm-3 offset-sm-2 col-md-4 offset-md-2 col-lg-4 offset-lg-1 rounded bg-warning text-light text-center p-2'>Info</Link>
+            </div>
+          </div>
         </div>
       ) : null}
     </div>
   );
 }
-{
-  /* <div className={s.productos}>
-            <img
-              src={p.image}
-              alt="En desarrollo"
-              className={s.image_product}
-            />
-            <h4 className={s.name}>{p.name}</h4>
-            <h6 className={s.description}>{p.description}</h6>
-            <h5 className={s.price}>$:{p.price}</h5>
-            <button className={s.button_cart}>Add to Cart</button>
-</div> */
-}
+
 export default Card;

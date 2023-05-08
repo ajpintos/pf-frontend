@@ -1,33 +1,88 @@
-import React from 'react';
+import React, { useState , useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 import Footer from '../Footer/Footer.jsx';
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../NavBar/NavBar.jsx";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+// import axios from "axios";
 
-function LoginPage(props) {
-    return (<>
-        <NavBar/>
-        <h1 className={styles.title}>Login Page</h1>
-        <div className={styles.container}>
-            <div className={styles.box}>
-                <h2>Login</h2>
-                <form>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Email"/>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Password"/>
-                </form>
-            </div>
-            <div className={styles.box}>
-                <h2>Register</h2>
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email"/>
-                <label htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password"/>
-            </div>
-        </div>
-        <Footer/>
-    </>);
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../../Redux/actions/actionsUserLogin.js';
 
+function LoginPage(){
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    //! Estado local para guardar los datos del formulario
+    const [form, setForm] = useState({
+        email: "",
+        password: "",
+    })
+
+    const submitHandler = async (event) => {
+        event.preventDefault();
+        // axios.post("/users/login", form)
+        //     .then(res => alert("Login successfully!"))
+        //     .catch(err => alert(err))
+        const user = dispatch(userLogin(form));
+        if (user) {
+            alert("login successfully")
+            navigate("/");
+        }
+    }
+
+    const changeHandler = (event) => {
+    const property = event.target.name;
+    const value = event.target.value;
+    //! Elimina id delay de la validación
+    setForm({...form, [property]: value});
 }
 
+useEffect(() => {
+
+},[])
+
+return (<>
+        <NavBar/>
+        <div className={styles.formContainer}>
+            <Form onSubmit={submitHandler}>
+                <h2>Login</h2>
+                <Row className="mb-3">
+                    <Form.Group as={Col} controlidemail="Email">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control 
+                            type="email" 
+                            placeholder="Enter email" id="email" name="email"
+                            value={form.email}
+                            onChange={changeHandler}
+                        />
+                    </Form.Group>
+                    <br/>
+
+                    <Form.Group as={Col} controlidpassword="Password">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control 
+                            type="password" 
+                            placeholder="Enter Password" 
+                            id="password" 
+                            name="password"
+                            value={form.password}
+                            onChange={changeHandler}
+                        />
+                    </Form.Group>
+                </Row>
+                <br/>
+                <Button variant="success" type="submit">Login</Button>
+            </Form>
+            <Link to={"/register"}>Register Now</Link>
+        </div>
+
+        <Footer/>
+    </>)
+}
 export default LoginPage;

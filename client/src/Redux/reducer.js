@@ -1,28 +1,52 @@
-import { ADD_FAVORITES, DELETE_FAVORITES } from "./types";
+import { ALL_USERS, LOGIN_USER } from "./types/loginUser";
+import { GET_ALLCATEGORIES } from "./types/typesCategories";
+import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
 
 const initialState = {
   users: [],
-  favorites: [],
+  allProducts: [],
+  showProducts: [],
+  nameProducts: '',
+  flagProducts: false,
+  allCategories: [],
+  userLogin: []
 };
 
-const rootReducer = (state = initialState, { type, payload }) => {
-  switch (type) {
-    case ADD_FAVORITES:
+const rootReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_ALLPRODUCTS:
       return {
         ...state,
-        favorites: [...state.favorites, payload],
-      };
-
-    case DELETE_FAVORITES:
+        allProducts: action.payload,
+        showProducts: action.payload,
+        nameProducts: '',
+        flagProducts: false,
+      }
+    case GET_PRODUCTSBYNAME:
       return {
-        favorites: state.favorites.filter((f) => f.id !== payload),
-      };
-
+        ...state,
+        showProducts: action.payload.products,
+        nameProducts: action.payload.name,
+        flagProducts: true,
+      }
+    case GET_ALLCATEGORIES: 
+      return {
+        ...state,
+        allCategories: action.payload,
+      }
+    case ALL_USERS: 
+      return {
+        ...state,
+        users: action.payload
+      }
+    case LOGIN_USER:
+      return {
+        ...state,
+        userLogin: action.payload
+      }
     default:
-      return {
-        ...state,
-      };
-  }
+      return {...state};
+  };
 };
 
 export default rootReducer;
