@@ -9,7 +9,7 @@ import { getProducts, sortProducts } from "../../Redux/actions/actionsProducts.j
 import imgpropia from "../../logo/logo.png";
 import s from "./Store.module.css";
 import Card from "../Card/Card.jsx";
-
+import Stack from "react-bootstrap/esm/Stack.js";
 
 export default function Store () {
   const dispatch = useDispatch()
@@ -52,30 +52,31 @@ export default function Store () {
 
 
   return (
-    <div className={s.container}>
+    <div className="container-fluid">
 
       {/* Cabecera */}
       <header>
 
         {/* Sección del logo, login, favoritos y carrito */}
-        <div className={s.container_inicio}>
-          <img src={imgpropia} alt="imagen" className={s.logo} />
-          <input type="text" placeholder="Search..." className={s.search} />
-          <button className={s.my_acount}><Link to="/login">🙋‍♂️My account</Link></button>
-          <button className={s.whishlist}>🧡Whishlist</button>
-          <button className={s.amount}>🛒AMOUNT</button>
-          <br />
-          <br />
+        <div className="row justtify-content-center align-items-center">
+          <figure className='col-6 col-sm-5 col-md-4 col-lg-3'>
+            <img src={imgpropia} alt="Biofresh Logo" className='img-fluid w-50 p-0' />
+          </figure>
+          <Link to="/login" className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-6">🙋‍♂️ MyAcc</Link>
+          <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
+          <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🛒 Cart</Link>
         </div>
 
         {/* Sección de NavBar y Settings */}
 
-        <NavBar/>
+        <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
+          <NavBar/>
+        </Stack>  
 
       </header>
 
       <section>
-        <h1>Store</h1>
+        <h1 className="text-center mt-3" >Store</h1>
       </section>
       <hr />
       {/* Seccion Ordenamiento y Filtrados */}

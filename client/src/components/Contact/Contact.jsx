@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Contact.module.css";
-import phone from "./img/phone.png";
-import direccion from "./img/direccion.png";
-import email from "./img/email.jpg";
+// import phone from "./img/phone.png";
+// import direccion from "./img/direccion.png";
+// import email from "./img/email.jpg";
 import { useState } from "react";
 import validate from "./validate.js";
 import Form from "react-bootstrap/Form";
@@ -205,12 +205,12 @@ function Contact() {
                   <h6 className="col  text-start ">
                     <div className="container-fluid">
                       <div className="row ">
-                        <img
+                        {/* <img
                           src={phone}
                           alt=""
                           height="60px"
                           className="col-4"
-                        />
+                        /> */}
                         <label className="col-7 p-2" height="60px ">
                           Telefono 3007476099
                         </label>
@@ -221,12 +221,12 @@ function Contact() {
                   <h6 className="col-md-6  ">
                     <div className="container-fluid">
                       <div className="row ">
-                        <img
+                        {/* <img
                           className="col-4 "
                           src={direccion}
                           alt=""
                           height="60px"
-                        />
+                        /> */}
                         <label className="col  text-start ">
                           Direccion carrera 23-42-123
                         </label>
@@ -237,12 +237,12 @@ function Contact() {
                   <h6 className="col-8   mt-4">
                     <div className="container-fluid">
                       <div className="row">
-                        <img
+                        {/* <img
                           className="col-3 "
                           src={email}
                           alt=""
                           height="60px"
-                        />
+                        /> */}
                         <label className="col-7 text-start   mt-2  ">
                           Email:  contact.biofresh.shop@gmail.com
                         </label>

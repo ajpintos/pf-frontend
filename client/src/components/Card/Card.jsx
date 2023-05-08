@@ -16,7 +16,7 @@ function Card({ id, name, image, description, price, stock, arrayCategories }) {
             <h5 className="card-title">{name}</h5>
             <p className="card-text">{description}</p>
             <div className="row">
-              <Button variant="success" className="col-xs-3 offset-xs-1 col-sm-5 offset-sm-1 col-md-6 offset-md-0 col-lg-7 offset-lg-0">Add to Cart</Button>
+              <Button variant="success" className="col-6 offset-3">Add to Cart</Button>
             </div>
           </div>
 

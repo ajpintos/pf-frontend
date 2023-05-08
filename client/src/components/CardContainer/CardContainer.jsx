@@ -6,7 +6,7 @@ import { getProducts, getProductsByName } from "../../Redux/actions/actionsProdu
 import Container from 'react-bootstrap/Container'
 import Button from "react-bootstrap/esm/Button.js";
 
-function CardContainer({ flagChange, changeFlag }) {
+function CardContainer() {
 
   const dispatch = useDispatch();
 
@@ -45,8 +45,8 @@ function CardContainer({ flagChange, changeFlag }) {
 
   return (
     <Container fluid >
-      <section className="row mt-3 mb-3">
-        { flagProducts && <Button variant="success" className="col-sx-1" onClick={changeProducts}>All Products</Button>}
+      <section className="container-fluid" >
+        { flagProducts && <Button variant="success" className="col-3 offset-9 mb-3 me-3" onClick={changeProducts}>All Products</Button>}
       </section>
       <section className="row">
         {products.length > 0 && products.map((product) => (

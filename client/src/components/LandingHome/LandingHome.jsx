@@ -15,11 +15,11 @@ const Landing_home = () => {
 
   const dispatch = useDispatch();
 
-  const [ flagChange, setFlagChange ] = useState(false);
+  // const [ flagChange, setFlagChange ] = useState(false);
 
-  const changeFlag = (flag) => {
-    setFlagChange(flag);
-  }
+  // const changeFlag = (flag) => {
+  //   setFlagChange(flag);
+  // }
 
   const loadingData = async () => {
     const all_Products = await getProducts();
@@ -62,9 +62,9 @@ const Landing_home = () => {
 
       {/* Sección Cards */}
       <SearchBar/>
-      <hr />
-      <h2 className="col-xs-12 text-center"  >FEATURED PRODUCTS</h2>
-      <CardContainer flagChange={flagChange} changeFlag={changeFlag} /> 
+      <h2 className="col-xs-12 text-center mt-3"  >FEATURED PRODUCTS</h2>
+      {/* <CardContainer flagChange={flagChange} changeFlag={changeFlag} />  */}
+      <CardContainer />
 
       {/* Footer */}
       <Footer />
