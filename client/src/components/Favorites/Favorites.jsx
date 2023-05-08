@@ -2,16 +2,18 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Favorites = () => {
-  const favorite = useSelector((state) => state.favorites);
+  const favorites = useSelector((state) => state.favorites);
 
-  const j = favorite.map((e) => {
+  const favorite = favorites.map((e) => {
     return e;
   });
+
+  console.log(favorite);
 
   return (
     <div className="container-fluid border border-info border-3">
       <h1>Favorites en Desarrollo</h1>
-      {j.map((e) => {
+      {favorite.map((e) => {
         return (
           <div>
             <div className="">

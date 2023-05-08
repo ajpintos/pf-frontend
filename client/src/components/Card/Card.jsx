@@ -3,10 +3,10 @@ import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 import { useDispatch, useSelector } from "react-redux";
-/* import {
+import {
   addFavorites,
   deleteFavorites,
-} from "../../Redux/actions/actionsFavorites"; */
+} from "../../Redux/actions/actionsFavorites";
 
 function Card({ id, name, image, description, price, stock }) {
   const [isFav, setIsFav] = React.useState(false);
