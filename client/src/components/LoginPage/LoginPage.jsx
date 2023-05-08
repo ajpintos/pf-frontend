@@ -29,6 +29,7 @@ function LoginPage(){
         dispatch(userLogin(form.email , form.password ));
         alert("login successfully")
         navigate("/");
+        //login funcionando
     }
 
     const changeHandler = (event) => {

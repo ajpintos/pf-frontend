@@ -5,7 +5,6 @@ export const userLogin = ( email , password ) => {
     return async function (dispatch) {
         try {
             const user = await axios.get(`/users/login?email=${email}&password=${password}`);
-            console.log(user.data)
             return dispatch({
                 type: LOGIN_USER,
                 payload: user.data
