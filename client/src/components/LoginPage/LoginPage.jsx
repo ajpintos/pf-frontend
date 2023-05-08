@@ -8,6 +8,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import Title from '../Title/Title';
+import Stack from 'react-bootstrap/esm/Stack';
 // import loginValidate from "./validate/loginValidate.js";
 
 function LoginPage(){
@@ -41,8 +43,12 @@ const changeHandler = (event) => {
     // setErrors(loginValidate({...form, [property]: value}));
 }
 
-return (<>
-        <NavBar/>
+return (
+    <div className="container-fluid">
+        <Title />
+        <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
+          <NavBar/>
+        </Stack>  
         <div className={styles.formContainer}>
             <Form onSubmit={submitHandler}>
                 <h2>Login</h2>
@@ -77,6 +83,6 @@ return (<>
         </div>
 
         <Footer/>
-    </>)
+    </div>)
 }
 export default LoginPage;

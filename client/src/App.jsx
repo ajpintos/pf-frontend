@@ -9,6 +9,7 @@ import Contact from "./components/Contact/Contact.jsx";
 import Store from "./components/Store/Store";
 import axios from "axios";
 import NavBar from "./components/NavBar/NavBar";
+import RegisterPage from "./components/RegisterPage/RegisterPage";
 //axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
 

@@ -10,6 +10,9 @@ import Form from "react-bootstrap/Form";
 import emailjs from "@emailjs/browser";
 import NavBar from "../NavBar/NavBar";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Title from "../Title/Title";
+import Stack from "react-bootstrap/esm/Stack";
+import Footer from "../Footer/Footer";
 
 
 function Contact() {
@@ -58,7 +61,7 @@ function Contact() {
         emailjs.sendForm(serviceID, templateID, Dom, key_public).then(
           (result) => {
             console.log(result.text);            
-            setSuccessMessage('Mensaje enviado con exito');
+            setSuccessMessage('Message sent succesfully');
             setForm({
               name: "",
               email: "",
@@ -68,29 +71,37 @@ function Contact() {
           },
           (error) => {
             console.log(error.text);
-            setErrorMessage('Error al enviar el mensaje');
+            setErrorMessage('Error sending the message');
           }
         );
         }
         else{
-          setErrorMessage('Debe completar los campos correctamente');
+          setErrorMessage('You must fill in the fields correctly');
           return}
   };
   return (
-    <div className="container">
-      <NavBar />
+    <div className="container-fluid">
+
+      <Title />
+      <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
+        <NavBar/>
+      </Stack>
+      <section>
+        <h1 className="text-center mt-3" >Contact Us</h1>
+      </section>
+
       {/* <button onClick={() => navigate("/")}>Back to Home</button> */}
 
-      <div>
+      <div className="container-fluid mb-3">
         <div className="row mt-3  ">
           <div className="col-md-6 col-xm-12 border pt-3">
-            <h3>Dejanos tu mensaje</h3>
+            <h3>Leave us your message</h3>
             <Form onSubmit={sendEmail} id="formToSend">
               <Form.Group className="my-1 pb-2">
                 
                 <FloatingLabel
                     controlId="floatingInputName"
-                    label="Nombres y Apellidos"
+                    label="Names and Surnames"
                     // className="mb-3"
                   >
                     <Form.Control
@@ -100,7 +111,7 @@ function Contact() {
                       value={form.name}
                       onChange={handleChange}
                       aria-label="Nombre"
-                      placeholder="Nombres y Apellidos"
+                      placeholder="Names and Surnames"
                     />
                 </FloatingLabel>
                 <div>
@@ -133,7 +144,7 @@ function Contact() {
                 <Form.Group className="col-md-6 col-xm-12 my-1 pb-2">
                 <FloatingLabel
                     controlId="floatingInputPhone"
-                    label="Phone"
+                    label="Cel Phone"
                   >
                   <Form.Control
                     type="text"
@@ -142,7 +153,7 @@ function Contact() {
                     value={form.phone}
                     maxLength="15"
                     onChange={handleChange}
-                    placeholder="Celular"
+                    placeholder="Cel Phone"
                     aria-label="Celular"
                   />
                    </FloatingLabel>
@@ -158,7 +169,7 @@ function Contact() {
                {/* <Form.Label htmlFor="message">Mensaje</Form.Label>  */}
                <FloatingLabel
                   controlId="floatingTextarea"
-                  label="Mensaje"
+                  label="Message"
                   className="mb-6"
                 >
                 <Form.Control
@@ -168,7 +179,7 @@ function Contact() {
                   onChange={handleChange}
                   name="message"
                   value={form.message}
-                  placeholder="Mensaje"
+                  placeholder="Message"
                   height='200px'
                 />
                </FloatingLabel>
@@ -180,7 +191,7 @@ function Contact() {
               </Form.Group>
              
               <button className="btn btn-primary" type="submit">                
-                Enviar
+                Send
               </button>
              
               <p className={styles.error}>{errorMessage}</p>
@@ -192,17 +203,17 @@ function Contact() {
             <div className="container col  mt-3">
               <div className="row ">
                 <h2 className="col-md-6 text-start ">BioFresh</h2>
-                <div className="col-m-4  text-start small  mt-3">
-                  Si tienes alguna duda sobre algún producto. quieres contarnos
-                  sobre un evento o simplemente quieres escribirnos, déianos tu
-                  mensaje aquí!
-                </div>
+                <p className="col-m-4  text-start small  mt-3">
+                  If you have any questions about a product. you want to tell us
+                  about an event or you just want to write to us, give us your
+                  message here!
+                </p>
 
                 {/* <div className="row text-white">" "</div> */}
-                <h4 className="col-md-4 mt-3">Contáctanos</h4>
+                <h4 className="col-md-4 mt-3">Contact us</h4>
                 <br />
                 <div className="d-flex flex-wrap   mt-3 ">
-                  <h6 className="col  text-start ">
+                  <article className="col  text-start h6">
                     <div className="container-fluid">
                       <div className="row ">
                         {/* <img
@@ -212,13 +223,13 @@ function Contact() {
                           className="col-4"
                         /> */}
                         <label className="col-7 p-2" height="60px ">
-                          Telefono 3007476099
+                          Phone 3007476099
                         </label>
                       </div>
                     </div>
-                  </h6>
+                  </article>
 
-                  <h6 className="col-md-6  ">
+                  <article className="col-md-6 h6 ">
                     <div className="container-fluid">
                       <div className="row ">
                         {/* <img
@@ -228,13 +239,13 @@ function Contact() {
                           height="60px"
                         /> */}
                         <label className="col  text-start ">
-                          Direccion carrera 23-42-123
+                          Address Carrera 23-42-123
                         </label>
                       </div>
                     </div>
-                  </h6>
+                  </article>
 
-                  <h6 className="col-8   mt-4">
+                  <article className="col-8 mt-4 h6">
                     <div className="container-fluid">
                       <div className="row">
                         {/* <img
@@ -248,15 +259,14 @@ function Contact() {
                         </label>
                       </div>
                     </div>
-                  </h6>
+                  </article>
                 </div>
               </div>
             </div>
           </div>
-          {/* <br /> */}
-          {/* <h1></h1> */}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
