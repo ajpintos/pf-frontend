@@ -26,14 +26,9 @@ function LoginPage(){
 
     const submitHandler = async (event) => {
         event.preventDefault();
-        // axios.post("/users/login", form)
-        //     .then(res => alert("Login successfully!"))
-        //     .catch(err => alert(err))
-        const user = dispatch(userLogin(form));
-        if (user) {
-            alert("login successfully")
-            navigate("/");
-        }
+        dispatch(userLogin(form.email , form.password ));
+        alert("login successfully")
+        navigate("/");
     }
 
     const changeHandler = (event) => {

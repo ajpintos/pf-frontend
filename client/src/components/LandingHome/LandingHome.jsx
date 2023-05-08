@@ -39,6 +39,7 @@ const Landing_home = () => {
 
     return (
         <div className="container-fluid">
+            {console.log(user)}
             {/* Cabecera */}
             <header>
                 {/* Sección del logo, login, favoritos y carrito */}
