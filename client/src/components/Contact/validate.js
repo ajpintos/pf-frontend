@@ -5,19 +5,19 @@ const validate = (form) => {
   const regexPhone = /^([0-9])*$/;
 
   if (form.name === "") {
-    errors.name = "Debe escribir el nombre";
+    errors.name = "You must write the name";
   }
   if (!regexEmail.test(form.email)) {
-    errors.email = "Debe ser un email valido ";
+    errors.email = "It must be a valid email ";
   }
   if (!regexPhone.test(form.phone)) {
-    errors.phone = "Solo numeros ";
+    errors.phone = "Only numbers are allowed ";
   }
   if (form.phone === "") {
-    errors.phone = "Digite el telefono";
+    errors.phone = "Enter the phone";
   }
   if (form.message.length === 0) {
-    errors.message = "Escribanos un mensaje";
+    errors.message = "Write us a message";
   }
   return errors;
 };

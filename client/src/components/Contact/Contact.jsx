@@ -58,7 +58,7 @@ function Contact() {
         emailjs.sendForm(serviceID, templateID, Dom, key_public).then(
           (result) => {
             console.log(result.text);            
-            setSuccessMessage('Mensaje enviado con exito');
+            setSuccessMessage('Message sent succesfully');
             setForm({
               name: "",
               email: "",
@@ -68,12 +68,12 @@ function Contact() {
           },
           (error) => {
             console.log(error.text);
-            setErrorMessage('Error al enviar el mensaje');
+            setErrorMessage('Error sending the message');
           }
         );
         }
         else{
-          setErrorMessage('Debe completar los campos correctamente');
+          setErrorMessage('You must fill in the fields correctly');
           return}
   };
   return (
@@ -84,13 +84,13 @@ function Contact() {
       <div>
         <div className="row mt-3  ">
           <div className="col-md-6 col-xm-12 border pt-3">
-            <h3>Dejanos tu mensaje</h3>
+            <h3>Leave us your message</h3>
             <Form onSubmit={sendEmail} id="formToSend">
               <Form.Group className="my-1 pb-2">
                 
                 <FloatingLabel
                     controlId="floatingInputName"
-                    label="Nombres y Apellidos"
+                    label="First and last names"
                     // className="mb-3"
                   >
                     <Form.Control
@@ -99,8 +99,8 @@ function Contact() {
                       name="name"                     
                       value={form.name}
                       onChange={handleChange}
-                      aria-label="Nombre"
-                      placeholder="Nombres y Apellidos"
+                      aria-label="First and last names"
+                      placeholder="First and last names"
                     />
                 </FloatingLabel>
                 <div>
@@ -142,8 +142,8 @@ function Contact() {
                     value={form.phone}
                     maxLength="15"
                     onChange={handleChange}
-                    placeholder="Celular"
-                    aria-label="Celular"
+                    placeholder="Phone"
+                    aria-label="Phone"
                   />
                    </FloatingLabel>
                   <div>
@@ -158,7 +158,7 @@ function Contact() {
                {/* <Form.Label htmlFor="message">Mensaje</Form.Label>  */}
                <FloatingLabel
                   controlId="floatingTextarea"
-                  label="Mensaje"
+                  label="Message"
                   className="mb-6"
                 >
                 <Form.Control
@@ -168,7 +168,7 @@ function Contact() {
                   onChange={handleChange}
                   name="message"
                   value={form.message}
-                  placeholder="Mensaje"
+                  placeholder="Message"
                   height='200px'
                 />
                </FloatingLabel>
@@ -180,7 +180,7 @@ function Contact() {
               </Form.Group>
              
               <button className="btn btn-primary" type="submit">                
-                Enviar
+                Submit
               </button>
              
               <p className={styles.error}>{errorMessage}</p>
@@ -193,13 +193,13 @@ function Contact() {
               <div className="row ">
                 <h2 className="col-md-6 text-start ">BioFresh</h2>
                 <div className="col-m-4  text-start small  mt-3">
-                  Si tienes alguna duda sobre algún producto. quieres contarnos
-                  sobre un evento o simplemente quieres escribirnos, déianos tu
-                  mensaje aquí!
+                If you have any questions about a product. You want to tell us
+                  about an event or you just want to write to us, give us your
+                  message here!
                 </div>
 
                 {/* <div className="row text-white">" "</div> */}
-                <h4 className="col-md-4 mt-3">Contáctanos</h4>
+                <h4 className="col-md-4 mt-3">Contact us</h4>
                 <br />
                 <div className="d-flex flex-wrap   mt-3 ">
                   <h6 className="col  text-start ">
@@ -212,7 +212,7 @@ function Contact() {
                           className="col-4"
                         />
                         <label className="col-7 p-2" height="60px ">
-                          Telefono 3007476099
+                          Phone: 3007476099
                         </label>
                       </div>
                     </div>
@@ -228,7 +228,7 @@ function Contact() {
                           height="60px"
                         />
                         <label className="col  text-start ">
-                          Direccion carrera 23-42-123
+                        Address: street 23 #42-123
                         </label>
                       </div>
                     </div>
@@ -252,9 +252,7 @@ function Contact() {
                 </div>
               </div>
             </div>
-          </div>
-          {/* <br /> */}
-          {/* <h1></h1> */}
+          </div>         
         </div>
       </div>
     </div>
