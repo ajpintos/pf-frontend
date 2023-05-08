@@ -12,6 +12,8 @@ import imgpropia from "../../logo/logo.png";
 import s from "./Landing_home.module.css";
 import Stack from "react-bootstrap/esm/Stack.js";
 import { useSelector } from "react-redux";
+import {gapi} from "gapi-script";
+import GoogleLogin from "react-google-login";
 
 const Landing_home = () => {
 
@@ -37,6 +39,26 @@ const Landing_home = () => {
     // const user = {name: "Javier"}
     const user = useSelector(state => state.userLogin);
 
+    //! Autenticación con Google
+    const clientID = "932914293926-uo3dpst96jr8s51di1mmbhdh3j2gie6a.apps.googleusercontent.com";
+    useEffect(() => {
+        const start = () => {
+            gapi.auth2.init({
+                clientId: clientID,
+            })
+        }
+        gapi.load("client:auth2", start);
+    },[])
+
+    const onSuccess = (response) => {
+        console.log(response)
+    }
+
+    const onFailure = (response) => {
+        console.log("Something went wrong", response)
+    }
+    //! --------------------------------------
+
     return (
         <div className="container-fluid">
             {console.log(user)}
@@ -59,7 +81,14 @@ const Landing_home = () => {
                     }
                     <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
                     <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🛒 Cart</Link>
+                    <GoogleLogin
+                        clientId={clientID}
+                        onSuccess={onSuccess}
+                        onFailure={onFailure}
+                        cookiePolicy={"single_host_policy"}
+                    />
                 </div>
+
 
                 {/* Sección de NavBar y Settings */}
 

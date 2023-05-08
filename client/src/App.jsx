@@ -12,8 +12,9 @@ import RegisterPage from "./components/RegisterPage/RegisterPage.jsx";
 import MyAccount from "./components/MyAccount/MyAccount.jsx";
 //axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
-
 function App() {
+
+
   return (
     <div className="App">
       <div className="App-header">
