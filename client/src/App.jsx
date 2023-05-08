@@ -20,13 +20,13 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingHome />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/about" element={<About />} />
-          <Route path='/' element={<NavBar/>} />
-          <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/settings" element={<Settings />}></Route>
-          <Route path="/contact" element={<Contact />}></Route>
           <Route path="/store" element={<Store/>}></Route>
           <Route path="/store/:id" element={<Store />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/settings" element={<Settings />}></Route>
+          <Route path="/detail/:id" element={<Detail />} />
         </Routes>
     </div>
   );
