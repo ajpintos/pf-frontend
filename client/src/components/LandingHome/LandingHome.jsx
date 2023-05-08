@@ -56,7 +56,8 @@ const Landing_home = () => {
                           🙋‍♂️ Login
                         </Link>
                     }
-                    <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
+                    
+                    <Link to='/favorites' className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
                     <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🛒 Cart</Link>
                 </div>
 

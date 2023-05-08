@@ -10,25 +10,26 @@ import Categories from "./components/Categories/Categories.jsx";
 import axios from "axios";
 import RegisterPage from "./components/RegisterPage/RegisterPage.jsx";
 import MyAccount from "./components/MyAccount/MyAccount.jsx";
+import Favorites from "./components/Favorites/Favorites";
 //axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
 
 function App() {
   return (
     <div className="App">
-      <div className="App-header">
-      </div>
-        <Routes>
-          <Route path="/" element={<LandingHome />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/myaccount" element={<MyAccount />} />
-          <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/settings" element={<Settings />}></Route>
-          <Route path="/contact" element={<Contact />}></Route>
-          <Route path="/categories" element={<Categories />}></Route>
-        </Routes>
+      <div className="App-header"></div>
+      <Routes>
+        <Route path="/" element={<LandingHome />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/myaccount" element={<MyAccount />} />
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/settings" element={<Settings />}></Route>
+        <Route path="/contact" element={<Contact />}></Route>
+        <Route path="/categories" element={<Categories />}></Route>
+        <Route path="/favorites" element={<Favorites />} />
+      </Routes>
     </div>
   );
 }
