@@ -7,6 +7,7 @@ import LoginPage from "./components/LoginPage/LoginPage.jsx";
 import Settings from "./components/Settings/Settings.jsx";
 import Contact from "./components/Contact/Contact.jsx";
 import Categories from "./components/Categories/Categories.jsx";
+import Favorites from "./components/Favorites/Favorites";
 import axios from "axios";
 import RegisterPage from "./components/RegisterPage/RegisterPage.jsx";
 import MyAccount from "./components/MyAccount/MyAccount.jsx";
@@ -28,6 +29,7 @@ function App() {
           <Route path="/settings" element={<Settings />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/categories" element={<Categories />}></Route>
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
     </div>
   );
