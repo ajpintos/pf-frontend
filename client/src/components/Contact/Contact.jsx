@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Contact.module.css";
-// import phone from "./img/phone.png";
-// import direccion from "./img/direccion.png";
-// import email from "./img/email.jpg";
+import phone from "./img/phone.png";
+import direccion from "./img/direccion.png";
+import email from "./img/email.jpg";
 import { useState } from "react";
 import validate from "./validate.js";
 import Form from "react-bootstrap/Form";
-// import emailjs from "@emailjs/browser";
+import emailjs from "@emailjs/browser";
 import NavBar from "../NavBar/NavBar";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Title from "../Title/Title";
