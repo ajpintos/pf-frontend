@@ -1,15 +1,17 @@
-import { ALL_USERS, LOGIN_USER } from "./types/loginUser";
-import { GET_ALLCATEGORIES } from "./types/typesCategories";
-import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
+import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
+import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME, SORT_PRODUCTS } from "./types/typesProducts";
+import {ALL_USERS, LOGIN_USER} from "./types/loginUser.js";
 
 const initialState = {
   users: [],
   allProducts: [],
+  products: [],
   showProducts: [],
   nameProducts: '',
   flagProducts: false,
+  userLogin: [],
   allCategories: [],
-  userLogin: []
+  categorieFilter: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -18,6 +20,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: action.payload,
+        products: action.payload,
         showProducts: action.payload,
         nameProducts: '',
         flagProducts: false,
@@ -34,7 +37,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allCategories: action.payload,
       }
-    case ALL_USERS: 
+    case ALL_USERS:
       return {
         ...state,
         users: action.payload
@@ -44,6 +47,67 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userLogin: action.payload
       }
+    case FILTER_BY_CATEGORIES : {
+      const allCategories = state.products
+      const CategoriesFiltered = action.payload === 'All'?
+      state.allProducts : allCategories.filter(el => {
+          return el.arrayCategories[0].name? el.arrayCategories[0].name.includes(action.payload) :
+              el.allCategories?.map(el => el.name).includes(action.payload)
+      })
+          return {
+              ...state,
+              products: CategoriesFiltered
+      }
+    }
+    case SORT_PRODUCTS: {
+      let sortType = action.payload;
+      if(sortType === 'AtoZ') {
+        return {
+          ...state,
+          products: state.products.sort((a,b) => {
+            if(a.name < b.name) return -1;
+            if(b.name < a.name) return 1;
+            return 0
+          })
+        }
+      } else if (sortType === 'ZtoA') {
+        return {
+          ...state,
+          products: state.products.sort((a,b) => {
+            if(a.name > b.name) return -1;
+            if(b.name > a.name) return 1;
+            return 0;
+          })
+        }
+      } else if (sortType === 'Lower') {
+        return {
+          ...state,
+          products: state.products.sort((a,b) => {
+            if(a.price < b.price) return -1;
+            if(b.price < a.price) return 1;
+            return 0
+          })
+        }
+      } else if (sortType === 'Higher') {
+        return {
+          ...state,
+          products: state.products.sort((a,b) => {
+            if(a.price > b.price) return -1;
+            if(b.price > a.price) return 1;
+            return 0
+          })
+        }
+      } else if(sortType === 'All Products') {
+        return {
+          ...state,
+          products
+        }
+      }
+      return {
+        ...state,
+        products: sortType,
+      }
+    }
     default:
       return {...state};
   };

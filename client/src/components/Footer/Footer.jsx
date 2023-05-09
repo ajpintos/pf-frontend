@@ -30,7 +30,7 @@ const Footer = () => {
           <h4 className='h5 text-warning-emphasis p-4 text-center'>MENU</h4>
           <div className='p-4 text-center'>
             <Link to='/' className="link-light link-light-hover"  >Home</Link><br/>
-            <Link to='/categories' className="link-light link-light-hover" >Categories</Link><br/>
+            <Link to='/store' className="link-light link-light-hover" >Store</Link><br/>
             <Link to='/about' className="link-light link-light-hover" >About Us</Link><br/>
             <Link to='/contact' className="link-light link-light-hover" >Contact Us</Link>
           </div>

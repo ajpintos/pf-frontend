@@ -1,15 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Contact.module.css";
-import phone from "./img/phone.png";
-import direccion from "./img/direccion.png";
-import email from "./img/email.jpg";
+// import phone from "./img/phone.png";
+// import direccion from "./img/direccion.png";
+// import email from "./img/email.jpg";
 import { useState } from "react";
 import validate from "./validate.js";
 import Form from "react-bootstrap/Form";
-import emailjs from "@emailjs/browser";
+// import emailjs from "@emailjs/browser";
 import NavBar from "../NavBar/NavBar";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Title from "../Title/Title";
+import Stack from "react-bootstrap/esm/Stack";
+import Footer from "../Footer/Footer";
 
 
 function Contact() {
@@ -77,11 +80,19 @@ function Contact() {
           return}
   };
   return (
-    <div className="container">
-      <NavBar />
+    <div className="container-fluid">
+
+      <Title />
+      <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
+        <NavBar/>
+      </Stack>
+      <section>
+        <h1 className="text-center mt-3" >Contact Us</h1>
+      </section>
+
       {/* <button onClick={() => navigate("/")}>Back to Home</button> */}
 
-      <div>
+      <div className="container-fluid mb-3">
         <div className="row mt-3  ">
           <div className="col-md-6 col-xm-12 border pt-3">
             <h3>Leave us your message</h3>
@@ -90,7 +101,7 @@ function Contact() {
                 
                 <FloatingLabel
                     controlId="floatingInputName"
-                    label="First and last names"
+                    label="Names and Surnames"
                     // className="mb-3"
                   >
                     <Form.Control
@@ -99,8 +110,8 @@ function Contact() {
                       name="name"                     
                       value={form.name}
                       onChange={handleChange}
-                      aria-label="First and last names"
-                      placeholder="First and last names"
+                      aria-label="Nombre"
+                      placeholder="Names and Surnames"
                     />
                 </FloatingLabel>
                 <div>
@@ -133,7 +144,7 @@ function Contact() {
                 <Form.Group className="col-md-6 col-xm-12 my-1 pb-2">
                 <FloatingLabel
                     controlId="floatingInputPhone"
-                    label="Phone"
+                    label="Cel Phone"
                   >
                   <Form.Control
                     type="text"
@@ -142,8 +153,8 @@ function Contact() {
                     value={form.phone}
                     maxLength="15"
                     onChange={handleChange}
-                    placeholder="Phone"
-                    aria-label="Phone"
+                    placeholder="Cel Phone"
+                    aria-label="Celular"
                   />
                    </FloatingLabel>
                   <div>
@@ -180,7 +191,7 @@ function Contact() {
               </Form.Group>
              
               <button className="btn btn-primary" type="submit">                
-                Submit
+                Send
               </button>
              
               <p className={styles.error}>{errorMessage}</p>
@@ -192,69 +203,70 @@ function Contact() {
             <div className="container col  mt-3">
               <div className="row ">
                 <h2 className="col-md-6 text-start ">BioFresh</h2>
-                <div className="col-m-4  text-start small  mt-3">
-                If you have any questions about a product. You want to tell us
+                <p className="col-m-4  text-start small  mt-3">
+                  If you have any questions about a product. you want to tell us
                   about an event or you just want to write to us, give us your
                   message here!
-                </div>
+                </p>
 
                 {/* <div className="row text-white">" "</div> */}
                 <h4 className="col-md-4 mt-3">Contact us</h4>
                 <br />
                 <div className="d-flex flex-wrap   mt-3 ">
-                  <h6 className="col  text-start ">
+                  <article className="col  text-start h6">
                     <div className="container-fluid">
                       <div className="row ">
-                        <img
+                        {/* <img
                           src={phone}
                           alt=""
                           height="60px"
                           className="col-4"
-                        />
+                        /> */}
                         <label className="col-7 p-2" height="60px ">
-                          Phone: 3007476099
+                          Phone 3007476099
                         </label>
                       </div>
                     </div>
-                  </h6>
+                  </article>
 
-                  <h6 className="col-md-6  ">
+                  <article className="col-md-6 h6 ">
                     <div className="container-fluid">
                       <div className="row ">
-                        <img
+                        {/* <img
                           className="col-4 "
                           src={direccion}
                           alt=""
                           height="60px"
-                        />
+                        /> */}
                         <label className="col  text-start ">
-                        Address: street 23 #42-123
+                          Address Carrera 23-42-123
                         </label>
                       </div>
                     </div>
-                  </h6>
+                  </article>
 
-                  <h6 className="col-8   mt-4">
+                  <article className="col-8 mt-4 h6">
                     <div className="container-fluid">
                       <div className="row">
-                        <img
+                        {/* <img
                           className="col-3 "
                           src={email}
                           alt=""
                           height="60px"
-                        />
+                        /> */}
                         <label className="col-7 text-start   mt-2  ">
                           Email:  contact.biofresh.shop@gmail.com
                         </label>
                       </div>
                     </div>
-                  </h6>
+                  </article>
                 </div>
               </div>
             </div>
-          </div>         
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

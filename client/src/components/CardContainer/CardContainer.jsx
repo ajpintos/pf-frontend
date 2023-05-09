@@ -6,7 +6,7 @@ import { getProducts, getProductsByName } from "../../Redux/actions/actionsProdu
 import Container from 'react-bootstrap/Container'
 import Button from "react-bootstrap/esm/Button.js";
 
-function CardContainer({ flagChange, changeFlag }) {
+function CardContainer() {
 
   const dispatch = useDispatch();
 
@@ -23,18 +23,16 @@ function CardContainer({ flagChange, changeFlag }) {
   }
 
   const callApi = async () => {
-    if (flagChange) {
+    if (flagProducts) {
       const name_Products = nameProducts;
       const products_ByName = await getProductsByName(name_Products);
       if (products_ByName !== null) {
         dispatch(products_ByName);
-        changeFlag(true);
       };
     } else {
       const all_products = await getProducts();
       if (all_products !== null) {
         dispatch(all_products);
-        changeFlag(false);
       };
     }
   };
@@ -45,9 +43,8 @@ function CardContainer({ flagChange, changeFlag }) {
 
   return (
     <Container fluid >
-      <section className="row mt-3 mb-3">
-        <h2 className="col-xs-12 text-center"  >FEATURED PRODUCTS</h2>
-        { flagProducts && <Button variant="success" className="col-sx-1" onClick={changeProducts}>All Products</Button>}
+      <section className="container-fluid" >
+        { flagProducts && <Button variant="success" className="col-3 offset-9 mb-3 me-3" onClick={changeProducts}>All Products</Button>}
       </section>
       <section className="row">
         {products.length > 0 && products.map((product) => (
@@ -59,6 +56,7 @@ function CardContainer({ flagChange, changeFlag }) {
           description={product.description}
           price={product.price}
           stock={product.stock}
+          categories={product.arrayCategories}
           />
           ))}
       </section>

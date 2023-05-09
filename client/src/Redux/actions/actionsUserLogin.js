@@ -1,10 +1,10 @@
 import axios from "axios";
 import { LOGIN_USER , ALL_USERS } from "../types/loginUser.js";
 
-export const userLogin = (email, password) => {
+export const userLogin = ( email , password ) => {
     return async function (dispatch) {
         try {
-            const user = await axios('/users/login',{ email , password});
+            const user = await axios.get(`/users/login?email=${email}&password=${password}`);
             return dispatch({
                 type: LOGIN_USER,
                 payload: user.data
