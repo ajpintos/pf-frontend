@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../Title/Title.jsx";
 import NavBar from "../NavBar/NavBar.jsx";
-import Card from "../Card/Card.jsx";
+// import Card from "../Card/Card.jsx";
 import Footer from '../Footer/Footer.jsx';
 import Stack from "react-bootstrap/esm/Stack.js";
 import { filterByCategories, getCategories } from "../../Redux/actions/actionsCategories.js";
 import { getProducts, sortProducts } from "../../Redux/actions/actionsProducts.js";
 import s from "./Store.module.css";
+import CardContainer from "../CardContainer/CardContainer.jsx";
 
 export default function Store () {
   const dispatch = useDispatch()
@@ -109,7 +110,7 @@ export default function Store () {
       {/* Sección Cards */}
       <section className="row">
         {currentProducts.length > 0 && currentProducts.map((product) => (
-          <Card
+          <CardContainer
           key={product.name}
           id={product.id}
           name={product.name}
