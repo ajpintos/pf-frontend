@@ -70,6 +70,14 @@
 } */
 
 .container {
+
+  display: flex;
+  /* // height: 100vw; */
   width: 100vw;
- /* // height: 100vw; */
+
+}
+
+.product {
+  border: 20px solid red;
+ 
 }
