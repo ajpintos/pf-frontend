@@ -18,7 +18,7 @@ const Detail = () => {
 
   const getProductForId = async () => {
     try {
-      const Data = await axios(`http://localhost:3001/products/${id}`);
+      const Data = await axios(`/products/${id}`);
       const char = Data.data;
       console.log(char);
       if (char) {
