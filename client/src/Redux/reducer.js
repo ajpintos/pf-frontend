@@ -96,12 +96,6 @@ const rootReducer = (state = initialState, action) => {
         products: sortType,
       }
     }
-    case "CHANGE_PAGE": {
-      return {
-          ...state,
-          actualPage: action.payload
-      }
-    }
     default:
       return {...state};
   };

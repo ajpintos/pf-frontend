@@ -13,10 +13,12 @@ export default function Store () {
   const dispatch = useDispatch()
   const allProducts = useSelector(state => state.products)
   const allCategories = useSelector(state => state.allCategories)
-  const [order, setOrder] = useState('');
+  const [/*order*/, setOrder] = useState('');
   const [filter, setFilter] = useState('')
+  const [input, setInput] = useState(1)
+  const pageNumbers = [];
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(15);
+  const [productsPerPage, /*setProductsPerPage*/] = useState(16);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -24,6 +26,19 @@ export default function Store () {
 
   const paged = (pageNumber) => {
     setCurrentPage(pageNumber)
+  }
+
+  const nextPage = () => {
+    setInput(parseInt(input) + 1);
+    setCurrentPage(parseInt(currentPage) + 1);
+  }
+
+  const previousPage = () => {
+      setInput(parseInt(input) -1);
+      setCurrentPage(parseInt(currentPage) -1)
+  }
+  for (let i = 1; i <=Math.ceil(allProducts/productsPerPage); i++) {
+    pageNumbers.push(i)
   }
 
   useEffect(() => {
@@ -105,6 +120,21 @@ export default function Store () {
           />
           ))}      
       </section>
+
+      {/* Sección Paged */}
+      <nav>
+        <div className={s.container_paged} > 
+          <button className={s.prev_paged} disabled={currentPage <= 1} onClick={previousPage}>{'<'}</button>
+          <ul className={s.paged}>
+              { pageNumbers?.map((i) => (
+                <li  key={i} onClick={() => paged(i)}>
+                  {i}
+                </li>
+              ))}
+          </ul >
+          <button className={s.next_paged} disabled={currentPage >= Math.ceil(allProducts/productsPerPage)} onClick={nextPage}>{'>'}</button>
+        </div>
+      </nav>
 
       {/* Footer */}
       <div className={s.ppp}>
