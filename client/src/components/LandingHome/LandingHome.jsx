@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 import CardContainer from "../CardContainer/CardContainer.jsx";
@@ -12,6 +12,8 @@ import { getCategories } from "../../Redux/actions/actionsCategories";
 import imgpropia from "../../logo/logo.png";
 import s from "./Landing_home.module.css";
 import Stack from "react-bootstrap/esm/Stack.js";
+import GoogleLogin from "react-google-login";
+import {gapi} from "gapi-script";
 
 const Landing_home = () => {
 

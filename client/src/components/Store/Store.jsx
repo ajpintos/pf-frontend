@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../Title/Title.jsx";
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../NavBar/NavBar.jsx";
 import Card from "../Card/Card.jsx";
 import Footer from '../Footer/Footer.jsx';
 import Stack from "react-bootstrap/esm/Stack.js";
@@ -41,13 +41,14 @@ export default function Store () {
     pageNumbers.push(i)
   }
 
-  useEffect(() => {
+/*  useEffect(() => {
     getProducts()
+      console.log("Todos los productos",getProducts())
   },[dispatch])
 
   useEffect(() => {
     getCategories()
-  },[dispatch])
+  },[dispatch])*/
 
   function handleOrder(e){
     e.preventDefault()
@@ -77,7 +78,7 @@ export default function Store () {
 
         <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
           <NavBar/>
-        </Stack>  
+        </Stack>
 
       </header>
 
@@ -108,7 +109,7 @@ export default function Store () {
       {/* Sección Cards */}
       <section className="row">
         {currentProducts.length > 0 && currentProducts.map((product) => (
-          <Card 
+          <Card
           key={product.name}
           id={product.id}
           name={product.name}
@@ -118,12 +119,12 @@ export default function Store () {
           price={product.price}
           stock={product.stock}
           />
-          ))}      
+          ))}
       </section>
 
       {/* Sección Paged */}
       <nav>
-        <div className={s.container_paged} > 
+        <div className={s.container_paged} >
           <button className={s.prev_paged} disabled={currentPage <= 1} onClick={previousPage}>{'<'}</button>
           <ul className={s.paged}>
               { pageNumbers?.map((i) => (

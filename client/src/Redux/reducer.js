@@ -1,5 +1,6 @@
 import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME, SORT_PRODUCTS } from "./types/typesProducts";
+import {ALL_USERS, LOGIN_USER} from "./types/loginUser.js";
 
 const initialState = {
   users: [],

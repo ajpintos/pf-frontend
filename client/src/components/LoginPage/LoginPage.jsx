@@ -15,20 +15,6 @@ import Stack from 'react-bootstrap/esm/Stack';
 
 function LoginPage(){
 
-//! Estado local para guardar los datos del formulario
-const [form, setForm] = useState({
-    email: "",
-    password: "",
-})
-
-// Estado local para guardar los errores de validación del formulario
-// const [errors, setErrors] = useState({
-//     email: "",
-//     password: ""
-// })
-
-function LoginPage(){
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
