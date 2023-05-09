@@ -9,6 +9,8 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import NavBar from "../NavBar/NavBar.jsx";
+import Title from '../Title/Title';
+import Stack from 'react-bootstrap/esm/Stack';
 
 function RegisterPage(props) {
 
@@ -59,8 +61,12 @@ function RegisterPage(props) {
         setErrors(registerValidate({...form, [property]: value}));
     }
 
-    return (<>
-            <NavBar/>
+    return (
+        <div className="container-fluid">
+            <Title />
+            <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
+                <NavBar/>
+            </Stack>
             <div className={styles.formContainer}>
                 <Form onSubmit={submitHandler}>
                     <h2>Register</h2>
@@ -190,7 +196,7 @@ function RegisterPage(props) {
             </div>
 
             <Footer/>
-        </>
+        </div>
     );
 }
 
