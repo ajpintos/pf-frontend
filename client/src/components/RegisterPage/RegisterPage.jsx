@@ -47,7 +47,7 @@ function RegisterPage(props) {
                 alert("User added successfully!")
                 navigate("/login")
             })
-            .catch(err => alert(err))
+            .catch(err => alert("Error: Check all camps and try again"))
     }
 
 

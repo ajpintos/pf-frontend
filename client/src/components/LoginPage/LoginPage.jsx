@@ -28,9 +28,12 @@ function LoginPage(){
 
         const submitHandler = async (event) => {
         event.preventDefault();
-        dispatch(userLogin(form.email , form.password ));
-        alert("login successfully")
-        navigate("/");
+        const status = await dispatch(userLogin(form.email , form.password ))
+        if (status.hasOwnProperty('error')) alert("Incorrect email or password");
+        else {
+            alert("login successfully");
+            navigate("/");
+        } 
         //login funcionando
     }
 
