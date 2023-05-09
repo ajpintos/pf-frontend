@@ -6,8 +6,10 @@ import Title from "../Title/Title";
 import style from "./Detail.module.css";
 import NavBar from "../NavBar/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/esm/Stack";
+import Footer from "../Footer/Footer";
 
 const Detail = () => {
   const { id } = useParams();
@@ -37,16 +39,18 @@ const Detail = () => {
   };
 
   return (
-    <Stack className="container-fluid">
-      <Title />
+    <div className={style.container}>
+      <div className="">
+        <Title />
+      </div>
       <div className="row  text-center ">
-        <Stack
+        <div
           direction="horizontal"
           className="d-flex flex-row justify-content-between bg-success pt-3 pb-3"
         >
           <NavBar />
-        </Stack>
-        <Stack className="container ">
+        </div>
+        <div className="container ">
           <h1>DETAIL</h1>
           <div className="row">
             <div className="col">
@@ -99,11 +103,11 @@ const Detail = () => {
               </div>
             </div>
           </div>
-        </Stack>
+        </div>
       </div>
       <br />
-      <br />
-    </Stack>
+      <Footer></Footer>
+    </div>
   );
 };
 export default Detail;

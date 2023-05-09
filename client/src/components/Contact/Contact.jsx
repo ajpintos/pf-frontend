@@ -9,11 +9,10 @@ import validate from "./validate.js";
 import Form from "react-bootstrap/Form";
 import emailjs from "@emailjs/browser";
 import NavBar from "../NavBar/NavBar";
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Title from "../Title/Title";
 import Stack from "react-bootstrap/esm/Stack";
 import Footer from "../Footer/Footer";
-
 
 function Contact() {
   const navigate = useNavigate();
@@ -31,8 +30,8 @@ function Contact() {
     phone: "",
     message: "",
   });
-  const [successMessage, setSuccessMessage]=useState('')
-  const [errorMessage, setErrorMessage]=useState('')
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (event) => {
     setForm({
@@ -45,49 +44,59 @@ function Contact() {
         [event.target.name]: event.target.value,
       })
     );
-    setSuccessMessage('');
-    setErrorMessage('');
+    setSuccessMessage("");
+    setErrorMessage("");
   };
   const sendEmail = (e) => {
     e.preventDefault();
-    setSuccessMessage('');
-    setErrorMessage('');
+    setSuccessMessage("");
+    setErrorMessage("");
 
-    if(!errors.name&&form.name&&!errors.message&&form.message&&!errors.email&&form.email&&!errors.phone&&form.phone){
-      
-        const serviceID = "service_e5hd1wt";
-        const templateID = "contact_form";
-        const key_public = "gEu_FBDo_Q0lvhmwA";
-        emailjs.sendForm(serviceID, templateID, Dom, key_public).then(
-          (result) => {
-            console.log(result.text);            
-            setSuccessMessage('Message sent succesfully');
-            setForm({
-              name: "",
-              email: "",
-              phone: "",
-              message: "",
-            });
-          },
-          (error) => {
-            console.log(error.text);
-            setErrorMessage('Error sending the message');
-          }
-        );
+    if (
+      !errors.name &&
+      form.name &&
+      !errors.message &&
+      form.message &&
+      !errors.email &&
+      form.email &&
+      !errors.phone &&
+      form.phone
+    ) {
+      const serviceID = "service_e5hd1wt";
+      const templateID = "contact_form";
+      const key_public = "gEu_FBDo_Q0lvhmwA";
+      emailjs.sendForm(serviceID, templateID, Dom, key_public).then(
+        (result) => {
+          console.log(result.text);
+          setSuccessMessage("Message sent succesfully");
+          setForm({
+            name: "",
+            email: "",
+            phone: "",
+            message: "",
+          });
+        },
+        (error) => {
+          console.log(error.text);
+          setErrorMessage("Error sending the message");
         }
-        else{
-          setErrorMessage('You must fill in the fields correctly');
-          return}
+      );
+    } else {
+      setErrorMessage("You must fill in the fields correctly");
+      return;
+    }
   };
   return (
     <div className="container-fluid">
-
       <Title />
-      <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
-        <NavBar/>
+      <Stack
+        direction="horizontal"
+        className="d-flex flex-row justify-content-between bg-success pt-3 pb-3"
+      >
+        <NavBar />
       </Stack>
       <section>
-        <h1 className="text-center mt-3" >Contact Us</h1>
+        <h1 className="text-center mt-3">Contact Us</h1>
       </section>
 
       {/* <button onClick={() => navigate("/")}>Back to Home</button> */}
@@ -98,21 +107,20 @@ function Contact() {
             <h3>Leave us your message</h3>
             <Form onSubmit={sendEmail} id="formToSend">
               <Form.Group className="my-1 pb-2">
-                
                 <FloatingLabel
-                    controlId="floatingInputName"
-                    label="Names and Surnames"
-                    // className="mb-3"
-                  >
-                    <Form.Control
-                      className="form-control"
-                      type="text"
-                      name="name"                     
-                      value={form.name}
-                      onChange={handleChange}
-                      aria-label="Nombre"
-                      placeholder="Names and Surnames"
-                    />
+                  controlId="floatingInputName"
+                  label="Names and Surnames"
+                  // className="mb-3"
+                >
+                  <Form.Control
+                    className="form-control"
+                    type="text"
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    aria-label="Nombre"
+                    placeholder="Names and Surnames"
+                  />
                 </FloatingLabel>
                 <div>
                   <span className={styles.error}>
@@ -123,87 +131,84 @@ function Contact() {
 
               <div className="row ">
                 <Form.Group className="col-md-6 col-xm-12 my-1 pb-2 ">
-                <FloatingLabel
-                    controlId="floatingInputEmail"
-                    label="Email"                    
-                  >
-                  <Form.Control
-                    type="text"
-                    name="email"
-                    className="form-control  "
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="Email"
-                  />
-                   </FloatingLabel>
-                   <div>
-                  <span className={styles.error}>
-                    {errors.email ? errors.email : null}
-                  </span></div>
+                  <FloatingLabel controlId="floatingInputEmail" label="Email">
+                    <Form.Control
+                      type="text"
+                      name="email"
+                      className="form-control  "
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="Email"
+                    />
+                  </FloatingLabel>
+                  <div>
+                    <span className={styles.error}>
+                      {errors.email ? errors.email : null}
+                    </span>
+                  </div>
                 </Form.Group>
                 <Form.Group className="col-md-6 col-xm-12 my-1 pb-2">
-                <FloatingLabel
+                  <FloatingLabel
                     controlId="floatingInputPhone"
                     label="Cel Phone"
                   >
-                  <Form.Control
-                    type="text"
-                    name="phone"
-                    className="form-control"
-                    value={form.phone}
-                    maxLength="15"
-                    onChange={handleChange}
-                    placeholder="Cel Phone"
-                    aria-label="Celular"
-                  />
-                   </FloatingLabel>
+                    <Form.Control
+                      type="text"
+                      name="phone"
+                      className="form-control"
+                      value={form.phone}
+                      maxLength="15"
+                      onChange={handleChange}
+                      placeholder="Cel Phone"
+                      aria-label="Celular"
+                    />
+                  </FloatingLabel>
                   <div>
                     <span className={styles.error}>
                       {errors.phone ? errors.phone : null}
                     </span>
-                    
                   </div>
                 </Form.Group>
               </div>
               <Form.Group className="my-1 pb-2 mb-3">
-               {/* <Form.Label htmlFor="message">Mensaje</Form.Label>  */}
-               <FloatingLabel
+                {/* <Form.Label htmlFor="message">Mensaje</Form.Label>  */}
+                <FloatingLabel
                   controlId="floatingTextarea"
                   label="Message"
                   className="mb-6"
                 >
-                <Form.Control
-                  as="textarea"
-                  className="form-control"
-                  rows={5}
-                  onChange={handleChange}
-                  name="message"
-                  value={form.message}
-                  placeholder="Message"
-                  height='200px'
-                />
-               </FloatingLabel>
+                  <Form.Control
+                    as="textarea"
+                    className="form-control"
+                    rows={5}
+                    onChange={handleChange}
+                    name="message"
+                    value={form.message}
+                    placeholder="Message"
+                    height="200px"
+                  />
+                </FloatingLabel>
                 <div className="row my-0">
                   <span className={styles.error}>
                     {errors.message ? errors.message : null}
                   </span>
                 </div>
               </Form.Group>
-             
-              <button className="btn btn-primary" type="submit">                
+
+              <button className="btn btn-primary" type="submit">
                 Send
               </button>
-             
+
               <p className={styles.error}>{errorMessage}</p>
               <p className={styles.success}>{successMessage}</p>
             </Form>
           </div>
 
-          <div className="col ">
+          <div className="col border ">
             <div className="container col  mt-3">
               <div className="row ">
                 <h2 className="col-md-6 text-start ">BioFresh</h2>
-                <p className="col-m-4  text-start small  mt-3">
+                <p className="col-m-4  text-start small  mt-2 ">
                   If you have any questions about a product. you want to tell us
                   about an event or you just want to write to us, give us your
                   message here!
@@ -216,13 +221,8 @@ function Contact() {
                   <article className="col  text-start h6">
                     <div className="container-fluid">
                       <div className="row ">
-                        <img
-                          src={phone}
-                          alt=""
-                          height="60px"
-                          className="col-4"
-                        />
-                        <label className="col-7 p-2" height="60px ">
+                        <img src={phone} alt="" height="" className="col-4" />
+                        <label className="col-7 p-2" height="60px">
                           Phone 3007476099
                         </label>
                       </div>
@@ -236,7 +236,7 @@ function Contact() {
                           className="col-4 "
                           src={direccion}
                           alt=""
-                          height="60px"
+                          height=""
                         />
                         <label className="col  text-start ">
                           Address Carrera 23-42-123
@@ -248,14 +248,9 @@ function Contact() {
                   <article className="col-8 mt-4 h6">
                     <div className="container-fluid">
                       <div className="row">
-                        <img
-                          className="col-3 "
-                          src={email}
-                          alt=""
-                          height="60px"
-                        />
+                        <img className="col-3 " src={email} alt="" height="" />
                         <label className="col-7 text-start   mt-2  ">
-                          Email:  contact.biofresh.shop@gmail.com
+                          Email: contact.biofresh.shop@gmail.com
                         </label>
                       </div>
                     </div>
