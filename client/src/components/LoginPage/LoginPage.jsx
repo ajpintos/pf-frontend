@@ -1,9 +1,10 @@
-import React from 'react';
+import React , { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 import Footer from '../Footer/Footer.jsx';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../../Redux/actions/actionsUserLogin.js';
-import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 import NavBar from "../NavBar/NavBar.jsx";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -47,7 +48,7 @@ return (
     <div className="container-fluid">
         <Title />
         <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
-        <NavBar/>
+            <NavBar/>
         </Stack>
         <div className={styles.formContainer}>
             <Form onSubmit={submitHandler}>
