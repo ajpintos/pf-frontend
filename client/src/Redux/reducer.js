@@ -20,6 +20,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: action.payload,
+        products: action.payload,
         showProducts: action.payload,
         nameProducts: '',
         flagProducts: false,
