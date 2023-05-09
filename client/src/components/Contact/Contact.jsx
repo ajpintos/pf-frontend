@@ -216,12 +216,12 @@ function Contact() {
                   <article className="col  text-start h6">
                     <div className="container-fluid">
                       <div className="row ">
-                        {/* <img
+                        <img
                           src={phone}
                           alt=""
                           height="60px"
                           className="col-4"
-                        /> */}
+                        />
                         <label className="col-7 p-2" height="60px ">
                           Phone 3007476099
                         </label>
@@ -232,12 +232,12 @@ function Contact() {
                   <article className="col-md-6 h6 ">
                     <div className="container-fluid">
                       <div className="row ">
-                        {/* <img
+                        <img
                           className="col-4 "
                           src={direccion}
                           alt=""
                           height="60px"
-                        /> */}
+                        />
                         <label className="col  text-start ">
                           Address Carrera 23-42-123
                         </label>
@@ -248,12 +248,12 @@ function Contact() {
                   <article className="col-8 mt-4 h6">
                     <div className="container-fluid">
                       <div className="row">
-                        {/* <img
+                        <img
                           className="col-3 "
                           src={email}
                           alt=""
                           height="60px"
-                        /> */}
+                        />
                         <label className="col-7 text-start   mt-2  ">
                           Email:  contact.biofresh.shop@gmail.com
                         </label>
