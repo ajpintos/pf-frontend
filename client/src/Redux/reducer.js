@@ -1,6 +1,6 @@
 import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME, SORT_PRODUCTS } from "./types/typesProducts";
-import {ALL_USERS, LOGIN_USER} from "./types/loginUser.js";
+import { ALL_USERS, LOGIN_USER , LOGIN_USER_GOOGLE } from "./types/loginUser.js";
 
 const initialState = {
   users: [],
@@ -47,6 +47,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userLogin: action.payload
       }
+    case LOGIN_USER_GOOGLE: {
+      return {
+        ...state,
+        userLogin: action.payload
+      }
+    }
     case FILTER_BY_CATEGORIES : {
       const allCategories = state.products
       const CategoriesFiltered = action.payload === 'All'?

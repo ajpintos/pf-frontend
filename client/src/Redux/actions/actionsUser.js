@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN_USER , ALL_USERS } from "../types/loginUser.js";
+import { LOGIN_USER , ALL_USERS, LOGIN_USER_GOOGLE } from "../types/loginUser.js";
 
 export const userLogin = ( email , password ) => {
     return async function (dispatch) {
@@ -13,6 +13,13 @@ export const userLogin = ( email , password ) => {
         } catch (error) {
             return { error: error.message };
         }
+    }
+};
+
+export const userLoginGoogle = (user) => {
+    return {
+        type: LOGIN_USER_GOOGLE,
+        payload: user
     }
 };
 

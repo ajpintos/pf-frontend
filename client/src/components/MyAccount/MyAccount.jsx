@@ -1,6 +1,6 @@
 import React , {useEffect}from 'react';
 import { useDispatch , useSelector } from 'react-redux';
-import { userLogin , allUsers } from '../../Redux/actions/actionsUserLogin';
+import { allUsers } from '../../Redux/actions/actionsUser.js';
 
 
 const MyAccount = () => {

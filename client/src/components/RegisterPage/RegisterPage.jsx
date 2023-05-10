@@ -1,18 +1,21 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './RegisterPage.module.css';
 import Footer from '../Footer/Footer.jsx';
+import Title from '../Title/Title.jsx';
 import axios from "axios";
 import registerValidate from "./validate/registerValidate.js";
+import styles from './RegisterPage.module.css';
+
+//CSS REACT-BOOSTRAP
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import NavBar from "../NavBar/NavBar.jsx";
-import Title from '../Title/Title';
 import Stack from 'react-bootstrap/esm/Stack';
+//------------------------------------------------------
 
-function RegisterPage(props) {
+function RegisterPage() {
 
     const navigate = useNavigate();
 
@@ -81,9 +84,8 @@ function RegisterPage(props) {
                                 value={form.email}
                                 onChange={changeHandler}
                             />
+                            <p style={{color:"red"}}>{errors.email}</p>
                         </Form.Group>
-                        <p style={{color:"red"}}>{errors.email}</p>
-                        <br/>
 
                         <Form.Group as={Col} controlId="formPassword">
                             <Form.Label>Password</Form.Label>
@@ -93,10 +95,10 @@ function RegisterPage(props) {
                                 value={form.password}
                                 onChange={changeHandler}
                             />
+                            <div style={{color:"red"}}>{errors.password}</div>
                         </Form.Group>
                     </Row>
-                    <p style={{color:"red"}}>{errors.password}</p>
-                    <br/>
+
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formName">
                             <Form.Label>First Name</Form.Label>
@@ -108,9 +110,9 @@ function RegisterPage(props) {
                                 value={form.firstname} 
                                 onChange={changeHandler}
                             />
+                            <p style={{color:"red"}}>{errors.firstname}</p>
                         </Form.Group>
-                        <p style={{color:"red"}}>{errors.firstname}</p>
-                        <br/>
+
                         <Form.Group as={Col} className="mb-3" controlId="formLastName">
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control 
@@ -121,10 +123,9 @@ function RegisterPage(props) {
                                 value={form.lastname}
                                 onChange={changeHandler}
                             />
+                            <p style={{color:"red"}}>{errors.lastname}</p>
                         </Form.Group>
                     </Row>
-                    <p style={{color:"red"}}>{errors.lastname}</p>
-                    <br/>
                     <Form.Group className="mb-3" controlId="formAddress">
                         <Form.Label>Address</Form.Label>
                         <Form.Control 
@@ -136,7 +137,6 @@ function RegisterPage(props) {
                             onChange={changeHandler}
                         />
                     </Form.Group>
-                    <br/>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formZiCode">
                             <Form.Label>Zip Code</Form.Label>
@@ -149,7 +149,6 @@ function RegisterPage(props) {
                                 onChange={changeHandler}
                             />
                         </Form.Group>
-                        <br/>
                         <Form.Group as={Col} controlId="formCity">
                             <Form.Label>City</Form.Label>
                             <Form.Control 
@@ -163,7 +162,6 @@ function RegisterPage(props) {
                         </Form.Group>
                     </Row>
 
-                    <br/>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formCountry">
                             <Form.Label>Country</Form.Label>
@@ -175,7 +173,6 @@ function RegisterPage(props) {
                                 value={form.country}
                                 onChange={changeHandler}/>
                         </Form.Group>
-                        <br/>
                         <Form.Group as={Col} controlId="formPhone">
                             <Form.Label>Phone</Form.Label>
                             <Form.Control 
@@ -188,13 +185,11 @@ function RegisterPage(props) {
                             />
                         </Form.Group>
                     </Row>
-                    <br/>
                     <Button variant="success" type="submit">
                         Register
                     </Button>
                 </Form>
             </div>
-
             <Footer/>
         </div>
     );
