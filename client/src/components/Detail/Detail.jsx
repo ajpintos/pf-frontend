@@ -1,10 +1,15 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Title from "../Title/Title";
 
 import style from "./Detail.module.css";
 import NavBar from "../NavBar/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Container from "react-bootstrap/Container";
+import Card from "react-bootstrap/Card";
+import Stack from "react-bootstrap/esm/Stack";
+import Footer from "../Footer/Footer";
 
 const Detail = () => {
   const { id } = useParams();
@@ -13,7 +18,7 @@ const Detail = () => {
 
   const getProductForId = async () => {
     try {
-      const Data = await axios(`http://localhost:3001/products/${id}`);
+      const Data = await axios(`/products/${id}`);
       const char = Data.data;
       console.log(char);
       if (char) {
@@ -34,66 +39,74 @@ const Detail = () => {
   };
 
   return (
-    <div>
-      <div>
-        <NavBar />
+    <div className={style.container}>
+      <div className="">
+        <Title />
       </div>
-      <div class=" container-fluid mt-5">
-        <div class="row ">
-          <div class="col  ">
-            <img
-              src={product?.image}
-              alt={product?.name}
-              width="320"
-              height="320"
-            />
-          </div>
-
-          <div class="col-md ">
-            <h1 class=" text-start">{product.name}</h1>
-
-            <h2 class="text-start">${product.price}</h2>
-            <p class=" text-start "> {product.description}</p>
-            <div class="row  text-start">
-              <strong class="col-3  text-start me-2    ">Disponibles:</strong>
-              <strong class="col  me-2 text-success">
-                {" "}
-                {product.stock} disponibles
-              </strong>
-            </div>
-
-            <div class="mt-1   text-start ">
-              <input
-                type="number"
-                value={cant}
-                min={1}
-                max={product.stock}
-                onChange={validacion}
-                style={{ width: "60px", marginTop: "10px" }}
+      <div className="row  text-center ">
+        <div
+          direction="horizontal"
+          className="d-flex flex-row justify-content-between bg-success pt-3 pb-3"
+        >
+          <NavBar />
+        </div>
+        <div className="container ">
+          <h1>DETAIL</h1>
+          <div className="row">
+            <div className="col">
+              <img
+                src={product?.image}
+                alt={product?.name}
+                width="320"
+                height="320"
               />
-
-              <button
-                style={{
-                  borderRadius: "10px",
-                  fontSize: "13px",
-                  textAlign: "center",
-                  backgroundColor: "green",
-                  color: "white",
-                }}
-              >
-                {" "}
-                Add to Cart 🛒
-              </button>
             </div>
-            <br />
-            <div class="row">
-              <div class="col text-start">
-                <button style={{ borderRadius: "1rem" }}>❤️</button>
+
+            <div className="col">
+              <h1>{product.name}</h1>
+
+              <h2>${product.price}</h2>
+              <p> {product.description}</p>
+              <div>
+                <strong>Available:</strong>
+                <strong> {product.stock} units</strong>
+              </div>
+
+              <div>
+                <input
+                  type="number"
+                  value={cant}
+                  min={1}
+                  max={product.stock}
+                  onChange={validacion}
+                  style={{ width: "60px", marginTop: "10px" }}
+                />
+
+                <button
+                  style={{
+                    borderRadius: "10px",
+                    fontSize: "13px",
+                    textAlign: "center",
+                    backgroundColor: "green",
+                    color: "white",
+                  }}
+                >
+                  {" "}
+                  Add to Cart 🛒
+                </button>
+              </div>
+              <br />
+              <div>
+                <div>
+                  <button style={{ borderRadius: "1rem" }}>❤️</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <br />
+      <Footer></Footer>
     </div>
   );
 };

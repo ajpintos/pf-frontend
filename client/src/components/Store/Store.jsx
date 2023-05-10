@@ -8,6 +8,7 @@ import Stack from "react-bootstrap/esm/Stack.js";
 import { filterByCategories, getCategories } from "../../Redux/actions/actionsCategories.js";
 import { getProducts, sortProducts } from "../../Redux/actions/actionsProducts.js";
 import s from "./Store.module.css";
+// import CardContainer from "../CardContainer/CardContainer.jsx";
 
 export default function Store () {
   const dispatch = useDispatch()
