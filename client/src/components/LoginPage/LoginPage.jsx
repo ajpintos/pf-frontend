@@ -21,14 +21,14 @@ const onSuccess = (response) => {
 const onFailure = (response) => {
     console.log("Something went wrong", response)
 }
-// useEffect(() => {
-//     const start = () => {
-//         gapi.auth2.init({
-//             clientId: clientID,
-//         })
-//     }
-//     gapi.load("client:auth2", start);
-// },[])
+useEffect(() => {
+    const start = () => {
+        gapi.auth2.init({
+            clientId: clientID,
+        })
+    }
+    gapi.load("client:auth2", start);
+},[])
 
 //! --------------------------------------
 // CSS REACT-BOOSTRAP
