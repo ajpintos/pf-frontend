@@ -48,15 +48,19 @@ const rootReducer = (state = initialState, action) => {
         userLogin: action.payload
       }
     case FILTER_BY_CATEGORIES : {
-      const allCategories = state.products
-      const CategoriesFiltered = action.payload === 'All'?
-      state.allProducts : allCategories.filter(el => {
-          return el.arrayCategories[0].name? el.arrayCategories[0].name.includes(action.payload) :
-              el.allCategories?.map(el => el.name).includes(action.payload)
-      })
-          return {
-              ...state,
-              products: CategoriesFiltered
+      // const allCategories = state.products
+      // const CategoriesFiltered = action.payload === 'All'?
+      // state.allProducts : allCategories.filter(el => {
+      //     return el.arrayCategories[0].name? el.arrayCategories[0].name.includes(action.payload) :
+      //         el.allCategories?.map(el => el.name).includes(action.payload)
+      // })
+      //     return {
+      //         ...state,
+      //         products: CategoriesFiltered
+      // }
+      return {
+        ...state,
+        products: action.payload,
       }
     }
     case SORT_PRODUCTS: {

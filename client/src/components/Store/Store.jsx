@@ -13,12 +13,12 @@ export default function Store () {
   const dispatch = useDispatch()
   const allProducts = useSelector(state => state.products)
   const allCategories = useSelector(state => state.allCategories)
-  const [/*order*/, setOrder] = useState('');
+  const [order, setOrder] = useState('');
   const [filter, setFilter] = useState('')
   const [input, setInput] = useState(1)
   const pageNumbers = [];
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, /*setProductsPerPage*/] = useState(16);
+  const [productsPerPage, setProductsPerPage] = useState(16);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -41,15 +41,6 @@ export default function Store () {
     pageNumbers.push(i)
   }
 
-/*  useEffect(() => {
-    getProducts()
-      console.log("Todos los productos",getProducts())
-  },[dispatch])
-
-  useEffect(() => {
-    getCategories()
-  },[dispatch])*/
-
   function handleOrder(e){
     e.preventDefault()
     dispatch(sortProducts(e.target.value));
@@ -57,11 +48,12 @@ export default function Store () {
     setOrder(e.target.value)
   }
 
-  function handleFilterByCategories(e){
+  async function handleFilterByCategories(e){
     e.preventDefault();
-    dispatch(filterByCategories(e.target.value))
+    const productsFilter = await filterByCategories(e.target.value, order);
+    dispatch(productsFilter);
     setCurrentPage(1);
-    setFilter(e.target.value)
+    setFilter(e.target.value);
   }
 
 
@@ -101,7 +93,7 @@ export default function Store () {
           <select onChange={e => handleFilterByCategories(e)}>
             <option value="All">All Categories</option>
             {allCategories.map(c => (
-              <option value={c.name} key={c.name}>{c.name}</option>
+              <option value={c.id} key={c.name}>{c.name}</option>
             ))}
           </select>
         </div>
@@ -118,6 +110,7 @@ export default function Store () {
           categories={product.arrayCategories}
           price={product.price}
           stock={product.stock}
+          priceFlag={true}
           />
           ))}
       </section>

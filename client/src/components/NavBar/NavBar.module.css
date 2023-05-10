@@ -34,8 +34,9 @@
 }
 
 .settings {
-    margin-right: 10px;
+    margin-left: 20rem;
 }
+
 .container_settings .home:hover ,
 .container_settings .about_us:hover ,
 .container_settings .contact_us:hover ,
