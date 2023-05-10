@@ -12,50 +12,28 @@ import { getCategories } from "../../Redux/actions/actionsCategories.js";
 import imgpropia from "../../logo/logo.png";
 import s from "./Landing_home.module.css";
 import Stack from "react-bootstrap/esm/Stack.js";
-import GoogleLogin from "react-google-login";
-import {gapi} from "gapi-script";
+
 
 const Landing_home = () => {
 
   const dispatch = useDispatch();
 
-   const loadingData = async () => {
+  const loadingData = async () => {
     const all_Products = await getProducts();
     dispatch(all_Products);
     const all_Categories = await getCategories();
     dispatch(all_Categories);
   };
 
-    useEffect(() => {
+  const user = useSelector(state => state.userLogin);
+
+  useEffect(() => {
         loadingData();
-    }, []);
+  }, []);
 
-    // const user = {name: "Javier"}
-    const user = useSelector(state => state.userLogin);
 
-    //! Autenticación con Google
-    const clientID = "932914293926-uo3dpst96jr8s51di1mmbhdh3j2gie6a.apps.googleusercontent.com";
-    useEffect(() => {
-        const start = () => {
-            gapi.auth2.init({
-                clientId: clientID,
-            })
-        }
-        gapi.load("client:auth2", start);
-    },[])
-
-    const onSuccess = (response) => {
-        console.log(response)
-    }
-
-    const onFailure = (response) => {
-        console.log("Something went wrong", response)
-    }
-    //! --------------------------------------
-
-    return (
+  return (
         <div className="container-fluid">
-            {console.log(user)}
             {/* Cabecera */}
             <header>
                 {/* Sección del logo, login, favoritos y carrito */}
@@ -76,12 +54,6 @@ const Landing_home = () => {
                     }
                     <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
                     <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🛒 Cart</Link>
-                    <GoogleLogin
-                        clientId={clientID}
-                        onSuccess={onSuccess}
-                        onFailure={onFailure}
-                        cookiePolicy={"single_host_policy"}
-                    />
                 </div>
 
         {/* Sección de NavBar y Settings */}
