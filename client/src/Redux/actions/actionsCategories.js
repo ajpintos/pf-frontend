@@ -12,14 +12,15 @@ export const getCategories = async () => {
 
 export const filterByCategories = async (category, order) => {
   try {
-    const orderFilter = order ? `&${order}` : null;
-    const productsArray = await axios.get('/products?catgory='+category+orderFilter);
+    const orderFilter = order ? '&order='+order : '';
+    const arrayFound = '/products?category='+category+orderFilter
+    const productsArray = await axios.get(arrayFound);
     if (productsArray.lenght < 1) throw Error('There are no products for this category');
     return {
         type: FILTER_BY_CATEGORIES,
-        payload: productsArray,
+        payload: productsArray.data,
     }
   } catch (error) {
-    return { error: message.error };
+    return { error: error };
   }
 }

@@ -56,7 +56,7 @@ function CardContainer() {
           description={product.description}
           price={product.price}
           stock={product.stock}
-          categories={product.arrayCategories}
+          priceFlag={false}
           />
           ))}
       </section>
