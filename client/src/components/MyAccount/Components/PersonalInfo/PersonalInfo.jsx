@@ -1,5 +1,16 @@
-import Footer from "../../../Footer/Footer";
+import { useEffect, useState } from "react";
+import { allUsers } from "../../../../Redux/actions/actionsUserLogin";
+import { useDispatch } from "react-redux";
+
 const PersonalInfo = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(allUsers());
+  }, []);
+
+  /*   const user = useState((state) => state.users); */
+  console.log();
+
   return (
     <div className=" text-center  ">
       <div className="">
@@ -28,11 +39,20 @@ const PersonalInfo = () => {
               Administra tu cuenta de google
             </button>
           </div>
-
+          <br />
           <div className="mt-3 text-end">otras configuraciones</div>
-          <div>usuarios </div>
-          <div>1 </div>
-          <div>2</div>
+          <br />
+          <button style={{ borderRadius: "1rem" }}>
+            Cambiar datos personales de la base de datos de Biofresh?
+          </button>
+
+          <div>cambiar First Name: ejemplo 1</div>
+          <div>cambiar Last Name: ejeplo 2</div>
+          <div>cambiar Address: 123121</div>
+          <div>Zip Code: 123123</div>
+          <div>Country: 12312</div>
+          <div>Phone: 3431212</div>
+          <div>City: prueba</div>
           <br />
         </div>
       </div>

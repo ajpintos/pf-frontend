@@ -1,11 +1,3 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { userLogin, allUsers } from "../../Redux/actions/actionsUserLogin";
-
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
 import PersonalInf from "./Components/PersonalInfo/PersonalInfo";
 import Footer from "../Footer/Footer";
 import Title from "../Title/Title";
