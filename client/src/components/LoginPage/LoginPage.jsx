@@ -1,6 +1,6 @@
 import React , { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector } from 'react-redux';
 import { userLogin , userLoginGoogle} from '../../Redux/actions/actionsUser.js';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer/Footer.jsx';
@@ -27,17 +27,23 @@ function LoginPage(){
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector(state => state.userLogin);
 
     //! Estado local para guardar el usuario
     // const [ user , setUser ] = useState({});
 
     const clientID = "932914293926-uo3dpst96jr8s51di1mmbhdh3j2gie6a.apps.googleusercontent.com";
    
-    const onSuccess = (response) => {
+    const onSuccess = async (response) => {
         console.log(response.profileObj);
-        userLoginGoogle(response.profileObj);
-        alert("login successfully");
-        navigate("/");
+        console.log(response.profileObj.name,"name");
+        console.log(response.profileObj.email,"email");
+        const statusGoogle = await userLoginGoogle(response.profileObj);
+        if (statusGoogle.hasOwnProperty('error')) alert("Incorrect email or password");
+        else {
+            alert("login successfully");
+            navigate("/");
+        }
     }
 
     const onFailure = (response) => {
@@ -75,6 +81,12 @@ function LoginPage(){
         }
         gapi.load("client:auth2", start);
     },[])
+
+    // UseEffect para volver al inicio si ya se encuentra logueado el usuario
+    
+    useEffect(() => {
+        user.email && navigate('/');
+    }, [user]);
 
 return (
     <div className="container-fluid">

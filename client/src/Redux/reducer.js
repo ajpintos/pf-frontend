@@ -1,6 +1,6 @@
 import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME, SORT_PRODUCTS } from "./types/typesProducts";
-import { ALL_USERS, LOGIN_USER , LOGIN_USER_GOOGLE } from "./types/typesUser.js";
+import { ALL_USERS, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER } from "./types/typesUser.js";
 
 const initialState = {
   users: [],
@@ -16,7 +16,7 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALLPRODUCTS:
+    case GET_ALLPRODUCTS:{
       return {
         ...state,
         allProducts: action.payload,
@@ -25,34 +25,45 @@ const rootReducer = (state = initialState, action) => {
         nameProducts: '',
         flagProducts: false,
       }
-    case GET_PRODUCTSBYNAME:
+    };
+    case GET_PRODUCTSBYNAME:{
       return {
         ...state,
         showProducts: action.payload.products,
         nameProducts: action.payload.name,
         flagProducts: true,
       }
-    case GET_ALLCATEGORIES: 
+    };
+    case GET_ALLCATEGORIES: {
       return {
         ...state,
         allCategories: action.payload,
       }
-    case ALL_USERS:
+    };
+    case ALL_USERS:{
       return {
         ...state,
         users: action.payload
       }
-    case LOGIN_USER:
+    };
+    case LOGIN_USER:{
       return {
         ...state,
         userLogin: action.payload
       }
+    };
     case LOGIN_USER_GOOGLE: {
       return {
         ...state,
         userLogin: action.payload
       }
-    }
+    };
+    case LOGOUT_USER:{ 
+      return {
+        ...state,
+        userLogin : action.payload
+      }
+    };
     case FILTER_BY_CATEGORIES : {
       const allCategories = state.products
       const CategoriesFiltered = action.payload === 'All'?

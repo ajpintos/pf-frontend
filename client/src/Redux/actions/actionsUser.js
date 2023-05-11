@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN_USER , ALL_USERS, LOGIN_USER_GOOGLE } from "../types/typesUser.js";
+import { LOGIN_USER , ALL_USERS, LOGIN_USER_GOOGLE, LOGOUT_USER } from "../types/typesUser.js";
 
 export const userLogin = ( email , password ) => {
     return async function (dispatch) {
@@ -17,15 +17,36 @@ export const userLogin = ( email , password ) => {
 };
 
 export const userLoginGoogle = (user) => {
-    return {
-        type: LOGIN_USER_GOOGLE,
-        payload: {
-            firstname: user.name,
-            email: user.email
-        }
+    return async function (dispatch) {
+        const userGoogle = await user
+        return dispatch({
+            type: LOGOUT_USER,
+            payload: {
+                firstname: userGoogle.givenName,
+                lastname: userGoogle.familyName,
+                email : userGoogle.email
+            }
+        })
     }
 };
+// email: "santiagomuller45@gmail.com"
+// ​
+// familyName: "Muller"
+// ​
+// givenName: "Santiago"
+// ​
+// googleId: "115156884018693892604"
+// ​
+// imageUrl: "https://lh3.googleusercontent.com/a/AGNmyxb8IPSeJ_WwJykVuSED8r0UEgKpp0_trbQeE4VYCQ=s96-c"
+// ​
+// name: "Santiago Muller"
 
+export const userLogout = () => {
+    return {
+        type: LOGOUT_USER,
+        payload: {}
+    }
+}
 export const allUsers = () => {
     return async function (dispatch) {
         try {
@@ -38,4 +59,5 @@ export const allUsers = () => {
             return { error: error.message };
         }
     }
-}
+};
+
