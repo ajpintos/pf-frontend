@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import Footer from '../Footer/Footer.jsx';
 import Title from '../Title/Title.jsx';
-import axios from "axios";
+import NavBar from "../NavBar/NavBar.jsx";
 import registerValidate from "./validate/registerValidate.js";
 import styles from './RegisterPage.module.css';
 
@@ -11,7 +12,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import NavBar from "../NavBar/NavBar.jsx";
 import Stack from 'react-bootstrap/esm/Stack';
 //------------------------------------------------------
 
