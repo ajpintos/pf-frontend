@@ -5,20 +5,22 @@ import NavBar from "../NavBar/NavBar.jsx";
 import Card from "../Card/Card.jsx";
 import Footer from '../Footer/Footer.jsx';
 import Stack from "react-bootstrap/esm/Stack.js";
-import { filterByCategories, getCategories } from "../../Redux/actions/actionsCategories.js";
-import { getProducts } from "../../Redux/actions/actionsProducts.js";
+import { filterByCategories } from "../../Redux/actions/actionsCategories.js";
 import s from "./Store.module.css";
+import { useParams } from "react-router-dom";
 
 export default function Store () {
-  const dispatch = useDispatch()
-  const allProducts = useSelector(state => state.products)
-  const allCategories = useSelector(state => state.allCategories)
+  const dispatch = useDispatch();
+  const params = useParams();
+  console.log('params ', params);
+  const allProducts = useSelector(state => state.products);
+  const allCategories = useSelector(state => state.allCategories);
   const [order, setOrder] = useState('All Products');
   const [filter, setFilter] = useState('All');
   const [input, setInput] = useState(1);
   const pageNumbers = [];
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(6);
+  const [productsPerPage, setProductsPerPage] = useState(8);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -65,13 +67,40 @@ export default function Store () {
     };
   };
 
+  async function loadingData () {
+    let flagCategory = true;
+    setOrder('All Products');
+    if (params.hasOwnProperty('id')) {
+      const idCategory = params.id;
+      const productsFilter = await filterByCategories(idCategory, order);
+      if (productsFilter.hasOwnProperty('error')) {
+        alert('There are no products for this category');
+        flagCategory = false;
+        alert('Return to all Categories')
+      } else {
+        dispatch(productsFilter);
+        setFilter(idCategory);
+      }
+    } 
+    if (!flagCategory) {
+      const productsFilter = await filterByCategories('All', order);
+      dispatch(productsFilter);
+      setFilter('All');
+    };
+    setCurrentPage(1);
+  };
+
+  useEffect(()=>{
+    loadingData();
+  },[]);
+
   return (
     <div className="container-fluid">
 
       {/* Cabecera */}
-      <header>
-        <Title />
-        <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
+      <header >
+        <Title  />
+        <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success" >
           <NavBar/>
         </Stack>
       </header>
@@ -80,49 +109,37 @@ export default function Store () {
         {/* Seccion Ordenamiento y Filtrados */}
         <div className="col-sm-3 col-md-3 col-lg-3 col-xl-2" >
           <h1 className="text-center mt-3" >Store</h1>
-          <h6 className="text-center mt-3" >{productsPerPage} products per page</h6>
           <section  className="col text-center mt-5" >
-            <div className={s.filters}>
-              <select onChange={e => handleFilterByCategories(e)}>
-                <option value="All">All Categories</option>
-                {allCategories.map(c => (
-                  <option value={c.id} key={c.name}>{c.name}</option>
-                  ))}
+            <div>
+              <p className="text-center h6" >Filter by Category</p>
+              <select className="form-select" size="5" aria-label="Filter by Category" onChange={handleFilterByCategories}>
+                { filter === "All" ? <option selected className="bg-success text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
+                {allCategories?.map(c => 
+                  { const rowCategory = filter === c.id ? <option selected className="bg-success text-white" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
+                  return (
+                    rowCategory
+                    )}
+                    )}
               </select>
             </div>
           </section>
           <section className="col text-center mt-5" >  
-            <div className={s.orders}>
-              <select onChange={e => handleOrder(e)}>
-                <option value="All Products">Without Order</option>
-                <option value="AtoZ">A to Z</option>
-                <option value="ZtoA">Z to A</option>
-                <option value="Lower">Lower Price</option>
-                <option value="Higher">Higher Price</option>
+            <div>
+              <p className="text-center h6" >Orde by</p>
+              <select className="form-select" size="5" aria-label="Order by" onChange={handleOrder}>
+                { order === "All Products" ? <option selected className="bg-success text-white" value="All Products">Without Order</option> : <option value="All Products">Without Order</option> }
+                { order === "AtoZ" ? <option selected className="bg-success text-white" value="AtoZ">A to Z</option> : <option value="AtoZ">A to Z</option> }
+                { order === "ZtoA" ? <option selected className="bg-success text-white" value="ZtoA">Z to A</option> : <option value="ZtoA">Z to A</option> }
+                { order === "Lower" ? <option selected className="bg-success text-white" value="Lower">Lower Price</option> : <option value="Lower">Lower Price</option> }
+                { order === "Higher" ? <option selected className="bg-success text-white" value="Higher">Higher Price</option> : <option value="Higher">Higher Price</option> }
               </select>
             </div>
           </section>
+          <h6 className="text-center mt-5" >{productsPerPage} products per page</h6>
         </div>
 
         {/* Sección Cards */}
-        <div className="col-sm-9 col-md-9 col-lg-9 col-xl-10">
-
-          {/* Sección Paged */}
-          <nav className="row">
-            {/* <div className={s.container_paged} > */}
-            <div className={s.container_paged} >
-              <button className={s.prev_paged} disabled={currentPage <= 1} onClick={previousPage}>{'<'}</button>
-              <ul className={s.paged}>
-                  { pageNumbers?.map((i) => (
-                    <li  key={i} onClick={() => paged(i)}>
-                      {i}
-                    </li>
-                  ))}
-              </ul >
-              <button className={s.next_paged} disabled={currentPage >= Math.ceil(allProducts/productsPerPage)} onClick={nextPage}>{'>'}</button>
-            
-            </div>
-          </nav>
+        <div className="col-sm-9 col-md-9 col-lg-9 col-xl-10 mt-2">
 
           <section className="row">
             {currentProducts.length > 0 && currentProducts.map((product) => (
@@ -138,6 +155,22 @@ export default function Store () {
               />
               ))}
           </section>
+
+          {/* Sección Paged */}
+          <nav className="row">
+            <div className={s.container_paged} >
+              <button className={s.prev_paged} disabled={currentPage <= 1} onClick={previousPage}>{'<'}</button>
+              <ul className={s.paged}>
+                  { pageNumbers?.map((i) => (
+                    <li  key={i} onClick={() => paged(i)}>
+                      {i}
+                    </li>
+                  ))}
+              </ul >
+              <button className={s.next_paged} disabled={currentPage >= Math.ceil(allProducts/productsPerPage)} onClick={nextPage}>{'>'}</button>
+            
+            </div>
+          </nav>
 
         </div>
       </div>

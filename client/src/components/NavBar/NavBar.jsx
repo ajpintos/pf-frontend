@@ -7,10 +7,11 @@ import s from './NavBar.module.css';
 import { getCategories } from "../../Redux/actions/actionsCategories";
 import { useEffect } from 'react';
 import { getProducts } from '../../Redux/actions/actionsProducts';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function NavBar() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const location = useLocation();
   const categories = useSelector(state => state.allCategories);
   const products = useSelector(state => state.allProducts);
 
@@ -30,15 +31,16 @@ export default function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="">
             <Link to='/' id={s.item}>HOME</Link>
-            <NavDropdown id={s.item} title="STORE"  >
-            <Link className='d-block' id={s.subItem} to='/store'>All Products</Link>
-              {categories?.map(c => (
-                <div>
-                  <NavDropdown.Divider/>
-                  <Link className='d-block' id={s.subItem} key={c.id} to={`/store/:${c.id}`}>{c.name}</Link>
-                </div>
-              ))}
-            </NavDropdown>
+            { location.pathname.substring(0,6) !== '/store' &&
+                <NavDropdown id={s.item} title="STORE"  >
+                  <Link className='d-block' id={s.subItem} to='/store'>All Products</Link>
+                    {categories?.map(c => (
+                      <div>
+                        <NavDropdown.Divider/>
+                        <Link className='d-block' id={s.subItem} key={c.id} to={`/store/${c.id}`}>{c.name}</Link>
+                      </div>
+                    ))}
+                </NavDropdown>}
             <Link to='/about' id={s.item}>ABOUT US</Link>
             <Link to='/contact' id={s.item}>CONTACT US</Link> 
             <NavDropdown id={s.item} title="SETTINGS">
