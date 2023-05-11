@@ -29,21 +29,12 @@ function LoginPage(){
     const navigate = useNavigate();
     const user = useSelector(state => state.userLogin);
 
-    //! Estado local para guardar el usuario
-    // const [ user , setUser ] = useState({});
-
     const clientID = "932914293926-uo3dpst96jr8s51di1mmbhdh3j2gie6a.apps.googleusercontent.com";
    
-    const onSuccess = async (response) => {
-        console.log(response.profileObj);
-        console.log(response.profileObj.name,"name");
-        console.log(response.profileObj.email,"email");
-        const statusGoogle = await dispatch(userLoginGoogle(response.profileObj));
-        if (statusGoogle.hasOwnProperty('error')) alert("Incorrect email or password");
-        else {
-            alert("login successfully");
-            navigate("/");
-        }
+    const onSuccess = (response) => {
+        dispatch(userLoginGoogle(response.profileObj));
+        alert("login successfully");
+        navigate("/");
     }
 
     const onFailure = (response) => {

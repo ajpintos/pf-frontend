@@ -17,15 +17,14 @@ export const userLogin = ( email , password ) => {
 };
 
 export const userLoginGoogle = (user) => {
-    return async function (dispatch) {
-        const userGoogle = await user
+    return function (dispatch) {
         return dispatch({
             type: LOGIN_USER_GOOGLE,
             payload: {
-                firstname: userGoogle.givenName,
-                lastname: userGoogle.familyName,
-                email : userGoogle.email,
-                fullname: userGoogle.name
+                firstname: user.givenName,
+                lastname: user.familyName,
+                email : user.email,
+                fullname: user.name
             }
         })
     }
