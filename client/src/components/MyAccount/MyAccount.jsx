@@ -6,10 +6,17 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import PersonalInf from "./Components/PersonalInfo/PersonalInfo";
 
 function MyAccount() {
   return (
-    <Form>
+    <div className=" vh-100 vw-100">
+      <div className="">
+        <PersonalInf />
+      </div>
+    </div>
+
+    /*  <Form>
       <h1 className="text-center">My Account</h1>
       <Row>
         <h3 className="border border-danger border-2 tex-center">
@@ -65,7 +72,7 @@ function MyAccount() {
       <Button variant="primary" type="submit">
         Cambiar datos
       </Button>
-    </Form>
+    </Form> */
   );
 }
 
