@@ -20,7 +20,7 @@ export const userLoginGoogle = (user) => {
     return async function (dispatch) {
         const userGoogle = await user
         return dispatch({
-            type: LOGOUT_USER,
+            type: LOGIN_USER_GOOGLE,
             payload: {
                 firstname: userGoogle.givenName,
                 lastname: userGoogle.familyName,
