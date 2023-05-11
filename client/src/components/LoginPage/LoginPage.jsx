@@ -34,6 +34,7 @@ function LoginPage(){
     const clientID = "932914293926-uo3dpst96jr8s51di1mmbhdh3j2gie6a.apps.googleusercontent.com";
    
     const onSuccess = (response) => {
+        console.log(response.profileObj);
         userLoginGoogle(response.profileObj);
         alert("login successfully");
         navigate("/");

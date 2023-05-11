@@ -4,12 +4,12 @@ import { ALL_USERS, LOGIN_USER , LOGIN_USER_GOOGLE } from "./types/typesUser.js"
 
 const initialState = {
   users: [],
+  userLogin: [],
   allProducts: [],
   products: [],
   showProducts: [],
   nameProducts: '',
   flagProducts: false,
-  userLogin: [],
   allCategories: [],
   categorieFilter: null,
 };

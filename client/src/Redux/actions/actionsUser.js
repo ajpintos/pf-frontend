@@ -19,7 +19,10 @@ export const userLogin = ( email , password ) => {
 export const userLoginGoogle = (user) => {
     return {
         type: LOGIN_USER_GOOGLE,
-        payload: user
+        payload: {
+            firstname: user.name,
+            email: user.email
+        }
     }
 };
 
