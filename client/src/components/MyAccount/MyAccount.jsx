@@ -7,13 +7,19 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import PersonalInf from "./Components/PersonalInfo/PersonalInfo";
+import Footer from "../Footer/Footer";
+import Title from "../Title/Title";
+import NavBar from "../NavBar/NavBar";
 
 function MyAccount() {
   return (
-    <div className=" vh-100 vw-100">
+    <div className="  vw-100">
+      <Title />
+      <NavBar />
       <div className="">
         <PersonalInf />
       </div>
+      <Footer />
     </div>
 
     /*  <Form>
