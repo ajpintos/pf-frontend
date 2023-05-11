@@ -38,7 +38,7 @@ function LoginPage(){
         console.log(response.profileObj);
         console.log(response.profileObj.name,"name");
         console.log(response.profileObj.email,"email");
-        const statusGoogle = await userLoginGoogle(response.profileObj);
+        const statusGoogle = await dispatch(userLoginGoogle(response.profileObj));
         if (statusGoogle.hasOwnProperty('error')) alert("Incorrect email or password");
         else {
             alert("login successfully");
@@ -83,7 +83,7 @@ function LoginPage(){
     },[])
 
     // UseEffect para volver al inicio si ya se encuentra logueado el usuario
-    
+
     useEffect(() => {
         user.email && navigate('/');
     }, [user]);

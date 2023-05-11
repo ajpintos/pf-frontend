@@ -14,7 +14,7 @@ function Title() {
         </figure>
         {user.email 
           ? <Link to="/myaccount" className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-6">
-              🙋‍♂️ {user.firstname ? user.firstname : user.name}
+              🙋‍♂️ {user.firstname}
             </Link>
           : <Link to="/login" className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-6">
               🙋‍♂️ Login

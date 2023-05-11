@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import { useEffect } from "react";
 import CardContainer from "../CardContainer/CardContainer.jsx";
 import Footer from "../Footer/Footer.jsx";
@@ -14,6 +14,7 @@ import s from "./Landing_home.module.css";
 const Landing_home = () => {
 
   const dispatch = useDispatch();
+  const testUser = useSelector(state => state.userLogin);
 
   const loadingData = async () => {
     const all_Products = await getProducts();
@@ -30,6 +31,7 @@ const Landing_home = () => {
 
   return (
         <div className="container-fluid">
+          {console.log(testUser)}
             {/* Cabecera */}
           <header>
               {/* Sección del logo, login, favoritos y carrito */}
