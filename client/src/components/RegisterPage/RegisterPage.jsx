@@ -11,6 +11,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/esm/Stack';
 import emailjs from "@emailjs/browser";
+import axios from 'axios';
 
 function RegisterPage() {
 
@@ -59,7 +60,7 @@ function RegisterPage() {
                       console.log(error.text);
                     }
                   );
-                  navigate("/login");
+                navigate("/login");
             })
             .catch(err => alert("Error: Check all camps and try again"))
     }
