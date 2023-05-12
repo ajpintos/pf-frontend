@@ -1,17 +1,20 @@
-import PersonalInf from "./Components/PersonalInfo/PersonalInfo";
-import Footer from "../Footer/Footer";
-import Title from "../Title/Title";
-import NavBar from "../NavBar/NavBar";
-import {useEffect} from "react";
+import PersonalInf from "./Components/PersonalInfo/PersonalInfo.jsx";
+import Footer from "../Footer/Footer.jsx";
+import Title from "../Title/Title.jsx";
+import NavBar from "../NavBar/NavBar.jsx";
+import { useSelector } from "react-redux";
 
 function MyAccount() {
-    // useEffect(() => {
-    //     dispatch(allUsers());
-    // },[])
+
+    const user = useSelector(state => state.userLogin)
+
     return (
         <div>
+            <Title/>
+            <NavBar/>
             <h1>My Account</h1>
-            {/*<h3>{`Welcome ${user.firstname}`}</h3>*/}
+            <h3>{`Welcome ${user.firstname}`}</h3>
+            <Footer/>
         </div>
     )
 };

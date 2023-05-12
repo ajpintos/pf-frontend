@@ -23,8 +23,7 @@ export const userLoginGoogle = (user) => {
             payload: {
                 firstname: user.givenName,
                 lastname: user.familyName,
-                email : user.email,
-                fullname: user.name
+                email : user.email
             }
         })
     }

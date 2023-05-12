@@ -1,7 +1,5 @@
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import CardContainer from "../CardContainer/CardContainer.jsx";
 import Footer from "../Footer/Footer.jsx";
 import Title from "../Title/Title.jsx";
