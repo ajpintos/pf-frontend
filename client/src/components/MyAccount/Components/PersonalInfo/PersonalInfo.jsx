@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { allUsers } from "../../../../Redux/actions/actionsUserLogin";
+import { allUsers } from "../../../../Redux/actions/actionsUser";
 import { useDispatch } from "react-redux";
 import prueba from "./img/yoda-bebe-6617.jpg";
 import { Link } from "react-router-dom";
