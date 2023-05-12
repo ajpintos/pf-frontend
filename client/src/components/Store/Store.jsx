@@ -6,13 +6,13 @@ import Card from "../Card/Card.jsx";
 import Footer from '../Footer/Footer.jsx';
 import Stack from "react-bootstrap/esm/Stack.js";
 import { filterByCategories } from "../../Redux/actions/actionsCategories.js";
-import s from "./Store.module.css";
 import { useParams } from "react-router-dom";
+import SetPages from "./SetPages.jsx";
 
 export default function Store () {
+
   const dispatch = useDispatch();
   const params = useParams();
-  console.log('params ', params);
   const allProducts = useSelector(state => state.products);
   const allCategories = useSelector(state => state.allCategories);
   const [order, setOrder] = useState('All Products');
@@ -38,9 +38,6 @@ export default function Store () {
   const previousPage = () => {
       setInput(parseInt(input) -1);
       setCurrentPage(parseInt(currentPage) -1)
-  }
-  for (let i = 1; i <=Math.ceil(allProducts/productsPerPage); i++) {
-    pageNumbers.push(i)
   }
 
   async function handleOrder(e){
@@ -107,39 +104,69 @@ export default function Store () {
 
       <div className="row" >
         {/* Seccion Ordenamiento y Filtrados */}
-        <div className="col-sm-3 col-md-3 col-lg-3 col-xl-2" >
+        <div className="col-md-3 col-lg-3 col-xl-2" >
           <h1 className="text-center mt-3" >Store</h1>
-          <section  className="col text-center mt-5" >
-            <div>
-              <p className="text-center h6" >Filter by Category</p>
-              <select className="form-select" size="5" aria-label="Filter by Category" onChange={handleFilterByCategories}>
-                { filter === "All" ? <option selected className="bg-success text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
-                {allCategories?.map(c => 
-                  { const rowCategory = filter === c.id ? <option selected className="bg-success text-white" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
-                  return (
-                    rowCategory
-                    )}
-                    )}
-              </select>
-            </div>
-          </section>
-          <section className="col text-center mt-5" >  
-            <div>
-              <p className="text-center h6" >Orde by</p>
-              <select className="form-select" size="5" aria-label="Order by" onChange={handleOrder}>
-                { order === "All Products" ? <option selected className="bg-success text-white" value="All Products">Without Order</option> : <option value="All Products">Without Order</option> }
-                { order === "AtoZ" ? <option selected className="bg-success text-white" value="AtoZ">A to Z</option> : <option value="AtoZ">A to Z</option> }
-                { order === "ZtoA" ? <option selected className="bg-success text-white" value="ZtoA">Z to A</option> : <option value="ZtoA">Z to A</option> }
-                { order === "Lower" ? <option selected className="bg-success text-white" value="Lower">Lower Price</option> : <option value="Lower">Lower Price</option> }
-                { order === "Higher" ? <option selected className="bg-success text-white" value="Higher">Higher Price</option> : <option value="Higher">Higher Price</option> }
-              </select>
-            </div>
-          </section>
-          <h6 className="text-center mt-5" >{productsPerPage} products per page</h6>
+          <div className="col">
+            <section  className="col text-center mt-5" >
+              <div className="col-8 offset-2 col-md-12 offset-md-0 col-lg-10 offset-lg-1 col-xl-12 offset-xl-0">
+                <p className="text-center h6" >Filter by Category</p>
+                <select className="form-select" size="5" aria-label="Filter by Category" onChange={handleFilterByCategories}>
+                  { filter === "All" ? <option selected className="bg-success text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
+                  {allCategories?.map(c => 
+                    { const rowCategory = filter === c.id ? <option selected className="bg-success text-white" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
+                    return (
+                      rowCategory
+                      )}
+                      )}
+                </select>
+              </div>
+            </section>
+            <section className="col text-center mt-5" >  
+              <div className="col-8 offset-2 col-md-12 offset-md-0 col-lg-10 offset-lg-1 col-xl-12 offset-xl-0">
+                <p className="text-center h6" >Orde by</p>
+                <select className="form-select" size="5" aria-label="Order by" onChange={handleOrder}>
+                  { order === "All Products" ? <option selected className="bg-success text-white" value="All Products">Without Order</option> : <option value="All Products">Without Order</option> }
+                  { order === "AtoZ" ? <option selected className="bg-success text-white" value="AtoZ">A to Z</option> : <option value="AtoZ">A to Z</option> }
+                  { order === "ZtoA" ? <option selected className="bg-success text-white" value="ZtoA">Z to A</option> : <option value="ZtoA">Z to A</option> }
+                  { order === "Lower" ? <option selected className="bg-success text-white" value="Lower">Lower Price</option> : <option value="Lower">Lower Price</option> }
+                  { order === "Higher" ? <option selected className="bg-success text-white" value="Higher">Higher Price</option> : <option value="Higher">Higher Price</option> }
+                </select>
+              </div>
+            </section>
+          </div>
+          {/* <div className="row">
+            <section  className="col-5 offset-1 text-center mt-5" >
+              <div >
+                <p className="text-center h6" >Filter by Category</p>
+                <select className="form-select" aria-label="Filter by Category" onChange={handleFilterByCategories}>
+                  { filter === "All" ? <option selected className="bg-success text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
+                  {allCategories?.map(c => 
+                    { const rowCategory = filter === c.id ? <option selected className="bg-success text-white" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
+                    return (
+                      rowCategory
+                      )}
+                      )}
+                </select>
+              </div>
+            </section>
+            <section className="col-4 offset-1 text-center mt-5" >  
+              <div >
+                <p className="text-center h6" >Orde by</p>
+                <select className="form-select" aria-label="Order by" onChange={handleOrder}>
+                  { order === "All Products" ? <option selected className="bg-success text-white" value="All Products">Without Order</option> : <option value="All Products">Without Order</option> }
+                  { order === "AtoZ" ? <option selected className="bg-success text-white" value="AtoZ">A to Z</option> : <option value="AtoZ">A to Z</option> }
+                  { order === "ZtoA" ? <option selected className="bg-success text-white" value="ZtoA">Z to A</option> : <option value="ZtoA">Z to A</option> }
+                  { order === "Lower" ? <option selected className="bg-success text-white" value="Lower">Lower Price</option> : <option value="Lower">Lower Price</option> }
+                  { order === "Higher" ? <option selected className="bg-success text-white" value="Higher">Higher Price</option> : <option value="Higher">Higher Price</option> }
+                </select>
+              </div>
+            </section>
+          </div> */}
+          <h6 className="text-center mt-5 mb-3" >{productsPerPage} products per page</h6>
         </div>
 
         {/* Sección Cards */}
-        <div className="col-sm-9 col-md-9 col-lg-9 col-xl-10 mt-2">
+        <div className="col-md-9 col-lg-9 col-xl-10 mt-2">
 
           <section className="row">
             {currentProducts.length > 0 && currentProducts.map((product) => (
@@ -157,20 +184,17 @@ export default function Store () {
           </section>
 
           {/* Sección Paged */}
-          <nav className="row">
-            <div className={s.container_paged} >
-              <button className={s.prev_paged} disabled={currentPage <= 1} onClick={previousPage}>{'<'}</button>
-              <ul className={s.paged}>
-                  { pageNumbers?.map((i) => (
-                    <li  key={i} onClick={() => paged(i)}>
-                      {i}
-                    </li>
-                  ))}
-              </ul >
-              <button className={s.next_paged} disabled={currentPage >= Math.ceil(allProducts/productsPerPage)} onClick={nextPage}>{'>'}</button>
-            
-            </div>
-          </nav>
+
+          {
+            Math.ceil(allProducts.length / productsPerPage) > 1 && <SetPages 
+            productsPerPage = {productsPerPage}
+            allProductsLength = {allProducts.length}
+            paged = {paged}
+            previousPage = {previousPage}
+            nextPage = {nextPage}
+            currentPage = {currentPage}
+            />
+          }
 
         </div>
       </div>
