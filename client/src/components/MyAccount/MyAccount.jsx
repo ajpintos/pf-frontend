@@ -1,13 +1,7 @@
-import React , {useEffect}from 'react';
-import { useDispatch , useSelector } from 'react-redux';
-import { allUsers } from '../../Redux/actions/actionsUser.js';
-
-
-const MyAccount = () => {
-
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.userLogin);
-    const allUsersDB = useSelector(state => state.users);
+import PersonalInf from "./Components/PersonalInfo/PersonalInfo";
+import Footer from "../Footer/Footer";
+import Title from "../Title/Title";
+import NavBar from "../NavBar/NavBar";
 
     useEffect(() => {
         dispatch(allUsers());
