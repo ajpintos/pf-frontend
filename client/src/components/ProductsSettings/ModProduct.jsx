@@ -1,89 +1,64 @@
-
-import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import Paginacion from './Paginacion.jsx';
-
-import ModProduct from './ModProduct.jsx';
-
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import NewProduct from './NewProduct.jsx';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from "react-bootstrap/Form";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import styles from "./ProductsSettings.module.css";
 
+const ModProduct=()=>{
 
-const ProductsSettings=()=>{
-    const allProducts = useSelector(state => state.products)
-//    console.log(allProducts);
-   //pagination
-    const itemsPerPage=10;
-    const [pageCurrent,setPageCurrent]=useState(1);
-    let totalItems=allProducts.length;
-    let indInicial=(pageCurrent-1)*itemsPerPage;
-    let indFinal= indInicial+itemsPerPage;
-   
-   //modal
-//     const [show, setShow] = useState(false);
+    const [form, setForm] = useState({
+        name: "",
+        description: "",
+        price: "",
+        stock: "",
+      });
+    
+      const [errors, setErrors] = useState({
+        name: "",
+        description: "",
+        price: "",
+        stock: "",
+      });
+        const [show, setShow] = useState(true);
 
-//   const handleClose = () => setShow(false);
-//   const handleShow = () => setShow(true);
-// const submitNew= ()=>{console.log('new')}
-
-///new
-const [showNew, setShowNew] = useState(false);
-const handleShowNew=()=>{
-    setShowNew(true)
-}
-  const [showModif, setShowModif] = useState(false);
-const showMod=()=>{
-setShowModif(true)
-}
-
-    return(
-        <>
-    <div className='container-fluid col-8'>
-        <h1>Products</h1>
-        <Button  variant="success" onClick={handleShowNew}>New</Button>
-        <Paginacion 
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            pageCurrent={pageCurrent}
-            setPageCurrent={setPageCurrent}
-            />
-       <Table striped size='sm'>
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Name</th>
-          <th>Modify</th>
-          <th>Status</th>
-         
-          
-        </tr>
-      </thead>
-      <tbody>
-       
-            {  allProducts.map((prod,index)=>{
-                return(
-              <tr><td key={index}>{index+1}</td> 
-             <td>{prod.name}</td>
-               <td><Button variant='light' size="sm" onClick={showMod}>📝</Button> </td>
-               <td><Button variant='light' size="sm">{prod.status? '✅':'❌'}</Button></td>
-              </tr>
-                //❎
-                // 
-)
-            }).slice(indInicial,indFinal)}
-          
-       
-       
-      </tbody>
-    </Table>
-    </div>
-    {/* <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>New Product</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <Form onSubmit={submitNew} >
+        const handleClose = () => setShow(false);
+        const [successMessage, setSuccessMessage] = useState("");
+        const [errorMessage, setErrorMessage] = useState("");
+        const handleChange = (event) => {
+            setForm({
+              ...form,
+              [event.target.name]: event.target.value, // se busca en que input esta escribiendo con la prop name del input, y se modifica el estado
+            });
+            setErrors(
+              validate({
+                ...form,
+                [event.target.name]: event.target.value,
+              })
+            );
+            setSuccessMessage("");
+            setErrorMessage("");
+          };
+        // const handleShow = () => setShow(true);
+        const submitNew= ()=>{console.log('new')}
+        
+        return (
+          <>
+            {/* <Button variant="primary" onClick={handleShow}>
+              Launch static backdrop modal
+            </Button> */}
+      
+            <Modal
+              show={show}
+              onHide={handleClose}
+              backdrop="static"
+              keyboard={false}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Modify Product</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+              <Form onSubmit={submitNew} >
               <Form.Group className="my-1 pb-2">
                 <FloatingLabel
                   controlId="floatingInputName"
@@ -109,8 +84,7 @@ setShowModif(true)
 
               <div className="row ">
                 <Form.Group className="col-md-6 col-xm-12 my-1 pb-2 ">
-                  <FloatingLabel controlId="floatingInputEmail" label="Stock
-">
+                  <FloatingLabel controlId="floatingInputEmail" label="Stock">
                     <Form.Control
                       type="text"
                       name="stock"
@@ -151,7 +125,7 @@ setShowModif(true)
               </div>
               <Form.Group className="my-1 pb-2 mb-3">
                 {/* <Form.Label htmlFor="message">Mensaje</Form.Label>  */}
-                {/* <FloatingLabel
+                <FloatingLabel
                   controlId="floatingTextarea"
                   label="Description"
                   className="mb-6"
@@ -183,19 +157,17 @@ setShowModif(true)
             </Form>
 
 
-        </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal> */} 
-      {showModif?<ModProduct/>:''}
-      {showNew?<NewProduct/>:''}
-        </ > 
-    )
+              </Modal.Body>
+              {/* <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary">Understood</Button>
+              </Modal.Footer> */}
+            </Modal>
+          </>
+        );
+  
+   
 }
-export default ProductsSettings;
+export default ModProduct;

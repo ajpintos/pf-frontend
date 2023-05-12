@@ -10,6 +10,7 @@ import Form from "react-bootstrap/Form";
 import emailjs from "@emailjs/browser";
 import NavBar from "../NavBar/NavBar";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Button from 'react-bootstrap/Button';
 import Title from "../Title/Title";
 import Stack from "react-bootstrap/esm/Stack";
 import Footer from "../Footer/Footer";
@@ -195,9 +196,9 @@ function Contact() {
                 </div>
               </Form.Group>
 
-              <button className="btn btn-primary" type="submit">
+              <Button variant="success" type="submit">
                 Send
-              </button>
+              </Button>
 
               <p className={styles.error}>{errorMessage}</p>
               <p className={styles.success}>{successMessage}</p>

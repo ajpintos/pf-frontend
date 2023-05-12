@@ -1,0 +1,12 @@
+.error {
+    color: red;
+  }
+  .success{
+    color:limegreen
+  }
+  .divInputs{
+    justify-content: flex-start;
+  }
+  .container2{
+    margin: 20px
+  }

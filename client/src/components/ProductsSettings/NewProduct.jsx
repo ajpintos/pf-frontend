@@ -1,84 +1,48 @@
-
-import Table from 'react-bootstrap/Table';
+import {  useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
-import Paginacion from './Paginacion.jsx';
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 
-import ModProduct from './ModProduct.jsx';
+import styles from "./ProductsSettings.module.css";
 
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import NewProduct from './NewProduct.jsx';
+const NewProduct=()=>{
+    const [form, setForm] = useState({
+        name: "",
+        description: "",
+        price: "",
+        stock: "",
+      });
+    
+      const [errors, setErrors] = useState({
+        name: "",
+        description: "",
+        price: "",
+        stock: "",
+      });
+      const handleChange = (event) => {
+        setForm({
+          ...form,
+          [event.target.name]: event.target.value, // se busca en que input esta escribiendo con la prop name del input, y se modifica el estado
+        });
+        setErrors(
+          validate({
+            ...form,
+            [event.target.name]: event.target.value,
+          })
+        );
+        setSuccessMessage("");
+        setErrorMessage("");
+      };
+      const [successMessage, setSuccessMessage] = useState("");
+      const [errorMessage, setErrorMessage] = useState("");
+      const [show, setShow] = useState(true);
 
-
-const ProductsSettings=()=>{
-    const allProducts = useSelector(state => state.products)
-//    console.log(allProducts);
-   //pagination
-    const itemsPerPage=10;
-    const [pageCurrent,setPageCurrent]=useState(1);
-    let totalItems=allProducts.length;
-    let indInicial=(pageCurrent-1)*itemsPerPage;
-    let indFinal= indInicial+itemsPerPage;
-   
-   //modal
-//     const [show, setShow] = useState(false);
-
-//   const handleClose = () => setShow(false);
-//   const handleShow = () => setShow(true);
-// const submitNew= ()=>{console.log('new')}
-
-///new
-const [showNew, setShowNew] = useState(false);
-const handleShowNew=()=>{
-    setShowNew(true)
-}
-  const [showModif, setShowModif] = useState(false);
-const showMod=()=>{
-setShowModif(true)
-}
+      const handleClose = () => setShow(false);
+      const submitNew= ()=>{console.log('new')}
 
     return(
-        <>
-    <div className='container-fluid col-8'>
-        <h1>Products</h1>
-        <Button  variant="success" onClick={handleShowNew}>New</Button>
-        <Paginacion 
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            pageCurrent={pageCurrent}
-            setPageCurrent={setPageCurrent}
-            />
-       <Table striped size='sm'>
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Name</th>
-          <th>Modify</th>
-          <th>Status</th>
-         
-          
-        </tr>
-      </thead>
-      <tbody>
-       
-            {  allProducts.map((prod,index)=>{
-                return(
-              <tr><td key={index}>{index+1}</td> 
-             <td>{prod.name}</td>
-               <td><Button variant='light' size="sm" onClick={showMod}>📝</Button> </td>
-               <td><Button variant='light' size="sm">{prod.status? '✅':'❌'}</Button></td>
-              </tr>
-                //❎
-                // 
-)
-            }).slice(indInicial,indFinal)}
-          
-       
-       
-      </tbody>
-    </Table>
-    </div>
-    {/* <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>New Product</Modal.Title>
         </Modal.Header>
@@ -109,8 +73,7 @@ setShowModif(true)
 
               <div className="row ">
                 <Form.Group className="col-md-6 col-xm-12 my-1 pb-2 ">
-                  <FloatingLabel controlId="floatingInputEmail" label="Stock
-">
+                  <FloatingLabel controlId="floatingInputEmail" label="Stock">
                     <Form.Control
                       type="text"
                       name="stock"
@@ -151,7 +114,7 @@ setShowModif(true)
               </div>
               <Form.Group className="my-1 pb-2 mb-3">
                 {/* <Form.Label htmlFor="message">Mensaje</Form.Label>  */}
-                {/* <FloatingLabel
+                <FloatingLabel
                   controlId="floatingTextarea"
                   label="Description"
                   className="mb-6"
@@ -191,11 +154,9 @@ setShowModif(true)
           <Button variant="primary" onClick={handleClose}>
             Save Changes
           </Button>
-        </Modal.Footer>
-      </Modal> */} 
-      {showModif?<ModProduct/>:''}
-      {showNew?<NewProduct/>:''}
-        </ > 
+        </Modal.Footer> */}
+      </Modal>
     )
 }
-export default ProductsSettings;
+
+export default NewProduct;
