@@ -35,9 +35,9 @@ export default function NavBar() {
                 <NavDropdown id={s.item} title="STORE"  >
                   <Link className='d-block' id={s.subItem} to='/store'>All Products</Link>
                     {categories?.map(c => (
-                      <div>
+                      <div key={c.id}>
                         <NavDropdown.Divider/>
-                        <Link className='d-block' id={s.subItem} key={c.id} to={`/store/${c.id}`}>{c.name}</Link>
+                        <Link className='d-block' id={s.subItem} to={`/store/${c.id}`}>{c.name}</Link>
                       </div>
                     ))}
                 </NavDropdown>}

@@ -16,6 +16,7 @@ const SetPages = ({productsPerPage, allProductsLength, paged, previousPage, next
             pageNumbers?.map( num => {
               return (
                   <button 
+                    key={num}
                     className={num === currentPage ? "col-1 bg-success text-center" : "col-1 bg-warning opacity-50 text-center"} 
                     onClick={() => paged(num)} 
                   >

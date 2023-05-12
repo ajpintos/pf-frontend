@@ -111,9 +111,9 @@ export default function Store () {
               <div className="col-8 offset-2 col-md-12 offset-md-0 col-lg-10 offset-lg-1 col-xl-12 offset-xl-0">
                 <p className="text-center h6" >Filter by Category</p>
                 <select className="form-select" size="5" aria-label="Filter by Category" onChange={handleFilterByCategories}>
-                  { filter === "All" ? <option selected className="bg-success text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
+                  { filter === "All" ? <option className="bg-success text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
                   {allCategories?.map(c => 
-                    { const rowCategory = filter === c.id ? <option selected className="bg-success text-white" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
+                    { const rowCategory = filter === c.id ? <option className="bg-success text-white" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
                     return (
                       rowCategory
                       )}
@@ -125,11 +125,11 @@ export default function Store () {
               <div className="col-8 offset-2 col-md-12 offset-md-0 col-lg-10 offset-lg-1 col-xl-12 offset-xl-0">
                 <p className="text-center h6" >Orde by</p>
                 <select className="form-select" size="5" aria-label="Order by" onChange={handleOrder}>
-                  { order === "All Products" ? <option selected className="bg-success text-white" value="All Products">Without Order</option> : <option value="All Products">Without Order</option> }
-                  { order === "AtoZ" ? <option selected className="bg-success text-white" value="AtoZ">A to Z</option> : <option value="AtoZ">A to Z</option> }
-                  { order === "ZtoA" ? <option selected className="bg-success text-white" value="ZtoA">Z to A</option> : <option value="ZtoA">Z to A</option> }
-                  { order === "Lower" ? <option selected className="bg-success text-white" value="Lower">Lower Price</option> : <option value="Lower">Lower Price</option> }
-                  { order === "Higher" ? <option selected className="bg-success text-white" value="Higher">Higher Price</option> : <option value="Higher">Higher Price</option> }
+                  { order === "All Products" ? <option className="bg-success text-white" value="All Products">Without Order</option> : <option value="All Products">Without Order</option> }
+                  { order === "AtoZ" ? <option className="bg-success text-white" value="AtoZ">A to Z</option> : <option value="AtoZ">A to Z</option> }
+                  { order === "ZtoA" ? <option className="bg-success text-white" value="ZtoA">Z to A</option> : <option value="ZtoA">Z to A</option> }
+                  { order === "Lower" ? <option className="bg-success text-white" value="Lower">Lower Price</option> : <option value="Lower">Lower Price</option> }
+                  { order === "Higher" ? <option className="bg-success text-white" value="Higher">Higher Price</option> : <option value="Higher">Higher Price</option> }
                 </select>
               </div>
             </section>
@@ -139,9 +139,9 @@ export default function Store () {
               <div >
                 <p className="text-center h6" >Filter by Category</p>
                 <select className="form-select" aria-label="Filter by Category" onChange={handleFilterByCategories}>
-                  { filter === "All" ? <option selected className="bg-success text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
+                  { filter === "All" ? <option className="bg-success text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
                   {allCategories?.map(c => 
-                    { const rowCategory = filter === c.id ? <option selected className="bg-success text-white" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
+                    { const rowCategory = filter === c.id ? <option className="bg-success text-white" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
                     return (
                       rowCategory
                       )}
@@ -153,11 +153,11 @@ export default function Store () {
               <div >
                 <p className="text-center h6" >Orde by</p>
                 <select className="form-select" aria-label="Order by" onChange={handleOrder}>
-                  { order === "All Products" ? <option selected className="bg-success text-white" value="All Products">Without Order</option> : <option value="All Products">Without Order</option> }
-                  { order === "AtoZ" ? <option selected className="bg-success text-white" value="AtoZ">A to Z</option> : <option value="AtoZ">A to Z</option> }
-                  { order === "ZtoA" ? <option selected className="bg-success text-white" value="ZtoA">Z to A</option> : <option value="ZtoA">Z to A</option> }
-                  { order === "Lower" ? <option selected className="bg-success text-white" value="Lower">Lower Price</option> : <option value="Lower">Lower Price</option> }
-                  { order === "Higher" ? <option selected className="bg-success text-white" value="Higher">Higher Price</option> : <option value="Higher">Higher Price</option> }
+                  { order === "All Products" ? <option className="bg-success text-white" value="All Products">Without Order</option> : <option value="All Products">Without Order</option> }
+                  { order === "AtoZ" ? <option className="bg-success text-white" value="AtoZ">A to Z</option> : <option value="AtoZ">A to Z</option> }
+                  { order === "ZtoA" ? <option className="bg-success text-white" value="ZtoA">Z to A</option> : <option value="ZtoA">Z to A</option> }
+                  { order === "Lower" ? <option className="bg-success text-white" value="Lower">Lower Price</option> : <option value="Lower">Lower Price</option> }
+                  { order === "Higher" ? <option className="bg-success text-white" value="Higher">Higher Price</option> : <option value="Higher">Higher Price</option> }
                 </select>
               </div>
             </section>
