@@ -97,9 +97,9 @@ export default function Store () {
       {/* Cabecera */}
       <header >
         <Title  />
-        <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success" >
+        {/* <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success" > */}
           <NavBar/>
-        </Stack>
+        {/* </Stack> */}
       </header>
 
       <div className="row" >
@@ -162,7 +162,7 @@ export default function Store () {
               </div>
             </section>
           </div> */}
-          <h6 className="text-center mt-5 mb-3" >{productsPerPage} products per page</h6>
+          <h6 className="text-center mt-5 mb-3" >Showing up to {productsPerPage} products per page</h6>
         </div>
 
         {/* Sección Cards */}
@@ -195,6 +195,7 @@ export default function Store () {
             currentPage = {currentPage}
             />
           }
+
 
         </div>
       </div>

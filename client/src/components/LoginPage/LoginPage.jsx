@@ -47,9 +47,9 @@ function LoginPage(){
 return (
     <div className="container-fluid">
         <Title />
-        <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
+        {/* <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" > */}
             <NavBar/>
-        </Stack>
+        {/* </Stack> */}
         <div className={styles.formContainer}>
             <Form onSubmit={submitHandler}>
                 <h2>Login</h2>

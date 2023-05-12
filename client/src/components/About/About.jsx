@@ -9,9 +9,9 @@ const About=()=>{
         <div className="container-fluid">
         
             <Title />
-            <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
+            {/* <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" > */}
                 <NavBar/>
-            </Stack>
+            {/* </Stack> */}
             <section>
                 <h1 className="text-center mt-3" >About Us</h1>
             </section>

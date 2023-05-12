@@ -85,9 +85,9 @@ const Landing_home = () => {
         </div>
 
         {/* Sección de NavBar y Settings */}
-        <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
+        {/* <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" > */}
           <NavBar/>
-        </Stack>  
+        {/* </Stack>   */}
 
 
         {/* Sección Hero */}
