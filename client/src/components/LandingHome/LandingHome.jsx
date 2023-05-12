@@ -11,7 +11,6 @@ import { getCategories } from "../../Redux/actions/actionsCategories.js";
 import imgpropia from "../../logo/logo.png";
 import s from "./Landing_home.module.css";
 import Stack from "react-bootstrap/esm/Stack.js";
-import s from "./Landing_home.module.css";
 
 
 const Landing_home = () => {
@@ -31,7 +30,6 @@ const Landing_home = () => {
 
     return (
         <div className="container-fluid">
-            {console.log(user)}
             {/* Cabecera */}
             <header>
                 {/* Sección del logo, login, favoritos y carrito */}
