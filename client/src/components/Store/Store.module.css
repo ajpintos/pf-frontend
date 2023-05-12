@@ -202,3 +202,8 @@
 .next_paged, .prev_paged {
     cursor: pointer;
 }
+
+#page_button{
+    margin: 0 5px 10px 10px;
+}
+

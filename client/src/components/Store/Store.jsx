@@ -100,9 +100,9 @@ export default function Store () {
       {/* Cabecera */}
       <header >
         <Title  />
-        <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success" >
+        {/* <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success" > */}
           <NavBar/>
-        </Stack>
+        {/* </Stack> */}
       </header>
 
       <div className="row" >
@@ -112,10 +112,10 @@ export default function Store () {
           <section  className="col text-center mt-5" >
             <div>
               <p className="text-center h6" >Filter by Category</p>
-              <select className="form-select" size="5" aria-label="Filter by Category" onChange={handleFilterByCategories}>
-                { filter === "All" ? <option selected className="bg-success text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
+              <select className="form-select" id={s.subitem} aria-label="Filter by Category" onChange={handleFilterByCategories}>
+                { filter === "All" ? <option selected id={s.subitem} className="bg-success text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
                 {allCategories?.map(c => 
-                  { const rowCategory = filter === c.id ? <option selected className="bg-success text-white" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
+                  { const rowCategory = filter === c.id ? <option selected className="bg-success  text-white" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
                   return (
                     rowCategory
                     )}
@@ -126,7 +126,7 @@ export default function Store () {
           <section className="col text-center mt-5" >  
             <div>
               <p className="text-center h6" >Orde by</p>
-              <select className="form-select" size="5" aria-label="Order by" onChange={handleOrder}>
+              <select className="form-select" aria-label="Order by" onChange={handleOrder}>
                 { order === "All Products" ? <option selected className="bg-success text-white" value="All Products">Without Order</option> : <option value="All Products">Without Order</option> }
                 { order === "AtoZ" ? <option selected className="bg-success text-white" value="AtoZ">A to Z</option> : <option value="AtoZ">A to Z</option> }
                 { order === "ZtoA" ? <option selected className="bg-success text-white" value="ZtoA">Z to A</option> : <option value="ZtoA">Z to A</option> }
@@ -135,7 +135,7 @@ export default function Store () {
               </select>
             </div>
           </section>
-          <h6 className="text-center mt-5" >{productsPerPage} products per page</h6>
+          <h6 className="text-center mt-5" >Showing up to {productsPerPage} products per page</h6>
         </div>
 
         {/* Sección Cards */}
@@ -159,7 +159,7 @@ export default function Store () {
           {/* Sección Paged */}
           <nav className="row">
             <div className={s.container_paged} >
-              <button className={s.prev_paged} disabled={currentPage <= 1} onClick={previousPage}>{'<'}</button>
+              <button className={s.prev_paged} id={s.page_button} disabled={currentPage <= 1} onClick={previousPage}>Prev Page</button>
               <ul className={s.paged}>
                   { pageNumbers?.map((i) => (
                     <li  key={i} onClick={() => paged(i)}>
@@ -167,7 +167,7 @@ export default function Store () {
                     </li>
                   ))}
               </ul >
-              <button className={s.next_paged} disabled={currentPage >= Math.ceil(allProducts/productsPerPage)} onClick={nextPage}>{'>'}</button>
+              <button className={s.next_paged} id={s.page_button} disabled={currentPage >= Math.ceil(allProducts/productsPerPage)} onClick={nextPage}>Next Page</button>
             
             </div>
           </nav>
