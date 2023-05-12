@@ -1,19 +1,16 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+import styles from './RegisterPage.module.css';
 import Footer from '../Footer/Footer.jsx';
 import Title from '../Title/Title.jsx';
 import NavBar from "../NavBar/NavBar.jsx";
 import registerValidate from "./validate/registerValidate.js";
-import styles from './RegisterPage.module.css';
-
-//CSS REACT-BOOSTRAP
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/esm/Stack';
-//------------------------------------------------------
+import emailjs from "@emailjs/browser";
 
 function RegisterPage() {
 
@@ -50,7 +47,19 @@ function RegisterPage() {
         axios.post("/users", form)
             .then(res => {
                 alert("User added successfully!")
-                navigate("/login")
+                const Dom = document.getElementById("formToSend");
+                const serviceID = "service_e5hd1wt";
+                const templateID ="template_59dtr2y";// "contact_form";
+                const key_public = "gEu_FBDo_Q0lvhmwA";
+                emailjs.sendForm(serviceID, templateID, Dom, key_public) .then(
+                    (result) => {
+                      console.log(result.text);
+                    },
+                    (error) => {
+                      console.log(error.text);
+                    }
+                  );
+                  navigate("/login");
             })
             .catch(err => alert("Error: Check all camps and try again"))
     }
@@ -71,7 +80,7 @@ function RegisterPage() {
                 <NavBar/>
             </Stack>
             <div className={styles.formContainer}>
-                <Form onSubmit={submitHandler}>
+                <Form onSubmit={submitHandler} id="formToSend">
                     <h2>Register</h2>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formEmail">
@@ -95,7 +104,7 @@ function RegisterPage() {
                                 value={form.password}
                                 onChange={changeHandler}
                             />
-                            <div style={{color:"red"}}>{errors.password}</div>
+                            <p style={{color:"red"}}>{errors.password}</p>
                         </Form.Group>
                     </Row>
 
@@ -161,7 +170,6 @@ function RegisterPage() {
                             />
                         </Form.Group>
                     </Row>
-
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formCountry">
                             <Form.Label>Country</Form.Label>
@@ -190,6 +198,7 @@ function RegisterPage() {
                     </Button>
                 </Form>
             </div>
+
             <Footer/>
         </div>
     );
