@@ -15,8 +15,8 @@ function Card({ id, name, image, description, price, priceFlag }) {
             <h5 className="card-title">{name}</h5>
             <p className="card-text mb-0">{description}</p>
             { priceFlag && 
-              <div className="col mt-0">
-                  <p className="col-6 offset-3 bg-warning bg-opacity-50" ><strong>$ {price}</strong></p>
+              <div className="col mt-1">
+                  <p className="col-6 offset-3" ><strong>$ {price}</strong></p>
               </div>
               }
             <div className="row">

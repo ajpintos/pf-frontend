@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Title from "../Title/Title.jsx";
-import NavBar from "../NavBar/NavBar.jsx";
 import Card from "../Card/Card.jsx";
-import Footer from '../Footer/Footer.jsx';
-import Stack from "react-bootstrap/esm/Stack.js";
-import { filterByCategories } from "../../Redux/actions/actionsCategories.js";
+import { filterByCategories, getCategories } from "../../Redux/actions/actionsCategories.js";
 import { useParams } from "react-router-dom";
 import SetPages from "./SetPages.jsx";
+import { getProducts } from "../../Redux/actions/actionsProducts.js";
 
 export default function Store () {
 
@@ -58,7 +55,7 @@ export default function Store () {
     e.preventDefault();
     const productsFilter = await filterByCategories(e.target.value, order);
     if (productsFilter.hasOwnProperty('error')) {
-      alert(productsFilter.error);
+      alert('There are no products for this category');
     } else {
       dispatch(productsFilter);
       setFilter(e.target.value);
@@ -67,6 +64,10 @@ export default function Store () {
   };
 
   async function loadingData () {
+    const all_Products = await getProducts();
+    dispatch(all_Products);
+    const all_Categories = await getCategories();
+    dispatch(all_Categories);
     let flagCategory = true;
     setOrder('All Products');
     if (params.hasOwnProperty('id')) {
@@ -96,14 +97,6 @@ export default function Store () {
   return (
     <div className="container-fluid">
 
-      {/* Cabecera */}
-      <header >
-        <Title  />
-        {/* <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success" > */}
-          <NavBar/>
-        {/* </Stack> */}
-      </header>
-
       <div className="row" >
 
         {/* Seccion Ordenamiento y Filtrados */}
@@ -114,9 +107,9 @@ export default function Store () {
               <div className="col-8 offset-2 col-md-12 offset-md-0 col-lg-10 offset-lg-1 col-xl-12 offset-xl-0">
                 <p className="text-center h6" >Filter by Category</p>
                 <select className="form-select" size="5" aria-label="Filter by Category" onChange={handleFilterByCategories}>
-                  { filter === "All" ? <option className="bg-success text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
+                  { filter === "All" ? <option className="bg-secondary text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
                   {allCategories?.map(c => 
-                    { const rowCategory = filter === c.id ? <option className="bg-success text-white" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
+                    { const rowCategory = filter === c.id ? <option className="bg-secondary text-white overflow-hidden" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
                     return (
                       rowCategory
                       )}
@@ -128,11 +121,11 @@ export default function Store () {
               <div className="col-8 offset-2 col-md-12 offset-md-0 col-lg-10 offset-lg-1 col-xl-12 offset-xl-0">
                 <p className="text-center h6" >Orde by</p>
                 <select className="form-select" size="5" aria-label="Order by" onChange={handleOrder}>
-                  { order === "All Products" ? <option className="bg-success text-white" value="All Products">Without Order</option> : <option value="All Products">Without Order</option> }
-                  { order === "AtoZ" ? <option className="bg-success text-white" value="AtoZ">A to Z</option> : <option value="AtoZ">A to Z</option> }
-                  { order === "ZtoA" ? <option className="bg-success text-white" value="ZtoA">Z to A</option> : <option value="ZtoA">Z to A</option> }
-                  { order === "Lower" ? <option className="bg-success text-white" value="Lower">Lower Price</option> : <option value="Lower">Lower Price</option> }
-                  { order === "Higher" ? <option className="bg-success text-white" value="Higher">Higher Price</option> : <option value="Higher">Higher Price</option> }
+                  { order === "All Products" ? <option className="bg-secondary text-white" value="All Products">Without Order</option> : <option value="All Products">Without Order</option> }
+                  { order === "AtoZ" ? <option className="bg-secondary text-white" value="AtoZ">A to Z</option> : <option value="AtoZ">A to Z</option> }
+                  { order === "ZtoA" ? <option className="bg-secondary text-white" value="ZtoA">Z to A</option> : <option value="ZtoA">Z to A</option> }
+                  { order === "Lower" ? <option className="bg-secondary text-white" value="Lower">Lower Price</option> : <option value="Lower">Lower Price</option> }
+                  { order === "Higher" ? <option className="bg-secondary text-white" value="Higher">Higher Price</option> : <option value="Higher">Higher Price</option> }
                 </select>
               </div>
             </section>
@@ -142,20 +135,6 @@ export default function Store () {
 
         {/* Sección Cards */}
         <div className="col-md-9 col-lg-9 col-xl-10 mt-2">
-
-          <section className="row">
-            {currentProducts.length > 0 && currentProducts.map((product) => (
-              <Card
-              key={product.name}
-              id={product.id}
-              name={product.name}
-              image={product.image}
-              description={product.description}
-              price={product.price}
-              priceFlag={true}
-              />
-              ))}
-          </section>
 
           {/* Sección Paged */}
 
@@ -170,6 +149,20 @@ export default function Store () {
             />
           }
 
+
+          <section className="row">
+            {currentProducts.length > 0 && currentProducts.map((product) => (
+              <Card
+              key={product.name}
+              id={product.id}
+              name={product.name}
+              image={product.image}
+              description={product.description}
+              price={product.price}
+              priceFlag={true}
+              />
+              ))}
+          </section>
 
         </div>
       </div>

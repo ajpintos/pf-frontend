@@ -1,6 +1,6 @@
 .hero {
   border: 1px solid black;
-  height: 65vh;
+  height: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,10 +24,4 @@
     background-image: url("../../img/4.jpg");
     animation-delay: 1s;
   }
-}
-
-.text {
-  color: black;
-  background-color: white;
-  border-radius: 1rem;
 }
