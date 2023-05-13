@@ -1,4 +1,4 @@
-import PersonalInf from "./Components/PersonalInfo/PersonalInfo.jsx";
+import PersonalInfo from "./Components/PersonalInfo/PersonalInfo.jsx";
 import Footer from "../Footer/Footer.jsx";
 import Title from "../Title/Title.jsx";
 import NavBar from "../NavBar/NavBar.jsx";
