@@ -30,12 +30,14 @@ export default function Store () {
     setCurrentPage(pageNumber)
   }
 
-  const nextPage = () => {
+  const nextPage = (e) => {
+    e.preventDefault();
     setInput(parseInt(input) + 1);
     setCurrentPage(parseInt(currentPage) + 1);
   }
 
-  const previousPage = () => {
+  const previousPage = (e) => {
+      e.preventDefault();
       setInput(parseInt(input) -1);
       setCurrentPage(parseInt(currentPage) -1)
   }
@@ -103,6 +105,7 @@ export default function Store () {
       </header>
 
       <div className="row" >
+
         {/* Seccion Ordenamiento y Filtrados */}
         <div className="col-md-3 col-lg-3 col-xl-2" >
           <h1 className="text-center mt-3" >Store</h1>
@@ -134,34 +137,6 @@ export default function Store () {
               </div>
             </section>
           </div>
-          {/* <div className="row">
-            <section  className="col-5 offset-1 text-center mt-5" >
-              <div >
-                <p className="text-center h6" >Filter by Category</p>
-                <select className="form-select" aria-label="Filter by Category" onChange={handleFilterByCategories}>
-                  { filter === "All" ? <option className="bg-success text-white" value="All">All Categories</option> : <option value="All">All Categories</option> }
-                  {allCategories?.map(c => 
-                    { const rowCategory = filter === c.id ? <option className="bg-success text-white" value={c.id} key={c.name}>{c.name}</option> : <option value={c.id} key={c.name}>{c.name}</option> 
-                    return (
-                      rowCategory
-                      )}
-                      )}
-                </select>
-              </div>
-            </section>
-            <section className="col-4 offset-1 text-center mt-5" >  
-              <div >
-                <p className="text-center h6" >Orde by</p>
-                <select className="form-select" aria-label="Order by" onChange={handleOrder}>
-                  { order === "All Products" ? <option className="bg-success text-white" value="All Products">Without Order</option> : <option value="All Products">Without Order</option> }
-                  { order === "AtoZ" ? <option className="bg-success text-white" value="AtoZ">A to Z</option> : <option value="AtoZ">A to Z</option> }
-                  { order === "ZtoA" ? <option className="bg-success text-white" value="ZtoA">Z to A</option> : <option value="ZtoA">Z to A</option> }
-                  { order === "Lower" ? <option className="bg-success text-white" value="Lower">Lower Price</option> : <option value="Lower">Lower Price</option> }
-                  { order === "Higher" ? <option className="bg-success text-white" value="Higher">Higher Price</option> : <option value="Higher">Higher Price</option> }
-                </select>
-              </div>
-            </section>
-          </div> */}
           <h6 className="text-center mt-5 mb-3" >Showing up to {productsPerPage} products per page</h6>
         </div>
 
@@ -177,7 +152,6 @@ export default function Store () {
               image={product.image}
               description={product.description}
               price={product.price}
-              stock={product.stock}
               priceFlag={true}
               />
               ))}
@@ -199,7 +173,6 @@ export default function Store () {
 
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
