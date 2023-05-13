@@ -10,3 +10,9 @@
   .container2{
     margin: 20px
   }
+  .ppp h6 {
+    display: flex;
+    justify-content: end;
+    font-weight:lighter;
+    margin-right: 20px;
+}

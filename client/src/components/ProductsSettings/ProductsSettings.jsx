@@ -5,13 +5,29 @@ import Paginacion from './Paginacion.jsx';
 
 import ModProduct from './ModProduct.jsx';
 
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../Redux/actions/actionsProducts.js";
+import { getCategories } from "../../Redux/actions/actionsCategories.js";
 import NewProduct from './NewProduct.jsx';
+import st from './ProductsSettings.module.css'
 
 
 const ProductsSettings=()=>{
-    const allProducts = useSelector(state => state.products)
+  const dispatch = useDispatch();
+  const loadingData = async () => {
+    const all_Products = await getProducts();
+    dispatch(all_Products);
+    const all_Categories = await getCategories();
+    dispatch(all_Categories);
+  };
+
+ 
+  useEffect(() => {
+        loadingData();
+  }, []);
+  
+    const allProducts = useSelector(state => state.allProducts)
 //    console.log(allProducts);
    //pagination
     const itemsPerPage=10;
@@ -63,7 +79,7 @@ setShowModif(true)
        
             {  allProducts.map((prod,index)=>{
                 return(
-              <tr><td key={index}>{index+1}</td> 
+              <tr key={index}><td >{index+1}</td> 
              <td>{prod.name}</td>
                <td><Button variant='light' size="sm" onClick={showMod}>📝</Button> </td>
                <td><Button variant='light' size="sm">{prod.status? '✅':'❌'}</Button></td>
@@ -77,122 +93,10 @@ setShowModif(true)
        
       </tbody>
     </Table>
+    <div className={st.ppp}> <h6  >Total products: {totalItems} </h6></div>
+   
     </div>
-    {/* <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>New Product</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <Form onSubmit={submitNew} >
-              <Form.Group className="my-1 pb-2">
-                <FloatingLabel
-                  controlId="floatingInputName"
-                  label="Name"
-                  // className="mb-3"
-                >
-                  <Form.Control
-                    className="form-control"
-                    type="text"
-                    name="name"
-                    // value={form.name}
-                    // onChange={handleChange}
-                    aria-label="Name"
-                    placeholder="Name"
-                  />
-                </FloatingLabel>
-                <div>
-                  <span className={styles.error}>
-                    {errors.name ? errors.name : null}
-                  </span>
-                </div>
-              </Form.Group>
-
-              <div className="row ">
-                <Form.Group className="col-md-6 col-xm-12 my-1 pb-2 ">
-                  <FloatingLabel controlId="floatingInputEmail" label="Stock
-">
-                    <Form.Control
-                      type="text"
-                      name="stock"
-                      className="form-control  "
-                      value={form.stock}
-                      onChange={handleChange}
-                      placeholder="Stock"
-                    />
-                  </FloatingLabel>
-                  <div>
-                    <span className={styles.error}>
-                      {errors.stock ? errors.stock : null}
-                    </span>
-                  </div>
-                </Form.Group>
-                <Form.Group className="col-md-6 col-xm-12 my-1 pb-2">
-                  <FloatingLabel
-                    controlId="floatingInputPhone"
-                    label="Price"
-                  >
-                    <Form.Control
-                      type="text"
-                      name="price"
-                      className="form-control"
-                      value={form.price}
-                      maxLength="15"
-                      onChange={handleChange}
-                      placeholder="Price"
-                      aria-label="price"
-                    />
-                  </FloatingLabel>
-                  <div>
-                    <span className={styles.error}>
-                      {errors.price ? errors.price : null}
-                    </span>
-                  </div>
-                </Form.Group>
-              </div>
-              <Form.Group className="my-1 pb-2 mb-3">
-                {/* <Form.Label htmlFor="message">Mensaje</Form.Label>  */}
-                {/* <FloatingLabel
-                  controlId="floatingTextarea"
-                  label="Description"
-                  className="mb-6"
-                >
-                  <Form.Control
-                    as="textarea"
-                    className="form-control"
-                    rows={5}
-                    onChange={handleChange}
-                    name="description"
-                    value={form.description}
-                    placeholder="Description"
-                    height="200px"
-                  />
-                </FloatingLabel>
-                <div className="row my-0">
-                  <span className={styles.error}>
-                    {errors.description ? errors.description : null}
-                  </span>
-                </div>
-              </Form.Group>
-
-              <Button variant="success" type="submit">
-                Send
-              </Button>
-
-              <p className={styles.error}>{errorMessage}</p>
-              <p className={styles.success}>{successMessage}</p>
-            </Form>
-
-
-        </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal> */} 
+ 
       {showModif?<ModProduct/>:''}
       {showNew?<NewProduct/>:''}
         </ > 

@@ -14,7 +14,7 @@
 }
 .divNoPaginas{
     border: 1px solid #e3dfdf;
-    background: linear-gradient(181deg, #fbf8f88a, #6c6a6a78);
+    /* background: linear-gradient(181deg, #fbf8f88a, #6c6a6a78); */
     display: inline-block;
     padding: 0 6px;
     border-radius: 6px;
@@ -74,9 +74,9 @@
 }
 .linkPagSig:disabled{
     background-color: rgb(195, 193, 193);
-    border: 1px solid #5b5a5a52;
+    border: 1px solid #8e8e8e;
    
-    color: #7b7a7a;
+    color: #676666;
 }
 .navButtons{
     display:inline-block

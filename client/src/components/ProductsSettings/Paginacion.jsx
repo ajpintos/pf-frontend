@@ -42,11 +42,11 @@ return(
             </div>
             <div className={st.divNoPaginas}>
             { pageNumber.map ( noPage =>
-                    ( ( noPage <=(pageCurrent+3)&& noPage >=(pageCurrent-3))?
+                    ( ( noPage <=(pageCurrent+2)&& noPage >=(pageCurrent-2))?
                         <div  onClick={()=>goToPage(noPage)}
                      className={  (noPage===pageCurrent ? st.isCurrent : st.linkPagination)}    key={noPage}>
                         {noPage}
-                    </div>:( noPage ===(pageCurrent+4))? <span>▷▷</span>:( noPage ===(pageCurrent-4))? <span>◁◁</span>:''
+                    </div>:( noPage ===(pageCurrent+3))? <span>...</span>:( noPage ===(pageCurrent-3))? <span>...</span>:''
                     )
                                
                 ) 

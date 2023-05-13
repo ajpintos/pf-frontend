@@ -32,7 +32,8 @@ function Settings() {
         <button onClick={handlerShowU} style={{ borderRadius: "2rem" }}>
           Users
         </button>
-        <button onClick={handlerShowP}>Products</button>
+        <button onClick={handlerShowP} style={{ borderRadius: "2rem" }}>
+          Products</button>
         {show.users ? <UsersSettings /> : null}
         {show.products ? <ProductsSettings /> : null}
       </div>
