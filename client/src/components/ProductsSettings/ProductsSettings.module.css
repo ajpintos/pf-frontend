@@ -16,3 +16,12 @@
     font-weight:lighter;
     margin-right: 20px;
 }
+
+.mensajes{
+  color:rgb(245, 21, 21);
+  margin: 10px;
+}
+.mensajesE{
+   color:rgb(19, 185, 19);
+   margin: 10px;
+}

@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Paginacion from './Paginacion.jsx';
 
 import ModProduct from './ModProduct.jsx';
-
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/actions/actionsProducts.js";
@@ -35,23 +35,40 @@ const ProductsSettings=()=>{
     let totalItems=allProducts.length;
     let indInicial=(pageCurrent-1)*itemsPerPage;
     let indFinal= indInicial+itemsPerPage;
-   
-   //modal
-//     const [show, setShow] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+  
 
-//   const handleClose = () => setShow(false);
-//   const handleShow = () => setShow(true);
-// const submitNew= ()=>{console.log('new')}
-
-///new
+///new producto**************
 const [showNew, setShowNew] = useState(false);
 const handleShowNew=()=>{
     setShowNew(true)
 }
-  const [showModif, setShowModif] = useState(false);
-const showMod=()=>{
-setShowModif(true)
+/*Modify product****************/
+const [showModif, setShowModif] = useState({status:false,id:''});
+
+const showMod=async(id)=>{
+
+setShowModif({status:true,id})
 }
+
+/*Delete product****************/
+const deleteHandler=async(id,status)=>{
+
+const data={id,status:!status}
+console.log('data', data)
+await  axios.delete("/products/",data)
+          .then(res=> {
+            setSuccessMessage('Product deleted successfully.')
+              console.log('res  '+res);
+          })
+          .catch(err=>{alert(err)
+            setErrorMessage('Product is not deleted.')});       
+     
+// const delete_Products = await getProducts();
+}
+
+/*  */
 
     return(
         <>
@@ -81,8 +98,8 @@ setShowModif(true)
                 return(
               <tr key={index}><td >{index+1}</td> 
              <td>{prod.name}</td>
-               <td><Button variant='light' size="sm" onClick={showMod}>📝</Button> </td>
-               <td><Button variant='light' size="sm">{prod.status? '✅':'❌'}</Button></td>
+               <td><Button variant='light' size="sm" onClick={()=>showMod(prod.id)}>📝</Button> </td>
+               <td><Button variant='light' size="sm" onClick={()=>deleteHandler(prod.id,prod.status)}>{prod.status? '✅':'❌'}</Button></td>
               </tr>
                 //❎
                 // 
@@ -94,10 +111,11 @@ setShowModif(true)
       </tbody>
     </Table>
     <div className={st.ppp}> <h6  >Total products: {totalItems} </h6></div>
-   
+    <p className={st.error}>{errorMessage}</p>
+              <p className={st.success}>{successMessage}</p>
     </div>
  
-      {showModif?<ModProduct/>:''}
+      {showModif.status?<ModProduct id={showModif.id}/>:''}
       {showNew?<NewProduct/>:''}
         </ > 
     )

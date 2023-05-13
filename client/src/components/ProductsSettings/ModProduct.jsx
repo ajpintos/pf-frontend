@@ -1,17 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import styles from "./ProductsSettings.module.css";
+import validate from './validate.js'
+import axios from 'axios'
+import {useSelector} from 'react-redux'
+import st from '../ProductsSettings/Form.module.css'
 
-const ModProduct=()=>{
+const ModProduct=({id})=>{
 
     const [form, setForm] = useState({
         name: "",
         description: "",
         price: "",
         stock: "",
+        image:'',
+        categories:[]
       });
     
       const [errors, setErrors] = useState({
@@ -19,12 +25,36 @@ const ModProduct=()=>{
         description: "",
         price: "",
         stock: "",
+        image:'',
+        categories:[]
       });
+      const allCategories = useSelector(state => state.allCategories)
+      const [categories,setCategories]=useState(allCategories);
+      const [successMessage, setSuccessMessage] = useState("");
+      const [errorMessage, setErrorMessage] = useState("");
+      const [categoriesSel, setCategoriesSel] = useState([]);
         const [show, setShow] = useState(true);
+const loadingData=async(id)=>{
+  try {
+    const Data = await axios(`/products/${id}`);
+    const prod = Data.data;
+    console.lod(prod)
+  }
+    catch (error) {
+      window.alert(error.message);
+    }
 
+
+  
+}
+
+      useEffect(()=>{
+            loadingData()
+
+
+      },[])
         const handleClose = () => setShow(false);
-        const [successMessage, setSuccessMessage] = useState("");
-        const [errorMessage, setErrorMessage] = useState("");
+       
         const handleChange = (event) => {
             setForm({
               ...form,
@@ -39,15 +69,38 @@ const ModProduct=()=>{
             setSuccessMessage("");
             setErrorMessage("");
           };
+
+          const handlerSelectCategory=(e)=>{
+            let nomCategory=(e.target.options[e.target.options.selectedIndex].text)
+            let value=e.target.value
+            setForm({...form, categories : [ ...form.categories, value]})
+            setCategoriesSel([...categoriesSel, {value, name:nomCategory}])
+            setCategories(allCategories.filter(ele=>ele.id!==value))
+            // console.log(form)
+       }
+       const deleteCategorie=(elem)=>{
+        //
+            const {value,name}=elem
+            // console.log(elem)
+            setCategoriesSel(categoriesSel.filter(ele=>ele.value!==value))
+            setForm({...form, countries :form.countries.filter(ele=>ele!==value)})
+            setCategories([...allCategories,{id:value, name}])
+        }
+    
         // const handleShow = () => setShow(true);
-        const submitNew= ()=>{console.log('new')}
+        const submitMod= (e)=>{
+          e.preventDefault();
+          setSuccessMessage("");
+          setErrorMessage("");
+          console.log('mod')
+        
+
+          /// falta la funcion dde  modificar
+        }
         
         return (
           <>
-            {/* <Button variant="primary" onClick={handleShow}>
-              Launch static backdrop modal
-            </Button> */}
-      
+                 
             <Modal
               show={show}
               onHide={handleClose}
@@ -58,7 +111,8 @@ const ModProduct=()=>{
                 <Modal.Title>Modify Product</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-              <Form onSubmit={submitNew} >
+                {id}
+              <Form onSubmit={submitMod} >
               <Form.Group className="my-1 pb-2">
                 <FloatingLabel
                   controlId="floatingInputName"
@@ -69,8 +123,8 @@ const ModProduct=()=>{
                     className="form-control"
                     type="text"
                     name="name"
-                    // value={form.name}
-                    // onChange={handleChange}
+                    value={form.name}
+                    onChange={handleChange}
                     aria-label="Name"
                     placeholder="Name"
                   />
@@ -147,7 +201,50 @@ const ModProduct=()=>{
                   </span>
                 </div>
               </Form.Group>
+              <Form.Group>
+              <FloatingLabel
+                  controlId="floatingInputName"
+                  label="Image"
+                  // className="mb-3"
+                >
+                  <Form.Control
+                    className="form-control"
+                    type="text"
+                    name="image"
+                   value={form.image}
+                    onChange={handleChange}
+                    aria-label="Image"
+                    placeholder="Image"
+                  />
+                </FloatingLabel>
+                <div>
+                  <span className={styles.error}>
+                    {errors.image ? errors.image : null}
+                  </span>
+                </div>
+              </Form.Group>
+{/* ///////// */}
+              <Form.Group>Categories
+              <Form.Select name='categories' className='mb-3' onChange={handlerSelectCategory}>
+                  <option>Select Categories</option>
+                  {categories.map((elem,index)=>{
+                    return(
+                      <option key={index} value={elem.id}>{elem.name}</option>
+                    )
+                  })}
+                </Form.Select>
+          
+              <div className={st.seleccionados}> 
+                        {categoriesSel.length>0 ? categoriesSel.map(ele=>{
+                            return(<div key={ele.value} className={ st.cont2B}><span >{ele.name}</span>
+                                    <div className={ st.equis} onClick={()=>deleteCategorie(ele)} >✕</div>
+                                    </div>)}):
+                            <p className={st.spErr}>  Select the categories</p>} 
+                    </div>
+              
 
+              </Form.Group>
+              
               <Button variant="success" type="submit">
                 Send
               </Button>
@@ -158,12 +255,7 @@ const ModProduct=()=>{
 
 
               </Modal.Body>
-              {/* <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary">Understood</Button>
-              </Modal.Footer> */}
+             
             </Modal>
           </>
         );

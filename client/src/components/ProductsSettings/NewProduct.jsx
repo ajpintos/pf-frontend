@@ -28,8 +28,7 @@ const NewProduct=()=>{
         image:'',
         categories:''
       });
-      // const [mensaje,setMensaje]=useState('');
-      // const [mensajeExito,setMensajeExito]=useState('');
+      
       const allCategories = useSelector(state => state.allCategories)
       const [categories,setCategories]=useState(allCategories);
       const [successMessage, setSuccessMessage] = useState("");
@@ -76,11 +75,11 @@ const NewProduct=()=>{
 
   const submitNew= async(e)=>{
         e.preventDefault();
-        console.log( form.categories[0]);
+        setSuccessMessage("");
+        setErrorMessage("");
+        
 
-        // setShow(false);&& errors.name===''&& form.description!==''&& form.categories.length!==0
-       // &&form.price!==''&& errors.price===''&&form.stock!==''&& errors.stock===''
-        if(form.name!==''&& form.description!==''&& form.price!==''&& form.stock!==''&& form.image!==''&& form.categories.length>0){ 
+        if(form.name!==''&& !errors.name && form.description!==''&& !errors.price&& form.price!==''&& form.stock!==''&& !errors.stock && form.image!==''&& form.categories.length>0){ 
          
           await  axios.post("/products/",form)
           .then(res=> {
