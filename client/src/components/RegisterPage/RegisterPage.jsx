@@ -5,15 +5,16 @@ import Footer from '../Footer/Footer.jsx';
 import Title from '../Title/Title.jsx';
 import NavBar from "../NavBar/NavBar.jsx";
 import registerValidate from "./validate/registerValidate.js";
+import emailjs from "@emailjs/browser";
 import styles from './RegisterPage.module.css';
 
 //CSS REACT-BOOSTRAP
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/esm/Stack';
-import emailjs from "@emailjs/browser";
+import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
 
 function RegisterPage() {
 
@@ -51,7 +52,7 @@ function RegisterPage() {
         event.preventDefault();
         axios.post("/users", form)
             .then(res => {
-                alert("User added successfully!")
+                alert("User added successfully!");
                 const Dom = document.getElementById("formToSend");
                 const serviceID = "service_e5hd1wt";
                 const templateID ="template_59dtr2y";// "contact_form";
@@ -85,7 +86,7 @@ function RegisterPage() {
                 <NavBar/>
             </Stack>
             <div className={styles.formContainer}>
-                <Form onSubmit={submitHandler}>
+                <Form onSubmit={submitHandler} id="formToSend">
                     <h2>Register</h2>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formEmail">
