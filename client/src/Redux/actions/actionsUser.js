@@ -16,30 +16,27 @@ export const userLogin = ( email , password ) => {
     }
 };
 
-export const userLoginGoogle = (user) => {
-    return function (dispatch) {
-        return dispatch({
-            type: LOGIN_USER_GOOGLE,
-            payload: {
-                firstname: user.givenName,
-                lastname: user.familyName,
-                email : user.email,
-                fullname: user.name
-            }
-        })
+export const userLoginGoogle = (infoUserGoogle) => {
+    return async function (dispatch) {
+        try{
+            const userGoogle = {
+                email : infoUserGoogle.email,
+                firstname : infoUserGoogle.givenName,
+                lastname : infoUserGoogle.familyName
+            };
+
+            const user = await axios.get(`/users/login/google?email=${userGoogle.email}&firstname=${userGoogle.firstname}&lastname=${userGoogle.lastname}`);
+
+            return dispatch({
+                type: LOGIN_USER_GOOGLE,
+                payload: user.data
+            });
+
+        } catch (error) {
+            return { error: error.message }
+        }
     }
 };
-// email: "santiagomuller45@gmail.com"
-// ​
-// familyName: "Muller"
-// ​
-// givenName: "Santiago"
-// ​
-// googleId: "115156884018693892604"
-// ​
-// imageUrl: "https://lh3.googleusercontent.com/a/AGNmyxb8IPSeJ_WwJykVuSED8r0UEgKpp0_trbQeE4VYCQ=s96-c"
-// ​
-// name: "Santiago Muller"
 
 export const userLogout = () => {
     return {

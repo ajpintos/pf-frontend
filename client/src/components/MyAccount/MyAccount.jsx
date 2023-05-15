@@ -1,23 +1,18 @@
-import React , {useEffect}from 'react';
-import { useDispatch , useSelector } from 'react-redux';
-import { allUsers } from '../../Redux/actions/actionsUser.js';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 
 const MyAccount = () => {
 
-    const dispatch = useDispatch();
     const user = useSelector(state => state.userLogin);
-    const allUsersDB = useSelector(state => state.users);
-
-    useEffect(() => {
-        dispatch(allUsers());
-    },[])
 
     return (
         <div>
             {console.log(allUsersDB)}
             <h1>My Account</h1>
             <h3>{`Welcome ${user.firstname}`}</h3>
+            <h4>Lastname: {user.lastname}</h4>
+            <h4>Email: {user.email}</h4>
         </div>
     );
 };
