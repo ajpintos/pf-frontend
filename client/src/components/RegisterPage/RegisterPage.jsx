@@ -5,7 +5,7 @@ import Footer from '../Footer/Footer.jsx';
 import Title from '../Title/Title.jsx';
 import NavBar from "../NavBar/NavBar.jsx";
 import registerValidate from "./validate/registerValidate.js";
-import styles from './RegisterPage.module.css';
+import axios from "axios";
 
 //CSS REACT-BOOSTRAP
 import Button from 'react-bootstrap/Button';
