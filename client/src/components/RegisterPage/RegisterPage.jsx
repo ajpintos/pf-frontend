@@ -48,7 +48,7 @@ function RegisterPage() {
     })
 
     const submitHandler = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         axios.post("/users", form)
             .then(res => {
                 alert("User added successfully!")
@@ -109,27 +109,19 @@ function RegisterPage() {
                                 value={form.password}
                                 onChange={changeHandler}
                             />
-                            <div style={{color: "red"}}>{errors.password}</div>
+                            <p style={{color: "red"}}>{errors.password}</p>
                         </Form.Group>
                     </Row>
 
                     <Form.Group as={Col} controlId="formPasswordRepeat">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label>Repeat Password</Form.Label>
                         <Form.Control
                             type="password"
                             placeholder="Repeat Password" id="passwordRepeat" name="passwordRepeat"
                             value={form.passwordRepeat}
                             onChange={changeHandler}
                         />
-                        <div>
-                            {form.passwordRepeat === form.password ? (
-                                ""
-                            ) : form.passwordRepeat.length > 4 ? (
-                                <div style={{ color: "red" }}>Passwords do not match</div>
-                            ) : (
-                                ""
-                            )}
-                        </div>
+                        <p style={{color: "red"}}>{errors.passwordRepeat}</p>
                     </Form.Group>
 
                     <Row className="mb-3">
