@@ -5,13 +5,15 @@ import Footer from '../Footer/Footer.jsx';
 import Title from '../Title/Title.jsx';
 import NavBar from "../NavBar/NavBar.jsx";
 import registerValidate from "./validate/registerValidate.js";
+import styles from './RegisterPage.module.css';
+
+//CSS REACT-BOOSTRAP
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/esm/Stack';
 import emailjs from "@emailjs/browser";
-import axios from 'axios';
 
 function RegisterPage() {
 
@@ -21,6 +23,7 @@ function RegisterPage() {
     const [form, setForm] = useState({
         email: "",
         password: "",
+        passwordRepeat: "",
         firstname: "",
         lastname: "",
         address: "",
@@ -34,6 +37,7 @@ function RegisterPage() {
     const [errors, setErrors] = useState({
         email: "",
         password: "",
+        passwordRepeat: "",
         firstname: "",
         lastname: "",
         address: "",
@@ -105,9 +109,28 @@ function RegisterPage() {
                                 value={form.password}
                                 onChange={changeHandler}
                             />
-                            <p style={{color:"red"}}>{errors.password}</p>
+                            <div style={{color:"red"}}>{errors.password}</div>
                         </Form.Group>
                     </Row>
+
+                    <Form.Group as={Col} controlId="formPasswordRepeat">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="Repeat Password" id="passwordRepeat" name="passwordRepeat"
+                            value={form.passwordRepeat}
+                            onChange={changeHandler}
+                        />
+                        <div>
+                            {form.passwordRepeat === form.password ? (
+                                ""
+                            ) : form.passwordRepeat.length > 4 ? (
+                                <div style={{ color: "red" }}>Passwords do not match</div>
+                            ) : (
+                                ""
+                            )}
+                        </div>
+                    </Form.Group>
 
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formName">
@@ -171,6 +194,7 @@ function RegisterPage() {
                             />
                         </Form.Group>
                     </Row>
+
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formCountry">
                             <Form.Label>Country</Form.Label>
@@ -199,7 +223,6 @@ function RegisterPage() {
                     </Button>
                 </Form>
             </div>
-
             <Footer/>
         </div>
     );
