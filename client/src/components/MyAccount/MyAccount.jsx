@@ -1,22 +1,20 @@
-import PersonalInf from "./Components/PersonalInfo/PersonalInfo.jsx";
-import Footer from "../Footer/Footer.jsx";
-import Title from "../Title/Title.jsx";
-import NavBar from "../NavBar/NavBar.jsx";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-function MyAccount() {
 
-    const user = useSelector(state => state.userLogin)
+const MyAccount = () => {
+
+    const user = useSelector(state => state.userLogin);
 
     return (
         <div>
-            <Title/>
-            <NavBar/>
+            {console.log(allUsersDB)}
             <h1>My Account</h1>
             <h3>{`Welcome ${user.firstname}`}</h3>
-            <Footer/>
+            <h4>Lastname: {user.lastname}</h4>
+            <h4>Email: {user.email}</h4>
         </div>
-    )
+    );
 };
 
 export default MyAccount;
