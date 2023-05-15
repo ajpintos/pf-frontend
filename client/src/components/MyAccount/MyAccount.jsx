@@ -8,7 +8,6 @@ const MyAccount = () => {
 
     return (
         <div>
-            {console.log(allUsersDB)}
             <h1>My Account</h1>
             <h3>{`Welcome ${user.firstname}`}</h3>
             <h4>Lastname: {user.lastname}</h4>
