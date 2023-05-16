@@ -9,8 +9,9 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import st from "../ProductsSettings/Form.module.css";
 
-const ModProduct = ({ id }) => {
+const ModProduct = ({ id, name }) => {
   const [form, setForm] = useState({
+    id: "",
     name: "",
     description: "",
     price: "",
@@ -18,6 +19,8 @@ const ModProduct = ({ id }) => {
     image: "",
     categories: [],
   });
+
+  form.id = id;
 
   const [errors, setErrors] = useState({
     name: "",
@@ -27,20 +30,21 @@ const ModProduct = ({ id }) => {
     image: "",
     categories: [],
   });
-  const allCategories = useSelector((state) => state.allCategories);
+
+  const allCategories = useSelector((state) => state?.allCategories);
   const [categories, setCategories] = useState(allCategories);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [categoriesSel, setCategoriesSel] = useState([]);
   const [show, setShow] = useState(true);
   const loadingData = async (id) => {
-    try {
+    /*   try {
       const Data = await axios(`/products/${id}`);
       const prod = Data.data;
-      console.lod(prod);
+    
     } catch (error) {
       window.alert(error.message);
-    }
+    } */
   };
 
   useEffect(() => {
@@ -53,14 +57,14 @@ const ModProduct = ({ id }) => {
       ...form,
       [event.target.name]: event.target.value, // se busca en que input esta escribiendo con la prop name del input, y se modifica el estado
     });
-    setErrors(
+    /*  setErrors(
       validate({
         ...form,
         [event.target.name]: event.target.value,
       })
-    );
-    setSuccessMessage("");
-    setErrorMessage("");
+    ); */
+    /*  setSuccessMessage("");
+    setErrorMessage(""); */
   };
 
   const handlerSelectCategory = (e) => {
@@ -84,13 +88,26 @@ const ModProduct = ({ id }) => {
   };
 
   // const handleShow = () => setShow(true);
-  const submitMod = (e) => {
-    e.preventDefault();
-    setSuccessMessage("");
-    setErrorMessage("");
-    console.log("mod");
-
-    /// falta la funcion dde  modificar
+  const submitMod = async (event) => {
+    event.preventDefault();
+    event.preventDefault();
+    try {
+      const result = await axios.put("/products", form);
+      if (result) {
+        setForm({
+          password: "",
+          firstname: "",
+          lastname: "",
+          adress: "",
+          cp: "",
+          city: "",
+          phone: "",
+        });
+        alert(result.data);
+      }
+    } catch (error) {
+      alert("CUIDADO " + error.message);
+    }
   };
 
   return (
@@ -102,15 +119,14 @@ const ModProduct = ({ id }) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Modify Product</Modal.Title>
+          <Modal.Title>producto a modificar |{name}| </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {id}
           <Form onSubmit={submitMod}>
             <Form.Group className="my-1 pb-2">
               <FloatingLabel
                 controlId="floatingInputName"
-                label="Name"
+                label="New name"
                 // className="mb-3"
               >
                 <Form.Control

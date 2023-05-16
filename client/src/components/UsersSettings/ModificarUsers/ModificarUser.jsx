@@ -18,9 +18,7 @@ const ModificarUser = ({ show, handleClose, email }) => {
   });
 
   form.email = email;
-
-  console.log(form);
-
+  
   const handleChange = (event) => {
     event.preventDefault();
     setForm({
