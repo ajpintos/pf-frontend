@@ -12,13 +12,27 @@ import RegisterPage from "./components/RegisterPage/RegisterPage.jsx";
 import MyAccount from "./components/MyAccount/MyAccount.jsx";
 import FormUdateMyaccount from "./components/MyAccount/Components/FormUpdate/FormUpdate.jsx";
 import Cart from "./components/Cart/Cart.jsx";
+import Footer from "./components/Footer/Footer";
+import NavBar from "../src/components/NavBar/NavBar.jsx";
+import Title from "./components/Title/Title";
+
 //axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
 
 function App() {
+
   return (
     <div className="App">
-      <div className="App-header"></div>
+
+      {/* Cabecera */}
+      <header className="container-fluid">
+        {/* Sección del logo, login, favoritos y carrito */}
+        <div className="row justtify-content-center align-items-center">
+          <Title />
+        </div>
+        <NavBar/>
+      </header>
+
       <Routes>
         <Route path="/" element={<LandingHome />} />
         <Route path="/login" element={<LoginPage />} />
@@ -33,6 +47,9 @@ function App() {
         <Route path="/form_update" element={<FormUdateMyaccount />} />
         <Route path="'/cart" element={<Cart />} />
       </Routes>
+      <footer className="container-fluid" >
+        <Footer />
+      </footer>
     </div>
   );
 }

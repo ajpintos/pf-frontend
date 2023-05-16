@@ -1,17 +1,10 @@
-import Stack from 'react-bootstrap/esm/Stack';
-import NavBar from '../NavBar/NavBar';
 import s from './About.module.css'
-import Title from '../Title/Title';
-import Footer from '../Footer/Footer';
+
 const About=()=>{
 
     return(
         <div className="container-fluid">
         
-            <Title />
-            <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
-                <NavBar/>
-            </Stack>
             <section>
                 <h1 className="text-center mt-3" >About Us</h1>
             </section>
@@ -39,7 +32,6 @@ const About=()=>{
                 <p>Our project is made for different development environments, applying various methodologies and work tools according to the area.</p>
                 <p>This application was developed with current programming technologies both in the backend area, databases and in the frontend.</p>
             </div> 
-            <Footer />
         </div>
     )
 }
