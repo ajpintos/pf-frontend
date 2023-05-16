@@ -14,8 +14,6 @@ export default function Store () {
   const allCategories = useSelector(state => state.allCategories);
   const [order, setOrder] = useState('All Products');
   const [filter, setFilter] = useState('All');
-  const [input, setInput] = useState(1);
-  const pageNumbers = [];
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(8);
 
@@ -29,13 +27,11 @@ export default function Store () {
 
   const nextPage = (e) => {
     e.preventDefault();
-    setInput(parseInt(input) + 1);
     setCurrentPage(parseInt(currentPage) + 1);
   }
 
   const previousPage = (e) => {
       e.preventDefault();
-      setInput(parseInt(input) -1);
       setCurrentPage(parseInt(currentPage) -1)
   }
 
