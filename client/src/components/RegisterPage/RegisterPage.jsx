@@ -48,6 +48,14 @@ function RegisterPage() {
         phone: "",
     })
 
+    // const handleSubmit = (event) => {
+    //     const form = event.currentTarget;
+    //     if (form.checkValidity() === false) {
+    //       event.preventDefault();
+    //       event.stopPropagation();
+    //     }
+    // }
+
     const submitHandler = (event) => {
         event.preventDefault();
         axios.post("/users", form)
@@ -92,6 +100,7 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formEmail">
                             <Form.Label>Email</Form.Label>
                             <Form.Control
+                                required
                                 type="email"
                                 placeholder="Enter email"
                                 id="email"
@@ -105,6 +114,7 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
+                                required
                                 type="password"
                                 placeholder="Enter Password" id="password" name="password"
                                 value={form.password}
@@ -117,6 +127,7 @@ function RegisterPage() {
                     <Form.Group as={Col} controlId="formPasswordRepeat">
                         <Form.Label>Repeat Password</Form.Label>
                         <Form.Control
+                            required
                             type="password"
                             placeholder="Repeat Password" id="passwordRepeat" name="passwordRepeat"
                             value={form.passwordRepeat}
@@ -129,6 +140,7 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formName">
                             <Form.Label>First Name</Form.Label>
                             <Form.Control
+                                required
                                 type="firstname"
                                 placeholder="First Name"
                                 id="firstname"
@@ -142,6 +154,7 @@ function RegisterPage() {
                         <Form.Group as={Col} className="mb-3" controlId="formLastName">
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control
+                                required
                                 type="lastname"
                                 placeholder="Last Name"
                                 id="lastname"
@@ -155,6 +168,7 @@ function RegisterPage() {
                     <Form.Group className="mb-3" controlId="formAddress">
                         <Form.Label>Address</Form.Label>
                         <Form.Control
+                            required
                             type="address"
                             placeholder="Address"
                             id="address"
@@ -167,6 +181,7 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formZiCode">
                             <Form.Label>Zip Code</Form.Label>
                             <Form.Control
+                                required
                                 type="cp"
                                 placeholder="Zip Code"
                                 id="cp"
@@ -178,6 +193,7 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formCity">
                             <Form.Label>City</Form.Label>
                             <Form.Control
+                                required
                                 type="city"
                                 placeholder="City"
                                 id="city"
@@ -192,6 +208,7 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formCountry">
                             <Form.Label>Country</Form.Label>
                             <Form.Control
+                                required
                                 type="country"
                                 placeholder="Country"
                                 id="country"
@@ -202,6 +219,7 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formPhone">
                             <Form.Label>Phone</Form.Label>
                             <Form.Control
+                                required
                                 type="phone"
                                 placeholder="Phone"
                                 id="phone"
