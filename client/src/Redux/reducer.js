@@ -1,6 +1,7 @@
 import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME, SORT_PRODUCTS } from "./types/typesProducts";
 import { ALL_USERS, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER } from "./types/typesUser.js";
+import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART } from "./types/typesCart";
 
 const initialState = {
   users: [],
@@ -13,6 +14,12 @@ const initialState = {
   allCategories: [],
   categorieFilter: null,
 };
+
+export const cartInitialState = JSON.parse(window.localStorage.getItem('cart')) || []
+
+export const updateLocalStorage = state => {
+  window.localStorage.setItem('cart', JSON.stringify(state))
+}
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -124,6 +131,42 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: sortType,
       }
+    }
+    case ADD_TO_CART: {
+      const {id} = action.payload
+      const productInCartIndex = state.findIndex(item => item.id === id)
+      if(productInCartIndex >= 0) {
+        const newState = [
+          ...state.slice(0, productInCartIndex),
+          {
+            ...state[productInCartIndex], 
+            quantity: state[productInCartIndex].quantity + 1
+          },
+          ...state.slice(productInCartIndex + 1)
+        ]
+        updateLocalStorage(newState);
+        return newState;
+      } else {
+        const newState = [
+          ...state,
+          {
+            ...action.payload,
+            quantity: 1
+          }
+        ]
+        updateLocalStorage(newState);
+        return newState;
+      }
+    }
+    case REMOVE_FROM_CART: {
+      const { id } = action.payload
+      const newState = state.filter(item => item.id !== id)
+      updateLocalStorage(newState)
+      return newState
+    }
+    case CLEAR_CART: {
+      updateLocalStorage([])
+      return []
     }
     default:
       return {...state};
