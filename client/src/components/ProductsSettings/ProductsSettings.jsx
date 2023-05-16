@@ -67,8 +67,18 @@ const ProductsSettings = () => {
 
   /*  */
 
-  const [idpasamanos, setIdpasamanos] = useState("");
-  const [namepasamanos, setNamepasamanos] = useState("");
+  const handleClose = () => setShow(false);
+
+  const [show, setShow] = useState(false);
+
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+
+  const handleShow = ({ id, name }) => {
+    setShow(true);
+    setId(id);
+    setName(name);
+  };
 
   return (
     <>
@@ -77,12 +87,12 @@ const ProductsSettings = () => {
         <Button variant="success" onClick={handleShowNew}>
           New
         </Button>
-          <Paginacion 
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            pageCurrent={pageCurrent}
-            setPageCurrent={setPageCurrent}
-            />
+        <Paginacion
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          pageCurrent={pageCurrent}
+          setPageCurrent={setPageCurrent}
+        />
         <Table striped size="sm">
           <thead>
             <tr>
@@ -104,9 +114,7 @@ const ProductsSettings = () => {
                         variant="light"
                         size="sm"
                         onClick={() => {
-                          showMod(prod.id);
-                          setIdpasamanos(prod.id);
-                          setNamepasamanos(prod.name);
+                          handleShow({ id: prod.id, name: prod.name });
                         }}
                       >
                         📝
@@ -128,6 +136,13 @@ const ProductsSettings = () => {
               })
               .slice(indInicial, indFinal)}
           </tbody>
+
+          <ModProduct
+            show={show}
+            id={id}
+            name={name}
+            handleClose={handleClose}
+          />
         </Table>
         <div className={st.ppp}>
           {" "}
@@ -137,11 +152,7 @@ const ProductsSettings = () => {
         <p className={st.success}>{successMessage}</p>
       </div>
 
-      {showModif.status ? (
-        <ModProduct id={idpasamanos} name={namepasamanos} />
-      ) : (
-        ""
-      )}
+      {showModif.status ? "" : ""}
       {showNew ? <NewProduct /> : ""}
     </>
   );
