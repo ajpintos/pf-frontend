@@ -3,7 +3,7 @@ import NavBar from "../NavBar/NavBar";
 import Stack from "react-bootstrap/esm/Stack";
 import Title from "../Title/Title";
 import Footer from "../Footer/Footer";
-import UsersSettings from "../UsersSettings/UsersSettings";
+import UsersSettings from "../UsersSettings/SettingsGeneral/UsersSettings";
 import ProductsSettings from "../ProductsSettings/ProductsSettings";
 
 function Settings() {
@@ -32,8 +32,10 @@ function Settings() {
         <button onClick={handlerShowU} style={{ borderRadius: "2rem" }}>
           Users
         </button>
+        <></> <></>
         <button onClick={handlerShowP} style={{ borderRadius: "2rem" }}>
-          Products</button>
+          Products
+        </button>
         {show.users ? <UsersSettings /> : null}
         {show.products ? <ProductsSettings /> : null}
       </div>
