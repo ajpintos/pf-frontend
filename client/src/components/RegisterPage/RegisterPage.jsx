@@ -1,17 +1,20 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './RegisterPage.module.css';
+import axios from "axios";
 import Footer from '../Footer/Footer.jsx';
 import Title from '../Title/Title.jsx';
 import NavBar from "../NavBar/NavBar.jsx";
 import registerValidate from "./validate/registerValidate.js";
+import emailjs from "@emailjs/browser";
+import styles from './RegisterPage.module.css';
+
+//CSS REACT-BOOSTRAP
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/esm/Stack';
-import emailjs from "@emailjs/browser";
-import axios from 'axios';
+import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
 
 function RegisterPage() {
 
@@ -21,6 +24,7 @@ function RegisterPage() {
     const [form, setForm] = useState({
         email: "",
         password: "",
+        passwordRepeat: "",
         firstname: "",
         lastname: "",
         address: "",
@@ -34,6 +38,7 @@ function RegisterPage() {
     const [errors, setErrors] = useState({
         email: "",
         password: "",
+        passwordRepeat: "",
         firstname: "",
         lastname: "",
         address: "",
@@ -47,7 +52,7 @@ function RegisterPage() {
         event.preventDefault()
         axios.post("/users", form)
             .then(res => {
-                alert("User added successfully!")
+                alert("User added successfully!");
                 const Dom = document.getElementById("formToSend");
                 const serviceID = "service_e5hd1wt";
                 const templateID ="template_59dtr2y";// "contact_form";
@@ -76,8 +81,8 @@ function RegisterPage() {
 
     return (
         <div className="container-fluid">
-            <Title />
-            <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3" >
+            <Title/>
+            <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3">
                 <NavBar/>
             </Stack>
             <div className={styles.formContainer}>
@@ -86,62 +91,81 @@ function RegisterPage() {
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formEmail">
                             <Form.Label>Email</Form.Label>
-                            <Form.Control 
-                                type="email" 
-                                placeholder="Enter email" 
-                                id="email" 
+                            <Form.Control
+                                type="email"
+                                placeholder="Enter email"
+                                id="email"
                                 name="email"
                                 value={form.email}
                                 onChange={changeHandler}
                             />
-                            <p style={{color:"red"}}>{errors.email}</p>
+                            <p style={{color: "red"}}>{errors.email}</p>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control 
-                                type="password" 
+                            <Form.Control
+                                type="password"
                                 placeholder="Enter Password" id="password" name="password"
                                 value={form.password}
                                 onChange={changeHandler}
                             />
-                            <p style={{color:"red"}}>{errors.password}</p>
+                            <div style={{color: "red"}}>{errors.password}</div>
                         </Form.Group>
                     </Row>
+
+                    <Form.Group as={Col} controlId="formPasswordRepeat">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="Repeat Password" id="passwordRepeat" name="passwordRepeat"
+                            value={form.passwordRepeat}
+                            onChange={changeHandler}
+                        />
+                        <div>
+                            {form.passwordRepeat === form.password ? (
+                                ""
+                            ) : form.passwordRepeat.length > 4 ? (
+                                <div style={{ color: "red" }}>Passwords do not match</div>
+                            ) : (
+                                ""
+                            )}
+                        </div>
+                    </Form.Group>
 
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formName">
                             <Form.Label>First Name</Form.Label>
-                            <Form.Control 
-                                type="firstname" 
-                                placeholder="First Name" 
-                                id="firstname" 
+                            <Form.Control
+                                type="firstname"
+                                placeholder="First Name"
+                                id="firstname"
                                 name="firstname"
-                                value={form.firstname} 
+                                value={form.firstname}
                                 onChange={changeHandler}
                             />
-                            <p style={{color:"red"}}>{errors.firstname}</p>
+                            <p style={{color: "red"}}>{errors.firstname}</p>
                         </Form.Group>
 
                         <Form.Group as={Col} className="mb-3" controlId="formLastName">
                             <Form.Label>Last Name</Form.Label>
-                            <Form.Control 
-                                type="lastname" 
-                                placeholder="Last Name" 
-                                id="lastname" 
+                            <Form.Control
+                                type="lastname"
+                                placeholder="Last Name"
+                                id="lastname"
                                 name="lastname"
                                 value={form.lastname}
                                 onChange={changeHandler}
                             />
-                            <p style={{color:"red"}}>{errors.lastname}</p>
+                            <p style={{color: "red"}}>{errors.lastname}</p>
                         </Form.Group>
                     </Row>
                     <Form.Group className="mb-3" controlId="formAddress">
                         <Form.Label>Address</Form.Label>
-                        <Form.Control 
-                            type="address" 
-                            placeholder="Address" 
-                            id="address" 
+                        <Form.Control
+                            type="address"
+                            placeholder="Address"
+                            id="address"
                             name="address"
                             value={form.address}
                             onChange={changeHandler}
@@ -150,44 +174,45 @@ function RegisterPage() {
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formZiCode">
                             <Form.Label>Zip Code</Form.Label>
-                            <Form.Control 
+                            <Form.Control
                                 type="cp"
-                                placeholder="Zip Code" 
-                                id="cp" 
-                                name="cp" 
+                                placeholder="Zip Code"
+                                id="cp"
+                                name="cp"
                                 value={form.cp}
                                 onChange={changeHandler}
                             />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formCity">
                             <Form.Label>City</Form.Label>
-                            <Form.Control 
-                                type="city" 
-                                placeholder="City" 
-                                id="city" 
-                                name="city" 
+                            <Form.Control
+                                type="city"
+                                placeholder="City"
+                                id="city"
+                                name="city"
                                 value={form.city}
                                 onChange={changeHandler}
                             />
                         </Form.Group>
                     </Row>
+
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formCountry">
                             <Form.Label>Country</Form.Label>
-                            <Form.Control 
-                                type="country" 
-                                placeholder="Country" 
-                                id="country" 
+                            <Form.Control
+                                type="country"
+                                placeholder="Country"
+                                id="country"
                                 name="country"
                                 value={form.country}
                                 onChange={changeHandler}/>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formPhone">
                             <Form.Label>Phone</Form.Label>
-                            <Form.Control 
-                                type="phone" 
-                                placeholder="Phone" 
-                                id="phone" 
+                            <Form.Control
+                                type="phone"
+                                placeholder="Phone"
+                                id="phone"
                                 name="phone"
                                 value={form.phone}
                                 onChange={changeHandler}
@@ -199,7 +224,6 @@ function RegisterPage() {
                     </Button>
                 </Form>
             </div>
-
             <Footer/>
         </div>
     );

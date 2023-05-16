@@ -79,6 +79,10 @@ function LoginPage(){
         user.email && navigate('/');
     }, [user]);
 
+    //! Obtener Token de Acceso de Google
+
+    // let accessToken = gapi.auth.getToken().accessToken
+
 return (
     <div className="container-fluid">
         <Title />
