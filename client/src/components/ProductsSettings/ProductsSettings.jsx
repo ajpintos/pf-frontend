@@ -64,9 +64,11 @@ const ProductsSettings = () => {
     try {
       const dataFuncional = { id: id, active: !status };
       const result = await axios.delete("/products", { data: dataFuncional });
+  
       if (result) {
         alert("Operacion exitosa");
       }
+      loadingData();
     } catch (error) {
       alert(error.message);
     }
