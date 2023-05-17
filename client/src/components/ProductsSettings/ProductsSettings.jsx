@@ -62,18 +62,10 @@ const ProductsSettings = () => {
 
   const deleteHandler = async (id, status) => {
     try {
-      let active = true;
-      if (status == true) {
-        active = false;
-      } else {
-        active = true;
-      }
-      const form = { id: id, active: active };
-
-      const body = form;
-      const result = await axios.delete("/products", body);
+      const dataFuncional = { id: id, active: !status };
+      const result = await axios.delete("/products", { data: dataFuncional });
       if (result) {
-        alert("Eliminacion completa");
+        alert("Operacion exitosa");
       }
     } catch (error) {
       alert(error.message);
