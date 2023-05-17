@@ -19,7 +19,7 @@ function Card({ id, name, image, description, price, priceFlag }) {
                   <p className="col-6 offset-3" ><strong>$ {price}</strong></p>
               </div>
               }
-            <div className="row">
+            <div className="row mt-2">
               <Button variant="success" className="col-6 offset-3">+ Cart</Button>
             </div>
           </div>

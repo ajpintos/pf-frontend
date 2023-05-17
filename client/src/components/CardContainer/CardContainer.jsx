@@ -44,7 +44,7 @@ function CardContainer() {
   return (
     <Container fluid >
       <section className="container-fluid" >
-        { flagProducts && <Button variant="success" className="col-3 offset-9 mb-3 me-3" onClick={changeProducts}>All Products</Button>}
+        { flagProducts && <Button variant="success" className="col-4 offset-4 col-lg-2 offset-lg-5 mb-3 me-3" onClick={changeProducts}>All Products</Button>}
       </section>
       <section className="row">
         {products.length > 0 && products.map((product) => (

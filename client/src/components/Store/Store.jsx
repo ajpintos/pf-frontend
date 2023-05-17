@@ -23,6 +23,10 @@ export default function Store () {
 
   const paged = (pageNumber) => {
     setCurrentPage(pageNumber)
+    // setCurrentPage((prevCurrentPage)=>{
+    //   console.log(prevCurrentPage);
+    //   return prevCurrentPage;
+    // })
   }
 
   const nextPage = (e) => {

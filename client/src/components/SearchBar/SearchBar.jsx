@@ -37,8 +37,8 @@ const SearchBar = () => {
       <Form onSubmit={handlerSubmit} className='col-6 mx-auto mt-3' >
         <Stack direction="horizontal" >
           <Form.Control className="me-auto" placeholder="Product ..." name='name' onChange={handlerChange} />
-          <Button variant="success" type='submit' >🔎</Button>
-          <Button variant="danger" type='reset' >X</Button>
+          <Button variant="outline-success" type='submit' >🔎</Button>
+          <Button variant="outline-danger" type='reset' ><strong>X</strong></Button>
         </Stack>
       </Form>
   )
