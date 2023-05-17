@@ -81,10 +81,6 @@ function RegisterPage() {
 
     return (
         <div className="container-fluid">
-            <Title/>
-            <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3">
-                <NavBar/>
-            </Stack>
             <div className={styles.formContainer}>
                 <Form onSubmit={submitHandler} id="formToSend">
                     <h2>Register</h2>
@@ -224,7 +220,6 @@ function RegisterPage() {
                     </Button>
                 </Form>
             </div>
-            <Footer/>
         </div>
     );
 }
