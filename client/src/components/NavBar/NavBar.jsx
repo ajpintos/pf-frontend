@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { getProducts } from '../../Redux/actions/actionsProducts';
 import { Link, useLocation } from 'react-router-dom';
 
-export default function NavBar() {
+export default function Categories() {
   const dispatch = useDispatch();
   const location = useLocation();
   const categories = useSelector(state => state.allCategories);
@@ -32,7 +32,7 @@ export default function NavBar() {
           <Nav className="">
             <Link to='/' id={s.item}>HOME</Link>
             { location.pathname.substring(0,6) !== '/store' &&
-                <NavDropdown id={s.item} title="STORE"  >
+                <NavDropdown id={s.item} title="CATEGORIES"  >
                   <Link className='d-block' id={s.subItem} to='/store'>All Products</Link>
                     {categories?.map(c => (
                       <div key={c.id}>
@@ -58,9 +58,7 @@ export default function NavBar() {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
-
       </Container>
-
     </Navbar>
   );
 }

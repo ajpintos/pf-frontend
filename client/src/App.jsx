@@ -11,10 +11,10 @@ import axios from "axios";
 import RegisterPage from "./components/RegisterPage/RegisterPage.jsx";
 import MyAccount from "./components/MyAccount/MyAccount.jsx";
 import FormUdateMyaccount from "./components/MyAccount/Components/FormUpdate/FormUpdate.jsx";
-import Cart from "./components/Cart/Cart.jsx";
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer.jsx";
 import NavBar from "../src/components/NavBar/NavBar.jsx";
-import Title from "./components/Title/Title";
+import Title from "./components/Title/Title.jsx";
+import Cart from './components/Cart/Cart.jsx';
 
 //axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
@@ -23,7 +23,6 @@ function App() {
 
   return (
     <div className="App">
-
       {/* Cabecera */}
       <header className="container-fluid">
         {/* Sección del logo, login, favoritos y carrito */}
@@ -32,7 +31,6 @@ function App() {
         </div>
         <NavBar/>
       </header>
-
       <Routes>
         <Route path="/" element={<LandingHome />} />
         <Route path="/login" element={<LoginPage />} />
@@ -40,12 +38,12 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/myaccount" element={<MyAccount />} />
         <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/store" element={<Store />} />
-        <Route path="/store/:id" element={<Store />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/settings" element={<Settings />}></Route>
+        <Route path="/store" element={<Store />}></Route>
+        <Route path="/store/:id" element={<Store />}></Route>
+        <Route path="/contact" element={<Contact />}></Route>
         <Route path="/form_update" element={<FormUdateMyaccount />} />
-        <Route path="'/cart" element={<Cart />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <footer className="container-fluid" >
         <Footer />

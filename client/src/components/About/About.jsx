@@ -4,7 +4,6 @@ const About=()=>{
 
     return(
         <div className="container-fluid">
-        
             <section>
                 <h1 className="text-center mt-3" >About Us</h1>
             </section>

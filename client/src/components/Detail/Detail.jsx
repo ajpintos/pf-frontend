@@ -1,9 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
-import style from "./Detail.module.css";
-import NavBar from "../NavBar/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Detail = () => {
@@ -34,7 +31,7 @@ const Detail = () => {
   };
 
   return (
-    <div className={style.container}>
+    <div>
       <div className="row  text-center ">
         <div className="container ">
           <h1>DETAIL</h1>

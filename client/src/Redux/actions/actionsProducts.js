@@ -20,4 +20,3 @@ export const getProductsByName = async (name) => {
     return { error: error.message };
   };
 };
-
