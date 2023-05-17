@@ -8,11 +8,8 @@ import { useState } from "react";
 import validate from "./validate.js";
 import Form from "react-bootstrap/Form";
 import emailjs from "@emailjs/browser";
-import NavBar from "../NavBar/NavBar";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Title from "../Title/Title";
 import Stack from "react-bootstrap/esm/Stack";
-import Footer from "../Footer/Footer";
 
 function Contact() {
   const navigate = useNavigate();
@@ -93,13 +90,6 @@ function Contact() {
   };
   return (
     <div className="container-fluid">
-      <Title />
-      <Stack
-        direction="horizontal"
-        className="d-flex flex-row justify-content-between bg-success pt-3 pb-3"
-      >
-        <NavBar />
-      </Stack>
       <section>
         <h1 className="text-center mt-3">Contact Us</h1>
       </section>
@@ -266,7 +256,6 @@ function Contact() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
