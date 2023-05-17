@@ -74,7 +74,6 @@ const NewProduct=()=>{
 
 
   const submitNew= async(e)=>{
-        e.preventDefault();
         setSuccessMessage("");
         setErrorMessage("");
         

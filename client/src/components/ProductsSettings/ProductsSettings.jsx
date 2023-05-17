@@ -47,26 +47,6 @@ const ProductsSettings = () => {
     setShowModif({ status: true, id });
   };
 
-  /*Delete product****************/
-  const deleteHandler = async (id, status) => {
-    const data = { id, status: !status };
-    console.log("data", data);
-    await axios
-      .delete("/products/", data)
-      .then((res) => {
-        setSuccessMessage("Product deleted successfully.");
-        console.log("res  " + res);
-      })
-      .catch((err) => {
-        alert(err);
-        setErrorMessage("Product is not deleted.");
-      });
-
-    // const delete_Products = await getProducts();
-  };
-
-  /*  */
-
   const handleClose = () => setShow(false);
 
   const [show, setShow] = useState(false);
@@ -80,6 +60,25 @@ const ProductsSettings = () => {
     setName(name);
   };
 
+  const deleteHandler = async (id, status) => {
+    try {
+      let active = true;
+      if (status == true) {
+        active = false;
+      } else {
+        active = true;
+      }
+      const form = { id: id, active: active };
+
+      const body = form;
+      const result = await axios.delete("/products", body);
+      if (result) {
+        alert("Eliminacion completa");
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <>
       <div className="container-fluid col-8">
@@ -126,12 +125,10 @@ const ProductsSettings = () => {
                         size="sm"
                         onClick={() => deleteHandler(prod.id, prod.status)}
                       >
-                        {prod.status ? "✅" : "❌"}
+                        {prod?.status ? "✅" : "❌"}
                       </Button>
                     </td>
                   </tr>
-                  //❎
-                  //
                 );
               })
               .slice(indInicial, indFinal)}

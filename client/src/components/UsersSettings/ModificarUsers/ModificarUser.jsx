@@ -36,7 +36,6 @@ const ModificarUser = ({ show, handleClose, email }) => {
   }, [form, setButton]);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
     try {
       const result = await axios.put("/users", form);
       if (result.status === 201) {
