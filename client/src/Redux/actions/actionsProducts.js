@@ -1,5 +1,5 @@
 import axios from "axios"
-import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME, SORT_PRODUCTS } from "../types/typesProducts";
+import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "../types/typesProducts";
 
 export const getProducts = async () => {
   try {
@@ -20,10 +20,3 @@ export const getProductsByName = async (name) => {
     return { error: error.message };
   };
 };
-
-export const sortProducts = (payload) => {
-  return {
-    type: SORT_PRODUCTS,
-    payload
-  }
-}

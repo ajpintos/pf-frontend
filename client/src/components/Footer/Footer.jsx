@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import imgpropia from "../../logo/logo.png";
+import imgpropia from "../../img/logo.png";
 
 const Footer = () => {
 
@@ -7,7 +7,7 @@ const Footer = () => {
     <div className='col bg-secondary' >
       <div className='row' >
         <figure className='col-xs-12 col-sm-6 col-md-3 col-lg-3'>
-          <img src={imgpropia} alt="Biofresh Logo" className='img-fluid p-4' />
+          <img src={imgpropia} alt="Biofresh Logo" className='img-fluid p-5' />
         </figure>
         <article className='col-xs-12 col-sm-6 col-md-3 col-lg-3'>
           <h4 className='text-warning-emphasis p-4 text-center'>INFORMATION</h4>
