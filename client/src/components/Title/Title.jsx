@@ -25,18 +25,18 @@ function Title() {
           <Link to={'/'}><img src={imgpropia} alt="Biofresh Logo" className='img-fluid w-50 px-3 py-1' /></Link>
         </figure>
         {user.email ? 
-          <div>
-            <Link to="/myaccount" id={s.link} className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-6">
+          <div className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-6 d-flex px-2">
+            <Link to="/myaccount" id={s.link} className="">
             🙋‍♂️ {user.firstname}
             </Link>
-            <Button variant="outline-danger" size="sm" onClick={handleLogout} >Logout</Button>
+            <Button variant="outline-danger" size="sm" className="" onClick={handleLogout} >Logout</Button>
           </div> : 
           <Link to="/login" id={s.link} className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-6">
             🙋‍♂️ Login
           </Link>
         } 
-        <Link to='/' id={s.link} className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
-        <Link to='/' id={s.link} className="col-2 col-sm-1 col-md-1 col-lg-1">🛒 Cart</Link>
+        <Link to='/favorites' id={s.link} className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
+        <Link to='/cart' id={s.link} className="col-2 col-sm-1 col-md-1 col-lg-1">🛒 Cart</Link>
       </div>
     </div>);
 };
