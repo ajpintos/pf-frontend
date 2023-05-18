@@ -45,7 +45,7 @@ export default function Categories() {
             <Link to='/contact' id={s.item}>CONTACT US</Link> 
             <NavDropdown id={s.item} title="SETTINGS">
               <div>
-                <Link className='d-block' id={s.item} to={"#action/3.1"}>Settings</Link>
+                <Link className='d-block' id={s.item} to={"/settings"}>Settings</Link>
                 <NavDropdown.Divider />
                 <Link className='d-block' id={s.item} to={"#action/3.2"}>Action 2</Link>
                 <NavDropdown.Divider />

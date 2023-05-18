@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import NavBar from "../NavBar/NavBar";
-import Stack from "react-bootstrap/esm/Stack";
-import Title from "../Title/Title";
-import Footer from "../Footer/Footer";
 import UsersSettings from "../UsersSettings/SettingsGeneral/UsersSettings";
 import ProductsSettings from "../ProductsSettings/ProductsSettings";
 
@@ -19,13 +15,6 @@ function Settings() {
   };
   return (
     <div className="container-fluid">
-      <Title />
-      <Stack
-        direction="horizontal"
-        className="d-flex flex-row justify-content-between bg-success pt-3 pb-3"
-      >
-        <NavBar />
-      </Stack>
 
       <div className="text-center mt-5 mb-5">
         <h4>Opciones de administrador</h4>
@@ -39,7 +28,6 @@ function Settings() {
         {show.users ? <UsersSettings /> : null}
         {show.products ? <ProductsSettings /> : null}
       </div>
-      <Footer />
     </div>
   );
 }
