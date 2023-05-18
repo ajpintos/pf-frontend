@@ -1,9 +1,9 @@
-import {useDispatch } from "react-redux";
-import { useEffect } from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
 import CardContainer from "../CardContainer/CardContainer.jsx";
 import SearchBar from "../SearchBar/SearchBar";
-import { getProducts } from "../../Redux/actions/actionsProducts.js";
-import { getCategories } from "../../Redux/actions/actionsCategories.js";
+import {getProducts} from "../../Redux/actions/actionsProducts.js";
+import {getCategories} from "../../Redux/actions/actionsCategories.js";
 import s from "./LandingHome.module.css";
 import table from '../../assets/img/table.jpg';
 import woman from '../../assets/img/woman.jpg';
@@ -11,14 +11,15 @@ import woman from '../../assets/img/woman.jpg';
 
 const Landing_home = () => {
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  const loadingData = async () => {
-    const all_Products = await getProducts();
-    dispatch(all_Products);
-    const all_Categories = await getCategories();
-    dispatch(all_Categories);
-  };
+    const loadingData = async () => {
+        const all_Products = await getProducts();
+        dispatch(all_Products);
+        const all_Categories = await getCategories();
+        dispatch(all_Categories);
+    };
+
 
   useEffect(() => {
       loadingData();

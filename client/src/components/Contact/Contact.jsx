@@ -59,13 +59,9 @@ function Contact() {
       form.phone
     ) {
       const serviceID = "service_e5hd1wt";
-      const templateID ="template_59dtr2y";// "contact_form";
+      const templateID = "contact_form";
       const key_public = "gEu_FBDo_Q0lvhmwA";
      emailjs.sendForm(serviceID, templateID, Dom, key_public)
-      // emailjs.send("service_e5hd1wt","template_59dtr2y",{
-      //   name: "Prueba de logeo22",
-      //   email: "emauriciomendez@gmail.com",
-      //   })
         .then(
         (result) => {
           console.log(result.text);
@@ -189,9 +185,9 @@ function Contact() {
                 </div>
               </Form.Group>
 
-              <button className="btn btn-primary" type="submit">
+              <Button variant="success" type="submit">
                 Send
-              </button>
+              </Button>
 
               <p className={styles.error}>{errorMessage}</p>
               <p className={styles.success}>{successMessage}</p>

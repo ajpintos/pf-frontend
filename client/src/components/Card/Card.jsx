@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
-
+import { AddToCartIcon } from "../Icons/Icons";
 
 function Card({ id, name, image, description, price, priceFlag }) {
   return (
@@ -19,8 +19,8 @@ function Card({ id, name, image, description, price, priceFlag }) {
                   <p className="col-6 offset-3" ><strong>$ {price}</strong></p>
               </div>
               }
-            <div className="row mt-2">
-              <Button variant="success" className="col-6 offset-3">+ Cart</Button>
+            <div className="row">
+              <Button variant="btn btn-success mt-2" className="col-6 offset-3"><AddToCartIcon/></Button>
             </div>
           </div>
 

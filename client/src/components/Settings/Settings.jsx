@@ -1,22 +1,35 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import NavBar from "../NavBar/NavBar";
-import Stack from "react-bootstrap/esm/Stack";
-import Title from "../Title/Title";
-import Footer from "../Footer/Footer";
+import React, { useState } from "react";
+import UsersSettings from "../UsersSettings/SettingsGeneral/UsersSettings";
+import ProductsSettings from "../ProductsSettings/ProductsSettings";
 
 function Settings() {
+  const [show, setShow] = useState({
+    users: false,
+    products: false,
+  });
+  const handlerShowU = () => {
+    setShow({ users: true, products: false });
+  };
+  const handlerShowP = () => {
+    setShow({ users: false, products: true });
+  };
+  return (
+    <div className="container-fluid">
 
-    const navigate = useNavigate();
-
-    return (
-        <div className="container-fluid">
-            <div className="text-center mt-5 mb-5">
-                <button className="mt-5 mb-3" onClick={() => navigate("/")}>Back to Home</button>
-                <h1 className="mb-5">Working in progres...</h1>
-            </div>
-        </div>
-    )
+      <div className="text-center mt-5 mb-5">
+        <h4>Opciones de administrador</h4>
+        <button onClick={handlerShowU} style={{ borderRadius: "2rem" }}>
+          Users
+        </button>
+        <></> <></>
+        <button onClick={handlerShowP} style={{ borderRadius: "2rem" }}>
+          Products
+        </button>
+        {show.users ? <UsersSettings /> : null}
+        {show.products ? <ProductsSettings /> : null}
+      </div>
+    </div>
+  );
 }
 
 export default Settings;
