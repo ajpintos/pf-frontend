@@ -72,7 +72,6 @@ const Landing_home = () => {
             <div className="container-fluid mt-5">
         <SearchBar/>
         <h2 className="col-xs-12 text-center mt-3"  >PRODUCTS</h2>
-                <CardContainer/>
         <CardContainer />
       </div>
         </div>
