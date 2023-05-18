@@ -20,3 +20,13 @@ export const getProductsByName = async (name) => {
     return { error: error.message };
   };
 };
+
+export const deleteProduct = async (id,active) => {
+  try {
+    const nameProducts = await axios.delete('/products');
+    if (nameProducts === null) throw Error('Product not found');
+    return { type: DELETE_PRODUCT, payload: { id, active} };
+  } catch (error) {
+    return { error: error.message };
+  };
+};
