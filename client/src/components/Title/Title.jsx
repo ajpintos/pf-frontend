@@ -2,7 +2,7 @@ import React from 'react';
 import { Link , useNavigate } from "react-router-dom";
 import imgpropia from "../../logo/logo.png";
 import { useSelector , useDispatch } from 'react-redux';
-import { userLogout } from '../../Redux/actions/actionsUser.js';
+import { userLogout , setUser } from '../../Redux/actions/actionsUser.js';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 
@@ -11,6 +11,17 @@ function Title() {
   const user = useSelector(state => state.userLogin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // // Obtener los datos del usuario del localStorage
+  //     const userData = localStorage.getItem('user');
+
+  // // Verificar si existen datos del usuario en el localStorage
+  //     if (userData) {
+  // // Parsear los datos a un objeto JavaScript
+  //       const user = JSON.parse(userData);
+  // // Disparar una acción en Redux para establecer los datos del usuario en el estado global
+  //       dispatch(setUser(user));
+  //     }
 
   const handleLogout = () => {
     dispatch(userLogout());
