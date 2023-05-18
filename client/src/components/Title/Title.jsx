@@ -2,6 +2,7 @@ import React from 'react';
 import { Link , useNavigate } from "react-router-dom";
 import { useSelector , useDispatch } from 'react-redux';
 import { userLogout } from '../../Redux/actions/actionsUser.js';
+import Cart from '../Cart/Cart.jsx';
 import imgpropia from "../../img/logo.png";
 import Button from 'react-bootstrap/Button';
 import s from './Title.module.css'
@@ -36,7 +37,9 @@ function Title() {
           </Link>
         } 
         <Link to='/favorites' id={s.link} className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
-        <Link to='/cart' id={s.link} className="col-2 col-sm-1 col-md-1 col-lg-1">🛒 Cart</Link>
+        <div id={s.link} className="col-2 col-sm-1 col-md-1 col-lg-1">
+          <Cart />
+        </div>
       </div>
     </div>);
 };
