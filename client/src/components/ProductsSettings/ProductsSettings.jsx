@@ -38,7 +38,7 @@ const ProductsSettings = () => {
   ///new producto**************
   const [showNew, setShowNew] = useState(false);
   const handleShowNew = () => {
-    setShowNew(true);
+    showNew ? setShowNew(false) : setShowNew(true);
   };
   /*Modify product****************/
   const [showModif, setShowModif] = useState({ status: false, id: "" });
@@ -64,7 +64,7 @@ const ProductsSettings = () => {
     try {
       const dataFuncional = { id: id, active: !status };
       const result = await axios.delete("/products", { data: dataFuncional });
-  
+
       if (result) {
         alert("Operacion exitosa");
       }
@@ -76,8 +76,13 @@ const ProductsSettings = () => {
   return (
     <>
       <div className="container-fluid col-8">
-        <h1>Products</h1>
-        <Button variant="success" onClick={handleShowNew}>
+        <br />
+        <h3>Configuracion de Products</h3>
+        <Button
+          variant="success"
+          onClick={handleShowNew}
+          style={{ borderRadius: "2rem", fontSize: "15px" }}
+        >
           New
         </Button>
         <Paginacion
@@ -142,8 +147,6 @@ const ProductsSettings = () => {
         <p className={st.error}>{errorMessage}</p>
         <p className={st.success}>{successMessage}</p>
       </div>
-
-      {showModif.status ? "" : ""}
       {showNew ? <NewProduct /> : ""}
     </>
   );

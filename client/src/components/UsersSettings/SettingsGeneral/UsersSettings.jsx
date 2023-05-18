@@ -4,6 +4,7 @@ import { allUsers } from "../../../Redux/actions/actionsUser";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ModificarUser from "../ModificarUsers/ModificarUser";
+import NuevoForm from "../New user admi/RegisterPage/RegisterPage";
 
 const UsersSettings = () => {
   const dispatch = useDispatch();
@@ -27,12 +28,24 @@ const UsersSettings = () => {
     console.log(event.target.value);
   };
 
+  const [estado, setEstado] = useState(false);
+  const handleModal = () => {
+    estado ? setEstado(false) : setEstado(true);
+  };
+
   return (
     <>
       <div className="container-fluid col-8">
         <br />
         <h3>Configuraciones de Usuarios</h3>
         <br />
+        <Button
+          style={{ borderRadius: "2rem", fontSize: "15px" }}
+          onClick={handleModal}
+          variant="success"
+        >
+          New
+        </Button>
         <Table striped size="sm">
           <thead>
             <tr>
@@ -75,6 +88,7 @@ const UsersSettings = () => {
           </tbody>
           <ModificarUser show={show} handleClose={handleClose} email={email} />
         </Table>
+        {estado ? <NuevoForm /> : null}
       </div>
     </>
   );
