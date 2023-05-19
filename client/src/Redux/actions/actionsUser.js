@@ -26,7 +26,7 @@ export const userLoginGoogle = (infoUserGoogle) => {
                 lastname : infoUserGoogle.familyName
             };
 
-            const user = await axios.get(`/users/login/google?email=${userGoogle.email}&firstname=${userGoogle.firstname}&lastname=${userGoogle.lastname}`);
+            const user = await axios.post('/users/login/google', userGoogle);
             localStorage.setItem('user', JSON.stringify(user.data));
             return dispatch({
                 type: LOGIN_USER_GOOGLE,

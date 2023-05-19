@@ -22,7 +22,7 @@ const MyAccount = () => {
         city: user.city,
         country: user.country,
         phone: user.phone
-    })
+    });
 
     useEffect(() => {
         !user.email && navigate('/');
@@ -31,7 +31,7 @@ const MyAccount = () => {
     return (
         <div className="container-fluid">
             <div>
-                <Form>
+                <Form id="formToSend">
                     <h1>Account Settings</h1>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formEmail">
@@ -42,6 +42,7 @@ const MyAccount = () => {
                                 id="email"
                                 name="email"
                                 value={userDetail.email}
+                                onChange={() =>{}}
                             />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formName">
@@ -52,6 +53,7 @@ const MyAccount = () => {
                                 id="firstname"
                                 name="firstname"
                                 value={userDetail.firstname}
+                                onChange={() =>{}}
                             />
                         </Form.Group>
                     </Row>
@@ -64,6 +66,7 @@ const MyAccount = () => {
                                 id="lastname"
                                 name="lastname"
                                 value={userDetail.lastname}
+                                onChange={() =>{}}
                             />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formAddress">
@@ -74,6 +77,7 @@ const MyAccount = () => {
                                 id="address"
                                 name="address"
                                 value={userDetail.address}
+                                onChange={() =>{}}
                             />
                         </Form.Group>
                     </Row>
@@ -86,6 +90,7 @@ const MyAccount = () => {
                                 id="cp"
                                 name="cp"
                                 value={userDetail.cp}
+                                onChange={() =>{}}
                             />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formCity">
@@ -96,6 +101,7 @@ const MyAccount = () => {
                                 id="city"
                                 name="city"
                                 value={userDetail.city}
+                                onChange={() =>{}}
                             />
                         </Form.Group>
                     </Row>
@@ -108,6 +114,7 @@ const MyAccount = () => {
                                 id="country"
                                 name="country"
                                 value={userDetail.country}
+                                onChange={() =>{}}
                             />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formPhone">
@@ -118,6 +125,7 @@ const MyAccount = () => {
                                 id="phone"
                                 name="phone"
                                 value={userDetail.phone}
+                                onChange={() =>{}}
                             />
                         </Form.Group>
                     </Row>
