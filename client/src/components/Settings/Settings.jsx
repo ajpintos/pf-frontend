@@ -35,7 +35,7 @@ function Settings() {
       </Stack>
 
       <div className="text-center mt-5 mb-5">
-        <h4>Opciones de administrador</h4>
+        <h4>administrator options</h4>
         <button onClick={handlerShowU} style={{ borderRadius: "2rem" }}>
           Users
         </button>
@@ -43,6 +43,7 @@ function Settings() {
         <button onClick={handlerShowP} style={{ borderRadius: "2rem" }}>
           Products
         </button>
+        <></> <></>
         <button onClick={handlerShowC} style={{ borderRadius: "2rem" }}>
           Categories
         </button>

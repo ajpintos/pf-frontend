@@ -60,7 +60,7 @@ const ProductsSettings = () => {
     setName(name);
   };
 
-  const deleteHandler = async (id, status) => {
+  const borradoLogico = async (id, status) => {
     try {
       const dataFuncional = { id: id, active: !status };
       const result = await axios.delete("/products", { data: dataFuncional });
@@ -77,7 +77,7 @@ const ProductsSettings = () => {
     <>
       <div className="container-fluid col-8">
         <br />
-        <h3>Configuracion de Products</h3>
+        <h3>product configuration</h3>
         <Button
           variant="success"
           onClick={handleShowNew}
@@ -122,7 +122,7 @@ const ProductsSettings = () => {
                       <Button
                         variant="light"
                         size="sm"
-                        onClick={() => deleteHandler(prod.id, prod.status)}
+                        onClick={() => borradoLogico(prod.id, prod.status)}
                       >
                         {prod?.status ? "✅" : "❌"}
                       </Button>
