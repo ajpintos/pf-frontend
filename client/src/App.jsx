@@ -11,10 +11,26 @@ import axios from "axios";
 import RegisterPage from "./components/RegisterPage/RegisterPage.jsx";
 import MyAccount from "./components/MyAccount/MyAccount.jsx";
 import FormUdateMyaccount from "./components/MyAccount/Components/FormUpdate/FormUpdate";
+// import { useEffect } from "react";
+// import { useDispatch } from "react-redux";
+// import { setUser } from "./Redux/actions/actionsUser.js";
 //axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
 
 function App() {
+
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   const userLocalStorage = window.localStorage.getItem('user');
+  //   if (userLocalStorage) {
+  //     const userLocalStorageRedux = window.JSON.parse(userLocalStorage);
+  //     dispatch(setUser(userLocalStorageRedux));
+  //   }
+  // },[])
+
+
+
   return (
     <div className="App">
       <div className="App-header"></div>

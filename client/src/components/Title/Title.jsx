@@ -13,21 +13,18 @@ function Title() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // // Obtener los datos del usuario del localStorage
-  //     const userData = localStorage.getItem('user');
-
-  // // Verificar si existen datos del usuario en el localStorage
-  //     if (userData) {
-  // // Parsear los datos a un objeto JavaScript
-  //       const user = JSON.parse(userData);
-  // // Disparar una acción en Redux para establecer los datos del usuario en el estado global
-  //       dispatch(setUser(user));
-  //     }
-
   const handleLogout = () => {
     dispatch(userLogout());
     navigate("/");
   }
+
+  useEffect(() => {
+    const userLocalStorage = localStorage.getItem('user');
+    if (userLocalStorage) {
+      const userLocalStorageRedux = JSON.parse(userLocalStorage);
+      dispatch(setUser(userLocalStorageRedux));
+    }
+  },[])
 
 
   return (
