@@ -10,23 +10,23 @@ export default function Store () {
 
   const dispatch = useDispatch();
   const params = useParams();
+
   const allProducts = useSelector(state => state.products);
   const allCategories = useSelector(state => state.allCategories);
+
+  const user = useSelector(state => state.userLogin);
+
   const [order, setOrder] = useState('All Products');
   const [filter, setFilter] = useState('All');
+
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(8);
-
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
   const paged = (pageNumber) => {
     setCurrentPage(pageNumber)
-    // setCurrentPage((prevCurrentPage)=>{
-    //   console.log(prevCurrentPage);
-    //   return prevCurrentPage;
-    // })
   }
 
   const nextPage = (e) => {

@@ -1,9 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Button from "react-bootstrap/esm/Button";
+import { foundOrderForDetail } from "../Cart/cartHelpers";
+import { AddToCartIcon } from "../Icons/Icons";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 const Detail = () => {
+
+  const userLogin = useSelector(state=>state.userLogin);
+
   const { id } = useParams();
   const [product, setProduct] = React.useState({});
   const [cant, setCant] = React.useState(1);
@@ -27,7 +34,20 @@ const Detail = () => {
   }, [id]);
 
   const validacion = (e) => {
+    console.log('cant ', cant);
     setCant(e.target.value);
+    console.log('cant dos ', cant);
+  };
+
+  const addToCart = async () => {
+    const orderUser = await foundOrderForDetail(userLogin);
+    const detailsData = {
+      idOrder: orderUser.id,
+      idProduct: id,
+      units: parseInt(cant)
+    };
+    console.log('detailsData ',detailsData);
+    const detailCreated = await axios.post('/ordersDetails', detailsData);
   };
 
   return (
@@ -65,18 +85,7 @@ const Detail = () => {
                   style={{ width: "60px", marginTop: "10px" }}
                 />
 
-                <button
-                  style={{
-                    borderRadius: "10px",
-                    fontSize: "13px",
-                    textAlign: "center",
-                    backgroundColor: "green",
-                    color: "white",
-                  }}
-                >
-                  {" "}
-                  Add to Cart 🛒
-                </button>
+                <Button variant="btn btn-success mt-2" className="col-6 offset-3" onClick={addToCart}><AddToCartIcon/></Button>
               </div>
               <br />
               <div>
