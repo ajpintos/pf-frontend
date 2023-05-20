@@ -47,7 +47,7 @@ const Landing_home = () => {
                         <img src={imgpropia} alt="Biofresh Logo" className='img-fluid w-50 p-0'/>
                     </figure>
 
-                    {user.email ? 
+                    {user?.email ? 
                         <Link to="/myaccount" className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-6">
                           🙋‍♂️ {user.firstname}
                         </Link> 

@@ -6,9 +6,9 @@ export const addFavorites = (favorites) => {
     payload: favorites,
   };
 };
-export const deleteFavorites = (id) => {
+export const deleteFavorites = (name) => {
   return {
     type: DELETE_FAVORITES,
-    payload: id,
+    payload: name,
   };
 };

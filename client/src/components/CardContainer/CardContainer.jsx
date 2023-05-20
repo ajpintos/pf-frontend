@@ -50,9 +50,9 @@ function CardContainer({ flagChange, changeFlag }) {
         { flagProducts && <Button variant="success" className="col-sx-1" onClick={changeProducts}>All Products</Button>}
       </section>
       <section className="row">
-        {products.length > 0 && products.map((product) => (
+        {products?.map((product,index) => (
           <Card 
-          key={product.name}
+          key={index}
           id={product.id}
           name={product.name}
           image={product.image}
