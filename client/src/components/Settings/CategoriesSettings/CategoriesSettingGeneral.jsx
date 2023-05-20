@@ -1,12 +1,10 @@
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/esm/Table";
-import AddCategorie from "./AddCategorie";
-import ModificarCategoria from "./ModificarCategories"
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../../Redux/actions/actionsCategories";
 import { useEffect, useState } from "react";
-
+import AddCategorie from "./AddCategorie";
 
 const CategoriesSettingGeneral = () => {
   const allCategories = useSelector((state) => state?.allCategories);
@@ -15,12 +13,6 @@ const CategoriesSettingGeneral = () => {
   const [estado, setEstado] = useState(false);
   const handleModal = () => {
     estado ? setEstado(false) : setEstado(true);
-  };
-
-  // modificar categorie
-  const [estad, setEstad] = useState(false);
-  const handleModa = () => {
-    estad ? setEstad(false) : setEstad(true);
   };
 
   const deleteCategorie = async (id, status) => {
@@ -64,7 +56,11 @@ const CategoriesSettingGeneral = () => {
                   <td key={index}>{index + 1}</td>
                   <td>{categorie?.name}</td>
                   <td>
-                    <Button variant="light" size="sm" onClick={handleModa}>
+                    <Button
+                      variant="light"
+                      size="sm"
+                      /*  onClick={() => handleShow(prod.email)} */
+                    >
                       📝
                     </Button>
                   </td>
@@ -85,7 +81,6 @@ const CategoriesSettingGeneral = () => {
           </tbody>
         </Table>
         {estado ? <AddCategorie /> : null}
-        {estad ? <ModificarCategoria/> : null}
       </div>
     </div>
   );

@@ -121,48 +121,40 @@ const ModProduct = ({ id, name, show, handleClose }) => {
           </Form.Group>
           <br />
 
-
-
-<Row>
- 
- 
-
-  <Col>
-
-          <Form.Group>
-            <Form.Control
-              onChange={handleChange}
-              name="price"
-              value={form.price}
-              placeholder="new price"
-            ></Form.Control>
-          </Form.Group>
-          </Col>
-          <br />
-          <Col>
-          <Form.Group>
-            <Form.Control
-              onChange={handleChange}
-              name="stock"
-              value={form.stock}
-              placeholder="new stock"
-            ></Form.Control>
-          </Form.Group>
-          </Col>
-          <br />
-          <Col>
-          <Form.Group>
-            <Form.Control
-              onChange={handleChange}
-              name="tax"
-              value={form.tax}
-              placeholder="new tax"
-            ></Form.Control>
-          </Form.Group>
-          </Col>
-
+          <Row>
+            <Col>
+              <Form.Group>
+                <Form.Control
+                  onChange={handleChange}
+                  name="price"
+                  value={form.price}
+                  placeholder="new price"
+                ></Form.Control>
+              </Form.Group>
+            </Col>
+            <br />
+            <Col>
+              <Form.Group>
+                <Form.Control
+                  onChange={handleChange}
+                  name="stock"
+                  value={form.stock}
+                  placeholder="new stock"
+                ></Form.Control>
+              </Form.Group>
+            </Col>
+            <br />
+            <Col>
+              <Form.Group>
+                <Form.Control
+                  onChange={handleChange}
+                  name="tax"
+                  value={form.tax}
+                  placeholder="new tax"
+                ></Form.Control>
+              </Form.Group>
+            </Col>
           </Row>
-          
 
           <br />
 
