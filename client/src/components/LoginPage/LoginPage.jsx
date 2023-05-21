@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch , useSelector } from 'react-redux';
 import { userLogin , userLoginGoogle} from '../../Redux/actions/actionsUser.js';
 import { useNavigate } from 'react-router-dom';
-import Title from '../Title/Title.jsx';
 import styles from './LoginPage.module.css';
 
 // CSS REACT-BOOSTRAP
@@ -82,7 +81,6 @@ function LoginPage(){
 
 return (
     <div className="container-fluid">
-        <Title/>
         <div className={styles.formContainer}>
             <Form onSubmit={submitHandler}>
                 <h2>Login</h2>
