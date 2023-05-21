@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch , useSelector } from 'react-redux';
 import { userLogin , userLoginGoogle} from '../../Redux/actions/actionsUser.js';
 import { useNavigate } from 'react-router-dom';
+import Title from '../Title/Title.jsx';
 import styles from './LoginPage.module.css';
 
 // CSS REACT-BOOSTRAP
@@ -10,7 +11,6 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Stack from 'react-bootstrap/esm/Stack';
 //----------------------------------------------------
 
 //! Autenticación con Google
@@ -47,7 +47,7 @@ function LoginPage(){
 
     const submitHandler = async (event) => {
         event.preventDefault();
-        const status = await dispatch(userLogin(form.email , form.password ));
+        const status = await dispatch(userLogin(form));
         if (status.hasOwnProperty('error')) alert("Incorrect email or password");
         else {
             alert("login successfully");
@@ -82,6 +82,7 @@ function LoginPage(){
 
 return (
     <div className="container-fluid">
+        <Title/>
         <div className={styles.formContainer}>
             <Form onSubmit={submitHandler}>
                 <h2>Login</h2>
@@ -122,7 +123,7 @@ return (
                     cookiePolicy={"single_host_policy"}
                 />
             </Row>
-        </div> 
+        </div>
     </div>
 )};
 

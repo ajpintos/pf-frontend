@@ -11,9 +11,9 @@ import axios from "axios";
 import RegisterPage from "./components/RegisterPage/RegisterPage.jsx";
 import MyAccount from "./components/MyAccount/MyAccount.jsx";
 import FormUdateMyaccount from "./components/MyAccount/Components/FormUpdate/FormUpdate";
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer.jsx";
 import NavBar from "../src/components/NavBar/NavBar.jsx";
-import Title from "./components/Title/Title";
+import Title from "./components/Title/Title.jsx";
 
 //axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
