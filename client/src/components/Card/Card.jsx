@@ -6,7 +6,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {addFavorites, deleteFavorites,} from "../../Redux/actions/actionsFavorites";
 
-function Card({ id, name, image, description, price, priceFlag }) {
+function Card({ id, name, image, description, price, priceFlag, stock }) {
   //! Función de Mercadopago
   const handlerMercadoPagoLink = async () => {
     axios.post('/payments', {id , name , image , description , price})
