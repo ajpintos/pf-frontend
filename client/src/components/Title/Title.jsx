@@ -29,17 +29,17 @@ function Title() {
         <Col xs={7}> 
           {user.email
             ?<div>
-              <Link to="/myaccount" className="col-5 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-10">
+              <Link to="/myaccount" id={s.link} className="col-5 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-10">
                 🙋‍♂️ {user.firstname}
               </Link>
               <Button variant="outline-danger" size="sm" onClick={handleLogout} >Logout</Button>
             </div>
-          : <Link to="/login" className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-10">
+          : <Link to="/login" id={s.link} className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-10">
               🙋‍♂️ Login
             </Link>
           }</Col>
-        <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
-        <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🛒 Cart</Link>
+        <Link to='/' id={s.link} className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
+        <Link to='/cart' id={s.link} className="col-2 col-sm-1 col-md-1 col-lg-1"><Cart/></Link>
       </div>
     </>
 )};

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import Button from 'react-bootstrap/esm/Button'
 import { RemoveFromCartIcon } from '../Icons/Icons'
 import axios from 'axios'
+import Container from 'react-bootstrap/esm/Container'
 
 const CartPage = () => {
 
@@ -31,6 +32,8 @@ const CartPage = () => {
       idDetail: idDetail,
       units: units
     };
+    // if(loginUser !== '') {
+    // }
     const orderDetailUpdate = await axios.put('/ordersDetails', updateData);
   };
 
@@ -48,7 +51,7 @@ const CartPage = () => {
   },[]);
 
   return (
-    <div className='container-fluid'>
+    <Container className='container-fluid'>
       <h1>🛒 Cart</h1>
       <section className='col' >
         { productsCart.length > 0 && productsCart.map(prod => 
@@ -74,7 +77,7 @@ const CartPage = () => {
         <p>${order.taxAmount}</p>
         <p>${order.totalAmount}</p>
       </section>
-    </div>
+    </Container>
   )
 }
 
