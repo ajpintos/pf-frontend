@@ -1,10 +1,10 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { Link , useNavigate } from "react-router-dom";
-import imgpropia from "../../logo/logo.png";
+import imgpropia from "../../img/logo.png";
 import { useSelector , useDispatch } from 'react-redux';
-import { userLogout } from '../../Redux/actions/actionsUser.js';
+import { userLogout , setUser } from '../../Redux/actions/actionsUser.js';
 import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function Title() {
@@ -17,6 +17,14 @@ function Title() {
     dispatch(userLogout());
     navigate("/");
   }
+
+  useEffect(() => {
+    const userLocalStorage = localStorage.getItem('user');
+    if (userLocalStorage) {
+      const userLocalStorageRedux = JSON.parse(userLocalStorage);
+      dispatch(setUser(userLocalStorageRedux));
+    }
+  },[])
 
 
   return (
@@ -36,7 +44,7 @@ function Title() {
               🙋‍♂️ Login
             </Link>
         } </Col>
-        <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
+        <Link to='/favorites' className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
         <Link to='/' className="col-2 col-sm-1 col-md-1 col-lg-1">🛒 Cart</Link>
     </div>
       </>);

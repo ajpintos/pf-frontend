@@ -1,10 +1,11 @@
 import axios from "axios";
-import { LOGIN_USER , ALL_USERS, LOGIN_USER_GOOGLE, LOGOUT_USER } from "../types/typesUser.js";
+import { LOGIN_USER , ALL_USERS, LOGIN_USER_GOOGLE, LOGOUT_USER, SET_USER } from "../types/typesUser.js";
 
-export const userLogin = ( email , password ) => {
+export const userLogin = ({ email , password }) => {
     return async function (dispatch) {
         try {
-            const user = await axios.get(`/users/login?email=${email}&password=${password}`);
+            const user = await axios.post('/users/login', { email , password });
+            localStorage.setItem('user', JSON.stringify(user.data));
             return dispatch({
                 type: LOGIN_USER,
                 payload: user.data
@@ -25,8 +26,8 @@ export const userLoginGoogle = (infoUserGoogle) => {
                 lastname : infoUserGoogle.familyName
             };
 
-            const user = await axios.get(`/users/login/google?email=${userGoogle.email}&firstname=${userGoogle.firstname}&lastname=${userGoogle.lastname}`);
-
+            const user = await axios.post('/users/login/google', userGoogle);
+            localStorage.setItem('user', JSON.stringify(user.data));
             return dispatch({
                 type: LOGIN_USER_GOOGLE,
                 payload: user.data
@@ -39,9 +40,12 @@ export const userLoginGoogle = (infoUserGoogle) => {
 };
 
 export const userLogout = () => {
-    return {
-        type: LOGOUT_USER,
-        payload: {}
+    return function () {
+        localStorage.removeItem('user');
+        return {
+            type: LOGOUT_USER,
+            payload: {}
+        }  
     }
 }
 export const allUsers = () => {
@@ -55,6 +59,15 @@ export const allUsers = () => {
         } catch (error) {
             return { error: error.message };
         }
+    }
+};
+
+export const setUser = (data) => {
+    return function(dispatch) {
+        return dispatch ({
+            type: SET_USER,
+            payload: data
+        })
     }
 };
 

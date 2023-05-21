@@ -1,5 +1,5 @@
 import axios from "axios"
-import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME, SORT_PRODUCTS } from "../types/typesProducts";
+import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "../types/typesProducts";
 
 export const getProducts = async () => {
   try {
@@ -21,9 +21,12 @@ export const getProductsByName = async (name) => {
   };
 };
 
-export const sortProducts = (payload) => {
-  return {
-    type: SORT_PRODUCTS,
-    payload
-  }
-}
+export const deleteProduct = async (id,active) => {
+  try {
+    const nameProducts = await axios.delete('/products');
+    if (nameProducts === null) throw Error('Product not found');
+    return { type: DELETE_PRODUCT, payload: { id, active} };
+  } catch (error) {
+    return { error: error.message };
+  };
+};

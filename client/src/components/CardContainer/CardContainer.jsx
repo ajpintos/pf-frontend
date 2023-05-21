@@ -43,20 +43,20 @@ function CardContainer() {
 
   return (
     <Container fluid >
-      <section className="container-fluid" >
-        { flagProducts && <Button variant="success" className="col-3 offset-9 mb-3 me-3" onClick={changeProducts}>All Products</Button>}
+      <section className="container-fluid d-flex justify-content-center" >
+        { flagProducts && <Button variant="success" className="col-3 mb-3" onClick={changeProducts}>All Products</Button>}
       </section>
       <section className="row">
-        {products.length > 0 && products.map((product) => (
+        {products?.map((product,index) => (
           <Card 
-          key={product.name}
+          key={index}
           id={product.id}
           name={product.name}
           image={product.image}
           description={product.description}
           price={product.price}
           stock={product.stock}
-          categories={product.arrayCategories}
+          priceFlag={false}
           />
           ))}
       </section>

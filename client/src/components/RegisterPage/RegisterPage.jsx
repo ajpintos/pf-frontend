@@ -48,8 +48,16 @@ function RegisterPage() {
         phone: "",
     })
 
+    // const handleSubmit = (event) => {
+    //     const form = event.currentTarget;
+    //     if (form.checkValidity() === false) {
+    //       event.preventDefault();
+    //       event.stopPropagation();
+    //     }
+    // }
+
     const submitHandler = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         axios.post("/users", form)
             .then(res => {
                 alert("User added successfully!");
@@ -81,10 +89,6 @@ function RegisterPage() {
 
     return (
         <div className="container-fluid">
-            <Title/>
-            <Stack direction="horizontal" className="d-flex flex-row justify-content-between bg-success pt-3 pb-3">
-                <NavBar/>
-            </Stack>
             <div className={styles.formContainer}>
                 <Form onSubmit={submitHandler} id="formToSend">
                     <h2>Register</h2>
@@ -92,6 +96,7 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formEmail">
                             <Form.Label>Email</Form.Label>
                             <Form.Control
+                                required
                                 type="email"
                                 placeholder="Enter email"
                                 id="email"
@@ -105,38 +110,33 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
+                                required
                                 type="password"
                                 placeholder="Enter Password" id="password" name="password"
                                 value={form.password}
                                 onChange={changeHandler}
                             />
-                            <div style={{color: "red"}}>{errors.password}</div>
+                            <p style={{color: "red"}}>{errors.password}</p>
                         </Form.Group>
                     </Row>
 
                     <Form.Group as={Col} controlId="formPasswordRepeat">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label>Repeat Password</Form.Label>
                         <Form.Control
+                            required
                             type="password"
                             placeholder="Repeat Password" id="passwordRepeat" name="passwordRepeat"
                             value={form.passwordRepeat}
                             onChange={changeHandler}
                         />
-                        <div>
-                            {form.passwordRepeat === form.password ? (
-                                ""
-                            ) : form.passwordRepeat.length > 4 ? (
-                                <div style={{ color: "red" }}>Passwords do not match</div>
-                            ) : (
-                                ""
-                            )}
-                        </div>
+                        <p style={{color: "red"}}>{errors.passwordRepeat}</p>
                     </Form.Group>
 
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formName">
                             <Form.Label>First Name</Form.Label>
                             <Form.Control
+                                required
                                 type="firstname"
                                 placeholder="First Name"
                                 id="firstname"
@@ -150,6 +150,7 @@ function RegisterPage() {
                         <Form.Group as={Col} className="mb-3" controlId="formLastName">
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control
+                                required
                                 type="lastname"
                                 placeholder="Last Name"
                                 id="lastname"
@@ -163,6 +164,7 @@ function RegisterPage() {
                     <Form.Group className="mb-3" controlId="formAddress">
                         <Form.Label>Address</Form.Label>
                         <Form.Control
+                            required
                             type="address"
                             placeholder="Address"
                             id="address"
@@ -175,6 +177,7 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formZiCode">
                             <Form.Label>Zip Code</Form.Label>
                             <Form.Control
+                                required
                                 type="cp"
                                 placeholder="Zip Code"
                                 id="cp"
@@ -186,6 +189,7 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formCity">
                             <Form.Label>City</Form.Label>
                             <Form.Control
+                                required
                                 type="city"
                                 placeholder="City"
                                 id="city"
@@ -200,6 +204,7 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formCountry">
                             <Form.Label>Country</Form.Label>
                             <Form.Control
+                                required
                                 type="country"
                                 placeholder="Country"
                                 id="country"
@@ -210,6 +215,7 @@ function RegisterPage() {
                         <Form.Group as={Col} controlId="formPhone">
                             <Form.Label>Phone</Form.Label>
                             <Form.Control
+                                required
                                 type="phone"
                                 placeholder="Phone"
                                 id="phone"
@@ -224,7 +230,6 @@ function RegisterPage() {
                     </Button>
                 </Form>
             </div>
-            <Footer/>
         </div>
     );
 }

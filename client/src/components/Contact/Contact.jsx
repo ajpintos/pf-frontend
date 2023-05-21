@@ -8,11 +8,9 @@ import { useState } from "react";
 import validate from "./validate.js";
 import Form from "react-bootstrap/Form";
 import emailjs from "@emailjs/browser";
-import NavBar from "../NavBar/NavBar";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Title from "../Title/Title";
+import Button from 'react-bootstrap/Button';
 import Stack from "react-bootstrap/esm/Stack";
-import Footer from "../Footer/Footer";
 
 function Contact() {
   const navigate = useNavigate();
@@ -63,13 +61,9 @@ function Contact() {
       form.phone
     ) {
       const serviceID = "service_e5hd1wt";
-      const templateID ="template_59dtr2y";// "contact_form";
+      const templateID = "contact_form";
       const key_public = "gEu_FBDo_Q0lvhmwA";
      emailjs.sendForm(serviceID, templateID, Dom, key_public)
-      // emailjs.send("service_e5hd1wt","template_59dtr2y",{
-      //   name: "Prueba de logeo22",
-      //   email: "emauriciomendez@gmail.com",
-      //   })
         .then(
         (result) => {
           console.log(result.text);
@@ -93,13 +87,6 @@ function Contact() {
   };
   return (
     <div className="container-fluid">
-      <Title />
-      <Stack
-        direction="horizontal"
-        className="d-flex flex-row justify-content-between bg-success pt-3 pb-3"
-      >
-        <NavBar />
-      </Stack>
       <section>
         <h1 className="text-center mt-3">Contact Us</h1>
       </section>
@@ -200,9 +187,9 @@ function Contact() {
                 </div>
               </Form.Group>
 
-              <button className="btn btn-primary" type="submit">
+              <Button variant="success" type="submit">
                 Send
-              </button>
+              </Button>
 
               <p className={styles.error}>{errorMessage}</p>
               <p className={styles.success}>{successMessage}</p>
@@ -266,7 +253,6 @@ function Contact() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
