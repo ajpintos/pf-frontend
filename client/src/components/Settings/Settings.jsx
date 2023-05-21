@@ -25,8 +25,6 @@ function Settings() {
     setShow({ users: false, products: false, categories: true });
   };
 
-
-
   return (
     <div className="container-fluid">
       <Title />
@@ -38,25 +36,24 @@ function Settings() {
       </Stack>
 
       <div className="text-center mt-5 mb-5">
-     
-          <div>
-            <h4>administrator options</h4>
-            <button onClick={handlerShowU} style={{ borderRadius: "2rem" }}>
-              Users
-            </button>
-            <></> <></>
-            <button onClick={handlerShowP} style={{ borderRadius: "2rem" }}>
-              Products
-            </button>
-            <></> <></>
-            <button onClick={handlerShowC} style={{ borderRadius: "2rem" }}>
-              Categories
-            </button>
-            {show.users ? <UsersSettings /> : null}
-            {show.products ? <ProductsSettings /> : null}
-            {show.categories ? <CategoresSettings /> : null}
-          </div>
-    
+        <div>
+          <h1>Prueba</h1>
+          <h4>administrator options</h4>
+          <button onClick={handlerShowU} style={{ borderRadius: "2rem" }}>
+            Users
+          </button>
+          <></> <></>
+          <button onClick={handlerShowP} style={{ borderRadius: "2rem" }}>
+            Products
+          </button>
+          <></> <></>
+          <button onClick={handlerShowC} style={{ borderRadius: "2rem" }}>
+            Categories
+          </button>
+          {show.users ? <UsersSettings /> : null}
+          {show.products ? <ProductsSettings /> : null}
+          {show.categories ? <CategoresSettings /> : null}
+        </div>
       </div>
       <Footer />
     </div>
