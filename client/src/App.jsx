@@ -15,6 +15,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import NavBar from "../src/components/NavBar/NavBar.jsx";
 import Title from "./components/Title/Title.jsx";
 import CartPage from './components/CartPage/CartPage.jsx';
+import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -100,6 +101,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/form_update" element={<FormUdateMyaccount />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart/checkout" element={<CheckoutPage />} />
       </Routes>
       <footer className="container-fluid" >
         <Footer />

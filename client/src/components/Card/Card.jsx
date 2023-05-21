@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { cartFoundIndex, foundOrderForDetail } from "../Cart/cartHelpers";
 import { add_ToCart, remove_FromCart } from "../../Redux/actions/actionsCart";
+import accounting from 'accounting';
 
 function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
 
@@ -90,7 +91,7 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
             <p className="card-text mb-0">{description}</p>
             { priceFlag && 
               <div className="col mt-1">
-                  <p className="col-6 offset-3" ><strong>$ {price}</strong></p>
+                  <p className="col-6 offset-3" ><strong>{accounting.formatMoney(`${price}`)}</strong></p>
               </div>
               }
             <div className="row">
