@@ -25,9 +25,7 @@ function Settings() {
     setShow({ users: false, products: false, categories: true });
   };
 
-  const user = useSelector((state) => state.userLogin);
 
-  console.log(user);
 
   return (
     <div className="container-fluid">
@@ -40,7 +38,7 @@ function Settings() {
       </Stack>
 
       <div className="text-center mt-5 mb-5">
-        {user.email ? (
+     
           <div>
             <h4>administrator options</h4>
             <button onClick={handlerShowU} style={{ borderRadius: "2rem" }}>
@@ -58,9 +56,7 @@ function Settings() {
             {show.products ? <ProductsSettings /> : null}
             {show.categories ? <CategoresSettings /> : null}
           </div>
-        ) : (
-          <h1>Setting Normales</h1>
-        )}
+    
       </div>
       <Footer />
     </div>
