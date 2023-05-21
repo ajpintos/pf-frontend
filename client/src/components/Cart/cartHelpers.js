@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export const foundOrderForDetail = async (userLogin) => {
   let orderFlag = false;
@@ -18,6 +19,12 @@ export const foundOrderForDetail = async (userLogin) => {
     const orderCreate = await axios.post('/orders', { userId : userFound });
     orderUser = orderCreate.data;
   };
-  window.alert('Product added to cart');
   return orderUser;
+};
+
+export const cartFoundIndex = (idProduct, cartDetails) => {
+  for (let i=0; i < cartDetails.length; i++) {
+    if (cartDetails[i].idProduct === idProduct) return cartDetails[i].units;
+  };
+  return null;
 };

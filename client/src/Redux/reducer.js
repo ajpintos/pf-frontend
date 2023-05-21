@@ -14,19 +14,25 @@ const initialState = {
   flagProducts: false,
   allCategories: [],
   categorieFilter: null,
-  cart: {
-    idOrder: '',
-    amount: 0,
-    taxAmout: 0,
-    totalAmount: 0,
-    orderDetails: [{
-      idOrderDetail: '',
-      idProduct: '',
-      amount: 0,
-      taxAmout: 0,
-      totalAmount: 0,      
-    }],
-  }
+  cart: '',
+  cartDetails: [],
+  // cart: {
+  //   idOrder: '',
+  //   amount: 0,
+  //   taxAmout: 0,
+  //   totalAmount: 0,
+  //   orderDetails: [{
+  //     idOrderDetail: '',
+  //     idProduct: '',
+  //     nameProduct: '',
+  //     descriptionProduct: '',
+  //     imageProduct: '',
+  //     units: 0,
+  //     amount: 0,
+  //     taxAmout: 0,
+  //     totalAmount: 0,      
+  //   }],
+  // }
 };
 
 export const cartInitialState = JSON.parse(window.localStorage.getItem('cart')) || []
@@ -92,12 +98,16 @@ const rootReducer = (state = initialState, action) => {
 
       return {
         ...state,
+        cart: action.payload.order,
+        cartDetails: [ ...state.cartDetails, action.payload.product ]
       }
     }
     case REMOVE_FROM_CART: {
 
       return {
-        ...state
+        ...state,
+        cart: action.payload.order,
+        cartDetails: action.payload.products,
       }
     }
     case STATUS_CHANGE_ORDER:{

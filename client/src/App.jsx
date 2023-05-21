@@ -35,47 +35,47 @@ function App() {
     setWhereIAm(IAmData);
   };
 
-  // de aqui hasta el useEffect son para cargar usuario y orden de prueba de carrito
+  // // de aqui hasta el useEffect son para cargar usuario y orden de prueba de carrito
+  // const userLogin = useSelector(state=>state.userLogin);
 
-  const dispatch = useDispatch();
-  const userLogin = useSelector(state=>state.userLogin);
+  // const dispatch = useDispatch();
 
-  const loadingUser = async () => {
+  // const loadingUser = async () => {
 
-    let loginUser = userLogin;
-    console.log('loginuser al entrar ', loginUser)
+  //   let loginUser = userLogin;
+  //   console.log('loginuser al entrar ', loginUser)
 
-      // const localizaPepito = await axios.get('/users?email=pepito@pepito.com');
-      // console.log('localizaPepito ', localizaPepito);
-      // loginUser = localizaPepito.data;
+  //     // const localizaPepito = await axios.get('/users?email=pepito@pepito.com');
+  //     // console.log('localizaPepito ', localizaPepito);
+  //     // loginUser = localizaPepito.data;
 
 
-        console.log('entre a registrar a pepito');
-        const userData = {
-          email: 'pepito@pepito.com',
-          password: 'P1234567p',
-          firstname: 'Pepito',
-          lastname: 'Dominguez',
-          address: 'address',
-          city: 'city',
-          cp: '12345',
-          phone: '1234567890',
-          country: 'country'
-        }
-        const logUser = await axios.post('/users', userData);
-        console.log(logUser);
-        loginUser = userData;
-        console.log('pepito registrado');
+  //       console.log('entre a registrar a pepito');
+  //       const userData = {
+  //         email: 'pepito@pepito.com',
+  //         password: 'P1234567p',
+  //         firstname: 'Pepito',
+  //         lastname: 'Dominguez',
+  //         address: 'address',
+  //         city: 'city',
+  //         cp: '12345',
+  //         phone: '1234567890',
+  //         country: 'country'
+  //       }
+  //       const logUser = await axios.post('/users', userData);
+  //       console.log(logUser);
+  //       loginUser = userData;
+  //       console.log('pepito registrado');
   
-      dispatch({
-        type: 'LOGIN_USER',
-        payload: loginUser.email
-      });
-  };
+  //     dispatch({
+  //       type: 'LOGIN_USER',
+  //       payload: loginUser.email
+  //     });
+  // };
 
-  useEffect(()=>{
-    loadingUser();
-  },[]);
+  // useEffect(()=>{
+  //   loadingUser();
+  // },[]);
 
   return (
     <div className="App">

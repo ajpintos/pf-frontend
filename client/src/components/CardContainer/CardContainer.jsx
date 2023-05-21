@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import Card from "../Card/Card.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, getProductsByName } from "../../Redux/actions/actionsProducts";
+import { getProductsByName } from "../../Redux/actions/actionsProducts";
 import Container from 'react-bootstrap/Container'
 import Button from "react-bootstrap/esm/Button.js";
 import SetPages from "../Store/SetPages.jsx";
@@ -11,7 +11,8 @@ function CardContainer({ whereIAm, hereIAm }) {
 
   const dispatch = useDispatch();
 
-  const showProducts = useSelector(state => state.showProducts);
+  const show_Products = useSelector(state => state.showProducts);
+  const showProducts = show_Products.filter(prod => prod.status && prod.stock > 0);
   const nameProducts = useSelector(state => state.nameProducts);
   const flagProducts = useSelector(state => state.flagProducts);
 
@@ -58,7 +59,7 @@ function CardContainer({ whereIAm, hereIAm }) {
 
   const changeProducts = async () => {
     const all_products = await getProductsByName('',false);
-    if (all_products !== null) dispatch(all_products);
+    dispatch(all_products);
     paged(1)
     hereIAm({
       place: '',
@@ -169,6 +170,7 @@ function CardContainer({ whereIAm, hereIAm }) {
           image={product.image}
           description={product.description}
           price={product.price}
+          tax={product.tax}
           stock={product.stock}
           priceFlag={false}
           />

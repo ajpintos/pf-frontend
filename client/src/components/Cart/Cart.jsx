@@ -1,4 +1,4 @@
-import { addToCart, removeFromCart, StatusChangeOrder, clearCart } from "../../Redux/actions/actionsCart";
+import { add_ToCart, remove_FromCart, status_ChangeOrder, clear_Cart } from "../../Redux/actions/actionsCart";
 import s from './Cart.module.css'
 import  { ClearCartIcon, RemoveFromCartIcon} from '../Icons/Icons.jsx'
 import { useId, useState } from "react";

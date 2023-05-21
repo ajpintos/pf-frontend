@@ -33,13 +33,16 @@ const Detail = ({ whereIAm, hereIAm }) => {
   };
 
   const addToCart = async () => {
-    const orderUser = await foundOrderForDetail(userLogin);
-    const detailsData = {
-      idOrder: orderUser.id,
-      idProduct: id,
-      units: parseInt(cant)
+    if (userLogin !== '') {
+      const orderUser = await foundOrderForDetail(userLogin);
+      const detailsData = {
+        idOrder: orderUser.id,
+        idProduct: id,
+        units: parseInt(cant)
+      };
+      const detailCreated = await axios.post('/ordersDetails', detailsData);
     };
-    const detailCreated = await axios.post('/ordersDetails', detailsData);
+
   };
 
   const returnTo = () => {

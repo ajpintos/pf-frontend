@@ -11,7 +11,8 @@ export default function Store ({ whereIAm, hereIAm }) {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const allProducts = useSelector(state => state.products);
+  const all_Products = useSelector(state => state.products);
+  const allProducts = all_Products.filter(prod => prod.status && prod.stock > 0);
   const allCategories = useSelector(state => state.allCategories);
 
   const user = useSelector(state => state.userLogin);
@@ -224,6 +225,8 @@ export default function Store ({ whereIAm, hereIAm }) {
               image={product.image}
               description={product.description}
               price={product.price}
+              tax={product.tax}
+              stock={product.stock}
               priceFlag={true}
               />
               ))}
