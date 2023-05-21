@@ -9,7 +9,7 @@ import table from '../../assets/img/table.jpg';
 import woman from '../../assets/img/woman.jpg';
 
 
-const Landing_home = () => {
+const Landing_home = ({ whereIAm, hereIAm }) => {
 
     const dispatch = useDispatch();
 
@@ -58,7 +58,7 @@ const Landing_home = () => {
       <div className="container-fluid mt-5">
         <SearchBar/>
         <h2 className="col-xs-12 text-center mt-3"  >PRODUCTS</h2>
-        <CardContainer />
+        <CardContainer whereIAm={whereIAm} hereIAm={hereIAm} />
       </div>
 
     </div>

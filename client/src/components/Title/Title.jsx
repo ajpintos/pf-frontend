@@ -6,6 +6,7 @@ import Cart from '../Cart/Cart.jsx';
 import imgpropia from "../../img/logo.png";
 import Button from 'react-bootstrap/Button';
 import s from './Title.module.css'
+import Col from 'react-bootstrap/esm/Col.js';
 
 function Title() {
 

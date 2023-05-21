@@ -1,43 +1,145 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import Card from "../Card/Card.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts, getProductsByName } from "../../Redux/actions/actionsProducts";
 import Container from 'react-bootstrap/Container'
 import Button from "react-bootstrap/esm/Button.js";
+import SetPages from "../Store/SetPages.jsx";
 
-function CardContainer() {
+function CardContainer({ whereIAm, hereIAm }) {
 
   const dispatch = useDispatch();
 
-  const allProducts = useSelector(state => state.allProducts);
   const showProducts = useSelector(state => state.showProducts);
   const nameProducts = useSelector(state => state.nameProducts);
   const flagProducts = useSelector(state => state.flagProducts);
 
-  const products = showProducts;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(8);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const products = showProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const paged = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    hereIAm({
+      place: '',
+      order: '',
+      filter: '',
+      name: nameProducts,
+      currentPage: pageNumber,
+    });
+  }
+
+  const nextPage = (e) => {
+    e.preventDefault();
+    setCurrentPage(parseInt(currentPage) + 1);
+    hereIAm({
+      place: '',
+      order: '',
+      filter: '',
+      name: nameProducts,
+      currentPage: parseInt(currentPage) + 1,
+    });
+  }
+
+  const previousPage = (e) => {
+      e.preventDefault();
+      setCurrentPage(parseInt(currentPage) - 1)
+      hereIAm({
+        place: '',
+        order: '',
+        filter: '',
+        name: nameProducts,
+        currentPage: parseInt(currentPage) - 1,
+      });
+  }
 
   const changeProducts = async () => {
-    const all_products = await getProducts();
+    const all_products = await getProductsByName('',false);
     if (all_products !== null) dispatch(all_products);
+    paged(1)
+    hereIAm({
+      place: '',
+      order: '',
+      filter: '',
+      name: '',
+      currentPage: 1,
+    });
   }
 
   const callApi = async () => {
-    if (flagProducts) {
-      const name_Products = nameProducts;
-      const products_ByName = await getProductsByName(name_Products);
-      if (products_ByName !== null) {
+    const flag_Products = flagProducts;
+    console.log('flagProducts en callAppi ', flag_Products);
+    const retWhereIAm = whereIAm;
+    console.log('entro a cardContainer con ',retWhereIAm);
+    if (whereIAm.place !== 'detail') {
+      if (flag_Products) {
+        console.log('entro a productsByName con flagProducts',flag_Products)
+        const name_Products = nameProducts;
+        console.log('name_Products ', name_Products);
+        const products_ByName = await getProductsByName(name_Products, true);
+        console.log('products_ByName ', products_ByName);
         dispatch(products_ByName);
+        paged(1);
+        hereIAm({
+          place: '',
+          order: '',
+          filter: '',
+          name: nameProducts,
+          currentPage: 1,
+        });
+        console.log('en cardContainer flag ', whereIAm);
+      } else {
+        const all_products = await getProductsByName('',false);
+        if (all_products !== null) {
+          dispatch(all_products);
+          paged(1);
+          hereIAm({
+            place: '',
+            order: '',
+            filter: '',
+            name: '',
+            currentPage: 1,
+          });
+          console.log('en cardContainer con no flag ', whereIAm);
+        };
       };
     } else {
-      const all_products = await getProducts();
-      if (all_products !== null) {
-        dispatch(all_products);
+      if (flag_Products) {
+        console.log('entro a productsByName con flagProducts ',flag_Products)
+        console.log('name_Products ', retWhereIAm.name);
+        const products_ByName = await getProductsByName(retWhereIAm.name, true);
+        console.log('products_ByName ', products_ByName);
+        dispatch(products_ByName);
+        paged(retWhereIAm.currentPage)
+        hereIAm({
+          place: '',
+          order: '',
+          filter: '',
+          name: retWhereIAm.name,
+          currentPage: retWhereIAm.currentPage,
+        });
+      } else {
+        const all_products = await getProductsByName('',false);
+        if (all_products !== null) {
+          dispatch(all_products);
+          paged(retWhereIAm.currentPage);
+          hereIAm({
+            place: '',
+            order: '',
+            filter: '',
+            name: '',
+            currentPage: retWhereIAm.currentPage,
+          });
+        };
       };
-    }
+    };
   };
 
   useEffect(() => {
+    console.log('nameProducts en useEffect ',nameProducts);
     callApi();
   }, []);
 
@@ -46,8 +148,20 @@ function CardContainer() {
       <section className="container-fluid d-flex justify-content-center" >
         { flagProducts && <Button variant="success" className="col-3 mb-3" onClick={changeProducts}>All Products</Button>}
       </section>
+         {/* Sección Paged */}
+
+         {
+            Math.ceil(showProducts.length / productsPerPage) > 1 && <SetPages 
+            productsPerPage = {productsPerPage}
+            allProductsLength = {showProducts.length}
+            paged = {paged}
+            previousPage = {previousPage}
+            nextPage = {nextPage}
+            currentPage = {currentPage}
+            />
+          }
       <section className="row">
-        {products.length > 0 && products.map((product) => (
+        {showProducts.length > 0 && products.map((product) => (
           <Card 
           key={product.name}
           id={product.id}

@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
 import { foundOrderForDetail } from "../Cart/cartHelpers";
 import { AddToCartIcon } from "../Icons/Icons";
-// import "bootstrap/dist/css/bootstrap.min.css";
 
-const Detail = () => {
+const Detail = ({ whereIAm, hereIAm }) => {
 
   const userLogin = useSelector(state=>state.userLogin);
+  const nameProducts = useSelector(state=>state.nameProducts);
+  const navigate = useNavigate();
 
   const { id } = useParams();
   const [product, setProduct] = React.useState({});
@@ -19,7 +20,6 @@ const Detail = () => {
     try {
       const Data = await axios(`/products/${id}`);
       const char = Data.data;
-      console.log(char);
       if (char) {
         setProduct(char);
       }
@@ -28,15 +28,8 @@ const Detail = () => {
     }
   };
 
-  React.useEffect(() => {
-    getProductForId();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
-
   const validacion = (e) => {
-    console.log('cant ', cant);
     setCant(e.target.value);
-    console.log('cant dos ', cant);
   };
 
   const addToCart = async () => {
@@ -46,9 +39,32 @@ const Detail = () => {
       idProduct: id,
       units: parseInt(cant)
     };
-    console.log('detailsData ',detailsData);
     const detailCreated = await axios.post('/ordersDetails', detailsData);
   };
+
+  const returnTo = () => {
+    const returnWhere = whereIAm;
+    hereIAm({
+      place: 'detail',
+      order: returnWhere.order,
+      filter: returnWhere.filter,
+      name: nameProducts,
+      currentPage: returnWhere.currentPage
+    });
+    console.log('salgo de details con ',whereIAm);
+    navigate('/'+returnWhere.place);
+  }
+
+  const escape = () => {
+    const returnWhere = whereIAm;
+    hereIAm(returnWhere);
+    console.log('entro a deatils con ', returnWhere);
+  };
+
+  useEffect(()=>{
+    getProductForId();
+    escape();
+  },[]);
 
   return (
     <div>
@@ -85,13 +101,12 @@ const Detail = () => {
                   style={{ width: "60px", marginTop: "10px" }}
                 />
 
-                <Button variant="btn btn-success mt-2" className="col-6 offset-3" onClick={addToCart}><AddToCartIcon/></Button>
+                <Button variant="btn btn-success mt-2 col-2" className="col-6 offset-3" onClick={addToCart}><AddToCartIcon/></Button>
               </div>
               <br />
               <div>
-                <div>
-                  <button style={{ borderRadius: "1rem" }}>❤️</button>
-                </div>
+                <button style={{ borderRadius: "1rem" }}>❤️</button>
+                <Button variant="btn btn-success mt-2" className="col-4 offset-3" onClick={returnTo} >Return {whereIAm.place === '' ? 'Home' : whereIAm.place}</Button>
               </div>
             </div>
           </div>

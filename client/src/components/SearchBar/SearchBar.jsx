@@ -19,14 +19,11 @@ const SearchBar = () => {
     e.preventDefault();
     if (!name) window.alert('Input empty');
     else {
-      console.log('entre a buscar');
-      const nameFound = await getProductsByName(name);
-      console.log('nameFound ',nameFound)
+      const nameFound = await getProductsByName(name, true);
       if (nameFound.hasOwnProperty('error')) { 
         setName('');
         alert(nameFound.error);
       } else {
-        console.log('dispatch ',nameFound)
         setName('');
         dispatch(nameFound);
       };

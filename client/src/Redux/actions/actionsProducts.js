@@ -11,11 +11,11 @@ export const getProducts = async () => {
   }
 };
 
-export const getProductsByName = async (name) => {
+export const getProductsByName = async (name, flag) => {
   try {
     const nameProducts = await axios.get('/products?name='+name);
     if (nameProducts === null) throw Error('Product not found');
-    return { type: GET_PRODUCTSBYNAME, payload: { products: nameProducts.data, name: name } };
+    return { type: GET_PRODUCTSBYNAME, payload: { products: nameProducts.data, name: name , flag: flag} };
   } catch (error) {
     return { error: error.message };
   };

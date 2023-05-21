@@ -16,14 +16,24 @@ import NavBar from "../src/components/NavBar/NavBar.jsx";
 import Title from "./components/Title/Title.jsx";
 import CartPage from './components/CartPage/CartPage.jsx';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 //axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
 
 function App() {
   
+  const [ whereIAm, setWhereIAm ] = useState({
+    place: '',
+    order: '',
+    filter: '',
+    name: '',
+    currentPage: 1
+  });
 
+  function hereIAm (IAmData) {
+    setWhereIAm(IAmData);
+  };
 
   // de aqui hasta el useEffect son para cargar usuario y orden de prueba de carrito
 
@@ -78,16 +88,16 @@ function App() {
         <NavBar/>
       </header>
       <Routes>
-        <Route path="/" element={<LandingHome />} />
+        <Route path="/" element={<LandingHome whereIAm={whereIAm} hereIAm={hereIAm} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/myaccount" element={<MyAccount />} />
-        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail whereIAm={whereIAm} hereIAm={hereIAm} />} />
         <Route path="/settings" element={<Settings />}></Route>
-        <Route path="/store" element={<Store />}></Route>
-        <Route path="/store/:id" element={<Store />}></Route>
-        <Route path="/contact" element={<Contact />}></Route>
+        <Route path="/store" element={<Store whereIAm={whereIAm} hereIAm={hereIAm} />} />
+        <Route path="/store/:id" element={<Store whereIAm={whereIAm} hereIAm={hereIAm} />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/form_update" element={<FormUdateMyaccount />} />
         <Route path="/cart" element={<CartPage />} />
       </Routes>

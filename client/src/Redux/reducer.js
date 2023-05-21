@@ -29,9 +29,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allProducts: action.payload,
         products: action.payload,
-        showProducts: action.payload,
-        nameProducts: '',
-        flagProducts: false,
       }
     };
     case GET_PRODUCTSBYNAME:{
@@ -39,7 +36,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         showProducts: action.payload.products,
         nameProducts: action.payload.name,
-        flagProducts: true,
+        flagProducts: action.payload.flag,
       }
     };
     case GET_ALLCATEGORIES: {
