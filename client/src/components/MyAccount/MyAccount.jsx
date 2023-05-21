@@ -2,10 +2,13 @@ import React from 'react';
 import { useEffect , useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Stack from 'react-bootstrap/Stack';
+import axios from 'axios';
+
+// REACT-BOOSTRAP
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 
 const MyAccount = () => {
@@ -24,6 +27,19 @@ const MyAccount = () => {
         phone: user.phone
     });
 
+    const handleChangeAccount = (event) => {
+        const property = event.target.name;
+        const value = event.target.value;
+        setUserDetail({...userDetail, [property]: value});
+    };
+
+    const submitHandlerAccount = (e) => {
+        e.preventDefault();
+        axios.put("/users", userDetail)
+            .then((res) => alert("Setting modified correctly"))
+            .catch(error => alert("Error: Check all camps and try again"));
+    }
+
     useEffect(() => {
         !user.email && navigate('/');
     }, [user]);
@@ -31,7 +47,7 @@ const MyAccount = () => {
     return (
         <div className="container-fluid">
             <div>
-                <Form id="formToSend">
+                <Form onSubmit={submitHandlerAccount} id="formToSend">
                     <h1>Account Settings</h1>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formEmail">
@@ -42,7 +58,7 @@ const MyAccount = () => {
                                 id="email"
                                 name="email"
                                 value={userDetail.email}
-                                onChange={() =>{}}
+                                onChange={handleChangeAccount}
                             />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formName">
@@ -53,7 +69,7 @@ const MyAccount = () => {
                                 id="firstname"
                                 name="firstname"
                                 value={userDetail.firstname}
-                                onChange={() =>{}}
+                                onChange={handleChangeAccount}
                             />
                         </Form.Group>
                     </Row>
@@ -66,7 +82,7 @@ const MyAccount = () => {
                                 id="lastname"
                                 name="lastname"
                                 value={userDetail.lastname}
-                                onChange={() =>{}}
+                                onChange={handleChangeAccount}
                             />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formAddress">
@@ -77,7 +93,7 @@ const MyAccount = () => {
                                 id="address"
                                 name="address"
                                 value={userDetail.address}
-                                onChange={() =>{}}
+                                onChange={handleChangeAccount}
                             />
                         </Form.Group>
                     </Row>
@@ -90,7 +106,7 @@ const MyAccount = () => {
                                 id="cp"
                                 name="cp"
                                 value={userDetail.cp}
-                                onChange={() =>{}}
+                                onChange={handleChangeAccount}
                             />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formCity">
@@ -101,7 +117,7 @@ const MyAccount = () => {
                                 id="city"
                                 name="city"
                                 value={userDetail.city}
-                                onChange={() =>{}}
+                                onChange={handleChangeAccount}
                             />
                         </Form.Group>
                     </Row>
@@ -114,7 +130,7 @@ const MyAccount = () => {
                                 id="country"
                                 name="country"
                                 value={userDetail.country}
-                                onChange={() =>{}}
+                                onChange={handleChangeAccount}
                             />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formPhone">
@@ -125,10 +141,13 @@ const MyAccount = () => {
                                 id="phone"
                                 name="phone"
                                 value={userDetail.phone}
-                                onChange={() =>{}}
+                                onChange={handleChangeAccount}
                             />
                         </Form.Group>
                     </Row>
+                    <Button variant="success" type="submit">
+                        Submit changes
+                    </Button>
                 </Form>
             </div>
         </div>
