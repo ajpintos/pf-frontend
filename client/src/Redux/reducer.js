@@ -1,6 +1,7 @@
 import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
 import { ALL_USERS, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER , SET_USER } from "./types/typesUser.js";
+import { DELETE_FAVORITES, ADD_FAVORITES } from "./types/typesFavorites";
 
 const initialState = {
   users: [],
@@ -10,8 +11,9 @@ const initialState = {
   showProducts: [],
   nameProducts: '',
   flagProducts: false,
+  favorites: [],
   allCategories: [],
-  categorieFilter: null,
+  categorieFilter: null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -58,7 +60,7 @@ const rootReducer = (state = initialState, action) => {
         userLogin: action.payload
       }
     };
-    case LOGOUT_USER:{ 
+    case LOGOUT_USER:{
       return {
         ...state,
         userLogin : action.payload
@@ -82,6 +84,17 @@ const rootReducer = (state = initialState, action) => {
               products: CategoriesFiltered
       }
     }
+    case ADD_FAVORITES: {
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
+      };
+    }
+    case DELETE_FAVORITES:
+      return {
+        ...state,
+        favorites: state.favorites.filter((f) => f.name !== action.payload),
+      };
     default:
       return {...state};
   };

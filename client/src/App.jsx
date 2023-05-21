@@ -10,6 +10,7 @@ import Store from "./components/Store/Store";
 import axios from "axios";
 import RegisterPage from "./components/RegisterPage/RegisterPage.jsx";
 import MyAccount from "./components/MyAccount/MyAccount.jsx";
+import Favorites from "./components/Favorites/Favorites.jsx";
 import FormUdateMyaccount from "./components/MyAccount/Components/FormUpdate/FormUpdate";
 import Footer from "./components/Footer/Footer.jsx";
 import NavBar from "../src/components/NavBar/NavBar.jsx";
@@ -42,6 +43,7 @@ function App() {
         <Route path="/store/:id" element={<Store />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/form_update" element={<FormUdateMyaccount />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
       <footer className="container-fluid" >
         <Footer />
