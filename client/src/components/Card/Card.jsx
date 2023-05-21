@@ -5,6 +5,7 @@ import { AddToCartIcon } from "../Icons/Icons";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { foundOrderForDetail } from "../Cart/cartHelpers";
+import accounting from 'accounting';
 
 function Card({ id, name, image, description, price, priceFlag }) {
 
@@ -32,7 +33,7 @@ function Card({ id, name, image, description, price, priceFlag }) {
             <p className="card-text mb-0">{description}</p>
             { priceFlag && 
               <div className="col mt-1">
-                  <p className="col-6 offset-3" ><strong>$ {price}</strong></p>
+                  <p className="col-6 offset-3" ><strong>{accounting.formatMoney(`${price}`)}</strong></p>
               </div>
               }
             <div className="row">

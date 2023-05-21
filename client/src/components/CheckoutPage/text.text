@@ -1,0 +1,322 @@
+<div class="container">
+  <!-- Page Heading -->
+  <div class="row">
+    <div class="col-12 mb-4">
+      <h1 class="page-header">Checkout</h1>
+    </div>
+  </div>
+
+  <!-- Checkout Container -->
+  <div class="checkout-container">
+    
+<form action="/checkout/revieworder/4d8519d3cecafd5622189e58ead646e4" accept-charset="UTF-8" method="post" target="_top" id="checkout"><input type="hidden" name="_method" value="put">  <div class="row"><div class="col-lg-8"><div id="contacts" class="row">
+      <h2 class="legend col-md-12 col-sm-12 col-xs-12">Contact</h2>
+      <div id="contacts_email" class="field text-field col-md-6 col-sm-12 col-xs-12 form-group">
+        <label for="order_customer_email" class="control-label">E-mail <em>*</em></label>
+        <input type="email" name="order_customer[email]" value="jcmatanzo@gmail.com" id="order_customer_email" class="text form-control" required="required" autocomplete="email" fdprocessedid="edl0t">
+        <div id="email-suggestion"></div>
+      </div>
+      <div id="contacts_phone" class="field text-field col-md-6 col-sm-12 col-xs-12 form-group">
+        <label for="order_customer_phone" class="control-label">Phone </label>
+        <input type="tel" name="order_customer[phone]" value="(261) 507-1131" id="order_customer_phone" class="text form-control" autocomplete="tel" fdprocessedid="ndiu5">
+      </div>
+
+      
+  </div><div id="shipping_address" class="row">
+        <h2 class="legend col-md-12 col-sm-12 col-xs-12">Shipping Address</h2>
+        <div id="shipping_address_name" class="field text-field col-md-6 col-sm-12 col-xs-12 form-group">
+          <label for="order_shipping_address_name" class="control-label">Name <em>*</em></label>
+          <input type="text" name="order_shipping_address[name]" value="Juan Cruz" id="order_shipping_address_name" class="text form-control" required="required" autocomplete="given-name" fdprocessedid="f0h7bf">
+        </div>
+        <div id="shipping_address_surname" class="field text-field col-md-6 col-sm-12 col-xs-12 form-group">
+          <label for="order_shipping_address_surname" class="control-label">Surname <em>*</em></label>
+          <input type="text" name="order_shipping_address[surname]" value="Matanzo" id="order_shipping_address_surname" class="text form-control" required="required" autocomplete="family-name" fdprocessedid="kv9bor">
+        </div>
+        <div id="shipping_address_address" class="field text-field col-md-6 col-sm-12 col-xs-12 form-group">
+          <label for="order_shipping_address_address" class="control-label">Address <em>*</em></label>
+          <input type="text" name="order_shipping_address[address]" value="Pedro B palacios y rodriguez" id="order_shipping_address_address" class="text form-control" required="required" autocomplete="street-address" fdprocessedid="pic2y">
+        </div>
+        <div id="shipping_address_city" class="field text-field col-md-6 col-sm-12 col-xs-12 form-group">
+          <label for="order_shipping_address_city" class="control-label">City <em>*</em></label>
+          <input type="text" name="order_shipping_address[city]" value="VILLA NUEVA DE GUAYMALLEN" id="order_shipping_address_city" class="text form-control" required="required" autocomplete="address-level2" fdprocessedid="jqfrbc">
+        </div>
+        <div id="shipping_address_postal" class="field text-field col-md-6 col-sm-12 col-xs-12 form-group" style="">
+          <label for="order_shipping_address_postal" class="control-label">Postal Code </label>
+          <input type="text" name="order_shipping_address[postal]" value="5521" id="order_shipping_address_postal" class="text form-control" autocomplete="postal-code" fdprocessedid="jnazi8">
+        </div>
+        <div id="shipping_address_country" class="field select-field col-md-6 col-sm-12 col-xs-12 form-group">
+          <label for="order_shipping_address_country" class="control-label">Country <em>*</em></label>          
+        </div>
+
+        <div id="shipping_address_region" class="field select-field col-md-6 col-sm-12 col-xs-12 form-group">
+          <label for="order_shipping_address_region" class="control-label">Region <em>*</em></label>
+        </div>
+        <div id="shipping_address_municipality" class="field select-field col-md-6 col-sm-12 col-xs-12 form-group" style="">
+          <label for="order_shipping_address_municipality" style="" class="control-label">Municipality <em>*</em></label>
+        </div>
+        <div id="shipping_address_same_as_shipping" class="field checkbox-field checkbox col-sm-12 col-xs-12 no-label form-group" style="">
+          <input type="hidden" name="order_shipping_address[shipping_same_as_billing]" value="0"><input type="checkbox" name="order_shipping_address[shipping_same_as_billing]" value="1" id="shipping_same_as_billing" class="checkbox" checked="checked" onchange="togglebilling(this.checked)">
+          <label for="shipping_same_as_billing" class="control-label">Billing Address same as Shipping</label>          
+        </div>
+    </div><div id="billing_address" style="" class="row">
+      <h2 class="legend col-md-12 col-sm-12 col-xs-12">Billing Address</h2>
+      <div id="billing_address_name" class="field text-field col-md-6 col-sm-12 col-xs-12 form-group">
+        <label for="order_billing_address_name" class="control-label">Name <em>*</em></label>
+        <input type="text" name="order_billing_address[name]" value="Juan Cruz" id="order_billing_address_name" class="text form-control" autocomplete="given-name">        
+      </div>
+      <div id="billing_address_surname" class="field text-field col-md-6 col-sm-12 col-xs-12 form-group">
+        <label for="order_billing_address_surname" class="control-label">Surname <em>*</em></label>
+        <input type="text" name="order_billing_address[surname]" value="Matanzo" id="order_billing_address_surname" class="text form-control" autocomplete="family-name">        
+      </div>
+      <div id="billing_address_address" class="field text-field col-md-6 col-sm-12 col-xs-12 form-group">
+        <label for="order_billing_address_address" class="control-label">Address <em>*</em></label>
+        <input type="text" name="order_billing_address[address]" value="Pedro B palacios y rodriguez" id="order_billing_address_address" class="text form-control" autocomplete="street-address">        
+      </div>
+      <div id="billing_address_city" class="field text-field col-md-6 col-sm-12 col-xs-12 form-group">
+        <label for="order_billing_address_city" class="control-label">City <em>*</em></label>
+        <input type="text" name="order_billing_address[city]" value="VILLA NUEVA DE GUAYMALLEN" id="order_billing_address_city" class="text form-control" autocomplete="address-level2">        
+      </div>
+      <div id="billing_address_postal" class="field text-field col-md-6 col-sm-12 col-xs-12 form-group" style="">
+        <label for="order_billing_address_postal" class="control-label">Postal Code </label>
+        <input type="text" name="order_billing_address[postal]" value="5521" id="order_billing_address_postal" class="text form-control" autocomplete="postal-code">        
+      </div>   
+      <div id="billing_address_country" class="field select-field col-md-6 col-sm-12 col-xs-12 form-group">
+        <label for="order_billing_address_country" class="control-label">Country <em>*</em></label>        
+      </div>
+      <div id="billing_address_region" class="field select-field col-md-6 col-sm-12 col-xs-12 form-group">
+        <label for="order_billing_address_region" class="control-label">Region <em>*</em></label>        
+      </div>
+      <div id="billing_address_municipality" class="field select-field col-md-6 col-sm-12 col-xs-12 form-group" style="">
+        <label for="order_billing_address_municipality" style="" class="control-label">Municipality <em>*</em></label>        
+      </div>
+
+  </div><p class="required">* Required Fields</p></div><div class="col-lg-4"><div id="payments" class="card mb-3">
+    <div class="card-header"><h2 class="legend card-title">Payment Options</h2></div>
+    <div id="payments_options" class="card-body">
+      <ul>
+        <li>
+          <input type="radio" name="order[payment_method]" value="27792" id="order_payment_method_27792" class="radiobox" checked="checked" onclick="hidePaymentInformation(), document.getElementById('pi27792').style.display = ''">
+          <label for="order_payment_method_27792"><span>Transferencia bancaria</span></label>
+
+          <div id="pi27792" class="payment_information">
+            Banco de Chile 123
+
+          </div>
+        </li>
+        <li>
+          <input type="radio" name="order[payment_method]" value="30906" id="order_payment_method_30906" class="radiobox" onclick="hidePaymentInformation(), document.getElementById('pi30906').style.display = ''">
+          <label for="order_payment_method_30906"><span>PayPal Standard</span></label>
+
+          <div id="pi30906" class="payment_information" style="display:none;">
+            You will be redirected to Paypal to make a secure payment.<br><img src="/images/gateways/paypal.png?1684691421" alt="Paypal">
+          </div>
+        </li>
+        <li>
+          <input type="radio" name="order[payment_method]" value="35043" id="order_payment_method_35043" class="radiobox" onclick="hidePaymentInformation(), document.getElementById('pi35043').style.display = ''">
+          <label for="order_payment_method_35043"><span>Servipag</span></label>
+
+          <div id="pi35043" class="payment_information" style="display:none;">
+            You will be redirected to Servipag to make a secure payment.<br><img src="/images/gateways/servipag.png?1684691421" alt="Servipag">
+          </div>
+        </li>
+      </ul>
+      
+    </div>
+  </div><div id="shipping" class="card mb-3">
+      <div class="card-header"><h2 class="legend card-title">Shipping Options</h2></div>
+      <div id="shipping_options" class="card-body">
+          <ul>
+              <li>
+
+                <input type="radio" name="order[shipping_method]" value="25573" id="order_shipping_method_25573" class="radiobox">
+                <label for="order_shipping_method_25573"><span>Regular Mail</span></label>
+              <p class="shipping_information"><i>$0</i></p></li>
+              <li>
+
+                <input type="radio" name="order[shipping_method]" value="26338" id="order_shipping_method_26338" class="radiobox" checked="checked">
+                <label for="order_shipping_method_26338"><span>Envío Gratis</span></label>
+              <p class="shipping_information"><i>$0</i></p></li>
+              <li>
+
+                <input type="radio" name="order[shipping_method]" value="26339" id="order_shipping_method_26339" class="radiobox">
+                <label for="order_shipping_method_26339"><span>Tabla de tarifas</span></label>
+              <p class="shipping_information"><i>$800</i></p></li>
+          </ul>
+          
+      </div>
+    </div><div class="actions">
+      <input type="submit" value="Review Order" class="button btn btn-primary btn-block" id="submit_review_order" fdprocessedid="vnu4t">
+    </div></div></div>
+
+    
+
+  
+
+
+  
+
+  
+
+    
+    
+<input type="hidden"></form>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mailcheck/1.1.2/mailcheck.min.js" integrity="sha256-0YrFKC1J34jsOD3yraBxgVJ91zLp4Rb8NztS6QNZV9A=" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+  var requiredStateForMunicipality = true;
+  var countriesWithMunicipalities = "AR,CL,CO,PE,MX,IE,GR".split(',');
+
+  function togglebilling(state) {
+    var tax_id_enabled =  false
+
+    if (state == true) {
+      document.getElementById('billing_address').style.display = 'none';
+      document.getElementById('order_billing_address_municipality').required = false;
+      if(tax_id_enabled) document.querySelectorAll("#billing_address_taxid > input")[0].required = false;
+    }
+    else {
+      document.getElementById('billing_address').style.display = '';
+      let country = document.getElementById('order_billing_address_country').value;
+      document.getElementById('order_billing_address_municipality').required = countriesWithMunicipalities.includes(country);
+      if(tax_id_enabled) document.querySelectorAll("#billing_address_taxid > input")[0].required = false;
+    }
+  }
+
+  function hidePaymentInformation()  {
+    node = document.getElementById("checkout");
+    var re = new RegExp('\\bpayment_information\\b');
+    var els = node.getElementsByTagName("*");
+    for(var i=0,j=els.length; i<j; i++)
+    if(re.test(els[i].className))els[i].style.display = 'none';
+  }
+
+  function removeInvalidTaxid(type) {
+    var invalid_nif = document.getElementsByClassName("invalid_" + type + "_nif");
+    if(invalid_nif.length > 0){
+      invalid_nif[0].parentNode.removeChild(invalid_nif[0]);
+    }
+    var taxid_field = document.getElementById("order_" + type + "_address_taxid");
+    taxid_field.removeAttribute("style");
+  }
+
+  function validateTaxid(url, taxid, country, type){
+    if (taxid == null || taxid == '' || country == null || country == "") {
+      removeInvalidTaxid(type);
+      return;
+    }
+    $.ajax({
+       type: "GET",
+       url: url,
+       data: jQuery.param({ taxid, country}),
+       success: function (data) {
+         if (data.success) {
+          removeInvalidTaxid(type);
+         } else {
+          createInvalidTaxidDiv(type);
+         }
+       }
+   });
+  }
+
+  function createInvalidTaxidDiv(type) {
+    var address_taxid = document.getElementById(type + "_address_taxid");
+    var taxid_field = document.getElementById("order_" + type + "_address_taxid");
+    removeInvalidTaxid(type);
+    var span_error = document.createElement('span'); // is a node
+    span_error.innerHTML = billing_address_taxid.getAttribute('error-msg');
+    span_error.classList.add("error", "invalid_" + type + "_nif")
+    address_taxid.appendChild(span_error)
+    taxid_field.setAttribute("style", "border: 1px solid #dc3545;")
+  }
+
+  function setBillingTaxIdEvents() {
+    var billing_address_taxid = document.getElementById("billing_address_taxid");
+    var billing_taxid_field = document.getElementById("order_billing_address_taxid");
+    var billing_taxid_field_label = document.getElementById("order_billing_address_taxid_label");
+    var billing_country_field = document.getElementById("order_billing_address_country");
+
+    if (billing_taxid_field !== null && billing_country_field !== null) {
+      billing_taxid_field.addEventListener('blur', function(event) {
+        validateTaxid(billing_address_taxid.getAttribute('url'), billing_taxid_field.value, billing_country_field.value, 'billing')
+      });
+
+      billing_country_field.addEventListener('change', function(event) {
+        removeInvalidTaxid('billing');
+        validateTaxid(billing_address_taxid.getAttribute('url'), billing_taxid_field.value, billing_country_field.value, 'billing')
+
+        if (event.currentTarget.value == 'CL') {
+          billing_taxid_field_label.innerHTML = billing_address_taxid.getAttribute('taxid-cl-msg');
+        } else {
+          billing_taxid_field_label.innerHTML = billing_address_taxid.getAttribute('taxid-msg');
+        }
+      });
+    }
+  }
+
+  function setShippingTaxIdEvents() {
+    var shipping_address_taxid = document.getElementById("shipping_address_taxid");
+    var shipping_taxid_field = document.getElementById("order_shipping_address_taxid");
+    var shipping_taxid_field_label = document.getElementById("order_shipping_address_taxid_label");
+    var shipping_country_field = document.getElementById("order_shipping_address_country");
+
+    if (shipping_taxid_field !== null && shipping_country_field !== null) {
+      shipping_taxid_field.addEventListener('blur', function(event) {
+        validateTaxid(shipping_address_taxid.getAttribute('url'), shipping_taxid_field.value, shipping_country_field.value, 'shipping')
+      });
+
+      shipping_country_field.addEventListener('change', function(event) {
+        removeInvalidTaxid('shipping');
+        validateTaxid(shipping_address_taxid.getAttribute('url'), shipping_taxid_field.value, shipping_country_field.value, 'shipping')
+
+        if (event.currentTarget.value == 'CL') {
+          shipping_taxid_field_label.innerHTML = shipping_address_taxid.getAttribute('taxid-cl-msg');
+        } else {
+          shipping_taxid_field_label.innerHTML = shipping_address_taxid.getAttribute('taxid-msg');
+        }
+      });
+    }
+  }
+
+  window.onload = function() {
+    var shipping_same_as_billing = false;
+    if (document.getElementById("shipping_same_as_billing") != null) {
+      //run this on load (after error checking)
+      shipping_same_as_billing = document.getElementById("shipping_same_as_billing").checked;
+      togglebilling(shipping_same_as_billing);
+    }
+
+    setBillingTaxIdEvents();
+    setShippingTaxIdEvents();
+
+    var emailSuggestionField = document.getElementById("email-suggestion");
+    var emailField = document.getElementById("order_customer_email");
+
+    function changeEmailValue(value) {
+      emailField.value = value;
+    }
+
+    document.addEventListener('click', function(event) {
+      if (event.target.closest('#mc-suggested-anchor')) {
+        emailField.value = event.target.text;
+        emailSuggestionField.innerHTML = "";
+      }
+    });
+
+    emailField.addEventListener('focus', function() {
+      emailSuggestionField.innerHTML = "";
+    });
+
+    emailField.addEventListener('blur', function() {
+      Mailcheck.run({
+        email: emailField.value,
+        suggested: function(suggestion) {
+          emailSuggestionField.innerHTML = "<div id='mc-suggested-text'>Did you mean: <a href='#' class='--teal' id='mc-suggested-anchor'>" + suggestion.full + "</a>?";
+        },
+        empty: function() {}
+      });
+    });
+  }
+  </script>
+
+    
+  </div>
+</div>

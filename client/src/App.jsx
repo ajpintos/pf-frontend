@@ -15,6 +15,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import NavBar from "../src/components/NavBar/NavBar.jsx";
 import Title from "./components/Title/Title.jsx";
 import CartPage from './components/CartPage/CartPage.jsx';
+import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -37,45 +38,45 @@ function App() {
 
   // de aqui hasta el useEffect son para cargar usuario y orden de prueba de carrito
 
-  const dispatch = useDispatch();
-  const userLogin = useSelector(state=>state.userLogin);
+  // const dispatch = useDispatch();
+  // const userLogin = useSelector(state=>state.userLogin);
 
-  const loadingUser = async () => {
+  // const loadingUser = async () => {
 
-    let loginUser = userLogin;
-    console.log('loginuser al entrar ', loginUser)
+  //   let loginUser = userLogin;
+  //   console.log('loginuser al entrar ', loginUser)
 
-      // const localizaPepito = await axios.get('/users?email=pepito@pepito.com');
-      // console.log('localizaPepito ', localizaPepito);
-      // loginUser = localizaPepito.data;
+  //     // const localizaPepito = await axios.get('/users?email=pepito@pepito.com');
+  //     // console.log('localizaPepito ', localizaPepito);
+  //     // loginUser = localizaPepito.data;
 
 
-        console.log('entre a registrar a pepito');
-        const userData = {
-          email: 'pepito@pepito.com',
-          password: 'P1234567p',
-          firstname: 'Pepito',
-          lastname: 'Dominguez',
-          address: 'address',
-          city: 'city',
-          cp: '12345',
-          phone: '1234567890',
-          country: 'country'
-        }
-        const logUser = await axios.post('/users', userData);
-        console.log(logUser);
-        loginUser = userData;
-        console.log('pepito registrado');
+  //       console.log('entre a registrar a pepito');
+  //       const userData = {
+  //         email: 'pepito@pepito.com',
+  //         password: 'P1234567p',
+  //         firstname: 'Pepito',
+  //         lastname: 'Dominguez',
+  //         address: 'address',
+  //         city: 'city',
+  //         cp: '12345',
+  //         phone: '1234567890',
+  //         country: 'country'
+  //       }
+  //       const logUser = await axios.post('/users', userData);
+  //       console.log(logUser);
+  //       loginUser = userData;
+  //       console.log('pepito registrado');
   
-      dispatch({
-        type: 'LOGIN_USER',
-        payload: loginUser.email
-      });
-  };
+  //     dispatch({
+  //       type: 'LOGIN_USER',
+  //       payload: loginUser.email
+  //     });
+  // };
 
-  useEffect(()=>{
-    loadingUser();
-  },[]);
+  // useEffect(()=>{
+  //   loadingUser();
+  // },[]);
 
   return (
     <div className="App">
@@ -100,6 +101,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/form_update" element={<FormUdateMyaccount />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart/checkout" element={<CheckoutPage />} />
       </Routes>
       <footer className="container-fluid" >
         <Footer />
