@@ -5,8 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../../Redux/actions/actionsCategories";
 import { useEffect, useState } from "react";
 import AddCategorie from "./AddCategorie";
+import ModificarCategoria from "./ModificarCategories";
 
 const CategoriesSettingGeneral = () => {
+  const dispatch = useDispatch();
+  const loadingData = async () => {
+    const data = await getCategories()
+     dispatch(data);
+  };
+
+  useEffect(() => {
+    loadingData();
+  },[]);
+
   const allCategories = useSelector((state) => state?.allCategories);
 
   //modal add categorie
@@ -22,8 +33,24 @@ const CategoriesSettingGeneral = () => {
       if (result) {
         alert("Operacion exitosa");
       }
+      loadingData();
     } catch (error) {
       alert(`Error encontrado ${error.message}`);
+    }
+  };
+
+  //modal modificar categorie
+  const [pasamanos, setPasamanos] = useState({
+    id: "",
+    name: "",
+  });
+  const [modificar, setModificar] = useState(false);
+  const handleModalDos = (id, name) => {
+    setPasamanos({ id: id, name: name });
+    if (modificar) {
+      setModificar(false);
+    } else {
+      setModificar(true);
     }
   };
 
@@ -59,7 +86,9 @@ const CategoriesSettingGeneral = () => {
                     <Button
                       variant="light"
                       size="sm"
-                      /*  onClick={() => handleShow(prod.email)} */
+                      onClick={() =>
+                        handleModalDos(categorie.id, categorie.name)
+                      }
                     >
                       📝
                     </Button>
@@ -81,6 +110,9 @@ const CategoriesSettingGeneral = () => {
           </tbody>
         </Table>
         {estado ? <AddCategorie /> : null}
+        {modificar ? (
+          <ModificarCategoria id={pasamanos.id} name={pasamanos.name} />
+        ) : null}
       </div>
     </div>
   );
