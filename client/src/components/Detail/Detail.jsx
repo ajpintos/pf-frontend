@@ -1,16 +1,19 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
-import { foundOrderForDetail } from "../Cart/cartHelpers";
+import { cartFoundIndex, foundOrderForDetail } from "../Cart/cartHelpers.js";
 import { AddToCartIcon } from "../Icons/Icons";
+import { add_ToCart, remove_FromCart } from "../../Redux/actions/actionsCart.js";
 
 const Detail = ({ whereIAm, hereIAm }) => {
 
   const userLogin = useSelector(state=>state.userLogin);
   const nameProducts = useSelector(state=>state.nameProducts);
+  const cartDetails = useSelector(state=>state.cartDetails);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { id } = useParams();
   const [product, setProduct] = React.useState({});
@@ -33,7 +36,7 @@ const Detail = ({ whereIAm, hereIAm }) => {
   };
 
   const addToCart = async () => {
-    if (userLogin !== '') {
+    if (userLogin && userLogin !== undefined && userLogin !== '') {
       const orderUser = await foundOrderForDetail(userLogin);
       const detailsData = {
         idOrder: orderUser.id,
@@ -42,6 +45,36 @@ const Detail = ({ whereIAm, hereIAm }) => {
       };
       const detailCreated = await axios.post('/ordersDetails', detailsData);
     };
+    let productModify = {
+      idOrderDetail: '',
+      idProduct: product.id,
+      name: product.name,
+      description: product.description,
+      image: product.image,
+      units: parseInt(cant),
+      price: product.price,
+      tax: product.tax,
+      stock: product.stock,
+      amount: (product.price * parseInt(cant)),
+      taxAmount: (product.price * parseInt(cant)) * product.tax,
+      totalAmount: ( (product.price * parseInt(cant)) * product.tax ) + (product.price * parseInt(cant)),
+    };
+    if (cartDetails.length > 0) {
+      let unitsProduct = cartFoundIndex(product.id, cartDetails);
+      if (unitsProduct !== null) {
+        dispatch(remove_FromCart(product.id, cartDetails));
+        unitsProduct = unitsProduct + parseInt(cant);
+        productModify = {
+          ...productModify, 
+          units: unitsProduct,
+          amount: (product.price * unitsProduct),
+          taxAmount: (product.price * unitsProduct) * product.tax,
+          totalAmount: ( (product.price * unitsProduct) * product.tax ) + (product.price * unitsProduct),
+        };
+      };
+    };
+    dispatch(add_ToCart(productModify, cartDetails));
+    window.alert('Product added to cart');
 
   };
 

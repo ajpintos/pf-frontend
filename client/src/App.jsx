@@ -10,6 +10,7 @@ import Store from "./components/Store/Store.jsx";
 import axios from "axios";
 import RegisterPage from "./components/RegisterPage/RegisterPage.jsx";
 import MyAccount from "./components/MyAccount/MyAccount.jsx";
+import Favorites from "./components/Favorites/Favorites.jsx";
 import FormUdateMyaccount from "./components/MyAccount/Components/FormUpdate/FormUpdate.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import NavBar from "../src/components/NavBar/NavBar.jsx";
@@ -36,48 +37,6 @@ function App() {
     setWhereIAm(IAmData);
   };
 
-  // // de aqui hasta el useEffect son para cargar usuario y orden de prueba de carrito
-  // const userLogin = useSelector(state=>state.userLogin);
-
-  // const dispatch = useDispatch();
-
-  // const loadingUser = async () => {
-
-  //   let loginUser = userLogin;
-  //   console.log('loginuser al entrar ', loginUser)
-
-  //     // const localizaPepito = await axios.get('/users?email=pepito@pepito.com');
-  //     // console.log('localizaPepito ', localizaPepito);
-  //     // loginUser = localizaPepito.data;
-
-
-  //       console.log('entre a registrar a pepito');
-  //       const userData = {
-  //         email: 'pepito@pepito.com',
-  //         password: 'P1234567p',
-  //         firstname: 'Pepito',
-  //         lastname: 'Dominguez',
-  //         address: 'address',
-  //         city: 'city',
-  //         cp: '12345',
-  //         phone: '1234567890',
-  //         country: 'country'
-  //       }
-  //       const logUser = await axios.post('/users', userData);
-  //       console.log(logUser);
-  //       loginUser = userData;
-  //       console.log('pepito registrado');
-  
-  //     dispatch({
-  //       type: 'LOGIN_USER',
-  //       payload: loginUser.email
-  //     });
-  // };
-
-  // useEffect(()=>{
-  //   loadingUser();
-  // },[]);
-
   return (
     <div className="App">
       {/* Cabecera */}
@@ -102,6 +61,7 @@ function App() {
         <Route path="/form_update" element={<FormUdateMyaccount />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/cart/checkout" element={<CheckoutPage />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
       <footer className="container-fluid" >
         <Footer />

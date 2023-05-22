@@ -1,54 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Button from 'react-bootstrap/esm/Button'
 import { RemoveFromCartIcon } from '../Icons/Icons'
 import axios from 'axios'
 import Container from 'react-bootstrap/esm/Container'
-import ListGroup from 'react-bootstrap/esm/ListGroup';
 import accounting from 'accounting';
+import { useNavigate } from 'react-router-dom'
+import { getCartDetail } from '../Cart/cartHelpers'
+import { add_ToCart, clear_Cart, remove_FromCart } from '../../Redux/actions/actionsCart'
+import { getProductById } from '../../Redux/actions/actionsProducts'
 
 const CartPage = () => {
 
-  const loginUser = useSelector(state=> state.loginUser);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const productsArray = [
-    {
-      name: "Almonds",
-      image: "https://biofresh.shop/img/almendras.jpg",
-      description: "Nut rich in healthy fats, protein and fiber.",
-      price: 2.50,
-      stock: 50,
-      arrayCategories: ['Nuts']
-    },
-    {
-      name: "Dates",
-      image: "https://biofresh.shop/img/datiles.jpg",
-      description: "Dried fruit rich in fiber and vitamins.",
-      price: 3.50,
-      stock: 30,
-      arrayCategories: ['Nuts']
-    },
-    {
-      name: "Prunes",
-      image: "https://biofresh.shop/img/pasas.jpg",
-      description: "Dried fruit rich in fiber, antioxidants and beneficial compounds for health.",
-      price: 4.00,
-      stock: 20,
-      arrayCategories: ['Nuts']
-    },
-  ]
+  const userLogin = useSelector(state=> state.userLogin);
+  const cart_Details = useSelector(state=> state.cartDetails);
+  const cartDetails = cart_Details;
+  console.log('cartDetails ',cartDetails);
 
-  const [ productsCart, setProductsCart ] = useState({
-    id: '',
-    productId: '',
-    orderId: '',
-    units: 0,
-    price: 0,
-    amount: 0,
-    tax: 0,
-    taxAmount: 0,
-    totalAmount: 0
-  });
+  const [ cant, setCant ] = useState(0);
+
+  const validateCant = (e) => {
+    e.preventDefault();
+    setCant(e.target.value);
+  };
+
   const [ order, setOrder ] = useState({
     id: '',
     amount: 0,
@@ -56,27 +34,73 @@ const CartPage = () => {
     totalAmount: 0
   });
 
-  const updatedCart = async (idDetail, units) => {
-    const updateData = {
-      idDetail: idDetail,
-      units: units
+  const updatedCart = async (idProduct) => {
+    const productFound = await getProductById(idProduct);
+    const cartDetail = await getCartDetail(idProduct, cartDetails);
+    console.log('idProduct ',idProduct);
+    console.log('cartDetail ',cartDetail);
+    console.log('userLogin ', userLogin);
+    if (userLogin && userLogin !== undefined && userLogin !== '') {
+      const updateData = {
+        idDetail: cartDetail.idDetail,
+        units: cartDetail.units
+      };
+      const orderDetailUpdate = await axios.put('/ordersDetails', updateData);
     };
-    // if(loginUser !== '') {
-    // }
-    const orderDetailUpdate = await axios.put('/ordersDetails', updateData);
+    dispatch(remove_FromCart(idProduct, cartDetails));
+    const cart_Detail = { 
+      ...cartDetail, 
+      units: parseInt(cant),
+      precio: productFound.price,
+      amount: (productFound.price * parseInt(cant)),
+      taxAmount: (productFound.price * parseInt(cant)) * cartDetail.tax,
+      totalAmount: ( (productFound.price * parseInt(cant)) * cartDetail.tax ) + (productFound.price * parseInt(cant)),
+    }
+    dispatch(add_ToCart(cart_Detail, cartDetails));
+    updateTotals();
+    window.alert('Updated product in cart');
   };
 
-  const removeToCart = async (idDetail) => {
-    const orderDetailDelete = await axios.delete('/ordersdetails', { idDetail: idDetail });
+  const removeToCart = async (idProduct) => {
+    const cartDetail = await getCartDetail(idProduct, cartDetails);
+    if (userLogin && userLogin !== undefined && userLogin !== '') {
+      const orderDetailDelete = await axios.delete('/ordersdetails', { idDetail: cartDetail.idDetail });
+    };
+    dispatch(remove_FromCart(idProduct, cartDetails));
+    updateTotals();
   };
 
-  const loadingCart = async () => {
+  const clearCart = () => {
+    if (userLogin && userLogin !== undefined && userLogin !== '') {
+    }; 
+    dispatch(clear_Cart());
+    updateTotals();
+  };
 
+  const goToPath = (goPath) => {
+    navigate(goPath);
+  };
 
+  const updateTotals = async () => {
+    const cart_Details = cartDetails;
+    let amountO= 0;
+    let taxAmountO = 0;
+    let totalAmountO = 0;
+    for (let i=0; i < cart_Details.length; i++) {
+        amountO = amountO + cart_Details[i].amount;
+        taxAmountO = taxAmountO + cart_Details[i].taxAmount;
+        totalAmountO = totalAmountO + cart_Details[i].totalAmount;
+    };
+    setOrder({
+      idOrder: '',
+      amount: amountO,
+      taxAmount: taxAmountO,
+      totalAmount: totalAmountO,
+    });
   };
 
   useEffect(()=>{
-    loadingCart();
+    updateTotals();
   },[]);
 
   return (
@@ -86,96 +110,75 @@ const CartPage = () => {
           <div className="col-12">
             <h1 className="page-header">Shopping Cart</h1>
           </div>
-          {/* {productsCart.length < 1 ?
-            <div class="row">
-              <section class="col-12">
-                <div class="bg-secondary alert text-white">The shopping cart is currently empty. You can go back and start adding products.</div>
-                <a href="/store" class="btn btn-link" title="← Go back & Keep Shopping">← Go back & Keep Shopping</a>
-              </section>
-            </div> :
-            productsCart.map(product => {
-              <article className='row' key={productsCart.id}>
-                <figure className='container-fluid'>
-                  <img src={productsCart.image} alt={productsCart.name} />
-                </figure>
-                <p className='h5' >{productsCart.name}</p>
-                <p className='h5' >{productsCart.units}</p>
-                <p className='h5' >{productsCart.price}</p>
-              </article>
-            </div>
-            })
-          } */}
         </div>
         <div className="row">
-            <div className="col-lg-9 mb-4">
-              <form id="cart-update-form" method="post" action="/cart/update">
-                <div className="table-responsive">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th>Product</th>
-                        <th className="mob-hide"></th>
-                        <th className="mob-hide">Unit Price</th>
-                        <th className="table-qty">Qty</th>
-                        <th>Subtotal</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    {productsArray.length < 1 ?
-                      <div class="row">
+          <div className="col-lg-9 mb-4">
+            <div className="table-responsive">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th className="mob-hide"></th>
+                    <th className="mob-hide">Unit Price</th>
+                    <th className="table-qty">Qty</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cartDetails.length < 1
+                    ? <div class="row">
                         <section class="col-12">
                           <div class="bg-secondary alert text-white">The shopping cart is currently empty. You can go back and start adding products.</div>
-                          <a href="/store" class="btn btn-link" title="← Go back & Keep Shopping">← Go back & Keep Shopping</a>
+                          <Button className="btn btn-success btn-block mb-1" onClick={()=>goToPath('/store')}>Go Store</Button>
                         </section>
-                      </div> :
-                      productsArray.map(product => {
+                      </div>
+                    : cartDetails.map(product => {
+                      return (
                         <tr>
                         <td>
-                          {/* <p className='h5' >{productsCart.name}</p> */}
                           <p className='h5' >{product.name}</p>
                         </td>
                         <td className="text-center mob-hide">
                           <figure className='container-fluid'>
-                            {/* <img src={productsCart.image} alt={productsCart.name} /> */}
                             <img src={product.image} width={90} height={90} alt={product.name} />
                           </figure>
                         </td>
                         <td className="mob-hide">
-                          {/* <span>{accounting.formatMoney(`${productsCart.price}`)}</span> */}
                           <span>{accounting.formatMoney(`${product.price}`)}</span>
                         </td>
                         <td>
-                          <select name="" id="">
-                            <option value="" selected>1</option>
-                            <option value="" selected>2</option>
-                            <option value="" selected>3</option>
-                            <option value="" selected>4</option>
-                            <option value="" selected>5</option>
-                            <option value="" selected>6</option>
-                          </select>
-                          <div>
-                            <Button className='btn' variant="light" onClick={updatedCart}>+</Button>
-                          </div>
-                          <div>
-                            <Button className='btn' variant="danger" onClick={removeToCart}><RemoveFromCartIcon /></Button>
-                          </div>
+                          <input
+                            type="number"
+                            // value={cant}
+                            min={1}
+                            max={product.stock}
+                            placeholder={product.units}
+                            onChange={validateCant}
+                            style={{ width: "40px", marginTop: "5px" }}
+                          />
                         </td>
                         <td>
-                          <p>{accounting.formatMoney(`${productsCart.amount}`)}</p>
+                          < Button className='btn' variant="warning" onClick={()=>updatedCart(product.idProduct)}>Up</Button>
                         </td>
-                        <td className="text-right">
-                          <a href="/cart/remove_product/137627033" className="cart-product-remove" title="Remove Product">
-                            <i className="fas fa-times-circle"></i>
-                          </a>
+                        <td>
+                          <Button className='btn' variant="danger" onClick={()=>removeToCart(product.idProduct)}><RemoveFromCartIcon /></Button>
+                        </td>
+                        <td>
+                          <p>{accounting.formatMoney(`${product.amount}`)}</p>
                         </td>
                       </tr>
-                    })}
-                    </tbody>
-                  </table>
-                </div>
-              <input type="hidden"/></form>
+                    )
+                    })
+                  }
+                </tbody>
+              </table>
             </div>
+            { cartDetails.length > 0 && <Button className='btn' variant="danger" onClick={()=>clearCart()} >Clear Cart</Button>}
+          </div>
+          { cartDetails.length > 0 &&
           <div className="col-lg-3 mb-4">
             <div className="col-12">
               <h1 className='text-center'>Total Order</h1>
@@ -195,12 +198,16 @@ const CartPage = () => {
                   </tr>
                 </tbody>
               </table>
-              <div className="text-center cart-actions ">
-                <a href="/cart/checkout" className="btn btn-success btn-block mb-3" title="Proceed to Checkout">Proceed to Checkout</a>
-                <a href="/store" className="btn btn-success btn-block" title="← Continue Shopping">← Continue Shopping</a>
+              <div className="text-center cart-actions">
+                <Button className="btn btn-success btn-block mb-3" onClick={()=>goToPath('/cart/checkout')}>Proceed to Checkout</Button>
+              
+              </div>
+              <div className="text-center cart-actions">
+                <Button className="btn btn-success btn-block mb-1" onClick={()=>goToPath('/store')}>Go Store</Button>
               </div>
             </div>
           </div>
+          } 
         </div>
       </div>
     </Container>
@@ -208,5 +215,3 @@ const CartPage = () => {
 }
 
 export default CartPage
-
-

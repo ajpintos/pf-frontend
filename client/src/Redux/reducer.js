@@ -1,8 +1,8 @@
 import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
-import { ALL_USERS, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER } from "./types/typesUser.js";
+import { ALL_USERS, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER, SET_USER } from "./types/typesUser.js";
 import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, STATUS_CHANGE_ORDER } from "./types/typesCart";
-
+import { DELETE_FAVORITES, ADD_FAVORITES } from "./types/typesFavorites";
 
 const initialState = {
   users: [],
@@ -12,27 +12,11 @@ const initialState = {
   showProducts: [],
   nameProducts: '',
   flagProducts: false,
+  favorites: [],
   allCategories: [],
   categorieFilter: null,
   cart: '',
   cartDetails: [],
-  // cart: {
-  //   idOrder: '',
-  //   amount: 0,
-  //   taxAmout: 0,
-  //   totalAmount: 0,
-  //   orderDetails: [{
-  //     idOrderDetail: '',
-  //     idProduct: '',
-  //     nameProduct: '',
-  //     descriptionProduct: '',
-  //     imageProduct: '',
-  //     units: 0,
-  //     amount: 0,
-  //     taxAmout: 0,
-  //     totalAmount: 0,      
-  //   }],
-  // }
 };
 
 export const cartInitialState = JSON.parse(window.localStorage.getItem('cart')) || []
@@ -64,6 +48,12 @@ const rootReducer = (state = initialState, action) => {
         allCategories: action.payload,
       }
     };
+
+    case FILTER_BY_CATEGORIES:
+      return {
+        ...state,
+        products: action.payload,
+      }
     case ALL_USERS:{
       return {
         ...state,
@@ -82,16 +72,16 @@ const rootReducer = (state = initialState, action) => {
         userLogin: action.payload
       }
     };
-    case LOGOUT_USER:{ 
+    case LOGOUT_USER:{
       return {
         ...state,
         userLogin : action.payload
       }
     };
-    case FILTER_BY_CATEGORIES : {
+    case SET_USER:{
       return {
         ...state,
-        products: action.payload,
+        userLogin: action.payload
       }
     }
     case ADD_TO_CART: {
@@ -117,8 +107,12 @@ const rootReducer = (state = initialState, action) => {
       }
     }
     case CLEAR_CART: {
-      updateLocalStorage([])
-      return []
+      // updateLocalStorage([])
+      return {
+        ...state,
+        cart: '',
+        cartDetails: [],
+      }
     }
     // case ADD_TO_CART: {
     //   const {id} = action.payload
@@ -152,7 +146,18 @@ const rootReducer = (state = initialState, action) => {
     //   updateLocalStorage(newState)
     //   return newState
     // }
-
+ 
+    case ADD_FAVORITES: {
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
+      };
+    }
+    case DELETE_FAVORITES:
+      return {
+        ...state,
+        favorites: state.favorites.filter((f) => f.name !== action.payload),
+      };
     
     default:
       return {...state};

@@ -20,3 +20,13 @@ export const getProductsByName = async (name, flag) => {
     return { error: error.message };
   };
 };
+
+export const getProductById = async (idProduct) => {
+  try {
+    const productFound = await axios.get('/products/'+idProduct);
+    if (productFound === null) throw Error('Product not Found');
+    return productFound.data;
+  } catch (error) {
+    return { error: error.message };
+  }
+};

@@ -162,9 +162,9 @@ function CardContainer({ whereIAm, hereIAm }) {
             />
           }
       <section className="row">
-        {showProducts.length > 0 && products.map((product) => (
+        {showProducts.length > 0 && products.map((product, index) => (
           <Card 
-          key={product.name}
+          key={index}
           id={product.id}
           name={product.name}
           image={product.image}

@@ -105,6 +105,7 @@ export default function Store ({ whereIAm, hereIAm }) {
     const all_Categories = await getCategories();
     dispatch(all_Categories);
     const retWhereIAm = whereIAm;
+    console.log('entro a loadingData de store whereIAm : ', retWhereIAm);
     if (whereIAm.place !== 'detail') {
       let flagCategory = false;
       setOrder('All Products');
@@ -154,6 +155,7 @@ export default function Store ({ whereIAm, hereIAm }) {
       });
       setCurrentPage(retWhereIAm.currentPage);
     };
+    console.log('salgo de loadingData de store whereIAm : ', whereIAm);
   };
 
   useEffect(()=>{

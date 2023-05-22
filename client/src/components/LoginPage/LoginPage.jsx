@@ -4,13 +4,13 @@ import { useDispatch , useSelector } from 'react-redux';
 import { userLogin , userLoginGoogle} from '../../Redux/actions/actionsUser.js';
 import { useNavigate } from 'react-router-dom';
 import styles from './LoginPage.module.css';
+import swal from 'sweetalert';
 
 // CSS REACT-BOOSTRAP
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Stack from 'react-bootstrap/esm/Stack';
 //----------------------------------------------------
 
 //! Autenticación con Google
@@ -30,7 +30,7 @@ function LoginPage(){
    
     const onSuccess = (response) => {
         dispatch(userLoginGoogle(response.profileObj));
-        alert("login successfully");
+        swal("Congratulations!", "Login Successfully", "success");
         navigate("/");
     }
 
@@ -47,10 +47,10 @@ function LoginPage(){
 
     const submitHandler = async (event) => {
         event.preventDefault();
-        const status = await dispatch(userLogin(form.email , form.password ));
-        if (status.hasOwnProperty('error')) alert("Incorrect email or password");
+        const status = await dispatch(userLogin(form));
+        if (status.hasOwnProperty('error')) swal("Error", "Incorrect email or password", "error");
         else {
-            alert("login successfully");
+            swal("Congratulations!", "Login Successfully", "success");
             navigate("/");
         }
     }
@@ -122,7 +122,7 @@ return (
                     cookiePolicy={"single_host_policy"}
                 />
             </Row>
-        </div> 
+        </div>
     </div>
 )};
 

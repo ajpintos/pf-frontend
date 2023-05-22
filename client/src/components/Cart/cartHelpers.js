@@ -28,3 +28,10 @@ export const cartFoundIndex = (idProduct, cartDetails) => {
   };
   return null;
 };
+
+export const getCartDetail = (idProduct, cartDetails) => {
+  for (let i=0; i < cartDetails.length; i++) {
+    if (cartDetails[i].idProduct === idProduct) return cartDetails[i];
+  };
+  return null; 
+}

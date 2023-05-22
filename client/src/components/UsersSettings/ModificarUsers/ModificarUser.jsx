@@ -1,6 +1,8 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -18,7 +20,7 @@ const ModificarUser = ({ show, handleClose, email }) => {
   });
 
   form.email = email;
-  
+
   const handleChange = (event) => {
     event.preventDefault();
     setForm({
@@ -59,39 +61,35 @@ const ModificarUser = ({ show, handleClose, email }) => {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Usuario a modificar {email}</Modal.Title>
+          <Modal.Title>user to modify {email}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
+            <Row>
+              <Col>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Control
+                    placeholder="new firstname"
+                    name="firstname"
+                    value={form.firstname}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Control
+                    placeholder="new lastname"
+                    name="lastname"
+                    value={form.lastname}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>email</Form.Label>
-              <Form.Control name="email" value={email} />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>firstname</Form.Label>
               <Form.Control
-                placeholder="Cambio de firstname"
-                name="firstname"
-                value={form.firstname}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>lastname</Form.Label>
-              <Form.Control
-                placeholder="Cambio de lastname"
-                name="lastname"
-                value={form.lastname}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>address</Form.Label>
-              <Form.Control
-                placeholder="Cambio de address"
+                placeholder="new address"
                 name="address"
                 value={form.address}
                 onChange={handleChange}
@@ -99,61 +97,64 @@ const ModificarUser = ({ show, handleClose, email }) => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>cd</Form.Label>
               <Form.Control
-                placeholder="Cambio de cd"
+                placeholder="new cd"
                 name="cd"
                 value={form.cd}
                 onChange={handleChange}
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>city</Form.Label>
-              <Form.Control
-                placeholder="Cambio de city"
-                name="city"
-                value={form.city}
-                onChange={handleChange}
-              />
-            </Form.Group>
+            <Row>
+              <Col>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Control
+                    placeholder="new city"
+                    name="city"
+                    value={form.city}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Col>
+
+              <Col>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Control
+                    placeholder="new country"
+                    name="country"
+                    value={form.country}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>country</Form.Label>
               <Form.Control
-                placeholder="Cambio de country"
-                name="country"
-                value={form.country}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>phone</Form.Label>
-              <Form.Control
-                placeholder="Cambio de phone"
+                placeholder="new phone"
                 name="phone"
                 value={form.phone}
                 onChange={handleChange}
               />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>email linked to account</Form.Label>
+              <Form.Control name="email" value={email} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="password"
+                placeholder="new password"
                 name="password"
                 value={form.password}
                 onChange={handleChange}
               />
             </Form.Group>
-            <Button variant="secondary" onClick={handleClose}>
-              Volver
-            </Button>
 
             <Button variant="primary" type="submit" disabled={button}>
-              Cambiar datos
+              modify data
             </Button>
           </Form>
         </Modal.Body>

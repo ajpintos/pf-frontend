@@ -17,9 +17,6 @@ export default function Categories() {
 
   useEffect(() => {
     getCategories()
-  }, [dispatch])
-
-  useEffect(() => {
     getProducts()
   }, [dispatch])
   
