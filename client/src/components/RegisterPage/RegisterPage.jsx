@@ -7,6 +7,7 @@ import NavBar from "../NavBar/NavBar.jsx";
 import registerValidate from "./validate/registerValidate.js";
 import emailjs from "@emailjs/browser";
 import styles from './RegisterPage.module.css';
+import swal from 'sweetalert';
 
 //CSS REACT-BOOSTRAP
 import Button from 'react-bootstrap/Button';
@@ -14,7 +15,6 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/esm/Stack';
 import Col from 'react-bootstrap/Col';
-import Alert from 'react-bootstrap/Alert';
 
 function RegisterPage() {
 
@@ -60,7 +60,7 @@ function RegisterPage() {
         event.preventDefault();
         axios.post("/users", form)
             .then(res => {
-                alert("User added successfully!");
+                swal("Congratulations!", "User added successfully!", "success");
                 const Dom = document.getElementById("formToSend");
                 const serviceID = "service_e5hd1wt";
                 const templateID ="template_59dtr2y";// "contact_form";
@@ -75,7 +75,7 @@ function RegisterPage() {
                   );
                 navigate("/login");
             })
-            .catch(err => alert("Error: Check all camps and try again"))
+            .catch(err => swal("Error!", "Check all camps and try again", "error"))
     }
 
 
