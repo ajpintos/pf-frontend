@@ -43,7 +43,8 @@ export default function Categories() {
                 </NavDropdown>}
             <Link to='/about' id={s.item}>ABOUT US</Link>
             <Link to='/contact' id={s.item}>CONTACT US</Link> 
-            <NavDropdown id={s.item} title="SETTINGS">
+            <Link to='/settings' id={s.item}>SETTINGS</Link> 
+            {/* <NavDropdown id={s.item} title="SETTINGS">
               <div>
                 <Link className='d-block' id={s.item} to={"/settings"}>Settings</Link>
                 <NavDropdown.Divider />
@@ -55,7 +56,7 @@ export default function Categories() {
                 <NavDropdown.Divider />
                 <Link className='d-block' id={s.item} to={"#action/3.5"}>Action 5</Link>
               </div>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

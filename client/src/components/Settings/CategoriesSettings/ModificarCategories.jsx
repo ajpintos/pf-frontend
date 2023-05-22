@@ -35,7 +35,7 @@ const ModificarCategories = ({ id, name }) => {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header>
-        <h3>category to modify {name} </h3>
+        <h3>Category to modify {name} </h3>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>

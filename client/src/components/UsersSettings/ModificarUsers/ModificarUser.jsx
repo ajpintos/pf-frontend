@@ -53,7 +53,7 @@ const ModificarUser = ({ show, handleClose, email }) => {
         if (result) alert(result.data);
       }
     } catch (error) {
-      alert("CUIDADO " + error.message);
+      alert("Error:  " + error.message);
     }
   };
 
@@ -61,7 +61,7 @@ const ModificarUser = ({ show, handleClose, email }) => {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>user to modify {email}</Modal.Title>
+          <Modal.Title>User to modify {email}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
