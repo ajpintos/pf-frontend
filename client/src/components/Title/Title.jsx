@@ -15,7 +15,7 @@ function Title() {
 
   const handleLogout = () => {
     dispatch(userLogout());
-    navigate("/");
+    navigate("/login");
   }
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function Title() {
       const userLocalStorageRedux = JSON.parse(userLocalStorage);
       dispatch(setUser(userLocalStorageRedux));
     }
-  },[])
+  },[dispatch])
 
 
   return (
