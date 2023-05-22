@@ -38,10 +38,10 @@ const UsersSettings = () => {
     };
     try {
       const borrado = await axios.delete("/users/delete", { data: form });
-      if (borrado) alert("operacion exitosa");
+      if (borrado) alert("Successful operation");
       loadingData()
     } catch (error) {
-      alert("ubo un error" + error.message);
+      alert("Error found: " + error.message);
     }
   };
 
@@ -52,9 +52,9 @@ const UsersSettings = () => {
 
   return (
     <>
-      <div className="container-fluid col-8">
+      <div className="container-fluid col-8 mt-3">
         <br />
-        <h3>User Settings</h3>
+        <h4>User Settings</h4>
 
         <Button
           style={{ borderRadius: "2rem", fontSize: "15px" }}

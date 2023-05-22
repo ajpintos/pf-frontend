@@ -24,10 +24,10 @@ function Settings() {
   return (
     <div className="container-fluid">
 
-      <div className="text-center mt-5 mb-5">
+      <div className="text-center mt-3 mb-3">
         <div>
-          <h1>Prueba</h1>
-          <h4>administrator options</h4>
+        
+          <h3>Administrator Options</h3>
           <button onClick={handlerShowU} style={{ borderRadius: "2rem" }}>
             Users
           </button>
@@ -39,6 +39,7 @@ function Settings() {
           <button onClick={handlerShowC} style={{ borderRadius: "2rem" }}>
             Categories
           </button>
+          <hr></hr>
           {show.users ? <UsersSettings /> : null}
           {show.products ? <ProductsSettings /> : null}
           {show.categories ? <CategoresSettings /> : null}
