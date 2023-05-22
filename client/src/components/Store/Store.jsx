@@ -6,34 +6,60 @@ import { useParams } from "react-router-dom";
 import SetPages from "./SetPages.jsx";
 import { getProducts } from "../../Redux/actions/actionsProducts.js";
 
-export default function Store () {
+export default function Store ({ whereIAm, hereIAm }) {
 
   const dispatch = useDispatch();
   const params = useParams();
-  const allProducts = useSelector(state => state.products);
+
+  const all_Products = useSelector(state => state.products);
+  const allProducts = all_Products.filter(prod => prod.status && prod.stock > 0);
   const allCategories = useSelector(state => state.allCategories);
+
+  const user = useSelector(state => state.userLogin);
+
   const [order, setOrder] = useState('All Products');
   const [filter, setFilter] = useState('All');
+
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(8);
-
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
   const paged = (pageNumber) => {
-    setCurrentPage(pageNumber)
-  }
+    setCurrentPage(pageNumber);
+    hereIAm({
+      place: 'store',
+      order: order,
+      filter: filter,
+      name:'',
+      currentPage: pageNumber,
+    });
+  };
 
   const nextPage = (e) => {
     e.preventDefault();
     setCurrentPage(parseInt(currentPage) + 1);
-  }
+    hereIAm({
+      place: 'store',
+      order: order,
+      filter: filter,
+      name:'',
+      currentPage: parseInt(currentPage) + 1,
+    });
+  };
 
   const previousPage = (e) => {
-      e.preventDefault();
-      setCurrentPage(parseInt(currentPage) -1)
-  }
+    e.preventDefault();
+    setCurrentPage(parseInt(currentPage) - 1)
+      hereIAm({
+        place: 'store',
+        order: order,
+        filter: filter,
+        name: '',
+        currentPage: parseInt(currentPage) - 1,
+      });
+  };
 
   async function handleOrder(e){
     e.preventDefault();
@@ -43,6 +69,13 @@ export default function Store () {
     } else {
       dispatch(productsOrder);
       setOrder(e.target.value)
+      hereIAm({
+        place: 'store',
+        order: e.target.value,
+        filter: filter,
+        name:'',
+        currentPage: 1,
+      });
       setCurrentPage(1);
     };
   };
@@ -55,6 +88,13 @@ export default function Store () {
     } else {
       dispatch(productsFilter);
       setFilter(e.target.value);
+      hereIAm({
+        place: 'store',
+        order: order,
+        filter: e.target.value,
+        name:'',
+        currentPage: 1,
+      });
       setCurrentPage(1);
     };
   };
@@ -64,26 +104,58 @@ export default function Store () {
     dispatch(all_Products);
     const all_Categories = await getCategories();
     dispatch(all_Categories);
-    let flagCategory = true;
-    setOrder('All Products');
-    if (params.hasOwnProperty('id')) {
-      const idCategory = params.id;
-      const productsFilter = await filterByCategories(idCategory, order);
-      if (productsFilter.hasOwnProperty('error')) {
-        alert('There are no products for this category');
-        flagCategory = false;
-        alert('Return to all Categories')
-      } else {
+    const retWhereIAm = whereIAm;
+    console.log('entro a loadingData de store whereIAm : ', retWhereIAm);
+    if (whereIAm.place !== 'detail') {
+      let flagCategory = false;
+      setOrder('All Products');
+      if (params.hasOwnProperty('id')) {
+        const idCategory = params.id;
+        const productsFilter = await filterByCategories(idCategory, order);
+        if (productsFilter.hasOwnProperty('error')) {
+          alert('There are no products for this category');
+          alert('Return to all Categories')
+        } else {
+          dispatch(productsFilter);
+          setFilter(idCategory);
+          hereIAm({
+            place: 'store',
+            order: 'All Products',
+            filter: idCategory,
+            name: '',
+            currentPage: 1,
+          });
+          flagCategory = true;
+        }
+      } 
+      if (!flagCategory) {
+        const productsFilter = await filterByCategories('All', order);
         dispatch(productsFilter);
-        setFilter(idCategory);
-      }
-    } 
-    if (!flagCategory) {
-      const productsFilter = await filterByCategories('All', order);
+        setFilter('All');
+        hereIAm({
+          place: 'store',
+          order: 'All Products',
+          filter: 'All',
+          name: '',
+          currentPage: 1,
+        });
+      };
+      setCurrentPage(1);
+    } else {
+      const productsFilter = await filterByCategories(retWhereIAm.filter, retWhereIAm.order);
       dispatch(productsFilter);
-      setFilter('All');
+      setOrder(retWhereIAm.order);
+      setFilter(retWhereIAm.filter);
+      hereIAm({
+        place: 'store',
+        order: retWhereIAm.order,
+        filter: retWhereIAm.filter,
+        name: retWhereIAm.name,
+        currentPage: retWhereIAm.currentPage,
+      });
+      setCurrentPage(retWhereIAm.currentPage);
     };
-    setCurrentPage(1);
+    console.log('salgo de loadingData de store whereIAm : ', whereIAm);
   };
 
   useEffect(()=>{
@@ -155,6 +227,8 @@ export default function Store () {
               image={product.image}
               description={product.description}
               price={product.price}
+              tax={product.tax}
+              stock={product.stock}
               priceFlag={true}
               />
               ))}

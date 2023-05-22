@@ -19,14 +19,11 @@ const SearchBar = () => {
     e.preventDefault();
     if (!name) window.alert('Input empty');
     else {
-      console.log('entre a buscar');
-      const nameFound = await getProductsByName(name);
-      console.log('nameFound ',nameFound)
+      const nameFound = await getProductsByName(name, true);
       if (nameFound.hasOwnProperty('error')) { 
         setName('');
         alert(nameFound.error);
       } else {
-        console.log('dispatch ',nameFound)
         setName('');
         dispatch(nameFound);
       };
@@ -38,7 +35,7 @@ const SearchBar = () => {
         <Stack direction="horizontal" >
           <Form.Control className="me-auto" placeholder="Product ..." name='name' onChange={handlerChange} />
           <Button variant="btn btn-outline-success" type='submit' >🔎</Button>
-          <Button variant="btn btn-danger" type='reset' >X</Button>
+          <Button variant="btn btn-outline-danger" type='reset' ><strong>X</strong></Button>
         </Stack>
       </Form>
   )

@@ -9,8 +9,7 @@ import validate from "./validate.js";
 import Form from "react-bootstrap/Form";
 import emailjs from "@emailjs/browser";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Button from 'react-bootstrap/Button';
-import Stack from "react-bootstrap/esm/Stack";
+import Button from "react-bootstrap/esm/Button";
 
 function Contact() {
   const navigate = useNavigate();

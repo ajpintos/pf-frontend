@@ -27,7 +27,7 @@ const Favorites = () => {
         >
           {favorite.map((e) => {
             return (
-              <div className="border border-success border-2">
+              <div key={e.id} className="border border-success border-2">
                 <div>
                   <div>NOMBRE:{e.name}</div>
                   <div>DESCRIPTION:{e.description}</div>
