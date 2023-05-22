@@ -31,7 +31,7 @@ function Title() {
       <>
     <div className="row justtify-content-center align-items-center">
         <figure className='col-6 col-sm-5 col-md-4 col-lg-3'>
-          <img src={imgpropia} alt="Biofresh Logo" className='img-fluid w-50 p-0' />
+            <Link to="/"><img src={imgpropia} alt="Biofresh Logo" className='img-fluid w-50 p-0' /></Link>
         </figure>
         <Col xs={7}> {user.email
           ? <div>
