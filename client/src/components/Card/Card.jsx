@@ -5,6 +5,7 @@ import { AddToCartIcon } from "../Icons/Icons";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {addFavorites, deleteFavorites,} from "../../Redux/actions/actionsFavorites";
+import st from './Card.module.css'
 
 function Card({ id, name, image, description, price, priceFlag, stock }) {
   //! Función de Mercadopago
@@ -39,11 +40,11 @@ function Card({ id, name, image, description, price, priceFlag, stock }) {
       {name ? (
         <div className="card">
           <div className="card-body">
-          {isFav ? (
-            <button onClick={handleFavorite}>❤️</button>
+          {/* {isFav ? (
+            <button onClick={handleFavorite} style={{border:0}}>❤️</button>
           ) : (
             <button onClick={handleFavorite}>🤍</button>
-          )}
+          )} */}
             <Link to={`/detail/${id}`}>
               <img src={image} className="card-img-top img-fluid" alt={name} />
             </Link>
@@ -56,6 +57,11 @@ function Card({ id, name, image, description, price, priceFlag, stock }) {
               }
             <div className="row">
               <Button variant="btn btn-success mt-2" className="col-6 offset-3" onClick={handlerMercadoPagoLink}><AddToCartIcon/></Button>
+              {isFav ? (
+            <button className={st.btnFav} onClick={handleFavorite} style={{border:0}}>❤️</button>
+          ) : (
+            <button className={st.btnFav} onClick={handleFavorite}>🤍</button>
+          )}
             </div>
           </div>
 

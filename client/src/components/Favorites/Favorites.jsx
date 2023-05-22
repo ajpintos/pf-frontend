@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Container from 'react-bootstrap/Container'
+import Card from '../Card/Card.jsx'
 
 const Favorites = () => {
   const favorites = useSelector((state) => state.favorites);
@@ -11,12 +13,13 @@ const Favorites = () => {
   console.log(favorite);
 
   return (
-    <div className="container-fluid text-center border border-info border-3 vh-100 vw-100">
-      <h1>Favorites en Desarrollo</h1>
+    <Container fluid >
+   
+    
       <Link to="/">
-        <button>Volver</button>
+        <button>Home</button>
       </Link>
-      <div className="border border-danger border-3 ">
+      {/* <div className="border border-danger border-3 ">
         <div
           style={{
             width: "200px",
@@ -24,23 +27,35 @@ const Favorites = () => {
             display: "flex",
             margin: "5px",
           }}
-        >
-          {favorite.map((e) => {
+        > */}
+        <section className="row">
+          {favorite?.map((product,index) => {
             return (
-              <div className="border border-success border-2">
-                <div>
-                  <div>NOMBRE:{e.name}</div>
-                  <div>DESCRIPTION:{e.description}</div>
-                  <img src={e.image} alt="" width="20%" height="20px" />
-                  <div>PRECIO:{e.price}</div>
-                  <div>DISPONIBLES:{e.stock}</div>
-                </div>
-              </div>
+              <Card 
+                  key={index}
+                  id={product.id}
+                  name={product.name}
+                  image={product.image}
+                  description={product.description}
+                  price={product.price}
+                  stock={product.stock}
+                  priceFlag={false}
+                  />
+              // <div className="border border-success border-2">
+              //   <div>
+              //     <div>NOMBRE:{e.name}</div>
+              //     <div>DESCRIPTION:{e.description}</div>
+              //     <img src={e.image} alt="" width="20%" height="20px" />
+              //     <div>PRECIO:{e.price}</div>
+              //     <div>DISPONIBLES:{e.stock}</div>
+              //   </div>
+              // </div>
             );
           })}
-        </div>
-      </div>
-    </div>
+        {/* </div> */}
+      {/* </div> */}
+      </section>
+    </Container>
   );
 };
 
