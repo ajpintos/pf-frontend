@@ -12,7 +12,6 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import registerValidate from "../../RegisterPage/validate/registerValidate.js";
 
 
 const ChangePassword = () => {
@@ -35,18 +34,20 @@ const ChangePassword = () => {
         const property = event.target.name;
         const value = event.target.value;
         setFormForgotPassword({...formForgotPassword, [property]: value});
-
-        setErrors(validate({...form, [property]: value}));
+        setErrors(validate({...formForgotPassword, [property]: value}));
     }
 
-    const handlerSubmitForgotPassword = async (e) => {
+    const handlerSubmitForgotPassword = (e) => {
         e.preventDefault();
-        await axios.put('/users/forgotpassword', { email ,token: formForgotPassword.token , password: formForgotPassword.newPassword })
-            .then((res) => {
-                alert("Password changed successfully");
-                navigate('/');
-            })
-            .catch((error) => alert(error.message))
+        if (errors.newPassword || errors.repeatNewPassword) alert("Check all camps and try again");
+        else {
+            axios.put('/users/forgotpassword', { email ,token: formForgotPassword.token , password: formForgotPassword.newPassword })
+                .then((res) => {
+                    alert("Password changed successfully");
+                    navigate('/');
+                })
+                .catch((error) => alert(error.message));
+        }
     }
 
     useEffect(() => {
