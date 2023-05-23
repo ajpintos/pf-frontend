@@ -23,10 +23,7 @@ function RegisterPage() {
     city: "",
     country: "",
     phone: "",
-    adminType:""
   });
-
-  form.adminType = true
 
   //! Estado local para guardar los errores de validación del formulario
   const [errors, setErrors] = useState({

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ModificarUser from "../ModificarUsers/ModificarUser";
 import NuevoForm from "../New user admi/RegisterPage/RegisterPage";
-import axios from "axios";
+import axios from "axios"
 
 const UsersSettings = () => {
   const dispatch = useDispatch();
@@ -31,18 +31,19 @@ const UsersSettings = () => {
     setEmail(email);
   };
 
-  const borradoLogico = async (email, status) => {
-    const form = {
-      email: email,
-      status: !status,
-    };
-    try {
-      const borrado = await axios.delete("/users/delete", { data: form });
-      if (borrado) alert("Successful operation");
-      loadingData()
-    } catch (error) {
-      alert("Error found: " + error.message);
+  const borradoLogico =async (email,status) => {
+  try {
+    const dataFuncional = {email:email,active:!status}
+    const result = await axios.delete("/users",{
+      data:dataFuncional
+    })
+    if(result){
+      alert("Operacion exitosa")
     }
+ /*    loadingData() */
+  } catch (error) {
+    alert("hubo un error" + error.message)
+  }
   };
 
   const [estado, setEstado] = useState(false);
@@ -52,10 +53,10 @@ const UsersSettings = () => {
 
   return (
     <>
-      <div className="container-fluid col-8 mt-3">
+      <div className="container-fluid col-8">
         <br />
-        <h4>User Settings</h4>
-
+        <h3>User Settings</h3>
+     
         <Button
           style={{ borderRadius: "2rem", fontSize: "15px" }}
           onClick={handleModal}
@@ -93,9 +94,7 @@ const UsersSettings = () => {
                     <Button
                       variant="light"
                       size="sm"
-                      onClick={() =>
-                        borradoLogico(prod.email, prod.customerStatus)
-                      }
+                      onClick={() => borradoLogico(prod?.email,prod?.customerStatus)}
                     >
                       {prod.customerStatus ? "✅ " : "❌"}
                     </Button>
