@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
-import { cartFoundIndex, foundOrderForDetail } from "../Cart/cartHelpers.js";
+import { cartFoundIndex, foundOrderForDetail, getCartDetail } from "../Cart/cartHelpers.js";
 import { AddToCartIcon } from "../Icons/Icons";
 import { add_ToCart, remove_FromCart } from "../../Redux/actions/actionsCart.js";
 
 const Detail = ({ whereIAm, hereIAm }) => {
 
-  const userLogin = useSelector(state=>state.userLogin);
+  const user = useSelector(state=>state.userLogin);
   const nameProducts = useSelector(state=>state.nameProducts);
   const cartDetails = useSelector(state=>state.cartDetails);
   const navigate = useNavigate();
@@ -36,16 +36,8 @@ const Detail = ({ whereIAm, hereIAm }) => {
   };
 
   const addToCart = async () => {
-    if (userLogin && userLogin !== undefined && userLogin !== '') {
-      const orderUser = await foundOrderForDetail(userLogin);
-      const detailsData = {
-        idOrder: orderUser.id,
-        idProduct: id,
-        units: parseInt(cant)
-      };
-      const detailCreated = await axios.post('/ordersDetails', detailsData);
-    };
     let productModify = {
+      idOrder: '',
       idOrderDetail: '',
       idProduct: product.id,
       name: product.name,
@@ -62,10 +54,13 @@ const Detail = ({ whereIAm, hereIAm }) => {
     if (cartDetails.length > 0) {
       let unitsProduct = cartFoundIndex(product.id, cartDetails);
       if (unitsProduct !== null) {
+        const detailFound = await getCartDetail(product.id, cartDetails);
         dispatch(remove_FromCart(product.id, cartDetails));
         unitsProduct = unitsProduct + parseInt(cant);
         productModify = {
           ...productModify, 
+          idOrder: detailFound.idOrder,
+          idOrderDetail: detailFound.idOrderDetail,
           units: unitsProduct,
           amount: (product.price * unitsProduct),
           taxAmount: (product.price * unitsProduct) * product.tax,
@@ -74,6 +69,13 @@ const Detail = ({ whereIAm, hereIAm }) => {
       };
     };
     dispatch(add_ToCart(productModify, cartDetails));
+    if (user.email) {
+      const updateData = {
+        idDetail: productModify.idOrderDetail,
+        units: productModify.units,
+      };
+      const orderDetailUpdate = await axios.put('/ordersDetails', updateData );
+    };
     window.alert('Product added to cart');
 
   };
@@ -87,14 +89,12 @@ const Detail = ({ whereIAm, hereIAm }) => {
       name: nameProducts,
       currentPage: returnWhere.currentPage
     });
-    console.log('salgo de details con ',whereIAm);
     navigate('/'+returnWhere.place);
   }
 
   const escape = () => {
     const returnWhere = whereIAm;
     hereIAm(returnWhere);
-    console.log('entro a deatils con ', returnWhere);
   };
 
   useEffect(()=>{

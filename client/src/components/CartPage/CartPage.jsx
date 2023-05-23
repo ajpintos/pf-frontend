@@ -10,16 +10,18 @@ import { getCartDetail } from '../Cart/cartHelpers'
 import { add_ToCart, clear_Cart, remove_FromCart } from '../../Redux/actions/actionsCart'
 import { getProductById } from '../../Redux/actions/actionsProducts'
 
+// contact.biofresh.shop@gmail.com
+// BioFreshADM2023
+
 const CartPage = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const userLogin = useSelector(state=> state.userLogin);
+  const user = useSelector(state=> state.userLogin);
   const cart_Details = useSelector(state=> state.cartDetails);
   const cartDetails = cart_Details;
-  console.log('cartDetails ',cartDetails);
-
+  let cantProduct;
   const [ cant, setCant ] = useState(0);
 
   const validateCant = (e) => {
@@ -37,15 +39,12 @@ const CartPage = () => {
   const updatedCart = async (idProduct) => {
     const productFound = await getProductById(idProduct);
     const cartDetail = await getCartDetail(idProduct, cartDetails);
-    console.log('idProduct ',idProduct);
-    console.log('cartDetail ',cartDetail);
-    console.log('userLogin ', userLogin);
-    if (userLogin && userLogin !== undefined && userLogin !== '') {
+    if (user.email) {
       const updateData = {
-        idDetail: cartDetail.idDetail,
-        units: cartDetail.units
+        idDetail: cartDetail.idOrderDetail,
+        units: parseInt(cant)
       };
-      const orderDetailUpdate = await axios.put('/ordersDetails', updateData);
+      const orderDetailUpdate = await axios.put('/ordersDetails', updateData );
     };
     dispatch(remove_FromCart(idProduct, cartDetails));
     const cart_Detail = { 
@@ -63,15 +62,20 @@ const CartPage = () => {
 
   const removeToCart = async (idProduct) => {
     const cartDetail = await getCartDetail(idProduct, cartDetails);
-    if (userLogin && userLogin !== undefined && userLogin !== '') {
-      const orderDetailDelete = await axios.delete('/ordersdetails', { idDetail: cartDetail.idDetail });
+    if (user.email) {
+      const detailData = { idDetail: cartDetail.idOrderDetail };
+      const orderDetailDelete = await axios.delete('/ordersDetails', { data: detailData });
     };
     dispatch(remove_FromCart(idProduct, cartDetails));
     updateTotals();
   };
 
-  const clearCart = () => {
-    if (userLogin && userLogin !== undefined && userLogin !== '') {
+  const clearCart = async () => {
+    if (user.email) {
+      for (let i=0; i < cartDetails.length; i++) {
+        const detailData = { idDetail: cartDetails[i].idOrderDetail };
+        const orderDetailDelete = await axios.delete('/ordersDetails', { data: detailData });
+      };
     }; 
     dispatch(clear_Cart());
     updateTotals();
@@ -129,13 +133,14 @@ const CartPage = () => {
                 </thead>
                 <tbody>
                   {cartDetails.length < 1
-                    ? <div className="row">
+                    ? <tr className="row">
                         <section className="col-12">
                           <div className="bg-secondary alert text-white">The shopping cart is currently empty. You can go back and start adding products.</div>
                           <Button className="btn btn-success btn-block mb-1" onClick={()=>goToPath('/store')}>Go Store</Button>
                         </section>
-                      </div>
+                      </tr>
                     : cartDetails.map(product => {
+                      cantProduct = product.units;
                       return (
                         <tr key={product.idProduct} >
                           <td>
@@ -152,12 +157,12 @@ const CartPage = () => {
                           <td>
                             <input
                               type="number"
-                              // value={cant}
+                              // value={cantProduct}
                               min={1}
                               max={product.stock}
                               placeholder={product.units}
                               onChange={validateCant}
-                              style={{ width: "40px", marginTop: "5px" }}
+                              style={{ width: "50px", marginTop: "5px" }}
                             />
                           </td>
                           <td>

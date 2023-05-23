@@ -85,7 +85,6 @@ const rootReducer = (state = initialState, action) => {
       }
     }
     case ADD_TO_CART: {
-
       return {
         ...state,
         cart: action.payload.order,
@@ -96,7 +95,12 @@ const rootReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        cart: action.payload.order,
+        cart: {
+          ...state.cart,
+          amount: action.payload.order.amount,
+          taxAmount: action.payload.order.taxAmount,
+          totalAmount: action.payload.order.totalAmount,  
+        },
         cartDetails: action.payload.products,
       }
     }

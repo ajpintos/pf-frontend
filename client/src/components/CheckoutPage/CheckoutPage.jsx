@@ -72,6 +72,10 @@ function RegisterPage() {
         setErrors(validate({...form, [property]: value}));
     }
 
+    const goToStore = () => {
+        navigate('/store');
+    };
+
     return (
         <div className="container-fluid">
             <div className='container'>
@@ -82,8 +86,8 @@ function RegisterPage() {
                 <Form onSubmit={submitHandler} id="formToSend" className='d-flex gap-4'>
                     <div className='col-lg-8'>
                         <div className='card mb-3'>
-                            <div class="card-header">
-                                <h2 class="legend card-title">Contact</h2>
+                            <div className="card-header">
+                                <h2 className="legend card-title">Contact</h2>
                             </div>
                             <Row className="mb-1 px-2">
                                 <Form.Group as={Col} controlId="formEmail">
@@ -111,9 +115,9 @@ function RegisterPage() {
                                 </Form.Group>
                             </Row>
                         </div>
-                        <div class="card mb-3 pb-3">
-                            <div class="card-header">
-                                <h2 class="legend card-title">Billing Address</h2>
+                        <div className="card mb-3 pb-3">
+                            <div className="card-header">
+                                <h2 className="legend card-title">Billing Address</h2>
                             </div>
                         <Row className="px-2">
                             <Form.Group as={Col} controlId="formName">
@@ -214,18 +218,19 @@ function RegisterPage() {
                         </div>
                     </div>
                     <div className=' col-lg-4'>
-                        <div id="payments" class="card mb-3">
-                            <div class="card-header">
-                                <h2 class="legend card-title">Payment Options</h2>
+                        <div id="payments" className="card mb-3">
+                            <div className="card-header">
+                                <h2 className="legend card-title">Payment Options</h2>
                             </div>
-                            <div id="payments_options" class="card-body">
+                            <div id="payments_options" className="card-body">
                             <ul>
                                 <li>
-                                    <input type="radio" id="order_payment_method_27792" class="radiobox"/>
+                                    <input type="radio" id="order_payment_method_27792" className="radiobox"/>
                                     <label htmlFor="order_payment_method_27792"><span>Transferencia bancaria</span></label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="order_payment_method_30906" class="radiobox" checked="checked"/>
+                                    {/* <input type="radio" id="order_payment_method_30906" className="radiobox" checked="checked"/> */}
+                                    <input type="radio" id="order_payment_method_30906" className="radiobox" defaultChecked/>
                                     <label for="order_payment_method_30906"><span>Mercado Pago</span></label>
                                     <div>
                                         You will be redirected to Mercado Pago to make a secure payment.
@@ -239,7 +244,7 @@ function RegisterPage() {
                             <Button variant="success" className='mb-2' type="submit">
                                 Review Order
                             </Button>
-                            <Button variant='success' className='mb-2' type='' href='/store'>
+                            <Button variant='success' className='mb-2' type='' onClick={goToStore}>
                                 ← Continue Shopping
                             </Button>
                         </div>

@@ -23,21 +23,13 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
 
   const [isFav, setIsFav] = React.useState(false);
   const state = useSelector((state) => state.favorites);
-  const userLogin = useSelector(state=>state.userLogin);
+  const user = useSelector(state=>state.userLogin);
   const cart = useSelector(state=>state.cart);
   const cartDetails = useSelector(state=>state.cartDetails);
 
   const addToCart = async () => {
-    if (userLogin && userLogin !== undefined && userLogin !== '') {
-      const orderUser = await foundOrderForDetail(userLogin);
-      const detailsData = {
-        idOrder: orderUser.id,
-        idProduct: id,
-        units: 1
-      };
-      const detailCreated = await axios.post('/ordersDetails', detailsData);
-    };
     let product = {
+      idOrder: '',
       idOrderDetail: '',
       idProduct: id,
       name: name,
@@ -50,6 +42,20 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
       amount: price,
       taxAmount: price * tax,
       totalAmount: ( price * tax ) + price,
+    };
+    if (user.email) {
+      const orderUser = await foundOrderForDetail(user.email);
+      const detailsData = {
+        idOrder: orderUser.id,
+        idProduct: id,
+        units: 1
+      };
+      const detailCreated = await axios.post('/ordersDetails', detailsData);
+      product = {
+        ...product,
+        idOrder: detailsData.idOrder,
+        idOrderDetail: detailCreated.data.id,
+      };
     };
     if (cartDetails.length > 0) {
       let unitsProduct = cartFoundIndex(product.idProduct, cartDetails);

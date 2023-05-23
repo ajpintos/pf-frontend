@@ -12,7 +12,7 @@ export const add_ToCart = (product, cartDetails) => {
         totalAmountO = totalAmountO + cart_Details[i].totalAmount;
     };
     const order = {
-        idOrder: '',
+        idOrder: product.idOrder,
         amount: amountO + product.amount,
         taxAmount: taxAmountO + product.taxAmount,
         totalAmount: totalAmountO + product.totalAmount,
@@ -24,9 +24,7 @@ export const add_ToCart = (product, cartDetails) => {
 }
 
 export const remove_FromCart = (idProduct, cartDetails) => {
-    console.log('idProduct en remove ', idProduct);
     const products = cartDetails.filter(prod => prod.idProduct !== idProduct );
-    console.log('products en remove ',products);
     let amountO= 0;
     let taxAmountO = 0;
     let totalAmountO = 0;
@@ -36,12 +34,10 @@ export const remove_FromCart = (idProduct, cartDetails) => {
         totalAmountO = totalAmountO + products[i].totalAmount;
     };
     const order = {
-        idOrder: '',
         amount: amountO,
         taxAmount: taxAmountO,
         totalAmount: totalAmountO,
     };
-    console.log('order en remove ', order);
     return {
         type: REMOVE_FROM_CART,
         payload: { order, products }

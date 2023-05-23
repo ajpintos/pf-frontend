@@ -72,16 +72,11 @@ function CardContainer({ whereIAm, hereIAm }) {
 
   const callApi = async () => {
     const flag_Products = flagProducts;
-    console.log('flagProducts en callAppi ', flag_Products);
     const retWhereIAm = whereIAm;
-    console.log('entro a cardContainer con ',retWhereIAm);
     if (whereIAm.place !== 'detail') {
       if (flag_Products) {
-        console.log('entro a productsByName con flagProducts',flag_Products)
         const name_Products = nameProducts;
-        console.log('name_Products ', name_Products);
         const products_ByName = await getProductsByName(name_Products, true);
-        console.log('products_ByName ', products_ByName);
         dispatch(products_ByName);
         paged(1);
         hereIAm({
@@ -91,7 +86,6 @@ function CardContainer({ whereIAm, hereIAm }) {
           name: nameProducts,
           currentPage: 1,
         });
-        console.log('en cardContainer flag ', whereIAm);
       } else {
         const all_products = await getProductsByName('',false);
         if (all_products !== null) {
@@ -104,15 +98,11 @@ function CardContainer({ whereIAm, hereIAm }) {
             name: '',
             currentPage: 1,
           });
-          console.log('en cardContainer con no flag ', whereIAm);
         };
       };
     } else {
       if (flag_Products) {
-        console.log('entro a productsByName con flagProducts ',flag_Products)
-        console.log('name_Products ', retWhereIAm.name);
         const products_ByName = await getProductsByName(retWhereIAm.name, true);
-        console.log('products_ByName ', products_ByName);
         dispatch(products_ByName);
         paged(retWhereIAm.currentPage)
         hereIAm({
@@ -140,7 +130,6 @@ function CardContainer({ whereIAm, hereIAm }) {
   };
 
   useEffect(() => {
-    console.log('nameProducts en useEffect ',nameProducts);
     callApi();
   }, []);
 
