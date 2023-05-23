@@ -16,6 +16,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import NavBar from "../src/components/NavBar/NavBar.jsx";
 import Title from "./components/Title/Title.jsx";
 import FormEmail from "./components/ForgotPassword/FormEmail/FormEmail.jsx";
+import ChangePassword from "./components/ForgotPassword/ChangePassword/ChangePassword.jsx";
 
 //axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
@@ -47,6 +48,7 @@ function App() {
         <Route path="/form_update" element={<FormUdateMyaccount />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/forgotpassword" element={<FormEmail />}/>
+        <Route path="/forgotpassword/changepassword" element={<ChangePassword/> } />
       </Routes>
       <footer className="container-fluid" >
         <Footer />

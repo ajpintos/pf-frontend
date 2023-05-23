@@ -1,5 +1,8 @@
 import React from "react";
-import { useState } from "react";
+import { useState , useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styles from "./ChangePassword.module.css";
 
 // REACT-BOOSTRAP
@@ -11,6 +14,9 @@ import Button from 'react-bootstrap/Button';
 
 
 const ChangePassword = () => {
+
+    const navigate = useNavigate();
+    const email = useSelector(state => state.userEmail)
 
     const [formForgotPassword , setFormForgotPassword ] = useState({
         token: "",
@@ -24,13 +30,33 @@ const ChangePassword = () => {
         setFormForgotPassword({...formForgotPassword, [property]: value});
     }
 
-    const handlerSubmitForgotPassword = (e) => {
+    const handlerSubmitForgotPassword = async (e) => {
         e.preventDefault();
+        await axios.put('/users/forgotpassword', { email ,token: formForgotPassword.token , password: formForgotPassword.newPassword })
+            .then((res) => {
+                alert("Password changed successfully");
+                navigate('/');
+            })
+            .catch((error) => alert(error.message))
     }
+
+    useEffect(() => {
+        !email.length && navigate('/forgotpassword')
+    })
+
+
     return (
         <div className="container-fluid">
             <div className={styles.formContainer}>
                 <Form onSubmit={handlerSubmitForgotPassword} id="formToSend">
+                    <Form.Group>
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                            type="text"
+                            value={email}
+                            readOnly
+                        />
+                    </Form.Group>
                     <Form.Group as={Col} controlId="formToken"> 
                         <Form.Label>Token</Form.Label>
                         <Form.Control
