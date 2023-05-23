@@ -15,6 +15,7 @@ import FormUdateMyaccount from "./components/MyAccount/Components/FormUpdate/For
 import Footer from "./components/Footer/Footer.jsx";
 import NavBar from "../src/components/NavBar/NavBar.jsx";
 import Title from "./components/Title/Title.jsx";
+import FormEmail from "./components/ForgotPassword/FormEmail/FormEmail.jsx";
 import CartPage from './components/CartPage/CartPage.jsx';
 import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
 import { useDispatch, useSelector } from "react-redux";
@@ -62,6 +63,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/cart/checkout" element={<CheckoutPage />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/forgotpassword" element={<FormEmail />}/>
       </Routes>
       <footer className="container-fluid" >
         <Footer />

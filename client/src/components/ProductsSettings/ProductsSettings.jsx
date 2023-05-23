@@ -66,7 +66,7 @@ const ProductsSettings = () => {
       const result = await axios.delete("/products", { data: dataFuncional });
 
       if (result) {
-        alert("Operacion exitosa");
+        alert("Successful operation");
       }
       loadingData();
     } catch (error) {
@@ -75,9 +75,9 @@ const ProductsSettings = () => {
   };
   return (
     <>
-      <div className="container-fluid col-8">
+      <div className="container-fluid col-8 mt-3">
         <br />
-        <h3>product configuration</h3>
+        <h4>Products Settings</h4>
         <Button
           variant="success"
           onClick={handleShowNew}

@@ -89,16 +89,17 @@ return (
                     <Form.Group as={Col} controlidemail="Email">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
+                            required
                             type="email"
                             placeholder="Enter email" id="email" name="email"
                             value={form.email}
                             onChange={changeHandler}
                         />
                     </Form.Group>
-                    <br/>
                     <Form.Group as={Col} controlidpassword="Password">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
+                            required
                             type="password"
                             placeholder="Enter Password"
                             id="password"
@@ -108,9 +109,11 @@ return (
                         />
                     </Form.Group>
                 </Row>
-                <br/>
                 <Button variant="success" type="submit">Login</Button>
             </Form>
+            <Row className="mb-3">
+                <Link to={"/"}>Forgot Password</Link>
+            </Row>
             <Row className="mb-3">
                 <Link to={"/register"}>Register Now</Link>
             </Row>
@@ -120,7 +123,7 @@ return (
                     onSuccess={onSuccess}
                     onFailure={onFailure}
                     cookiePolicy={"single_host_policy"}
-                />
+                    />
             </Row>
         </div>
     </div>

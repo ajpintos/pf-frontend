@@ -8,6 +8,7 @@ import axios from "axios";
 import { cartFoundIndex, foundOrderForDetail } from "../Cart/cartHelpers";
 import { add_ToCart, remove_FromCart } from "../../Redux/actions/actionsCart";
 import accounting from 'accounting';
+import st from './Card.module.css'
 
 function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
 
@@ -91,11 +92,11 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
       {name ? (
         <div className="card">
           <div className="card-body">
-          {isFav ? (
-            <button onClick={handleFavorite}>❤️</button>
+          {/* {isFav ? (
+            <button onClick={handleFavorite} style={{border:0}}>❤️</button>
           ) : (
             <button onClick={handleFavorite}>🤍</button>
-          )}
+          )} */}
             <Link to={`/detail/${id}`}>
               <img src={image} className="card-img-top img-fluid" alt={name} />
             </Link>
@@ -109,6 +110,11 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
             <div className="row">
               <Button variant="btn btn-success mt-2" className="col-6 offset-3" onClick={addToCart}><AddToCartIcon/></Button>
               {/* <Button variant="btn btn-success mt-2" className="col-6 offset-3" onClick={handlerMercadoPagoLink}><AddToCartIcon/></Button> */}
+              {isFav ? (
+            <button className={st.btnFav} onClick={handleFavorite} style={{border:0}}>❤️</button>
+          ) : (
+            <button className={st.btnFav} onClick={handleFavorite}>🤍</button>
+          )}
             </div>
           </div>
 

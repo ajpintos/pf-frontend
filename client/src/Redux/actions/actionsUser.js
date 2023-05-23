@@ -44,7 +44,7 @@ export const userLogout = () => {
         localStorage.removeItem('user');
         return {
             type: LOGOUT_USER,
-            payload: {}
+            payload: []
         }  
     }
 }
@@ -64,6 +64,7 @@ export const allUsers = () => {
 
 export const setUser = (data) => {
     return function(dispatch) {
+        localStorage.setItem('user', JSON.stringify(data));
         return dispatch ({
             type: SET_USER,
             payload: data

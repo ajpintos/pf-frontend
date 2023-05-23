@@ -26,9 +26,9 @@ const AddCategorie = () => {
   const handleSubmit = async (event) => {
     try {
       const result = await axios.post("/categories/categorie", form);
-      if (result) alert("Operacion exitosa");
+      if (result) alert("Successful operation");
     } catch (error) {
-      alert("DENEGADO" + error.message);
+      alert("Error" + error.message);
     }
   };
 

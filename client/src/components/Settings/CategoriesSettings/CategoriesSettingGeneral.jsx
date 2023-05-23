@@ -1,12 +1,23 @@
 import axios from "axios";
 import Button from "react-bootstrap/Button";
-import Table from "react-bootstrap/esm/Table";
+import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../../Redux/actions/actionsCategories";
 import { useEffect, useState } from "react";
 import AddCategorie from "./AddCategorie";
+import ModificarCategoria from "./ModificarCategories";
 
 const CategoriesSettingGeneral = () => {
+  const dispatch = useDispatch();
+  const loadingData = async () => {
+    const data = await getCategories()
+     dispatch(data);
+  };
+
+  useEffect(() => {
+    loadingData();
+  },[]);
+
   const allCategories = useSelector((state) => state?.allCategories);
 
   //modal add categorie
@@ -20,17 +31,33 @@ const CategoriesSettingGeneral = () => {
       const dataFuncional = { id: id, active: !status };
       const result = await axios.delete("/categories", { data: dataFuncional });
       if (result) {
-        alert("Operacion exitosa");
+        alert("Successful operation");
       }
+      loadingData();
     } catch (error) {
-      alert(`Error encontrado ${error.message}`);
+      alert(`Error found ${error.message}`);
+    }
+  };
+
+  //modal modificar categorie
+  const [pasamanos, setPasamanos] = useState({
+    id: "",
+    name: "",
+  });
+  const [modificar, setModificar] = useState(false);
+  const handleModalDos = (id, name) => {
+    setPasamanos({ id: id, name: name });
+    if (modificar) {
+      setModificar(false);
+    } else {
+      setModificar(true);
     }
   };
 
   return (
-    <div>
+    <div className="container-fluid col-8 mt-3">
       <br />
-      <h3>category settings</h3>
+      <h4>Category Settings</h4>
       <div>
         <Button
           style={{ borderRadius: "2rem", fontSize: "15px" }}
@@ -40,7 +67,7 @@ const CategoriesSettingGeneral = () => {
           New
         </Button>
 
-        <Table>
+        <Table striped size="sm">
           <thead>
             <tr>
               <th>No.</th>
@@ -59,7 +86,9 @@ const CategoriesSettingGeneral = () => {
                     <Button
                       variant="light"
                       size="sm"
-                      /*  onClick={() => handleShow(prod.email)} */
+                      onClick={() =>
+                        handleModalDos(categorie.id, categorie.name)
+                      }
                     >
                       📝
                     </Button>
@@ -81,6 +110,9 @@ const CategoriesSettingGeneral = () => {
           </tbody>
         </Table>
         {estado ? <AddCategorie /> : null}
+        {modificar ? (
+          <ModificarCategoria id={pasamanos.id} name={pasamanos.name} />
+        ) : null}
       </div>
     </div>
   );

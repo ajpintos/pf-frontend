@@ -1,5 +1,10 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Container from 'react-bootstrap/Container'
+import Card from '../Card/Card.jsx'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col'
+import Alert from 'react-bootstrap/Alert';
 
 const Favorites = () => {
   const favorites = useSelector((state) => state.favorites);
@@ -11,36 +16,41 @@ const Favorites = () => {
   console.log(favorite);
 
   return (
-    <div className="container-fluid text-center border border-info border-3 vh-100 vw-100">
-      <h1>Favorites en Desarrollo</h1>
-      <Link to="/">
-        <button>Volver</button>
-      </Link>
-      <div className="border border-danger border-3 ">
-        <div
-          style={{
-            width: "200px",
-            height: "200px",
-            display: "flex",
-            margin: "5px",
-          }}
-        >
-          {favorite.map((e) => {
+    <Container fluid my-3 pb-3 mx-5>
+   <Row className="justify-content-md-center">
+           <Col md="auto">
+    <h2>Favorites</h2></Col>
+    </Row>
+      {/* <Link to="/">
+        <button>Home</button>
+      </Link> */}
+      
+        <section className="row">
+          {favorite?.map((product,index) => {
             return (
-              <div key={e.id} className="border border-success border-2">
-                <div>
-                  <div>NOMBRE:{e.name}</div>
-                  <div>DESCRIPTION:{e.description}</div>
-                  <img src={e.image} alt="" width="20%" height="20px" />
-                  <div>PRECIO:{e.price}</div>
-                  <div>DISPONIBLES:{e.stock}</div>
-                </div>
-              </div>
+              <Card 
+                  key={index}
+                  id={product.id}
+                  name={product.name}
+                  image={product.image}
+                  description={product.description}
+                  price={product.price}
+                  stock={product.stock}
+                  priceFlag={false}
+                  />
+            
             );
           })}
-        </div>
-      </div>
-    </div>
+           <Row className="justify-content-md-center">
+           <Col md="auto">
+          {favorites.length <1 ?  <h4 my-3 pb-5 style={{ color: "orangered",
+        margin:'auto',}}>No favorites have been selected, go back to Home.</h4>:''}
+       </Col>
+        </Row>
+
+        
+      </section>
+    </Container>
   );
 };
 

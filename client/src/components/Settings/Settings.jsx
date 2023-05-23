@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UsersSettings from "../UsersSettings/SettingsGeneral/UsersSettings";
 import ProductsSettings from "../ProductsSettings/ProductsSettings";
 import CategoresSettings from "../Settings/CategoriesSettings/CategoriesSettingGeneral";
 import { useSelector } from "react-redux";
+import {useNavigate} from "react-router-dom"
 
 function Settings() {
+  const userAdmin = useSelector((state) => state.userLogin);
+  const navigate = useNavigate()
+
   const [show, setShow] = useState({
     users: false,
     products: false,
@@ -21,13 +25,15 @@ function Settings() {
     setShow({ users: false, products: false, categories: true });
   };
 
+  useEffect(() => {
+    !userAdmin.adminType && navigate("/");
+  });
+
   return (
     <div className="container-fluid">
-
-      <div className="text-center mt-5 mb-5">
+      <div className="text-center mt-3 mb-3">
         <div>
-          <h1>Prueba</h1>
-          <h4>administrator options</h4>
+          <h3>Administrator Options</h3>
           <button onClick={handlerShowU} style={{ borderRadius: "2rem" }}>
             Users
           </button>
@@ -39,6 +45,7 @@ function Settings() {
           <button onClick={handlerShowC} style={{ borderRadius: "2rem" }}>
             Categories
           </button>
+          <hr></hr>
           {show.users ? <UsersSettings /> : null}
           {show.products ? <ProductsSettings /> : null}
           {show.categories ? <CategoresSettings /> : null}
