@@ -129,47 +129,47 @@ const CartPage = () => {
                 </thead>
                 <tbody>
                   {cartDetails.length < 1
-                    ? <div class="row">
-                        <section class="col-12">
-                          <div class="bg-secondary alert text-white">The shopping cart is currently empty. You can go back and start adding products.</div>
+                    ? <div className="row">
+                        <section className="col-12">
+                          <div className="bg-secondary alert text-white">The shopping cart is currently empty. You can go back and start adding products.</div>
                           <Button className="btn btn-success btn-block mb-1" onClick={()=>goToPath('/store')}>Go Store</Button>
                         </section>
                       </div>
                     : cartDetails.map(product => {
                       return (
-                        <tr>
-                        <td>
-                          <p className='h5' >{product.name}</p>
-                        </td>
-                        <td className="text-center mob-hide">
-                          <figure className='container-fluid'>
-                            <img src={product.image} width={90} height={90} alt={product.name} />
-                          </figure>
-                        </td>
-                        <td className="mob-hide">
-                          <span>{accounting.formatMoney(`${product.price}`)}</span>
-                        </td>
-                        <td>
-                          <input
-                            type="number"
-                            // value={cant}
-                            min={1}
-                            max={product.stock}
-                            placeholder={product.units}
-                            onChange={validateCant}
-                            style={{ width: "40px", marginTop: "5px" }}
-                          />
-                        </td>
-                        <td>
-                          < Button className='btn' variant="warning" onClick={()=>updatedCart(product.idProduct)}>Up</Button>
-                        </td>
-                        <td>
-                          <Button className='btn' variant="danger" onClick={()=>removeToCart(product.idProduct)}><RemoveFromCartIcon /></Button>
-                        </td>
-                        <td>
-                          <p>{accounting.formatMoney(`${product.amount}`)}</p>
-                        </td>
-                      </tr>
+                        <tr key={product.idProduct} >
+                          <td>
+                            <p className='h5' >{product.name}</p>
+                          </td>
+                          <td className="text-center mob-hide">
+                            <figure className='container-fluid'>
+                              <img src={product.image} width={90} height={90} alt={product.name} />
+                            </figure>
+                          </td>
+                          <td className="mob-hide">
+                            <span>{accounting.formatMoney(`${product.price}`)}</span>
+                          </td>
+                          <td>
+                            <input
+                              type="number"
+                              // value={cant}
+                              min={1}
+                              max={product.stock}
+                              placeholder={product.units}
+                              onChange={validateCant}
+                              style={{ width: "40px", marginTop: "5px" }}
+                            />
+                          </td>
+                          <td>
+                            < Button className='btn' variant="warning" onClick={()=>updatedCart(product.idProduct)}>Up</Button>
+                          </td>
+                          <td>
+                            <Button className='btn' variant="danger" onClick={()=>removeToCart(product.idProduct)}><RemoveFromCartIcon /></Button>
+                          </td>
+                          <td>
+                            <p>{accounting.formatMoney(`${product.amount}`)}</p>
+                          </td>
+                        </tr>
                     )
                     })
                   }
