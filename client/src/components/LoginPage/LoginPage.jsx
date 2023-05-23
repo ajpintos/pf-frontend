@@ -112,7 +112,7 @@ return (
                 <Button variant="success" type="submit">Login</Button>
             </Form>
             <Row className="mb-3">
-                <Link to={"/"}>Forgot Password</Link>
+                <Link to={"/forgotpassword"}>Forgot Password</Link>
             </Row>
             <Row className="mb-3">
                 <Link to={"/register"}>Register Now</Link>

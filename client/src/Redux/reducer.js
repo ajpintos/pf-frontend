@@ -1,12 +1,13 @@
 import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
-import { ALL_USERS, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER, SET_USER } from "./types/typesUser.js";
+import { ALL_USERS, EMAIL, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER , SET_USER } from "./types/typesUser.js";
 import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, STATUS_CHANGE_ORDER } from "./types/typesCart";
 import { DELETE_FAVORITES, ADD_FAVORITES } from "./types/typesFavorites";
 
 const initialState = {
   users: [],
-  userLogin: '',
+  userLogin: [],
+  userEmail: [],
   allProducts: [],
   products: [],
   showProducts: [],
@@ -82,6 +83,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userLogin: action.payload
+      }
+    };
+    case EMAIL: {
+      return {
+        ...state,
+        userEmail: action.payload
       }
     }
     case ADD_TO_CART: {

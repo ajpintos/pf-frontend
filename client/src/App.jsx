@@ -16,6 +16,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import NavBar from "../src/components/NavBar/NavBar.jsx";
 import Title from "./components/Title/Title.jsx";
 import FormEmail from "./components/ForgotPassword/FormEmail/FormEmail.jsx";
+import ChangePassword from "./components/ForgotPassword/ChangePassword/ChangePassword.jsx";
 import CartPage from './components/CartPage/CartPage.jsx';
 import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
 import ReviewOrder from "./components/ReviewOrder/ReviewOrder";
@@ -66,6 +67,7 @@ function App() {
         <Route path="/cart/checkout/review" element={<ReviewOrder />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/forgotpassword" element={<FormEmail />}/>
+        <Route path="/forgotpassword/changepassword" element={<ChangePassword/> } />
       </Routes>
       <footer className="container-fluid" >
         <Footer />
