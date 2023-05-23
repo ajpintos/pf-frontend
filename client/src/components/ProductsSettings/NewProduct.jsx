@@ -55,21 +55,25 @@ const NewProduct = () => {
   const handlerSelectCategory = (e) => {
     let nomCategory = e.target.options[e.target.options.selectedIndex].text;
     let value = e.target.value;
+    if(value!==-1){
     setForm({ ...form, categories: [...form.categories, value] });
     setCategoriesSel([...categoriesSel, { value, name: nomCategory }]);
-    setCategories(allCategories.filter((ele) => ele.id !== value));
-    // console.log(form)
+    setCategories(categories.filter((ele) => ele.id !== value));
+    
+    }
   };
+  // console.log(categoriesSel)
+  // console.log(allCategories)
   const deleteCategorie = (elem) => {
-    //
+   
     const { value, name } = elem;
-    // console.log(elem)
+    //  console.log(elem)
     setCategoriesSel(categoriesSel.filter((ele) => ele.value !== value));
     setForm({
       ...form,
-      countries: form.countries.filter((ele) => ele !== value),
+      categories: form.categories.filter((ele) => ele !== value),
     });
-    setCategories([...allCategories, { id: value, name }]);
+    setCategories([...categories, { id: value, name }]);
   };
 
   const submitNew = async (e) => {
@@ -205,26 +209,9 @@ const NewProduct = () => {
               </span>
             </div>
           </Form.Group>
-          {/* //////// */}
-          {/* <div>
-      <input type="file" onChange={handleChange} name='image' />
-      {form.image && <p>{form.image}</p>}
-    </div> */}
+         
           <Form.Group className="my-1 pb-2">
-            {/******** * si se maneja con input file aparce en español */}
-            {/* <Form.Label htmlFor="image">
-                      Image
-                  </Form.Label>                
-                  <Form.Control
-                    className="form-control"
-                    id='image'
-                    type="file"
-                    name="image"
-                   value={form.image}
-                    onChange={handleChange}
-                    aria-label="Image"
-                    placeholder="Image"
-                  /> */}
+           
             <FloatingLabel
               controlId="floatingInputName"
               label="Image"
@@ -254,8 +241,8 @@ const NewProduct = () => {
               className="mb-3"
               onChange={handlerSelectCategory}
             >
-              <option>Select Categories</option>
-              {categories.map((elem, index) => {
+              <option value={-1}>Select Categories...</option>
+              {categories?.map((elem, index) => {
                 return (
                   <option key={index} value={elem.id}>
                     {elem.name}
@@ -291,17 +278,8 @@ const NewProduct = () => {
           <p className={styles.success}>{successMessage}</p>
         </Form>
 
-        {/* <p className={st.mensajes}>{mensaje}</p>
-           <p className={st.mensajesE}>{mensajeExito}</p> */}
       </Modal.Body>
-      {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer> */}
+    
     </Modal>
   );
 };
