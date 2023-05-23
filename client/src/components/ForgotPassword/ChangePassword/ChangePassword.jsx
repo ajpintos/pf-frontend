@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./ChangePassword.module.css";
+import validate from "./validate/validate.js";
 
 // REACT-BOOSTRAP
 
@@ -11,6 +12,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import registerValidate from "../../RegisterPage/validate/registerValidate.js";
 
 
 const ChangePassword = () => {
@@ -24,10 +26,17 @@ const ChangePassword = () => {
         repeatNewPassword:""
     })
 
+    const [errors, setErrors] = useState({
+        newPassword: "",
+        repeatNewPassword: "",
+    })
+
     const handleInputChange = (event) => {
         const property = event.target.name;
         const value = event.target.value;
         setFormForgotPassword({...formForgotPassword, [property]: value});
+
+        setErrors(validate({...form, [property]: value}));
     }
 
     const handlerSubmitForgotPassword = async (e) => {
@@ -81,6 +90,8 @@ const ChangePassword = () => {
                                 value={formForgotPassword.newPassword}
                                 onChange={handleInputChange}
                             />
+                            {console.log("Esto es el error de new password", errors.newPassword)}
+                            <p style={{color: "red"}}>{errors.newPassword}</p>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formRepeatNewPassword"> 
                             <Form.Label>Repeat new password</Form.Label>
@@ -93,6 +104,7 @@ const ChangePassword = () => {
                                 value={formForgotPassword.repeatNewPassword}
                                 onChange={handleInputChange}
                             />
+                            <p style={{color: "red"}}>{errors.repeatNewPassword}</p>
                         </Form.Group>
                     </Row>
                     <Button variant="success" type="submit" size='lg'>Submit</Button>
