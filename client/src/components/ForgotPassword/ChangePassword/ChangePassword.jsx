@@ -12,6 +12,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import swal from 'sweetalert';
 
 
 const ChangePassword = () => {
@@ -39,14 +40,14 @@ const ChangePassword = () => {
 
     const handlerSubmitForgotPassword = (e) => {
         e.preventDefault();
-        if (errors.newPassword || errors.repeatNewPassword) alert("Check all camps and try again");
+        if (errors.newPassword || errors.repeatNewPassword) swal("Error","Check all camps and try again", "error");
         else {
             axios.put('/users/forgotpassword', { email ,token: formForgotPassword.token , password: formForgotPassword.newPassword })
                 .then((res) => {
-                    alert("Password changed successfully");
+                    swal("Congratulations", "Password changed successfully", "success");
                     navigate('/');
                 })
-                .catch((error) => alert(error.message));
+                .catch((error) => swal("Error","Invalid token or email", "error"));
         }
     }
 
