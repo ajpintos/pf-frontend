@@ -3,11 +3,12 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import st from "../ProductsSettings/Form.module.css";
 import validate from "./validate.js";
 import axios from "axios";
 import styles from "./ProductsSettings.module.css";
+import {getProducts} from '../../Redux/actions/actionsProducts'
 
 const NewProduct = () => {
   const [form, setForm] = useState({
@@ -27,7 +28,7 @@ const NewProduct = () => {
     image: "",
     categories: "",
   });
-
+  const dispatch = useDispatch();
   const allCategories = useSelector((state) => state.allCategories);
   const [categories, setCategories] = useState(allCategories);
   const [successMessage, setSuccessMessage] = useState("");
@@ -77,6 +78,7 @@ const NewProduct = () => {
   };
 
   const submitNew = async (e) => {
+    e.preventDefault();
     setSuccessMessage("");
     setErrorMessage("");
 
@@ -96,6 +98,7 @@ const NewProduct = () => {
         .then((res) => {
           setSuccessMessage("Product created successfully.");
           console.log("res  " + res);
+          dispatch(getProducts)
           setForm({
             name: "",
             description: "",

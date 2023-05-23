@@ -5,11 +5,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import st from "../ProductsSettings/Form.module.css";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import validate from "./validate.js";
 import styles from "./ProductsSettings.module.css";
+
 
 
 
@@ -50,6 +51,7 @@ const ModProduct = ({ id, name, show, handleClose }) => {
     );
     console.log(errors)
   };
+  const dispatch = useDispatch();
 
   //? ESTADO DE BOTON DE SUBMIT CONTROLADO CON USEEFFECT
   const [button, setButton] = useState(true);
@@ -86,7 +88,21 @@ const ModProduct = ({ id, name, show, handleClose }) => {
 
   //? PARA ENVIAR LOS DATOS AL BACK
   const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
+      
+  
+      if (
+        form.name !== "" &&
+        !errors.name &&
+        form.description !== "" &&
+        !errors.price &&
+        form.price !== "" &&
+        form.stock !== "" &&
+        !errors.stock &&
+        form.image !== "" &&
+        form.categories.length > 0
+      ) {
       const result = await axios.put("/products", form);
       if (result) {
         setForm({
@@ -99,10 +115,11 @@ const ModProduct = ({ id, name, show, handleClose }) => {
           tax: "",
           /*   status: true, */
         });
-        alert("modiciado con exito en la base de datos");
-      }
+        dispatch(getProducts)
+        alert("Successfully modified product.");
+      }}else alert('Wrong information')
     } catch (error) {
-      alert("error al modificar en base de datos");
+      alert("Error modifying database");
     }
   };
 
