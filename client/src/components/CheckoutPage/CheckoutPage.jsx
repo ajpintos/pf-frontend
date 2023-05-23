@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import validate from './validate.js';
@@ -17,60 +18,48 @@ function RegisterPage() {
 
     const navigate = useNavigate();
 
-    //! Estado local para guardar los datos del formulario
-    const [form, setForm] = useState({
-        email: "",
-        firstname: "",
-        lastname: "",
-        address: "",
-        cp: "",
-        city: "",
-        country: "",
-        phone: "",
-    })
+    const user = useSelector(state => state.userLogin);
 
-    //! Estado local para guardar los errores de validación del formulario
+    const [ formCheckout , setFormCheckout ] = useState({
+        email: user.email,
+        phone: user.phone,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        address: user.address,
+        cp: user.cp,
+        city: user.city,
+        country: user.country,
+    });
+
     const [errors, setErrors] = useState({
         email: "",
+        phone: "",
         firstname: "",
         lastname: "",
         address: "",
         cp: "",
         city: "",
         country: "",
-        phone: "",
     })
 
-    const submitHandler = (event) => {
-        event.preventDefault()
-        axios.post("/users", form)
-            .then(res => {
-                alert("User added successfully!");
-                const Dom = document.getElementById("formToSend");
-                const serviceID = "service_e5hd1wt";
-                const templateID ="template_59dtr2y";// "contact_form";
-                const key_public = "gEu_FBDo_Q0lvhmwA";
-                emailjs.sendForm(serviceID, templateID, Dom, key_public) .then(
-                    (result) => {
-                      console.log(result.text);
-                    },
-                    (error) => {
-                      console.log(error.text);
-                    }
-                  );
-                navigate("/login");
-            })
-            .catch(err => alert("Error: Check all camps and try again"))
-    }
+    // handle para cambiar la informacion del formulario de checkout
 
-
-    const changeHandler = (event) => {
+    const handleChangeCheckout = (event) => {
         const property = event.target.name;
         const value = event.target.value;
-        //! Elimina id delay de la validación
-        setForm({...form, [property]: value});
-        setErrors(validate({...form, [property]: value}));
+        setUserDetail({...userDetail, [property]: value});
+    };
+
+    const submitHandlerCheckout = (e) => {
+        e.preventDefault();
+
     }
+
+    const goToPath = (goPath) => {
+        navigate(goPath);
+    };
+
+    //! Estado local para guardar los datos del formulario
 
     return (
         <div className="container-fluid">
@@ -79,167 +68,150 @@ function RegisterPage() {
                     <h1 className='text-center'>Checkout Page</h1>
                 </div>
             <div>
-                <Form onSubmit={submitHandler} id="formToSend" className='d-flex gap-4'>
-                    <div className='col-lg-8'>
+                <Form onSubmit={submitHandlerCheckout} id="formToSend" className='row row-cols-1 row-cols-sm-2 row-cols-lg-4'>
+                    <div className='col-lg-8 col-sm-12'>
                         <div className='card mb-3'>
-                            <div class="card-header">
-                                <h2 class="legend card-title">Contact</h2>
+                            <div className="card-header">
+                                <h2 className="legend card-title">Contact</h2>
                             </div>
                             <Row className="mb-1 px-2">
-                                <Form.Group as={Col} controlId="formEmail">
+                                <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formEmail">
                                     <Form.Label>E-mail *</Form.Label>
                                     <Form.Control
                                         type="email"
                                         placeholder="Enter email"
                                         id="email"
                                         name="email"
-                                        value={form.email}
-                                        onChange={changeHandler}
+                                        value={formCheckout.email}
+                                        onChange={handleChangeCheckout}
                                     />
-                                    <p style={{color: "red"}}>{errors.email}</p>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formPhone">
+                                <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formPhone">
                                     <Form.Label>Phone</Form.Label>
                                     <Form.Control
                                         type="phone"
                                         placeholder="Phone"
                                         id="phone"
                                         name="phone"
-                                        value={form.phone}
-                                        onChange={changeHandler}
+                                        value={formCheckout.phone}
+                                        onChange={handleChangeCheckout}
                                     />
                                 </Form.Group>
                             </Row>
                         </div>
-                        <div class="card mb-3 pb-3">
-                            <div class="card-header">
-                                <h2 class="legend card-title">Billing Address</h2>
+                        <div className="card mb-3 pb-3">
+                            <div className="card-header">
+                                <h2 className="legend card-title">Billing Address</h2>
                             </div>
                         <Row className="px-2">
-                            <Form.Group as={Col} controlId="formName">
+                            <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formName">
                                 <Form.Label>Name *</Form.Label>
                                 <Form.Control
                                     type="firstname"
                                     placeholder="First Name"
                                     id="firstname"
                                     name="firstname"
-                                    value={form.firstname}
-                                    onChange={changeHandler}
+                                    value={formCheckout.firstname}
+                                    onChange={handleChangeCheckout}
                                 />
                                 <p style={{color: "red"}}>{errors.firstname}</p>
                             </Form.Group>
 
-                            <Form.Group as={Col} controlId="formLastName">
+                            <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formLastName">
                                 <Form.Label>Last Name *</Form.Label>
                                 <Form.Control
                                     type="lastname"
                                     placeholder="Last Name"
                                     id="lastname"
                                     name="lastname"
-                                    value={form.lastname}
-                                    onChange={changeHandler}
+                                    value={formCheckout.lastname}
+                                    onChange={handleChangeCheckout}
                                 />
                                 <p style={{color: "red"}}>{errors.lastname}</p>
                             </Form.Group>
                         </Row>
                         <Row className="mb-1 px-2">
-                            <Form.Group as={Col} controlId="formAddress">
+                            <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formAddress">
                                 <Form.Label>Address *</Form.Label>
                                 <Form.Control
                                     type="address"
                                     placeholder="Address"
                                     id="address"
                                     name="address"
-                                    value={form.address}
-                                    onChange={changeHandler}
+                                    value={formCheckout.address}
+                                    onChange={handleChangeCheckout}
                                     />
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formCity">
+                            <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formCity">
                                 <Form.Label>City *</Form.Label>
                                 <Form.Control
                                     type="city"
                                     placeholder="City"
                                     id="city"
                                     name="city"
-                                    value={form.city}
-                                    onChange={changeHandler}
+                                    value={formCheckout.city}
+                                    onChange={handleChangeCheckout}
                                     />
                             </Form.Group>
                         </Row>
                         <Row className="mb-1 px-2">
-                            <Form.Group as={Col} controlId="formZiCode">
+                            <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formZiCode">
                                 <Form.Label>Zip Code</Form.Label>
                                 <Form.Control
                                     type="cp"
                                     placeholder="Zip Code"
                                     id="cp"
                                     name="cp"
-                                    value={form.cp}
-                                    onChange={changeHandler}
+                                    value={formCheckout.cp}
+                                    onChange={handleChangeCheckout}
                                 />
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formCountry">
+                            <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formCountry">
                                 <Form.Label>Country *</Form.Label>
                                 <Form.Control
                                     type="country"
                                     placeholder="Country"
                                     id="country"
                                     name="country"
-                                    value={form.country}
-                                    onChange={changeHandler}/>
-                            </Form.Group>
-                        </Row>
-                        <Row className="mb-1 px-2">
-                            <Form.Group as={Col} controlId="formRegion">
-                                <Form.Label>Region *</Form.Label>
-                                <Form.Control
-                                    type="region"
-                                    placeholder="Region"
-                                    id="region"
-                                    name="region"
-                                    value={form.region}
-                                    onChange={changeHandler}/>
-                            </Form.Group>
-                            <Form.Group as={Col} controlId="formMunicipality">
-                                <Form.Label>Municipality *</Form.Label>
-                                <Form.Control
-                                    type="municipality"
-                                    placeholder="Municipality"
-                                    id="municipality"
-                                    name="municipality"
-                                    value={form.municipality}
-                                    onChange={changeHandler}/>
+                                    value={formCheckout.country}
+                                    onChange={handleChangeCheckout}/>
                             </Form.Group>
                         </Row>
                         </div>
                     </div>
-                    <div className=' col-lg-4'>
-                        <div id="payments" class="card mb-3">
-                            <div class="card-header">
-                                <h2 class="legend card-title">Payment Options</h2>
+                    <div className='col-lg-4 col-sm-12'>
+                        <div id="payments" className="card mb-3">
+                            <div className="card-header">
+                                <h2 className="legend card-title">Payment Options</h2>
                             </div>
-                            <div id="payments_options" class="card-body">
-                            <ul>
-                                <li>
-                                    <input type="radio" id="order_payment_method_27792" class="radiobox"/>
-                                    <label htmlFor="order_payment_method_27792"><span>Transferencia bancaria</span></label>
-                                </li>
-                                <li>
-                                    <input type="radio" id="order_payment_method_30906" class="radiobox" checked="checked"/>
-                                    <label for="order_payment_method_30906"><span>Mercado Pago</span></label>
-                                    <div>
-                                        You will be redirected to Mercado Pago to make a secure payment.
+                            <Form>
+                                {['radio'].map((type) => (
+                                    <div className="card-body">
+                                        <Form.Check
+                                            label="Cash"
+                                            name="group1"
+                                            type={type}
+                                            id={`inline-${type}-1`}
+                                        />
+                                        <Form.Check
+                                            label="Mercado Pago"
+                                            name="group1"
+                                            type={type}
+                                            id={`inline-${type}-2`}
+                                        >
+                                        </Form.Check>
+                                        <div>
+                                            <p>You will be redirected to Mercado Pago to make a secure payment.</p>
+                                        </div>
                                     </div>
-                                </li>
-                            </ul>
-                            
-                            </div>
+                                ))}
+                            </Form>
                         </div>
-                        <div className='d-flex flex-column align-items-center'>
-                            <Button variant="success" className='mb-2' type="submit">
+                        <div className='d-flex flex-column align-items-center '>
+                            <Button variant="success" className='mb-2' onClick={()=>goToPath('/cart/checkout/review')}>
                                 Review Order
                             </Button>
-                            <Button variant='success' className='mb-2' type='' href='/store'>
+                            <Button variant='success' className='mb-2' type='' onClick={()=>goToPath('/store')}>
                                 ← Continue Shopping
                             </Button>
                         </div>
