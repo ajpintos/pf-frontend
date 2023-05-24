@@ -51,6 +51,7 @@ const Detail = ({ whereIAm, hereIAm }) => {
       taxAmount: (product.price * parseInt(cant)) * product.tax,
       totalAmount: ( (product.price * parseInt(cant)) * product.tax ) + (product.price * parseInt(cant)),
     };
+    let detailFlag = false;
     if (cartDetails.length > 0) {
       let unitsProduct = cartFoundIndex(product.id, cartDetails);
       if (unitsProduct !== null) {
@@ -66,6 +67,21 @@ const Detail = ({ whereIAm, hereIAm }) => {
           taxAmount: (product.price * unitsProduct) * product.tax,
           totalAmount: ( (product.price * unitsProduct) * product.tax ) + (product.price * unitsProduct),
         };
+        detailFlag = true;
+      };
+    };
+    if (!detailFlag && user.email) {
+      const orderUser = await foundOrderForDetail(user.email);
+      const detailsData = {
+        idOrder: orderUser.id,
+        idProduct: id,
+        units: 1
+      };
+      const detailCreated = await axios.post('/ordersDetails', detailsData);
+      productModify = {
+        ...productModify,
+        idOrder: detailsData.idOrder,
+        idOrderDetail: detailCreated.data.id,
       };
     };
     dispatch(add_ToCart(productModify, cartDetails));
@@ -74,6 +90,7 @@ const Detail = ({ whereIAm, hereIAm }) => {
         idDetail: productModify.idOrderDetail,
         units: productModify.units,
       };
+      console.log('updateData en Detalle ', updateData);
       const orderDetailUpdate = await axios.put('/ordersDetails', updateData );
     };
     window.alert('Product added to cart');
