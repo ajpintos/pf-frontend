@@ -17,11 +17,13 @@ import NavBar from "../src/components/NavBar/NavBar.jsx";
 import Title from "./components/Title/Title.jsx";
 import FormEmail from "./components/ForgotPassword/FormEmail/FormEmail.jsx";
 import ChangePassword from "./components/ForgotPassword/ChangePassword/ChangePassword.jsx";
+import { useSelector } from "react-redux";
 
 //axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
 
 function App() {
+  const userFavorite = useSelector((state) => state.userLogin.email);
 
   return (
     <div className="App">
@@ -31,7 +33,7 @@ function App() {
         <div className="row justtify-content-center align-items-center">
           <Title />
         </div>
-        <NavBar/>
+        <NavBar />
       </header>
       <div className="App-header"></div>
       <Routes>
@@ -46,11 +48,14 @@ function App() {
         <Route path="/store/:id" element={<Store />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/form_update" element={<FormUdateMyaccount />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/forgotpassword" element={<FormEmail />}/>
-        <Route path="/forgotpassword/changepassword" element={<ChangePassword/> } />
+        <Route path="/favorites" element={<Favorites email={userFavorite} />} />
+        <Route path="/forgotpassword" element={<FormEmail />} />
+        <Route
+          path="/forgotpassword/changepassword"
+          element={<ChangePassword />}
+        />
       </Routes>
-      <footer className="container-fluid" >
+      <footer className="container-fluid">
         <Footer />
       </footer>
     </div>

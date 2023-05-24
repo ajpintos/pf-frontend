@@ -1,7 +1,21 @@
-import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
+import {
+  FILTER_BY_CATEGORIES,
+  GET_ALLCATEGORIES,
+} from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
-import { ALL_USERS, EMAIL, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER , SET_USER } from "./types/typesUser.js";
-import { DELETE_FAVORITES, ADD_FAVORITES } from "./types/typesFavorites";
+import {
+  ALL_USERS,
+  EMAIL,
+  LOGIN_USER,
+  LOGIN_USER_GOOGLE,
+  LOGOUT_USER,
+  SET_USER,
+} from "./types/typesUser.js";
+import {
+  DELETE_FAVORITES,
+  ADD_FAVORITES,
+  GET_FAVORITES_DB,
+} from "./types/typesFavorites";
 
 const initialState = {
   users: [],
@@ -10,101 +24,112 @@ const initialState = {
   allProducts: [],
   products: [],
   showProducts: [],
-  nameProducts: '',
+  nameProducts: "",
   flagProducts: false,
   favorites: [],
   allCategories: [],
-  categorieFilter: null
+  categorieFilter: null,
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALLPRODUCTS:{
+    case GET_ALLPRODUCTS: {
       return {
         ...state,
         allProducts: action.payload,
         products: action.payload,
         showProducts: action.payload,
-        nameProducts: '',
+        nameProducts: "",
         flagProducts: false,
-      }
-    };
-    case GET_PRODUCTSBYNAME:{
+      };
+    }
+    case GET_PRODUCTSBYNAME: {
       return {
         ...state,
         showProducts: action.payload.products,
         nameProducts: action.payload.name,
         flagProducts: true,
-      }
-    };
+      };
+    }
     case GET_ALLCATEGORIES: {
       return {
         ...state,
         allCategories: action.payload,
-      }
-    };
-    case ALL_USERS:{
+      };
+    }
+    case ALL_USERS: {
       return {
         ...state,
-        users: action.payload
-      }
-    };
-    case LOGIN_USER:{
+        users: action.payload,
+      };
+    }
+    case LOGIN_USER: {
       return {
         ...state,
-        userLogin: action.payload
-      }
-    };
+        userLogin: action.payload,
+      };
+    }
     case LOGIN_USER_GOOGLE: {
       return {
         ...state,
-        userLogin: action.payload
-      }
-    };
-    case LOGOUT_USER:{
+        userLogin: action.payload,
+      };
+    }
+    case LOGOUT_USER: {
       return {
         ...state,
-        userLogin : action.payload
-      }
-    };
-    case SET_USER:{
+        userLogin: action.payload,
+      };
+    }
+    case SET_USER: {
       return {
         ...state,
-        userLogin: action.payload
-      }
-    };
+        userLogin: action.payload,
+      };
+    }
     case EMAIL: {
       return {
         ...state,
-        userEmail: action.payload
-      }
+        userEmail: action.payload,
+      };
     }
-    case FILTER_BY_CATEGORIES : {
-      const allCategories = state.products
-      const CategoriesFiltered = action.payload === 'All'?
-      state.allProducts : allCategories.filter(el => {
-          return el.arrayCategories[0].name? el.arrayCategories[0].name.includes(action.payload) :
-              el.allCategories?.map(el => el.name).includes(action.payload)
-      })
-          return {
-              ...state,
-              products: CategoriesFiltered
-      }
+    case FILTER_BY_CATEGORIES: {
+      const allCategories = state.products;
+      const CategoriesFiltered =
+        action.payload === "All"
+          ? state.allProducts
+          : allCategories.filter((el) => {
+              return el.arrayCategories[0].name
+                ? el.arrayCategories[0].name.includes(action.payload)
+                : el.allCategories
+                    ?.map((el) => el.name)
+                    .includes(action.payload);
+            });
+      return {
+        ...state,
+        products: CategoriesFiltered,
+      };
     }
     case ADD_FAVORITES: {
       return {
         ...state,
-        favorites: [...state.favorites, action.payload],
+        favorites: action.payload,
       };
     }
     case DELETE_FAVORITES:
       return {
         ...state,
-        favorites: state.favorites.filter((f) => f.name !== action.payload),
+        favorites: action.payload,
+      };
+
+    case GET_FAVORITES_DB:
+      return {
+        ...state,
+        favorites: action.payload,
       };
     default:
-      return {...state};
-  };
+      return { ...state };
+  }
 };
 
 export default rootReducer;
