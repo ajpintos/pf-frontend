@@ -1,9 +1,12 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getFavoritesDB,addFavorites,deleteFavorites } from "../../Redux/actions/actionsFavorites";
 
-const Detail = () => {
+const Detail = ({ email }) => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [product, setProduct] = React.useState({});
   const [cant, setCant] = React.useState(1);
@@ -12,7 +15,6 @@ const Detail = () => {
     try {
       const Data = await axios(`/products/${id}`);
       const char = Data.data;
-      console.log(char);
       if (char) {
         setProduct(char);
       }
@@ -23,12 +25,46 @@ const Detail = () => {
 
   React.useEffect(() => {
     getProductForId();
+    dispatch(getFavoritesDB(email));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, dispatch]);
 
   const validacion = (e) => {
     setCant(e.target.value);
   };
+
+  const userLogueado = useSelector((state) => state?.userLogin);
+
+  const datos = useSelector((state) => state?.favorites);
+
+
+  const [isFav, setIsFav] = React.useState(false);
+
+  const handleFavorite = () => {
+    if (isFav) {
+      setIsFav(false);
+      dispatch(
+        deleteFavorites({ userEmail: userLogueado.email, productId: id })
+      );
+    } else {
+      setIsFav(true);
+      dispatch(addFavorites({ userEmail: userLogueado.email, productId: id }));
+    }
+  };
+
+  useEffect(() => {
+    datos?.forEach((fav) => {
+      if (fav.productId === id) {
+        if (fav.active) {
+          setIsFav(true);
+        } else {
+          setIsFav(false);
+        }
+      }
+    });
+  }, [datos, id]);
+
+
 
   return (
     <div>
@@ -81,7 +117,23 @@ const Detail = () => {
               <br />
               <div>
                 <div>
-                  <button style={{ borderRadius: "1rem" }}>❤️</button>
+                {userLogueado.email ? (
+                isFav ? (
+                  <button
+                    /* className={st.btnFav} */
+                    onClick={handleFavorite}
+                    style={{ border: 0 }}
+                  >
+                    ❤️
+                  </button>
+                ) : (
+                  <button /* className={st.btnFav}  */onClick={handleFavorite}>
+                    🤍
+                  </button>
+                )
+              ) : (
+                ""
+              )}
                 </div>
               </div>
             </div>

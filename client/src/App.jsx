@@ -42,7 +42,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/myaccount" element={<MyAccount />} />
-        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail email={userFavorite} />} />
         <Route path="/settings" element={<Settings />}></Route>
         <Route path="/store" element={<Store />}></Route>
         <Route path="/store/:id" element={<Store />}></Route>
