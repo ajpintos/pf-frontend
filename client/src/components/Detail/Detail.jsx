@@ -1,9 +1,13 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getFavoritesDB,addFavorites,deleteFavorites } from "../../Redux/actions/actionsFavorites";
+import {
+  getFavoritesDB,
+  addFavorites,
+  deleteFavorites,
+} from "../../Redux/actions/actionsFavorites";
 
 const Detail = ({ email }) => {
   const dispatch = useDispatch();
@@ -37,7 +41,6 @@ const Detail = ({ email }) => {
 
   const datos = useSelector((state) => state?.favorites);
 
-
   const [isFav, setIsFav] = React.useState(false);
 
   const handleFavorite = () => {
@@ -63,8 +66,6 @@ const Detail = ({ email }) => {
       }
     });
   }, [datos, id]);
-
-
 
   return (
     <div>
@@ -117,23 +118,33 @@ const Detail = ({ email }) => {
               <br />
               <div>
                 <div>
-                {userLogueado.email ? (
-                isFav ? (
-                  <button
-                    /* className={st.btnFav} */
-                    onClick={handleFavorite}
-                    style={{ border: 0 }}
-                  >
-                    ❤️
-                  </button>
-                ) : (
-                  <button /* className={st.btnFav}  */onClick={handleFavorite}>
-                    🤍
-                  </button>
-                )
-              ) : (
-                ""
-              )}
+                  {userLogueado.email ? (
+                    isFav ? (
+                      <button
+                        style={{
+                          background: "none",
+                          border: "none",
+                          fontSize: "1.5rem",
+                        }}
+                        onClick={handleFavorite}
+                      >
+                        ❤️
+                      </button>
+                    ) : (
+                      <button
+                        style={{
+                          background: "none",
+                          border: "none",
+                          fontSize: "1.5rem",
+                        }}
+                        onClick={handleFavorite}
+                      >
+                        🤍
+                      </button>
+                    )
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>
