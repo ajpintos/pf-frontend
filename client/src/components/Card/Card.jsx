@@ -73,8 +73,9 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
       };
     };
     dispatch(add_ToCart(product, cartDetails));
-    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
     swal("Congratulations", "Product added to cart", "success");
+    const detailsStorage = cartDetails;
+    localStorage.setItem('cartDetails', JSON.stringify(detailsStorage));
   };
 
   const handleFavorite = () => {

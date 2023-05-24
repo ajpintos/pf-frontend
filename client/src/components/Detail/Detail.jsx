@@ -86,7 +86,6 @@ const Detail = ({ whereIAm, hereIAm }) => {
       };
     };
     dispatch(add_ToCart(productModify, cartDetails));
-    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
     if (user.email) {
       const updateData = {
         idDetail: productModify.idOrderDetail,
@@ -96,6 +95,8 @@ const Detail = ({ whereIAm, hereIAm }) => {
       const orderDetailUpdate = await axios.put('/ordersDetails', updateData );
     };
     swal("Congratulations", "Product added to cart", "success");
+    const detailsStorage = cartDetails;
+    localStorage.setItem('cartDetails', JSON.stringify(detailsStorage));
   };
 
   const returnTo = () => {

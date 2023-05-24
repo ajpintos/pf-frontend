@@ -57,9 +57,10 @@ const CartPage = () => {
       totalAmount: ( (productFound.price * parseInt(cant)) * cartDetail.tax ) + (productFound.price * parseInt(cant)),
     }
     dispatch(add_ToCart(cart_Detail, cartDetails));
-    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
-    updateTotals();
     swal("Congratulations", "Updated product in cart", "success");
+    const detailsStorage = cartDetails;
+    updateTotals(detailsStorage);
+    localStorage.setItem('cartDetails', JSON.stringify(detailsStorage));
   };
 
   const removeToCart = async (idProduct) => {
@@ -69,8 +70,9 @@ const CartPage = () => {
       const orderDetailDelete = await axios.delete('/ordersDetails', { data: detailData });
     };
     dispatch(remove_FromCart(idProduct, cartDetails));
-    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
-    updateTotals();
+    const detailsStorage = cartDetails;
+    updateTotals(detailsStorage);
+    localStorage.setItem('cartDetails', JSON.stringify(detailsStorage));
   };
 
   const clearCart = async () => {
@@ -81,16 +83,16 @@ const CartPage = () => {
       };
     }; 
     dispatch(clear_Cart());
-    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
-    updateTotals();
+    const detailsStorage = cartDetails;
+    updateTotals(detailsStorage);
+    localStorage.removeItem('cartDetails');
   };
 
   const goToPath = (goPath) => {
     navigate(goPath);
   };
 
-  const updateTotals = async () => {
-    const cart_Details = cartDetails;
+  const updateTotals = async (cart_Details) => {
     let amountO= 0;
     let taxAmountO = 0;
     let totalAmountO = 0;
