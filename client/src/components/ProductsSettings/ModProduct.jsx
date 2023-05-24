@@ -10,6 +10,7 @@ import st from "../ProductsSettings/Form.module.css";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import validate from "./validate.js";
 import styles from "./ProductsSettings.module.css";
+import swal from 'sweetalert';
 
 
 
