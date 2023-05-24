@@ -24,11 +24,14 @@ const UsersSettings = () => {
 
   const [email, setEmail] = useState("");
 
+  const [tipeUser, setTipeUser] = useState(false);
+
   const handleClose = () => setShow(false);
 
-  const handleShow = (email) => {
+  const handleShow = (email, tipo) => {
     setShow(true);
     setEmail(email);
+    setTipeUser(tipo);
   };
 
   const borradoLogico = async (email, status) => {
@@ -39,7 +42,7 @@ const UsersSettings = () => {
     try {
       const borrado = await axios.delete("/users/delete", { data: form });
       if (borrado) alert("Successful operation");
-      loadingData()
+      loadingData();
     } catch (error) {
       alert("Error found: " + error.message);
     }
@@ -84,7 +87,7 @@ const UsersSettings = () => {
                     <Button
                       variant="light"
                       size="sm"
-                      onClick={() => handleShow(prod?.email)}
+                      onClick={() => handleShow(prod?.email, prod.adminType)}
                     >
                       📝
                     </Button>
@@ -105,7 +108,7 @@ const UsersSettings = () => {
               );
             })}
           </tbody>
-          <ModificarUser show={show} handleClose={handleClose} email={email} />
+          <ModificarUser show={show} handleClose={handleClose} email={email} tipo={tipeUser} />
         </Table>
         {estado ? <NuevoForm /> : null}
       </div>

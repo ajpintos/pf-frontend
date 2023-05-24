@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios, { all } from "axios";
 import registerValidate from "./validate/registerValidate";
 
 //CSS REACT-BOOSTRAP
@@ -8,14 +8,27 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Modal from "react-bootstrap/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { allUsers } from "../../../../Redux/actions/actionsUser";
 
 //------------------------------------------------------
 
 function RegisterPage() {
+  const dispatch = useDispatch();
+  const loadingData = async () => {
+    const llamado = await allUsers();
+    dispatch(llamado);
+  };
+
+  const users = useSelector((state) => state.users);
+
+  console.log(users);
+
   //! Estado local para guardar los datos del formulario
   const [form, setForm] = useState({
     email: "",
     password: "",
+    passwordRepeat: "",
     firstname: "",
     lastname: "",
     address: "",
@@ -23,15 +36,16 @@ function RegisterPage() {
     city: "",
     country: "",
     phone: "",
-    adminType:""
+    adminType: "",
   });
 
-  form.adminType = true
+  form.adminType = true;
 
   //! Estado local para guardar los errores de validación del formulario
   const [errors, setErrors] = useState({
     email: "",
     password: "",
+    passwordRepeat: "",
     firstname: "",
     lastname: "",
     address: "",
@@ -49,6 +63,7 @@ function RegisterPage() {
         alert("User added successfully!");
       })
       .catch((err) => alert("Error: Check all camps and try again"));
+    loadingData();
   };
 
   const changeHandler = (event) => {
@@ -94,6 +109,19 @@ function RegisterPage() {
               <div style={{ color: "red" }}>{errors.password}</div>
             </Form.Group>
           </Row>
+          <Form.Group as={Col} controlId="formPasswordRepeat">
+            <Form.Label>Repeat Password</Form.Label>
+            <Form.Control
+              required
+              type="password"
+              placeholder="Repeat Password"
+              id="passwordRepeat"
+              name="passwordRepeat"
+              value={form.passwordRepeat}
+              onChange={changeHandler}
+            />
+            <p style={{ color: "red" }}>{errors.passwordRepeat}</p>
+          </Form.Group>
 
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formName">
@@ -105,6 +133,7 @@ function RegisterPage() {
                 name="firstname"
                 value={form.firstname}
                 onChange={changeHandler}
+                pattern=".{4,}"
               />
               <p style={{ color: "red" }}>{errors.firstname}</p>
             </Form.Group>
@@ -173,7 +202,7 @@ function RegisterPage() {
             <Form.Group as={Col} controlId="formPhone">
               <Form.Label>Phone</Form.Label>
               <Form.Control
-                type="phone"
+                type="number"
                 placeholder="Phone"
                 id="phone"
                 name="phone"
@@ -184,8 +213,8 @@ function RegisterPage() {
           </Row>
           <Row>
             <Form.Group>
-              <Form.Label>Tipo de usuario</Form.Label>
-              <Form.Control value="administrador" />
+              <Form.Label>type of user</Form.Label>
+              <Form.Control style={{ color: "red" }} value="administrator" />
             </Form.Group>
           </Row>
           <br />

@@ -1,13 +1,13 @@
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getCategories } from "../../../Redux/actions/actionsCategories";
 
 const AddCategorie = () => {
   const dispatch = useDispatch();
-
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
 
@@ -16,21 +16,56 @@ const AddCategorie = () => {
     description: "",
   });
 
+  const [errors, setErrors] = useState({
+    name: "",
+    description: "",
+  });
+
+  const loadingData = async () => {
+    const data = await getCategories();
+    dispatch(data);
+  };
+
+  const validate = (form) => {
+    const error = {};
+    if (form.name.length < 3) {
+      error.name = "name no null";
+    } else if (form.description.length < 3) {
+      error.description = "description no null";
+    }
+    return error;
+  };
+
   const handleChange = (event) => {
     setForm({
       ...form,
       [event.target.name]: event.target.value,
     });
+    setErrors(validate({ ...form, [event.target.name]: event.target.value }));
   };
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       const result = await axios.post("/categories/categorie", form);
-      if (result) alert("Successful operation");
+      if (result) {
+        alert("Successful operation");
+        loadingData();
+      }
     } catch (error) {
       alert("Error" + error.message);
     }
   };
+
+  const [button, setButton] = useState(true);
+
+  useEffect(() => {
+    if ((form.name.length > 0) & (form.description.length > 0))
+      setButton(false);
+    else {
+      setButton(true);
+    }
+  }, [form, setButton]);
 
   return (
     <>
@@ -46,8 +81,8 @@ const AddCategorie = () => {
                 onChange={handleChange}
                 value={form.name}
                 name="name"
-                id="prueba"
               />
+              <span style={{ color: "red" }}>{errors.name}</span>
             </Form.Group>
             <br />
             <Form.Group>
@@ -60,9 +95,12 @@ const AddCategorie = () => {
                 onChange={handleChange}
                 id="pruebo"
               />
+              <span style={{ color: "red" }}>{errors.description}</span>
             </Form.Group>
             <br />
-            <Button type="submit">add</Button>
+            <Button type="submit" disabled={button}>
+              add
+            </Button>
           </Form>
         </Modal.Body>
       </Modal>

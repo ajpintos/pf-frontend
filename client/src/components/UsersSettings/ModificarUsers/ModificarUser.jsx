@@ -4,9 +4,13 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { all } from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { allUsers } from "../../../Redux/actions/actionsUser";
 
-const ModificarUser = ({ show, handleClose, email }) => {
+const ModificarUser = ({ show, handleClose, email, tipo }) => {
+  const dispatch = useDispatch();
+
   const [form, setForm] = useState({
     email: "",
     firstname: "",
@@ -17,9 +21,16 @@ const ModificarUser = ({ show, handleClose, email }) => {
     country: "",
     phone: "",
     password: "",
+    adminType: tipo,
   });
 
   form.email = email;
+  form.adminType = tipo;
+
+  const loadingData = () => {
+    const data = allUsers();
+    dispatch(data);
+  };
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -31,13 +42,19 @@ const ModificarUser = ({ show, handleClose, email }) => {
   const [button, setButton] = useState(true);
 
   useEffect(() => {
-    if (form.firstname.length > 0) setButton(false);
+    if (
+      form.password.length > 0 &&
+      form.firstname.length > 0 &&
+      form.lastname.length > 0
+    )
+      setButton(false);
     else {
       setButton(true);
     }
   }, [form, setButton]);
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       const result = await axios.put("/users", form);
       if (result.status === 201) {
@@ -49,13 +66,34 @@ const ModificarUser = ({ show, handleClose, email }) => {
           cp: "",
           city: "",
           phone: "",
+          adminType: tipo,
         });
-        if (result) alert(result.data);
+        if (result) {
+          alert(result.data);
+          loadingData();
+        }
       }
     } catch (error) {
       alert("Error:  " + error.message);
     }
   };
+
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleSelect = (event) => {
+    const value = event.target.value;
+    setSelectedOption(value);
+  };
+
+  useEffect(() => {
+    if (selectedOption) {
+      if (selectedOption == "false") {
+        form.adminType = false;
+      } else {
+        form.adminType = true;
+      }
+    }
+  }, [form, selectedOption]);
 
   return (
     <>
@@ -64,6 +102,8 @@ const ModificarUser = ({ show, handleClose, email }) => {
           <Modal.Title>User to modify {email}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <h5>current user type {tipo ? "Administrator" : "Standard"}</h5>
+          <br />
           <Form onSubmit={handleSubmit}>
             <Row>
               <Col>
@@ -135,6 +175,7 @@ const ModificarUser = ({ show, handleClose, email }) => {
                 name="phone"
                 value={form.phone}
                 onChange={handleChange}
+                type="number"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -143,7 +184,7 @@ const ModificarUser = ({ show, handleClose, email }) => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>password</Form.Label>
+              <Form.Label>New password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="new password"
@@ -152,6 +193,19 @@ const ModificarUser = ({ show, handleClose, email }) => {
                 onChange={handleChange}
               />
             </Form.Group>
+
+            <Form.Group>
+              <h5>Type of user</h5>
+              <Form.Select onChange={handleSelect} value={selectedOption}>
+                <option value="" disabled>
+                  choose your option
+                </option>
+                <option value={false}>Standard</option>
+                <option value={true}>Administrator</option>
+              </Form.Select>
+            </Form.Group>
+            <br />
+            <br />
 
             <Button variant="primary" type="submit" disabled={button}>
               modify data
