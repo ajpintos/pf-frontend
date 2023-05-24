@@ -12,9 +12,10 @@ const Favorites = ({ email }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFavoritesDB(email));
-  }, []);
+  }, [dispatch, getFavoritesDB]);
 
   const datos = useSelector((state) => state?.favorites);
+
   /*   const user = useSelector((state) => state?.userLogin);
   const [datos, setDatos] = useState();
   const llamado = async () => {
@@ -44,7 +45,7 @@ const Favorites = ({ email }) => {
         </Col>
       </Row>
 
-      <Row >
+      <Row>
         {datos?.map((e, i) => {
           if (e?.active) {
             return (
@@ -57,6 +58,7 @@ const Favorites = ({ email }) => {
                   description={e?.product.description}
                   price={e?.product.price}
                   stock={e?.product.stock}
+                  datos={datos}
                 />
               </>
             );

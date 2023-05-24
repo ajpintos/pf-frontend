@@ -50,6 +50,8 @@ function Card({
       if (fav.productId === id) {
         if (fav.active) {
           setIsFav(true);
+        } else {
+          setIsFav(false);
         }
       }
     });
@@ -60,11 +62,6 @@ function Card({
       {name ? (
         <div className="card">
           <div className="card-body">
-            {/* {isFav ? (
-            <button onClick={handleFavorite} style={{border:0}}>❤️</button>
-          ) : (
-            <button onClick={handleFavorite}>🤍</button>
-          )} */}
             <Link to={`/detail/${id}`}>
               <img src={image} className="card-img-top img-fluid" alt={name} />
             </Link>
