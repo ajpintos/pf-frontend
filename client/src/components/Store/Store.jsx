@@ -5,6 +5,7 @@ import { filterByCategories, getCategories } from "../../Redux/actions/actionsCa
 import { useParams } from "react-router-dom";
 import SetPages from "./SetPages.jsx";
 import { getProducts } from "../../Redux/actions/actionsProducts.js";
+import swal from 'sweetalert';
 
 export default function Store ({ whereIAm, hereIAm }) {
 
@@ -65,7 +66,7 @@ export default function Store ({ whereIAm, hereIAm }) {
     e.preventDefault();
     const productsOrder = await filterByCategories(filter, e.target.value);
     if (productsOrder.hasOwnProperty('error')) {
-      alert(productsOrder.error);
+      swal("Error",productsOrder.error, "error");
     } else {
       dispatch(productsOrder);
       setOrder(e.target.value)
@@ -84,7 +85,7 @@ export default function Store ({ whereIAm, hereIAm }) {
     e.preventDefault();
     const productsFilter = await filterByCategories(e.target.value, order);
     if (productsFilter.hasOwnProperty('error')) {
-      alert('There are no products for this category');
+      swal("Error","There are no products for this category", "error");
     } else {
       dispatch(productsFilter);
       setFilter(e.target.value);
@@ -105,7 +106,6 @@ export default function Store ({ whereIAm, hereIAm }) {
     const all_Categories = await getCategories();
     dispatch(all_Categories);
     const retWhereIAm = whereIAm;
-    console.log('entro a loadingData de store whereIAm : ', retWhereIAm);
     if (whereIAm.place !== 'detail') {
       let flagCategory = false;
       setOrder('All Products');
@@ -113,8 +113,7 @@ export default function Store ({ whereIAm, hereIAm }) {
         const idCategory = params.id;
         const productsFilter = await filterByCategories(idCategory, order);
         if (productsFilter.hasOwnProperty('error')) {
-          alert('There are no products for this category');
-          alert('Return to all Categories')
+          swal("Error","There are no products for this category. Return to all Categories", "error");
         } else {
           dispatch(productsFilter);
           setFilter(idCategory);
@@ -155,7 +154,6 @@ export default function Store ({ whereIAm, hereIAm }) {
       });
       setCurrentPage(retWhereIAm.currentPage);
     };
-    console.log('salgo de loadingData de store whereIAm : ', whereIAm);
   };
 
   useEffect(()=>{

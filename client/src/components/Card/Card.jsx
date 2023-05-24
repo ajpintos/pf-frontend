@@ -9,6 +9,7 @@ import { cartFoundIndex, foundOrderForDetail } from "../Cart/cartHelpers";
 import { add_ToCart, remove_FromCart } from "../../Redux/actions/actionsCart";
 import accounting from 'accounting';
 import st from './Card.module.css'
+import swal from 'sweetalert';
 
 function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
 
@@ -72,7 +73,8 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
       };
     };
     dispatch(add_ToCart(product, cartDetails));
-    window.alert('Product added to cart');
+    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
+    swal("Congratulations", "Product added to cart", "success");
   };
 
   const handleFavorite = () => {

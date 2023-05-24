@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { getCartDetail } from '../Cart/cartHelpers'
 import { add_ToCart, clear_Cart, remove_FromCart } from '../../Redux/actions/actionsCart'
 import { getProductById } from '../../Redux/actions/actionsProducts'
+import swal from 'sweetalert';
 
 // contact.biofresh.shop@gmail.com
 // BioFreshADM2023
@@ -56,8 +57,9 @@ const CartPage = () => {
       totalAmount: ( (productFound.price * parseInt(cant)) * cartDetail.tax ) + (productFound.price * parseInt(cant)),
     }
     dispatch(add_ToCart(cart_Detail, cartDetails));
+    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
     updateTotals();
-    window.alert('Updated product in cart');
+    swal("Congratulations", "Updated product in cart", "success");
   };
 
   const removeToCart = async (idProduct) => {
@@ -67,6 +69,7 @@ const CartPage = () => {
       const orderDetailDelete = await axios.delete('/ordersDetails', { data: detailData });
     };
     dispatch(remove_FromCart(idProduct, cartDetails));
+    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
     updateTotals();
   };
 
@@ -78,6 +81,7 @@ const CartPage = () => {
       };
     }; 
     dispatch(clear_Cart());
+    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
     updateTotals();
   };
 

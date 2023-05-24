@@ -6,6 +6,7 @@ import Button from "react-bootstrap/esm/Button";
 import { cartFoundIndex, foundOrderForDetail, getCartDetail } from "../Cart/cartHelpers.js";
 import { AddToCartIcon } from "../Icons/Icons";
 import { add_ToCart, remove_FromCart } from "../../Redux/actions/actionsCart.js";
+import swal from 'sweetalert';
 
 const Detail = ({ whereIAm, hereIAm }) => {
 
@@ -27,7 +28,7 @@ const Detail = ({ whereIAm, hereIAm }) => {
         setProduct(char);
       }
     } catch (error) {
-      window.alert(error.message);
+      swal("Error","Product not found", "error");
     }
   };
 
@@ -85,6 +86,7 @@ const Detail = ({ whereIAm, hereIAm }) => {
       };
     };
     dispatch(add_ToCart(productModify, cartDetails));
+    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
     if (user.email) {
       const updateData = {
         idDetail: productModify.idOrderDetail,
@@ -93,8 +95,7 @@ const Detail = ({ whereIAm, hereIAm }) => {
       console.log('updateData en Detalle ', updateData);
       const orderDetailUpdate = await axios.put('/ordersDetails', updateData );
     };
-    window.alert('Product added to cart');
-
+    swal("Congratulations", "Product added to cart", "success");
   };
 
   const returnTo = () => {
