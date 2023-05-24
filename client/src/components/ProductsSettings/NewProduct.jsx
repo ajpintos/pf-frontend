@@ -9,6 +9,7 @@ import validate from "./validate.js";
 import axios from "axios";
 import styles from "./ProductsSettings.module.css";
 import {getProducts} from '../../Redux/actions/actionsProducts'
+import swal from 'sweetalert';
 
 const NewProduct = () => {
   const [form, setForm] = useState({
@@ -96,7 +97,8 @@ const NewProduct = () => {
       await axios
         .post("/products/", form)
         .then((res) => {
-          setSuccessMessage("Product created successfully.");
+          swal("Congratulations!", "Product added successfully!", "success");
+          // setSuccessMessage("Product created successfully.");
           console.log("res  " + res);
           dispatch(getProducts)
           setForm({
@@ -111,12 +113,14 @@ const NewProduct = () => {
           setCategoriesSel([]);
         })
         .catch((err) => {
-          alert(err);
-          setErrorMessage("Product is not created.");
+          swal("Error!", "Product is not created.", err)
+          // alert(err);
+          // setErrorMessage("Product is not created.");
         });
     } else {
-      console.log(errors);
-      setErrorMessage("Wrong information.");
+      // console.log(errors);
+      // setErrorMessage("Wrong information.");
+      swal("Error!", "Wrong information.")
     }
   };
 

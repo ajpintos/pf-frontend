@@ -81,7 +81,7 @@ const ModProduct = ({ id, name, show, handleClose }) => {
 // }
 
   useEffect(() => {
-    getProductForId
+    getProductForId();
     setCategoriesSel([]);
     
   }, [id]);
