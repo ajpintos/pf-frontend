@@ -6,8 +6,10 @@ import { getCategories } from "../../../Redux/actions/actionsCategories";
 import { useEffect, useState } from "react";
 import AddCategorie from "./AddCategorie";
 import ModificarCategoria from "./ModificarCategories";
+import Paginacion from "../../ProductsSettings/Paginacion.jsx";
 
 const CategoriesSettingGeneral = () => {
+
   const dispatch = useDispatch();
   const loadingData = async () => {
     const data = await getCategories()
@@ -19,6 +21,13 @@ const CategoriesSettingGeneral = () => {
   },[]);
 
   const allCategories = useSelector((state) => state?.allCategories);
+//paginacion
+  const itemsPerPage = 10;
+  const [pageCurrent, setPageCurrent] = useState(1);
+  let totalItems = allCategories.length;
+  let indInicial = (pageCurrent - 1) * itemsPerPage;
+  let indFinal = indInicial + itemsPerPage;
+
 
   //modal add categorie
   const [estado, setEstado] = useState(false);
@@ -66,7 +75,12 @@ const CategoriesSettingGeneral = () => {
         >
           New
         </Button>
-
+        <Paginacion
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          pageCurrent={pageCurrent}
+          setPageCurrent={setPageCurrent}
+        />
         <Table striped size="sm">
           <thead>
             <tr>
@@ -106,9 +120,17 @@ const CategoriesSettingGeneral = () => {
                   </td>
                 </tr>
               );
-            })}
+            }).slice(indInicial, indFinal)}
           </tbody>
         </Table>
+        <div >
+        
+          <h6 style={{'display': 'flex',
+                      'justify-content': 'end',
+                    'font-weight':'lighter',
+                    'margin-right': '20px'}}>
+                      Total categories: {totalItems} </h6>
+        </div>
         {estado ? <AddCategorie /> : null}
         {modificar ? (
           <ModificarCategoria id={pasamanos.id} name={pasamanos.name} />

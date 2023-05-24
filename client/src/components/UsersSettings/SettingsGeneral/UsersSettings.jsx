@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import ModificarUser from "../ModificarUsers/ModificarUser";
 import NuevoForm from "../New user admi/RegisterPage/RegisterPage";
 import axios from "axios";
+import Paginacion from "../../ProductsSettings/Paginacion.jsx";
 
 const UsersSettings = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,13 @@ const UsersSettings = () => {
     setEmail(email);
     setTipeUser(tipo);
   };
-
+//paginacion
+    const itemsPerPage = 10;
+    const [pageCurrent, setPageCurrent] = useState(1);
+    let totalItems = users.length;
+    let indInicial = (pageCurrent - 1) * itemsPerPage;
+    let indFinal = indInicial + itemsPerPage;
+////////////////////
   const borradoLogico = async (email, status) => {
     const form = {
       email: email,
@@ -66,6 +73,12 @@ const UsersSettings = () => {
         >
           New
         </Button>
+        <Paginacion
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          pageCurrent={pageCurrent}
+          setPageCurrent={setPageCurrent}
+        />
         <Table striped size="sm">
           <thead>
             <tr>
@@ -106,10 +119,17 @@ const UsersSettings = () => {
                 </tr>
                 //❎
               );
-            })}
+            }).slice(indInicial, indFinal)}
           </tbody>
           <ModificarUser show={show} handleClose={handleClose} email={email} tipo={tipeUser} />
         </Table>
+        <div >        
+          <h6 style={{'display': 'flex',
+                      'justify-content': 'end',
+                    'font-weight':'lighter',
+                    'margin-right': '20px'}}>
+                      Total Users: {totalItems} </h6>
+        </div>
         {estado ? <NuevoForm /> : null}
       </div>
     </>

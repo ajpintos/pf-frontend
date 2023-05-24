@@ -15,6 +15,10 @@ import styles from "./ProductsSettings.module.css";
 
 
 const ModProduct = ({ id, name, show, handleClose }) => {
+
+  const dispatch = useDispatch();
+  const [button, setButton] = useState(true);
+
   const [form, setForm] = useState({
     id,
     name,
@@ -51,11 +55,10 @@ const ModProduct = ({ id, name, show, handleClose }) => {
     );
     console.log(errors)
   };
-  const dispatch = useDispatch();
+  
 
   //? ESTADO DE BOTON DE SUBMIT CONTROLADO CON USEEFFECT
-  const [button, setButton] = useState(true);
-
+  
 
   
     //traer los datos del producto
@@ -71,11 +74,16 @@ const ModProduct = ({ id, name, show, handleClose }) => {
       window.alert(error.message);
     }
   };
+// const loadingData=()=>{
+//   const getProduct= getProductForId();
+//   dispatch(getProduct)
+  
+// }
 
   useEffect(() => {
-    getProductForId();
+    getProductForId
     setCategoriesSel([]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, [id]);
 
   useEffect(() => {
@@ -107,6 +115,7 @@ const ModProduct = ({ id, name, show, handleClose }) => {
       ) {
       const result = await axios.put("/products/", form);
       if (result) {
+        loadingData()
         setForm({
           id: "",
           name: "",
