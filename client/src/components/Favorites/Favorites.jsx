@@ -44,7 +44,7 @@ const Favorites = ({ email }) => {
         </Col>
       </Row>
 
-      <div>
+      <Row >
         {datos?.map((e, i) => {
           if (e?.active) {
             return (
@@ -62,7 +62,7 @@ const Favorites = ({ email }) => {
             );
           }
         })}
-      </div>
+      </Row>
 
       {/*   <section className="row">
         {
