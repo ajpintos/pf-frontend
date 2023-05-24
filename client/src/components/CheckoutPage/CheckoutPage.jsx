@@ -5,6 +5,7 @@ import axios from "axios";
 import validate from './validate.js';
 import emailjs from "@emailjs/browser";
 import styles from './CheckoutPage.module.css';
+import mercadoPago from '../../assets/mercadoPago.png'
 
 //CSS REACT-BOOSTRAP
 import Button from 'react-bootstrap/Button';
@@ -13,6 +14,7 @@ import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/esm/Stack';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
+
 
 function RegisterPage() {
 
@@ -187,22 +189,11 @@ function RegisterPage() {
                             <Form>
                                 {['radio'].map((type) => (
                                     <div className="card-body">
-                                        <Form.Check
-                                            label="Cash"
-                                            name="group1"
-                                            type={type}
-                                            id={`inline-${type}-1`}
-                                        />
-                                        <Form.Check
-                                            label="Mercado Pago"
-                                            name="group1"
-                                            type={type}
-                                            id={`inline-${type}-2`}
-                                        >
-                                        </Form.Check>
-                                        <div>
-                                            <p>You will be redirected to Mercado Pago to make a secure payment.</p>
+                                        <p className='text-center'>You will be redirected to Mercado Pago to make a secure payment.</p>
+                                        <div className='d-flex justify-content-center text-align center'>
+                                            <img src={mercadoPago} alt="Mercado Pago" width='50%' height="auto"/>
                                         </div>
+                                        
                                     </div>
                                 ))}
                             </Form>

@@ -109,68 +109,67 @@ const CartPage = () => {
         <div className="row">
           <div className="col-lg-9 mb-4">
             <div className="table-responsive">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th className="mob-hide"></th>
-                    <th className="mob-hide">Unit Price</th>
-                    <th className="table-qty">Qty</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                    <th>Subtotal</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cartDetails.length < 1
-                    ? <tr className="row">
-                        <section className="col-12">
-                          <div className="bg-secondary alert text-white">The shopping cart is currently empty. You can go back and start adding products.</div>
-                          <Button className="btn btn-success btn-block mb-1" onClick={()=>goToPath('/store')}>Go Store</Button>
-                        </section>
+              {cartDetails.length < 1 ? 
+                <tr>
+                  <section className="col-12">
+                    <div className="bg-secondary alert text-white">The shopping cart is currently empty. You can go back and start adding products.</div>
+                    <Button className="btn btn-success btn-block mb-1" onClick={()=>goToPath('/store')}>Go Store</Button>
+                  </section>
+                </tr> :
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th className="mob-hide"></th>
+                      <th className="mob-hide">Unit Price</th>
+                      <th className="table-qty">Qty</th>
+                      <th>Update</th>
+                      <th>Delete</th>
+                      <th>Subtotal</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    { cartDetails.map(product => {
+                    cantProduct = product.units;
+                    return (
+                      <tr key={product.idProduct} >
+                        <td>
+                          <p className='h5' >{product.name}</p>
+                        </td>
+                        <td className="text-center mob-hide">
+                          <figure className='container-fluid'>
+                            <img src={product.image} width={90} height={90} alt={product.name} />
+                          </figure>
+                        </td>
+                        <td className="mob-hide">
+                          <span>{accounting.formatMoney(`${product.price}`)}</span>
+                        </td>
+                        <td>
+                          <input
+                            type="number"
+                            // value={cantProduct}
+                            min={1}
+                            max={product.stock}
+                            placeholder={product.units}
+                            onChange={validateCant}
+                            style={{ width: "50px", marginTop: "5px" }}
+                          />
+                        </td>
+                        <td>
+                          < Button className='btn' variant="warning" onClick={()=>updatedCart(product.idProduct)}>Up</Button>
+                        </td>
+                        <td>
+                          <Button className='btn' variant="danger" onClick={()=>removeToCart(product.idProduct)}><RemoveFromCartIcon /></Button>
+                        </td>
+                        <td>
+                          <p>{accounting.formatMoney(`${product.amount}`)}</p>
+                        </td>
                       </tr>
-                    : cartDetails.map(product => {
-                      cantProduct = product.units;
-                      return (
-                        <tr key={product.idProduct} >
-                          <td>
-                            <p className='h5' >{product.name}</p>
-                          </td>
-                          <td className="text-center mob-hide">
-                            <figure className='container-fluid'>
-                              <img src={product.image} width={90} height={90} alt={product.name} />
-                            </figure>
-                          </td>
-                          <td className="mob-hide">
-                            <span>{accounting.formatMoney(`${product.price}`)}</span>
-                          </td>
-                          <td>
-                            <input
-                              type="number"
-                              // value={cantProduct}
-                              min={1}
-                              max={product.stock}
-                              placeholder={product.units}
-                              onChange={validateCant}
-                              style={{ width: "50px", marginTop: "5px" }}
-                            />
-                          </td>
-                          <td>
-                            < Button className='btn' variant="warning" onClick={()=>updatedCart(product.idProduct)}>Up</Button>
-                          </td>
-                          <td>
-                            <Button className='btn' variant="danger" onClick={()=>removeToCart(product.idProduct)}><RemoveFromCartIcon /></Button>
-                          </td>
-                          <td>
-                            <p>{accounting.formatMoney(`${product.amount}`)}</p>
-                          </td>
-                        </tr>
-                    )
-                    })
-                  }
-                </tbody>
-              </table>
+                    )})}
+                  </tbody>
+                </table>
+              }
             </div>
             { cartDetails.length > 0 && <Button className='btn' variant="danger" onClick={()=>clearCart()} >Clear Cart</Button>}
           </div>
