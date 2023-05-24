@@ -45,7 +45,6 @@ function Card({
     }
   };
 
-  const state = useSelector((state) => state.favorites);
   useEffect(() => {
     datos?.forEach((fav) => {
       if (fav.productId === id) {
@@ -54,7 +53,7 @@ function Card({
         }
       }
     });
-  }, [state, id]);
+  }, [datos, id]);
 
   return (
     <div className="col-8 offset-2 py-1 px-3 col-sm-6 offset-sm-0 py-sm-1 px-sm-3 col-md-6 offset-md-0 py-md-1 px-md-3 col-lg-4 offset-lg-0 py-lg-1 px-lg-3 col-xl-3 offset-xl-0 py-xl-1 px-xl-3 mt-1 mb-3 text-center">
@@ -86,18 +85,22 @@ function Card({
               >
                 <AddToCartIcon />
               </Button>
-              {isFav ? (
-                <button
-                  className={st.btnFav}
-                  onClick={handleFavorite}
-                  style={{ border: 0 }}
-                >
-                  ❤️
-                </button>
+              {userLogueado.email ? (
+                isFav ? (
+                  <button
+                    className={st.btnFav}
+                    onClick={handleFavorite}
+                    style={{ border: 0 }}
+                  >
+                    ❤️
+                  </button>
+                ) : (
+                  <button className={st.btnFav} onClick={handleFavorite}>
+                    🤍
+                  </button>
+                )
               ) : (
-                <button className={st.btnFav} onClick={handleFavorite}>
-                  🤍
-                </button>
+                ""
               )}
             </div>
           </div>
