@@ -54,6 +54,13 @@ export default function ReviewOrder() {
     });
   };
 
+  // //! Función de Mercadopago
+  const handlerMercadoPagoLink = async () => {
+    axios.post('/payments', {id: order.id , name:"Compra BioFresh" , image:"https://biofresh.shop/assets/logo-014472b5.png" , description:"Esto es una prueba" , price: order.totalAmount})
+        .then((res) => window.location.href = res.data.response.body.init_point)
+        .catch((error) => console.log(error));
+  }
+
   useEffect(()=>{
     updateTotals();
   },[]);
@@ -132,7 +139,7 @@ export default function ReviewOrder() {
                             </tbody>
                         </table>
                         <div className="text-center cart-actions">
-                            <Button className="btn btn-success btn-block mb-3" onClick={()=>goToPath('/cart/checkout/review/payment')}>Proceed to the Payment</Button>
+                            <Button className="btn btn-success btn-block mb-3" onClick={handlerMercadoPagoLink}>Proceed to the Payment</Button>
                         </div>
                     </div>
                 </div>
