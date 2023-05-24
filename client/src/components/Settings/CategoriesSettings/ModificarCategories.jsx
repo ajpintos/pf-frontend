@@ -51,6 +51,10 @@ const ModificarCategories = ({ id, name }) => {
       const envio = await axios.put("/categories/modificacion", form);
       if (envio) {
         alert("datos cambiados con exito ");
+        setForm({
+          name: "",
+          description: "",
+        });
         loadingData();
       }
     } catch (error) {
