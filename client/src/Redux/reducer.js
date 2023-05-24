@@ -1,11 +1,12 @@
 import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
-import { ALL_USERS, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER , SET_USER } from "./types/typesUser.js";
+import { ALL_USERS, EMAIL, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER , SET_USER } from "./types/typesUser.js";
 import { DELETE_FAVORITES, ADD_FAVORITES } from "./types/typesFavorites";
 
 const initialState = {
   users: [],
   userLogin: [],
+  userEmail: [],
   allProducts: [],
   products: [],
   showProducts: [],
@@ -70,6 +71,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userLogin: action.payload
+      }
+    };
+    case EMAIL: {
+      return {
+        ...state,
+        userEmail: action.payload
       }
     }
     case FILTER_BY_CATEGORIES : {

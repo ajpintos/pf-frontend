@@ -50,21 +50,21 @@ const Paginacion = ({
           </button>
         </div>
         <div className={st.divNoPaginas}>
-          {pageNumber.map((noPage) =>
+          {pageNumber.map((noPage,index) =>
             noPage <= pageCurrent + 2 && noPage >= pageCurrent - 2 ? (
-              <div
+              <div key={index}
                 onClick={() => goToPage(noPage)}
                 className={
                   noPage === pageCurrent ? st.isCurrent : st.linkPagination
                 }
-                key={noPage}
+                // key={noPage}
               >
                 {noPage}
               </div>
             ) : noPage === pageCurrent + 3 ? (
-              <span>...</span>
+              <span key={index}>...</span>
             ) : noPage === pageCurrent - 3 ? (
-              <span>...</span>
+              <span key={index}>...</span>
             ) : (
               ""
             )
