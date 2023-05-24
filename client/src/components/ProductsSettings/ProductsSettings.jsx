@@ -12,17 +12,23 @@ import NewProduct from "./NewProduct.jsx";
 import st from "./ProductsSettings.module.css";
 
 const ProductsSettings = () => {
+
+
   const dispatch = useDispatch();
+
   const loadingData = async () => {
-    const all_Products = await getProducts();
-    dispatch(all_Products);
+    const all_ProductsBd = await getProducts();
+    dispatch(all_ProductsBd);
     const all_Categories = await getCategories();
     dispatch(all_Categories);
   };
 
   useEffect(() => {
     loadingData();
+   
   }, []);
+  
+ 
 
   const allProducts = useSelector((state) => state.allProducts);
   //    console.log(allProducts);
@@ -32,6 +38,8 @@ const ProductsSettings = () => {
   let totalItems = allProducts.length;
   let indInicial = (pageCurrent - 1) * itemsPerPage;
   let indFinal = indInicial + itemsPerPage;
+
+
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 

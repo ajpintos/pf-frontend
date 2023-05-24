@@ -15,7 +15,7 @@ function Title() {
 
   const handleLogout = () => {
     dispatch(userLogout());
-    navigate("/login");
+    navigate("/");
   }
 
   useEffect(() => {

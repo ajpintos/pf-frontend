@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { emailForgotPassword } from "../../../Redux/actions/actionsUser.js";
 import styles from "./FormEmail.module.css"
+import validateFormEmail from "./validate/validateFormEmail.js";
 
 // REACT-BOOSTRAP
 
@@ -11,6 +12,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import registerValidate from "../../RegisterPage/validate/registerValidate.js";
 
 const FormEmail = () => {
 
@@ -18,13 +20,28 @@ const FormEmail = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleChangeEmail = (e) => setEmail(e.target.value);
+    const [form, setForm] = useState({
+        email: ""
+    })
+
+    const [errors, setErrors] = useState({
+        email: ""
+    })
+
+    const handleChangeEmail = (e) => {
+        setEmail(e.target.value);
+        const property = e.target.name;
+        const value = e.target.value;
+        setForm({...form, [property]: value});
+        setErrors(validateFormEmail({...form, [property]: value}));
+    }
 
     const handlerSubmitEmail = (e) => {
         e.preventDefault();
         dispatch(emailForgotPassword(email));
         navigate('/forgotpassword/changepassword');
     }
+
 
     return (
         <div className="container-fluid">
@@ -42,6 +59,7 @@ const FormEmail = () => {
                                 onChange={handleChangeEmail}
                             />
                         </Form.Group>
+                    <p style={{color: "red"}}>{errors.email}</p>
                         <Button variant="success" type="submit" size='sm'>Submit</Button>
                 </Form> 
             </div>

@@ -11,6 +11,7 @@ import emailjs from "@emailjs/browser";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Button from 'react-bootstrap/Button';
 import Stack from "react-bootstrap/esm/Stack";
+import swal from 'sweetalert';
 
 function Contact() {
   const navigate = useNavigate();
@@ -28,8 +29,8 @@ function Contact() {
     phone: "",
     message: "",
   });
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [successMessage, setSuccessMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (event) => {
     setForm({
@@ -42,13 +43,13 @@ function Contact() {
         [event.target.name]: event.target.value,
       })
     );
-    setSuccessMessage("");
-    setErrorMessage("");
+    // setSuccessMessage("");
+    // setErrorMessage("");
   };
   const sendEmail = (e) => {
     e.preventDefault();
-    setSuccessMessage("");
-    setErrorMessage("");
+    // setSuccessMessage("");
+    // setErrorMessage("");
 
     if (
       !errors.name &&
@@ -67,7 +68,8 @@ function Contact() {
         .then(
         (result) => {
           console.log(result.text);
-          setSuccessMessage("Message sent succesfully");
+         // setSuccessMessage("Message sent succesfully");
+          swal("Congratulations!", "Message sent succesfully!", "success");
           setForm({
             name: "",
             email: "",
@@ -77,11 +79,13 @@ function Contact() {
         },
         (error) => {
           console.log(error.text);
-          setErrorMessage("Error sending the message");
+        //  setErrorMessage("Error sending the message");
+          swal("Error!", "No  sending the message", "error")
         }
       );
     } else {
-      setErrorMessage("You must fill in the fields correctly");
+      swal("Error!", "You must fill in the fields correctly", "error")
+     // setErrorMessage("You must fill in the fields correctly");
       return;
     }
   };
@@ -191,8 +195,8 @@ function Contact() {
                 Send
               </Button>
 
-              <p className={styles.error}>{errorMessage}</p>
-              <p className={styles.success}>{successMessage}</p>
+              {/* <p className={styles.error}>{errorMessage}</p>
+              <p className={styles.success}>{successMessage}</p> */}
             </Form>
           </div>
 

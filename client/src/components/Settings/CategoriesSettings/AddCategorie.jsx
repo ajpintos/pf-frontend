@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { getCategories } from "../../../Redux/actions/actionsCategories";
+import swal from 'sweetalert';
 
 const AddCategorie = () => {
   const dispatch = useDispatch();
@@ -49,11 +50,13 @@ const AddCategorie = () => {
     try {
       const result = await axios.post("/categories/categorie", form);
       if (result) {
-        alert("Successful operation");
+       // alert("Successful operation");
+        swal("Congratulations!", "Category added successfully!", "success");
         loadingData();
       }
     } catch (error) {
       alert("Error" + error.message);
+     swal("Error!", "No Added Category", "error")
     }
   };
 
