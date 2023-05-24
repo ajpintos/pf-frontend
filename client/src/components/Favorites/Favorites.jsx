@@ -9,12 +9,12 @@ import { useEffect, useState } from "react";
 import { getFavoritesDB } from "../../Redux/actions/actionsFavorites.js";
 
 const Favorites = ({ email }) => {
- /*  const dispatch = useDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFavoritesDB(email));
   }, []);
 
-  const datos = useSelector((state) => state?.favorites); */
+  const datos = useSelector((state) => state?.favorites);
   /*   const user = useSelector((state) => state?.userLogin);
   const [datos, setDatos] = useState();
   const llamado = async () => {
