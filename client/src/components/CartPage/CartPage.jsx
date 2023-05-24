@@ -6,8 +6,8 @@ import axios from 'axios'
 import Container from 'react-bootstrap/esm/Container'
 import accounting from 'accounting';
 import { useNavigate } from 'react-router-dom'
-import { getCartDetail } from '../Cart/cartHelpers'
-import { add_ToCart, clear_Cart, remove_FromCart } from '../../Redux/actions/actionsCart'
+import { getCartDetail, updateTotals } from '../Cart/cartHelpers'
+import { add_ToCart, clear_Cart, remove_FromCart, set_Cart } from '../../Redux/actions/actionsCart'
 import { getProductById } from '../../Redux/actions/actionsProducts'
 import swal from 'sweetalert';
 
@@ -20,22 +20,16 @@ const CartPage = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(state=> state.userLogin);
-  const cart_Details = useSelector(state=> state.cartDetails);
-  const cartDetails = cart_Details;
-  let cantProduct;
+  const cartDetails = useSelector(state=> state.cartDetails);
+  const cart = useSelector(state=> state.cart);
+  const [ cartFlag, setCartFlag ] = useState(true);
   const [ cant, setCant ] = useState(0);
+  let cantProduct;
 
   const validateCant = (e) => {
     e.preventDefault();
     setCant(e.target.value);
   };
-
-  const [ order, setOrder ] = useState({
-    id: '',
-    amount: 0,
-    taxAmount: 0,
-    totalAmount: 0
-  });
 
   const updatedCart = async (idProduct) => {
     const productFound = await getProductById(idProduct);
@@ -58,9 +52,6 @@ const CartPage = () => {
     }
     dispatch(add_ToCart(cart_Detail, cartDetails));
     swal("Congratulations", "Updated product in cart", "success");
-    const detailsStorage = cartDetails;
-    updateTotals(detailsStorage);
-    localStorage.setItem('cartDetails', JSON.stringify(detailsStorage));
   };
 
   const removeToCart = async (idProduct) => {
@@ -70,48 +61,42 @@ const CartPage = () => {
       const orderDetailDelete = await axios.delete('/ordersDetails', { data: detailData });
     };
     dispatch(remove_FromCart(idProduct, cartDetails));
-    const detailsStorage = cartDetails;
-    updateTotals(detailsStorage);
-    localStorage.setItem('cartDetails', JSON.stringify(detailsStorage));
   };
 
   const clearCart = async () => {
     if (user.email) {
-      for (let i=0; i < cartDetails.length; i++) {
-        const detailData = { idDetail: cartDetails[i].idOrderDetail };
-        const orderDetailDelete = await axios.delete('/ordersDetails', { data: detailData });
-      };
+      const order = cart.orderId;
+      console.log('order en clearCart ', order);
+      const orderDetailDelete = await axios.delete('/orders/'+order);
     }; 
     dispatch(clear_Cart());
-    const detailsStorage = cartDetails;
-    updateTotals(detailsStorage);
-    localStorage.removeItem('cartDetails');
+    setCartFlag(false);
   };
 
   const goToPath = (goPath) => {
     navigate(goPath);
   };
 
-  const updateTotals = async (cart_Details) => {
-    let amountO= 0;
-    let taxAmountO = 0;
-    let totalAmountO = 0;
-    for (let i=0; i < cart_Details.length; i++) {
-        amountO = amountO + cart_Details[i].amount;
-        taxAmountO = taxAmountO + cart_Details[i].taxAmount;
-        totalAmountO = totalAmountO + cart_Details[i].totalAmount;
+  const cartUpdate = async () => {
+    if (!cartFlag) {
+      const cartTotal = {
+        amount: 0,
+        taxAmount: 0,
+        totalAmount: 0
+      };
+      dispatch(set_Cart(cartTotal));
+      localStorage.removeItem('cartDetails');
+      setCartFlag(true);
+    } else {
+      const cartTotal = updateTotals(cartDetails);
+      dispatch(set_Cart(cartTotal));
+      localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
     };
-    setOrder({
-      idOrder: '',
-      amount: amountO,
-      taxAmount: taxAmountO,
-      totalAmount: totalAmountO,
-    });
   };
 
   useEffect(()=>{
-    updateTotals();
-  },[]);
+    cartUpdate();
+  },[cartDetails]);
 
   return (
     <Container className='container-fluid'>
@@ -197,15 +182,15 @@ const CartPage = () => {
                 <tbody>
                   <tr>
                     <td className='text-left'><strong>Subtotal: </strong></td>
-                    <td className='text-right'><p>{accounting.formatMoney(`${order.amount}`)}</p></td>
+                    <td className='text-right'><p>{accounting.formatMoney(`${cart.amount}`)}</p></td>
                   </tr>
                   <tr>
                     <td className='text-left'><strong>Tax: </strong></td>
-                    <td className='text-right'><p>{accounting.formatMoney(`${order.taxAmount}`)}</p></td>
+                    <td className='text-right'><p>{accounting.formatMoney(`${cart.taxAmount}`)}</p></td>
                   </tr>
                   <tr>
                     <td colSpan="1" className="text-left"><strong>Total: </strong></td>
-                    <td colSpan="1" className="text-right"><p>{accounting.formatMoney(`${order.totalAmount}`)}</p></td>
+                    <td colSpan="1" className="text-right"><p>{accounting.formatMoney(`${cart.totalAmount}`)}</p></td>
                   </tr>
                 </tbody>
               </table>

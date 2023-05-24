@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {addFavorites, deleteFavorites,} from "../../Redux/actions/actionsFavorites";
 import axios from "axios";
 import { cartFoundIndex, foundOrderForDetail } from "../Cart/cartHelpers";
-import { add_ToCart, remove_FromCart } from "../../Redux/actions/actionsCart";
+import { add_Cart, add_ToCart, remove_FromCart, set_Cart } from "../../Redux/actions/actionsCart";
 import accounting from 'accounting';
 import st from './Card.module.css'
 import swal from 'sweetalert';
@@ -57,6 +57,7 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
         idOrder: detailsData.idOrder,
         idOrderDetail: detailCreated.data.id,
       };
+      dispatch(add_Cart(detailsData.idOrder));
     };
     if (cartDetails.length > 0) {
       let unitsProduct = cartFoundIndex(product.idProduct, cartDetails);
@@ -74,8 +75,6 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
     };
     dispatch(add_ToCart(product, cartDetails));
     swal("Congratulations", "Product added to cart", "success");
-    const detailsStorage = cartDetails;
-    localStorage.setItem('cartDetails', JSON.stringify(detailsStorage));
   };
 
   const handleFavorite = () => {
@@ -95,6 +94,10 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
       }
     });
   }, [state, id]);
+
+  useEffect(()=>{
+    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
+  },[cartDetails]);
 
   return (
     <div className="col-8 offset-2 py-1 px-3 col-sm-6 offset-sm-0 py-sm-1 px-sm-3 col-md-6 offset-md-0 py-md-1 px-md-3 col-lg-4 offset-lg-0 py-lg-1 px-lg-3 col-xl-3 offset-xl-0 py-xl-1 px-xl-3 mt-1 mb-3 text-center">

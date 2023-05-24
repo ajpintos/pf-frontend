@@ -22,14 +22,13 @@ import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
 import ReviewOrder from "./components/ReviewOrder/ReviewOrder";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import state from "sweetalert/typings/modules/state";
 
 //axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
 
 function App() {
 
-  const user = useSelector(steta => state.userLogin);
+  const user = useSelector(state => state.userLogin);
   
   const [ whereIAm, setWhereIAm ] = useState({
     place: '',

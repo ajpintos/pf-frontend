@@ -130,7 +130,6 @@ function CardContainer({ whereIAm, hereIAm }) {
   };
 
   useEffect(() => {
-    console.log('nameProducts en useEffect ',nameProducts);
     callApi();
   }, []);
 

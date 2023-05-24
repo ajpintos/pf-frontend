@@ -34,4 +34,21 @@ export const getCartDetail = (idProduct, cartDetails) => {
     if (cartDetails[i].idProduct === idProduct) return cartDetails[i];
   };
   return null; 
-}
+};
+
+export const updateTotals = (cartDetails) => {
+  let amountO= 0;
+  let taxAmountO = 0;
+  let totalAmountO = 0;
+  for (let i=0; i < cartDetails.length; i++) {
+      amountO = amountO + cartDetails[i].amount;
+      taxAmountO = taxAmountO + cartDetails[i].taxAmount;
+      totalAmountO = totalAmountO + cartDetails[i].totalAmount;
+  };
+  return {
+    amount: amountO,
+    taxAmount: taxAmountO,
+    totalAmount: totalAmountO,
+  };
+};
+

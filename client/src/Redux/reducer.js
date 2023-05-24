@@ -1,12 +1,12 @@
 import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
 import { ALL_USERS, EMAIL, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER , SET_USER } from "./types/typesUser.js";
-import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, STATUS_CHANGE_ORDER } from "./types/typesCart";
+import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, STATUS_CHANGE_ORDER, SET_CART, ADD_CART } from "./types/typesCart";
 import { DELETE_FAVORITES, ADD_FAVORITES } from "./types/typesFavorites";
 
 const initialState = {
   users: [],
-  userLogin: [],
+  userLogin: {},
   userEmail: [],
   allProducts: [],
   products: [],
@@ -91,10 +91,29 @@ const rootReducer = (state = initialState, action) => {
         userEmail: action.payload
       }
     }
+    case ADD_CART: {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          orderId: action.payload
+        }
+      }
+    }
+    case SET_CART: {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          amount: action.payload.amount,
+          taxAmount: action.payload.taxAmount,
+          totalAmount: action.payload.totalAmount
+        }
+      }
+    }
     case ADD_TO_CART: {
       return {
         ...state,
-        cart: action.payload.order,
         cartDetails: [ ...state.cartDetails, action.payload.product ]
       }
     }
@@ -102,12 +121,6 @@ const rootReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        cart: {
-          ...state.cart,
-          amount: action.payload.order.amount,
-          taxAmount: action.payload.order.taxAmount,
-          totalAmount: action.payload.order.totalAmount,  
-        },
         cartDetails: action.payload.products,
       }
     }
@@ -118,46 +131,17 @@ const rootReducer = (state = initialState, action) => {
       }
     }
     case CLEAR_CART: {
-      // updateLocalStorage([])
       return {
         ...state,
-        cart: '',
+        cart: {
+          ...state.cart,
+          amount: 0,
+          taxAmount: 0,
+          totalAmount: 0,
+        },
         cartDetails: [],
       }
     }
-    // case ADD_TO_CART: {
-    //   const {id} = action.payload
-    //   const productInCartIndex = state.findIndex(item => item.id === id)
-    //   if(productInCartIndex >= 0) {
-    //     const newState = [
-    //       ...state.slice(0, productInCartIndex),
-    //       {
-    //         ...state[productInCartIndex], 
-    //         quantity: state[productInCartIndex].quantity + 1
-    //       },
-    //       ...state.slice(productInCartIndex + 1)
-    //     ]
-    //     updateLocalStorage(newState);
-    //     return newState;
-    //   } else {
-    //     const newState = [
-    //       ...state,
-    //       {
-    //         ...action.payload,
-    //         quantity: 1
-    //       }
-    //     ]
-    //     updateLocalStorage(newState);
-    //     return newState;
-    //   }
-    // }
-    // case REMOVE_FROM_CART: {
-    //   const { id } = action.payload
-    //   const newState = state.filter(item => item.id !== id)
-    //   updateLocalStorage(newState)
-    //   return newState
-    // }
- 
     case ADD_FAVORITES: {
       return {
         ...state,

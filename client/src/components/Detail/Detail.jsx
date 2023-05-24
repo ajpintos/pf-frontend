@@ -5,13 +5,14 @@ import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
 import { cartFoundIndex, foundOrderForDetail, getCartDetail } from "../Cart/cartHelpers.js";
 import { AddToCartIcon } from "../Icons/Icons";
-import { add_ToCart, remove_FromCart } from "../../Redux/actions/actionsCart.js";
+import { add_Cart, add_ToCart, remove_FromCart, set_Cart } from "../../Redux/actions/actionsCart.js";
 import swal from 'sweetalert';
 
 const Detail = ({ whereIAm, hereIAm }) => {
 
   const user = useSelector(state=>state.userLogin);
   const nameProducts = useSelector(state=>state.nameProducts);
+  const cart = useSelector(state=>state.cart);
   const cartDetails = useSelector(state=>state.cartDetails);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -69,6 +70,7 @@ const Detail = ({ whereIAm, hereIAm }) => {
           totalAmount: ( (product.price * unitsProduct) * product.tax ) + (product.price * unitsProduct),
         };
         detailFlag = true;
+        dispatch(add_Cart(detailFound.idOrder));
       };
     };
     if (!detailFlag && user.email) {
@@ -84,6 +86,7 @@ const Detail = ({ whereIAm, hereIAm }) => {
         idOrder: detailsData.idOrder,
         idOrderDetail: detailCreated.data.id,
       };
+      dispatch(add_Cart(detailsData.idOrder));
     };
     dispatch(add_ToCart(productModify, cartDetails));
     if (user.email) {
@@ -95,9 +98,11 @@ const Detail = ({ whereIAm, hereIAm }) => {
       const orderDetailUpdate = await axios.put('/ordersDetails', updateData );
     };
     swal("Congratulations", "Product added to cart", "success");
-    const detailsStorage = cartDetails;
-    localStorage.setItem('cartDetails', JSON.stringify(detailsStorage));
   };
+
+  useEffect(()=>{
+    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
+  },[cartDetails]);
 
   const returnTo = () => {
     const returnWhere = whereIAm;
