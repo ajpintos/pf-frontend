@@ -69,12 +69,12 @@ const ModificarUser = ({ show, handleClose, email, tipo }) => {
           adminType: tipo,
         });
         if (result) {
-          alert(result.data);
+          alert("operacion exitosa");
           loadingData();
         }
       }
     } catch (error) {
-      alert("Error:  " + error.message);
+      alert("completa los datos");
     }
   };
 
