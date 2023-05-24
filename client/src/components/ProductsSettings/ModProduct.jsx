@@ -89,10 +89,12 @@ const ModProduct = ({ id, name, show, handleClose }) => {
   //? PARA ENVIAR LOS DATOS AL BACK
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
-      
+      console.log (form)
   
       if (
+        form.id !== "" &&
         form.name !== "" &&
         !errors.name &&
         form.description !== "" &&
@@ -103,7 +105,7 @@ const ModProduct = ({ id, name, show, handleClose }) => {
         form.image !== "" &&
         form.categories.length > 0
       ) {
-      const result = await axios.put("/products", form);
+      const result = await axios.put("/products/", form);
       if (result) {
         setForm({
           id: "",
