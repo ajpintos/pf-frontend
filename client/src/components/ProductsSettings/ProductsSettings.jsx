@@ -17,14 +17,15 @@ const ProductsSettings = () => {
   const dispatch = useDispatch();
 
   const loadingData = async () => {
-    const all_Products = await getProducts();
-    dispatch(all_Products);
+    const all_ProductsBd = await getProducts();
+    dispatch(all_ProductsBd);
     const all_Categories = await getCategories();
     dispatch(all_Categories);
   };
 
   useEffect(() => {
     loadingData();
+   
   }, []);
   
  
