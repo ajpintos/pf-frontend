@@ -44,6 +44,7 @@ const FormEmail = () => {
         emailjsSend();
         navigate('/forgotpassword/changepassword');
     }
+    
 const emailjsSend=()=>{
     const serviceID = "service_e5hd1wt";
       const templateID = "template_8i1yknj";
@@ -52,13 +53,10 @@ const emailjsSend=()=>{
         .then(
         (result) => {
           console.log(result.text);
-         // setSuccessMessage("Message sent succesfully");
-          swal("Ok!", "Message sent succesfully!", "success");
-         
+              swal("Ok!", "Please check your email!", "success");         
         },
         (error) => {
           console.log(error.text);
-        //  setErrorMessage("Error sending the message");
           swal("Error!", "No  sending the message", "error")
         }
       );
