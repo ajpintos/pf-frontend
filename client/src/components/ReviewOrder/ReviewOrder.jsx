@@ -28,8 +28,6 @@ export default function ReviewOrder() {
 
   const [ order, setOrder ] = useState({
     id: '',
-    amount: 0,
-    taxAmount: 0,
     totalAmount: 0
   });
 
@@ -114,20 +112,34 @@ export default function ReviewOrder() {
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div className="col-lg-3 mb-4">
-                    <div class="col-12">
+                <div className="col-lg-12 mb-4 d-flex gap-2">
+                    <div class="col-6">
                         <div class="card mb-3">
                             <div class="card-body">
                                     <label><strong>Billing Address</strong></label>
                                     <hr />
-                                    <p>{formCheckout.firstname} {formCheckout.lastname}</p>
-                                    <p>{formCheckout.address}</p>
-                                    <p>{formCheckout.cp}</p>
-                                    <p>{formCheckout.country} - {formCheckout.city}</p>
+                                    <span>{formCheckout.firstname} {formCheckout.lastname}</span><br/>
+                                    <span>{formCheckout.address}</span><br/>
+                                    <span>{formCheckout.cp}</span><br/>
+                                    <span>{formCheckout.country} - {formCheckout.city}</span><br/>
                             </div>
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                    <label><strong>Shipping Address</strong></label>
+                                    <hr />
+                                    <span>{formCheckout.firstname} {formCheckout.lastname}</span><br/>
+                                    <span>{formCheckout.address}</span><br/>
+                                    <span>{formCheckout.cp}</span><br/>
+                                    <span>{formCheckout.country} - {formCheckout.city}</span><br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div className='col-lg-3 mb-4'>
                     <div className="col-12">
                         <h1 className='text-center'>Total Order</h1>
                         <table className="table bordered table-striped">

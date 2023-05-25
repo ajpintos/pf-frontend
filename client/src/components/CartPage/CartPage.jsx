@@ -180,14 +180,6 @@ const CartPage = () => {
               <table className="table bordered table-striped">
                 <tbody>
                   <tr>
-                    <td className='text-left'><strong>Subtotal: </strong></td>
-                    <td className='text-right'><p>{accounting.formatMoney(`${cart.amount}`)}</p></td>
-                  </tr>
-                  <tr>
-                    <td className='text-left'><strong>Tax: </strong></td>
-                    <td className='text-right'><p>{accounting.formatMoney(`${cart.taxAmount}`)}</p></td>
-                  </tr>
-                  <tr>
                     <td colSpan="1" className="text-left"><strong>Total: </strong></td>
                     <td colSpan="1" className="text-right"><p>{accounting.formatMoney(`${cart.totalAmount}`)}</p></td>
                   </tr>
