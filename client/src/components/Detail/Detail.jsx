@@ -166,7 +166,7 @@ const Detail = ({ whereIAm, hereIAm, email }) => {
     <div>
       <div className="row  text-center ">
         <div className="container ">
-          <h1>DETAIL</h1>
+          <br/>  
           <div className="row">
             <div className="col">
               <img
