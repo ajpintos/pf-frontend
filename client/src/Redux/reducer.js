@@ -88,7 +88,7 @@ const rootReducer = (state = initialState, action) => {
         userEmail: action.payload
       }
     }
-  
+    
     case ADD_CART: {
       return {
         ...state,
