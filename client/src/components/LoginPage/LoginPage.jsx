@@ -17,6 +17,7 @@ import Button from "react-bootstrap/Button";
 
 import GoogleLogin from "react-google-login";
 import { gapi } from "gapi-script";
+import { cartToUser } from '../Cart/cartHelpers.js';
 
 //! --------------------------------------
 
@@ -25,11 +26,14 @@ function LoginPage(){
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(state => state.userLogin);
+    let userCart = user;
 
     const clientID = "932914293926-uo3dpst96jr8s51di1mmbhdh3j2gie6a.apps.googleusercontent.com";
    
     const onSuccess = (response) => {
         dispatch(userLoginGoogle(response.profileObj));
+        console.log('usercart ', userCart);
+        cartToUser(user);
         swal("Congratulations!", "Login Successfully", "success");
         navigate("/");
     }
@@ -50,6 +54,8 @@ function LoginPage(){
         const status = await dispatch(userLogin(form));
         if (status.hasOwnProperty('error')) swal("Error", "Incorrect email or password", "error");
         else {
+            console.log('usercart ', userCart);
+            cartToUser(form.email);
             swal("Congratulations!", "Login Successfully", "success");
             navigate("/");
         }
@@ -69,6 +75,10 @@ function LoginPage(){
         }
         gapi.load("client:auth2", start);
     },[])
+
+    useEffect(()=>{
+        userCart = user;
+    },[user]);
 
     // UseEffect para volver al inicio si ya se encuentra logueado el usuario
 

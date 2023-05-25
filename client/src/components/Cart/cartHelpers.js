@@ -52,3 +52,7 @@ export const updateTotals = (cartDetails) => {
   };
 };
 
+export const cartToUser = (user) => {
+  console.log('user en cartToUser ', user);
+  return null;
+};
