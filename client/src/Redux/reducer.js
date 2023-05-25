@@ -4,6 +4,7 @@ import { ALL_USERS, EMAIL, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER , SET_US
 import { DELETE_FAVORITES, ADD_FAVORITES, GET_FAVORITES_DB } from "./types/typesFavorites";
 import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, STATUS_CHANGE_ORDER, SET_CART, ADD_CART } from "./types/typesCart";
 import { SET_SHIPPING_OPTIONS, SAVE_SHIPPING_DATA } from "./types/typesDeliveries";
+import { GET_RATINGS } from "./types/typesRating";
 
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
   cartDetails: [],
   shippingOption: '',
   shippingAddress: [],
+  ratingProducts: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -169,6 +171,11 @@ const rootReducer = (state = initialState, action) => {
         shippingAddress: action.payload
       }
     }
+    case GET_RATINGS:
+      return {
+        ...state,
+        ratingProducts: action.payload,
+      }
     default:
       return {...state};
   };
