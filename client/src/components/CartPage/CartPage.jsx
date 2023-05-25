@@ -193,12 +193,16 @@ const CartPage = () => {
                   </tr>
                 </tbody>
               </table>
+              {user.email ? 
+                <div className="text-center cart-actions">
+                  <Button className="btn btn-success btn-block mb-3" onClick={()=>goToPath('/cart/checkout')}>Proceed to Checkout</Button>
+                </div> :
+                <div className="text-center cart-actions">
+                  <Button className="btn btn-success btn-block mb-3" onClick={()=>goToPath('/login')}>Proceed to Checkout</Button>
+                </div>
+              }
               <div className="text-center cart-actions">
-                <Button className="btn btn-success btn-block mb-3" onClick={()=>goToPath('/cart/checkout')}>Proceed to Checkout</Button>
-              
-              </div>
-              <div className="text-center cart-actions">
-                <Button className="btn btn-success btn-block mb-1" onClick={()=>goToPath('/store')}>Go Store</Button>
+                <Button className="btn btn-success btn-block mb-1" onClick={()=>goToPath('/store')}>← Continue Shopping</Button>
               </div>
             </div>
           </div>

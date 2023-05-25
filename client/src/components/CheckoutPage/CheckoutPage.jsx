@@ -202,8 +202,8 @@ function RegisterPage() {
                             <Button variant="success" className='mb-2' onClick={()=>goToPath('/cart/checkout/review')}>
                                 Review Order
                             </Button>
-                            <Button variant='success' className='mb-2' type='' onClick={()=>goToPath('/store')}>
-                                ← Continue Shopping
+                            <Button variant='success' className='mb-2' type='' onClick={()=>goToPath('/cart')}>
+                                Go back to Cart
                             </Button>
                         </div>
                     </div>
