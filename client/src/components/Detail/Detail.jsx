@@ -202,7 +202,7 @@ const Detail = ({ whereIAm, hereIAm, email }) => {
               <br />
               <div>
               <div>
-                <button style={{ borderRadius: "1rem" }}>❤️</button>
+                
                 <Button variant="btn btn-success mt-2" className="col-4 offset-3" onClick={returnTo} >Return {whereIAm.place === '' ? 'Home' : whereIAm.place}</Button>
                   {userLogueado.email ? (
                     isFav ? (
