@@ -47,7 +47,6 @@ const rootReducer = (state = initialState, action) => {
         allCategories: action.payload,
       }
     };
-
     case FILTER_BY_CATEGORIES:
       return {
         ...state,
@@ -89,6 +88,7 @@ const rootReducer = (state = initialState, action) => {
         userEmail: action.payload
       }
     }
+  
     case ADD_CART: {
       return {
         ...state,
@@ -151,7 +151,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         favorites: action.payload,
       };
-
     case GET_FAVORITES_DB:
       return {
         ...state,

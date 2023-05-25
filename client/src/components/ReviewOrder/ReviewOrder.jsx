@@ -74,7 +74,6 @@ export default function ReviewOrder() {
 
   return (
     <Container className='container-fluid'>
-        {console.log(shippingAddress)}
         <div className="container">
             <div className="row my-2">
                 <div className="col-12">
@@ -122,35 +121,48 @@ export default function ReviewOrder() {
                             </tbody>
                         </table>
                     </div>
-                <div className="col-lg-12 mb-4 d-flex gap-2">
-                    <div class="col-6">
-                        <div class="card mb-3">
-                            <div class="card-body">
+                    {shippingAddress.firstname ?
+                    <div className="col-lg-12 mb-4 d-flex gap-2">
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
                                     <label><strong>Billing Address</strong></label>
                                     <hr />
                                     <span>{formCheckout.firstname} {formCheckout.lastname}</span><br/>
                                     <span>{formCheckout.address}</span><br/>
                                     <span>{formCheckout.cp}</span><br/>
                                     <span>{formCheckout.country} - {formCheckout.city}</span><br/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {shippingAddress.firstname? 
-                    <div class="col-6">
-                        <div class="card mb-3">
-                            <div class="card-body">
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
                                     <label><strong>Shipping Address</strong></label>
                                     <hr />
                                     <span>{shippingAddress.firstname} {shippingAddress.lastname}</span><br/>
                                     <span>{shippingAddress.address}</span><br/>
                                     <span>{shippingAddress.cp}</span><br/>
                                     <span>{shippingAddress.country} - {shippingAddress.city}</span><br/>
+                                </div>
+                            </div>
+                        </div> 
+                    </div> : 
+                    <div className="col-lg-12 mb-4 d-flex gap-2">
+                    <div class="col-6">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label><strong>Billing and Address</strong></label>
+                                <hr />
+                                <span>{formCheckout.firstname} {formCheckout.lastname}</span><br/>
+                                <span>{formCheckout.address}</span><br/>
+                                <span>{formCheckout.cp}</span><br/>
+                                <span>{formCheckout.country} - {formCheckout.city}</span><br/>
                             </div>
                         </div>
-                    </div> :
-                        " "
+                    </div>
+                    </div>
                     }
-                </div>
                 </div>
                 <div className='col-lg-3 mb-4'>
                     <div className="col-12">

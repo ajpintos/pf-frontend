@@ -8,7 +8,6 @@ import s from './CheckoutPage.module.css';
 import mercadoPago from '../../assets/mercadoPago.png'
 import { saveShippingData } from '../../Redux/actions/actionsDeliveries.js';
 
-
 //CSS REACT-BOOSTRAP
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -16,7 +15,6 @@ import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/esm/Stack';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
-
 
 function RegisterPage() {
     const dispatch = useDispatch()
@@ -55,13 +53,7 @@ function RegisterPage() {
         country: "",
     })
 
-    // handle para cambiar la informacion del formulario de checkout
-
-    const handleChangeCheckout = (event) => {
-        const property = event.target.name;
-        const value = event.target.value;
-        setFormCheckout({...formCheckout, [property]: value});
-    };
+    // handle para cambiar la informacion del formulario de envios
 
     const handleChangeShippingForm = (event) => {
         const property = event.target.name;
@@ -74,7 +66,6 @@ function RegisterPage() {
 
     const submitHandlerCheckout = (e) => {
         e.preventDefault();
-        console.log(formShipping)
         dispatch(saveShippingData(formShipping));
     }
 
@@ -107,25 +98,11 @@ function RegisterPage() {
                             <Row className="mb-1 px-2">
                                 <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formEmail">
                                     <Form.Label>E-mail *</Form.Label>
-                                    <Form.Control
-                                        type="email"
-                                        placeholder="Enter email"
-                                        id="email"
-                                        name="email"
-                                        value={formCheckout.email}
-                                        onChange={handleChangeCheckout}
-                                    />
+                                    <Form.Control type="email" placeholder="Enter email" id="email" name="email" value={formCheckout.email} />
                                 </Form.Group>
                                 <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formPhone">
                                     <Form.Label>Phone</Form.Label>
-                                    <Form.Control
-                                        type="phone"
-                                        placeholder="Phone"
-                                        id="phone"
-                                        name="phone"
-                                        value={formCheckout.phone}
-                                        onChange={handleChangeCheckout}
-                                    />
+                                    <Form.Control type="phone" placeholder="Phone" id="phone" name="phone" value={formCheckout.phone} />
                                 </Form.Group>
                             </Row>
                         </div>
@@ -136,75 +113,34 @@ function RegisterPage() {
                         <Row className="px-2">
                             <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formName">
                                 <Form.Label>Name *</Form.Label>
-                                <Form.Control
-                                    type="firstname"
-                                    placeholder="First Name"
-                                    id="firstname"
-                                    name="firstname"
-                                    value={formCheckout.firstname}
-                                    onChange={handleChangeCheckout}
-                                />
+                                <Form.Control type="firstname" placeholder="First Name" id="firstname" name="firstname" value={formCheckout.firstname} />
                                 <p style={{color: "red"}}>{errors.firstname}</p>
                             </Form.Group>
 
                             <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formLastName">
                                 <Form.Label>Last Name *</Form.Label>
-                                <Form.Control
-                                    type="lastname"
-                                    placeholder="Last Name"
-                                    id="lastname"
-                                    name="lastname"
-                                    value={formCheckout.lastname}
-                                    onChange={handleChangeCheckout}
-                                />
+                                <Form.Control type="lastname" placeholder="Last Name" id="lastname" name="lastname" value={formCheckout.lastname} />
                                 <p style={{color: "red"}}>{errors.lastname}</p>
                             </Form.Group>
                         </Row>
                         <Row className="mb-1 px-2">
                             <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formAddress">
                                 <Form.Label>Address *</Form.Label>
-                                <Form.Control
-                                    type="address"
-                                    placeholder="Address"
-                                    id="address"
-                                    name="address"
-                                    value={formCheckout.address}
-                                    onChange={handleChangeCheckout}
-                                    />
+                                <Form.Control type="address" placeholder="Address" id="address" name="address" value={formCheckout.address} />
                             </Form.Group>
                             <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formCity">
                                 <Form.Label>City *</Form.Label>
-                                <Form.Control
-                                    type="city"
-                                    placeholder="City"
-                                    id="city"
-                                    name="city"
-                                    value={formCheckout.city}
-                                    onChange={handleChangeCheckout}
-                                    />
+                                <Form.Control type="city" placeholder="City" id="city" name="city" value={formCheckout.city} />
                             </Form.Group>
                         </Row>
                         <Row className="mb-1 px-2">
                             <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formZiCode">
                                 <Form.Label>Zip Code</Form.Label>
-                                <Form.Control
-                                    type="cp"
-                                    placeholder="Zip Code"
-                                    id="cp"
-                                    name="cp"
-                                    value={formCheckout.cp}
-                                    onChange={handleChangeCheckout}
-                                />
+                                <Form.Control type="cp" placeholder="Zip Code" id="cp" name="cp" value={formCheckout.cp} />
                             </Form.Group>
                             <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formCountry">
                                 <Form.Label>Country *</Form.Label>
-                                <Form.Control
-                                    type="country"
-                                    placeholder="Country"
-                                    id="country"
-                                    name="country"
-                                    value={formCheckout.country}
-                                    onChange={handleChangeCheckout}/>
+                                <Form.Control type="country" placeholder="Country" id="country" name="country" value={formCheckout.country} />
                             </Form.Group>
                         </Row>
                         </div>
@@ -220,75 +156,34 @@ function RegisterPage() {
                                 <Row className="px-2">
                                     <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formName">
                                         <Form.Label>Name *</Form.Label>
-                                        <Form.Control
-                                            type="firstname"
-                                            placeholder="First Name"
-                                            id="firstname"
-                                            name="firstname"
-                                            value={formShipping.firstname}
-                                            onChange={handleChangeShippingForm}
-                                        />
+                                        <Form.Control type="firstname" placeholder="First Name" id="firstname" name="firstname" value={formShipping.firstname}onChange={handleChangeShippingForm} />
                                         <p style={{color: "red"}}>{errors.firstname}</p>
                                     </Form.Group>
 
                                     <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formLastName">
                                         <Form.Label>Last Name *</Form.Label>
-                                        <Form.Control
-                                            type="lastname"
-                                            placeholder="Last Name"
-                                            id="lastname"
-                                            name="lastname"
-                                            value={formShipping.lastname}
-                                            onChange={handleChangeShippingForm}
-                                        />
+                                        <Form.Control type="lastname" placeholder="Last Name" id="lastname" name="lastname" value={formShipping.lastname} onChange={handleChangeShippingForm} />
                                         <p style={{color: "red"}}>{errors.lastname}</p>
                                     </Form.Group>
                                 </Row>
                                 <Row className="mb-1 px-2">
                                     <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formAddress">
                                         <Form.Label>Address *</Form.Label>
-                                        <Form.Control
-                                            type="address"
-                                            placeholder="Address"
-                                            id="address"
-                                            name="address"
-                                            value={formShipping.address}
-                                            onChange={handleChangeShippingForm}
-                                            />
+                                        <Form.Control type="address" placeholder="Address" id="address" name="address" value={formShipping.address} onChange={handleChangeShippingForm} />
                                     </Form.Group>
                                     <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formCity">
                                         <Form.Label>City *</Form.Label>
-                                        <Form.Control
-                                            type="city"
-                                            placeholder="City"
-                                            id="city"
-                                            name="city"
-                                            value={formShipping.city}
-                                            onChange={handleChangeShippingForm}
-                                            />
+                                        <Form.Control type="city" placeholder="City" id="city" name="city" value={formShipping.city} onChange={handleChangeShippingForm} />
                                     </Form.Group>
                                 </Row>
                                 <Row className="mb-1 px-2">
                                     <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formZiCode">
                                         <Form.Label>Zip Code</Form.Label>
-                                        <Form.Control
-                                            type="cp"
-                                            placeholder="Zip Code"
-                                            id="cp"
-                                            name="cp"
-                                            value={formShipping.cp}
-                                            onChange={handleChangeShippingForm}
-                                        />
+                                        <Form.Control type="cp" placeholder="Zip Code" id="cp" name="cp" value={formShipping.cp} onChange={handleChangeShippingForm} />
                                     </Form.Group>
                                     <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formCountry">
                                         <Form.Label>Country *</Form.Label>
-                                        <Form.Control
-                                            type="country"
-                                            placeholder="Country"
-                                            id="country"
-                                            name="country"
-                                            value={formShipping.country}
-                                            onChange={handleChangeShippingForm}/>
+                                        <Form.Control type="country" placeholder="Country" id="country" name="country" value={formShipping.country} onChange={handleChangeShippingForm}/>
                                     </Form.Group>
                                 </Row>
                             </div>
@@ -327,12 +222,8 @@ function RegisterPage() {
                             </Form>
                         </div>
                         <div className='d-flex flex-column align-items-center '>
-                            <Button variant="success" className='mb-2' type='submit' onClick={()=>goToPath('/cart/checkout/review')}>
-                                Review Order
-                            </Button>
-                            <Button variant='success' className='mb-2' onClick={()=>goToPath('/cart')}>
-                                Go back to Cart
-                            </Button>
+                            <Button variant="success" className='mb-2' type='submit' onClick={()=>goToPath('/cart/checkout/review')}>Review Order</Button>
+                            <Button variant='success' className='mb-2' onClick={()=>goToPath('/cart')}>Go back to Cart</Button>
                         </div>
                     </div>
                 </Form>
