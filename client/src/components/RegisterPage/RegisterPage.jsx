@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import Footer from '../Footer/Footer.jsx';
-import Title from '../Title/Title.jsx';
-import NavBar from "../NavBar/NavBar.jsx";
 import registerValidate from "./validate/registerValidate.js";
 import emailjs from "@emailjs/browser";
 import styles from './RegisterPage.module.css';

@@ -11,22 +11,22 @@ export const getProducts = async () => {
   }
 };
 
-export const getProductsByName = async (name) => {
+export const getProductsByName = async (name, flag) => {
   try {
     const nameProducts = await axios.get('/products?name='+name);
     if (nameProducts === null) throw Error('Product not found');
-    return { type: GET_PRODUCTSBYNAME, payload: { products: nameProducts.data, name: name } };
+    return { type: GET_PRODUCTSBYNAME, payload: { products: nameProducts.data, name: name , flag: flag} };
   } catch (error) {
     return { error: error.message };
   };
 };
 
-export const deleteProduct = async (id,active) => {
+export const getProductById = async (idProduct) => {
   try {
-    const nameProducts = await axios.delete('/products');
-    if (nameProducts === null) throw Error('Product not found');
-    return { type: DELETE_PRODUCT, payload: { id, active} };
+    const productFound = await axios.get('/products/'+idProduct);
+    if (productFound === null) throw Error('Product not Found');
+    return productFound.data;
   } catch (error) {
     return { error: error.message };
-  };
+  }
 };

@@ -1,11 +1,12 @@
 import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
 import { ALL_USERS, EMAIL, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER , SET_USER } from "./types/typesUser.js";
+import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, STATUS_CHANGE_ORDER, SET_CART, ADD_CART } from "./types/typesCart";
 import { DELETE_FAVORITES, ADD_FAVORITES } from "./types/typesFavorites";
 
 const initialState = {
   users: [],
-  userLogin: [],
+  userLogin: {},
   userEmail: [],
   allProducts: [],
   products: [],
@@ -14,8 +15,16 @@ const initialState = {
   flagProducts: false,
   favorites: [],
   allCategories: [],
-  categorieFilter: null
+  categorieFilter: null,
+  cart: '',
+  cartDetails: [],
 };
+
+export const cartInitialState = JSON.parse(window.localStorage.getItem('cart')) || []
+
+export const updateLocalStorage = state => {
+  window.localStorage.setItem('cart', JSON.stringify(state))
+}
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -24,9 +33,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allProducts: action.payload,
         products: action.payload,
-        showProducts: action.payload,
-        nameProducts: '',
-        flagProducts: false,
       }
     };
     case GET_PRODUCTSBYNAME:{
@@ -34,7 +40,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         showProducts: action.payload.products,
         nameProducts: action.payload.name,
-        flagProducts: true,
+        flagProducts: action.payload.flag,
       }
     };
     case GET_ALLCATEGORIES: {
@@ -43,6 +49,12 @@ const rootReducer = (state = initialState, action) => {
         allCategories: action.payload,
       }
     };
+
+    case FILTER_BY_CATEGORIES:
+      return {
+        ...state,
+        products: action.payload,
+      }
     case ALL_USERS:{
       return {
         ...state,
@@ -79,16 +91,55 @@ const rootReducer = (state = initialState, action) => {
         userEmail: action.payload
       }
     }
-    case FILTER_BY_CATEGORIES : {
-      const allCategories = state.products
-      const CategoriesFiltered = action.payload === 'All'?
-      state.allProducts : allCategories.filter(el => {
-          return el.arrayCategories[0].name? el.arrayCategories[0].name.includes(action.payload) :
-              el.allCategories?.map(el => el.name).includes(action.payload)
-      })
-          return {
-              ...state,
-              products: CategoriesFiltered
+    case ADD_CART: {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          orderId: action.payload
+        }
+      }
+    }
+    case SET_CART: {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          amount: action.payload.amount,
+          taxAmount: action.payload.taxAmount,
+          totalAmount: action.payload.totalAmount
+        }
+      }
+    }
+    case ADD_TO_CART: {
+      return {
+        ...state,
+        cartDetails: [ ...state.cartDetails, action.payload.product ]
+      }
+    }
+    case REMOVE_FROM_CART: {
+
+      return {
+        ...state,
+        cartDetails: action.payload.products,
+      }
+    }
+    case STATUS_CHANGE_ORDER:{
+
+      return{
+        ...state
+      }
+    }
+    case CLEAR_CART: {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          amount: 0,
+          taxAmount: 0,
+          totalAmount: 0,
+        },
+        cartDetails: [],
       }
     }
     case ADD_FAVORITES: {
@@ -102,6 +153,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         favorites: state.favorites.filter((f) => f.name !== action.payload),
       };
+    
     default:
       return {...state};
   };

@@ -6,22 +6,53 @@ import Detail from "./components/Detail/Detail.jsx";
 import LoginPage from "./components/LoginPage/LoginPage.jsx";
 import Settings from "./components/Settings/Settings.jsx";
 import Contact from "./components/Contact/Contact.jsx";
-import Store from "./components/Store/Store";
+import Store from "./components/Store/Store.jsx";
 import axios from "axios";
 import RegisterPage from "./components/RegisterPage/RegisterPage.jsx";
 import MyAccount from "./components/MyAccount/MyAccount.jsx";
 import Favorites from "./components/Favorites/Favorites.jsx";
-import FormUdateMyaccount from "./components/MyAccount/Components/FormUpdate/FormUpdate";
+import FormUdateMyaccount from "./components/MyAccount/Components/FormUpdate/FormUpdate.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import NavBar from "../src/components/NavBar/NavBar.jsx";
 import Title from "./components/Title/Title.jsx";
 import FormEmail from "./components/ForgotPassword/FormEmail/FormEmail.jsx";
 import ChangePassword from "./components/ForgotPassword/ChangePassword/ChangePassword.jsx";
+import CartPage from './components/CartPage/CartPage.jsx';
+import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
+import ReviewOrder from "./components/ReviewOrder/ReviewOrder";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 //axios.defaults.baseURL = "https://biofresh.shop/backend/"; //para deploy
 axios.defaults.baseURL = "http://localhost:3001";
 
 function App() {
+
+  const user = useSelector(state => state.userLogin);
+  
+  const [ whereIAm, setWhereIAm ] = useState({
+    place: '',
+    order: '',
+    filter: '',
+    name: '',
+    currentPage: 1
+  });
+
+  function hereIAm (IAmData) {
+    setWhereIAm(IAmData);
+  };
+
+  const loadingCart = async () => {
+    console.log('userLogin ', user);
+    const lsUser = localStorage.getItem('user');
+    console.log('localStorage User ', lsUser);
+    const lsDetails = localStorage.getItem('detaCartDetails');
+    console.log('localStorage Details ', lsDetails);
+  };
+
+  useEffect(()=>{
+    loadingCart();
+  },[]);
 
   return (
     <div className="App">
@@ -33,19 +64,21 @@ function App() {
         </div>
         <NavBar/>
       </header>
-      <div className="App-header"></div>
       <Routes>
-        <Route path="/" element={<LandingHome />} />
+        <Route path="/" element={<LandingHome whereIAm={whereIAm} hereIAm={hereIAm} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/myaccount" element={<MyAccount />} />
-        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail whereIAm={whereIAm} hereIAm={hereIAm} />} />
         <Route path="/settings" element={<Settings />}></Route>
-        <Route path="/store" element={<Store />}></Route>
-        <Route path="/store/:id" element={<Store />}></Route>
-        <Route path="/contact" element={<Contact />}></Route>
+        <Route path="/store" element={<Store whereIAm={whereIAm} hereIAm={hereIAm} />} />
+        <Route path="/store/:id" element={<Store whereIAm={whereIAm} hereIAm={hereIAm} />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/form_update" element={<FormUdateMyaccount />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart/checkout" element={<CheckoutPage />} />
+        <Route path="/cart/checkout/review" element={<ReviewOrder />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/forgotpassword" element={<FormEmail />}/>
         <Route path="/forgotpassword/changepassword" element={<ChangePassword/> } />

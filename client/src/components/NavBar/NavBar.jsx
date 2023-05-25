@@ -17,12 +17,10 @@ export default function Categories() {
   const products = useSelector((state) => state.allProducts);
 
   useEffect(() => {
-    getCategories();
-  }, [dispatch]);
-
-  useEffect(() => {
-    getProducts();
-  }, [dispatch]);
+    getCategories()
+    getProducts()
+  }, [dispatch])
+  
 
   return (
     <Navbar
@@ -72,19 +70,6 @@ export default function Categories() {
               </Link>
             ) : null}
 
-            {/* <NavDropdown id={s.item} title="SETTINGS">
-              <div>
-                <Link className='d-block' id={s.item} to={"/settings"}>Settings</Link>
-                <NavDropdown.Divider />
-                <Link className='d-block' id={s.item} to={"#action/3.2"}>Action 2</Link>
-                <NavDropdown.Divider />
-                <Link className='d-block' id={s.item} to={"#action/3.3"}>Action 3</Link>
-                <NavDropdown.Divider />
-                <Link className='d-block' id={s.item} to={"#action/3.4"}>Action 4</Link>
-                <NavDropdown.Divider />
-                <Link className='d-block' id={s.item} to={"#action/3.5"}>Action 5</Link>
-              </div>
-            </NavDropdown> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

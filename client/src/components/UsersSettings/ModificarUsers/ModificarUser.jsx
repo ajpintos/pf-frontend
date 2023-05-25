@@ -99,7 +99,7 @@ const ModificarUser = ({ show, handleClose, email, tipo }) => {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>User to modify {email}</Modal.Title>
+          <Modal.Title>user to modify {email}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h5>current user type {tipo ? "Administrator" : "Standard"}</h5>
