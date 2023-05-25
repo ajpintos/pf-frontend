@@ -41,6 +41,7 @@ const FormEmail = () => {
     const handlerSubmitEmail = (e) => {
         e.preventDefault();
         dispatch(emailForgotPassword(email));
+        getToken(email);
         emailjsSend();
         navigate('/forgotpassword/changepassword');
     }

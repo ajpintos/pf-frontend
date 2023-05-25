@@ -64,17 +64,18 @@ function RegisterPage() {
     };
 
     const handleChangeShippingForm = (event) => {
-        const {name, value} = event.target;
-        setFormShipping((prevState) => ({
-            ...prevState,
-            [name]: value
-        }));
+        const property = event.target.name;
+        const value = event.target.value;
+        setFormShipping({
+            ...formShipping,
+            [property] : value 
+        });
     };
 
     const submitHandlerCheckout = (e) => {
         e.preventDefault();
         console.log(formShipping)
-        dispatch(saveShippingData(formShipping))
+        dispatch(saveShippingData(formShipping));
     }
 
     const [mostrarFormulario, setMostrarFormulario] = useState(true);
@@ -84,6 +85,7 @@ function RegisterPage() {
     };
 
     const goToPath = (goPath) => {
+        dispatch(saveShippingData(formShipping));
         navigate(goPath);
     };
 
