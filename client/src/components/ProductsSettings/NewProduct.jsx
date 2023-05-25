@@ -8,8 +8,8 @@ import st from "../ProductsSettings/Form.module.css";
 import validate from "./validate.js";
 import axios from "axios";
 import styles from "./ProductsSettings.module.css";
-import {getProducts} from '../../Redux/actions/actionsProducts'
-import swal from 'sweetalert';
+import { getProducts } from "../../Redux/actions/actionsProducts";
+import swal from "sweetalert";
 
 const NewProduct = () => {
   const [form, setForm] = useState({
@@ -57,17 +57,15 @@ const NewProduct = () => {
   const handlerSelectCategory = (e) => {
     let nomCategory = e.target.options[e.target.options.selectedIndex].text;
     let value = e.target.value;
-    if(value!==-1){
-    setForm({ ...form, categories: [...form.categories, value] });
-    setCategoriesSel([...categoriesSel, { value, name: nomCategory }]);
-    setCategories(categories.filter((ele) => ele.id !== value));
-    
+    if (value !== -1) {
+      setForm({ ...form, categories: [...form.categories, value] });
+      setCategoriesSel([...categoriesSel, { value, name: nomCategory }]);
+      setCategories(categories.filter((ele) => ele.id !== value));
     }
   };
   // console.log(categoriesSel)
   // console.log(allCategories)
   const deleteCategorie = (elem) => {
-   
     const { value, name } = elem;
     //  console.log(elem)
     setCategoriesSel(categoriesSel.filter((ele) => ele.value !== value));
@@ -76,6 +74,11 @@ const NewProduct = () => {
       categories: form.categories.filter((ele) => ele !== value),
     });
     setCategories([...categories, { id: value, name }]);
+  };
+
+  const loadingData = async () => {
+    const datos = await getProducts();
+    dispatch(datos);
   };
 
   const submitNew = async (e) => {
@@ -99,8 +102,8 @@ const NewProduct = () => {
         .then((res) => {
           swal("Congratulations!", "Product added successfully!", "success");
           // setSuccessMessage("Product created successfully.");
+          loadingData();
           console.log("res  " + res);
-          dispatch(getProducts)
           setForm({
             name: "",
             description: "",
@@ -109,18 +112,19 @@ const NewProduct = () => {
             image: "",
             categories: [],
           });
+
           setCategories(allCategories);
           setCategoriesSel([]);
         })
         .catch((err) => {
-          swal("Error!", "Product is not created.", err)
+          swal("Error!", "Product is not created.", err);
           // alert(err);
           // setErrorMessage("Product is not created.");
         });
     } else {
       // console.log(errors);
       // setErrorMessage("Wrong information.");
-      swal("Error!", "Wrong information.")
+      swal("Error!", "Wrong information.");
     }
   };
 
@@ -216,9 +220,8 @@ const NewProduct = () => {
               </span>
             </div>
           </Form.Group>
-         
+
           <Form.Group className="my-1 pb-2">
-           
             <FloatingLabel
               controlId="floatingInputName"
               label="Image"
@@ -284,9 +287,7 @@ const NewProduct = () => {
           <p className={styles.error}>{errorMessage}</p>
           <p className={styles.success}>{successMessage}</p>
         </Form>
-
       </Modal.Body>
-    
     </Modal>
   );
 };
