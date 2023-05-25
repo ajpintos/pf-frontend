@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useResolvedPath } from 'react-router-dom';
 import axios from "axios";
 import validate from './validate.js';
 import emailjs from "@emailjs/browser";
-import styles from './CheckoutPage.module.css';
+import s from './CheckoutPage.module.css';
 import mercadoPago from '../../assets/mercadoPago.png'
+import { saveShippingData } from '../../Redux/actions/actionsDeliveries.js';
+
 
 //CSS REACT-BOOSTRAP
 import Button from 'react-bootstrap/Button';
@@ -17,7 +19,7 @@ import Alert from 'react-bootstrap/Alert';
 
 
 function RegisterPage() {
-
+    const dispatch = useDispatch()
     const navigate = useNavigate();
 
     const user = useSelector(state => state.userLogin);
@@ -32,6 +34,15 @@ function RegisterPage() {
         city: user.city,
         country: user.country,
     });
+
+    const [formShipping, setFormShipping] = useState({
+        firstname: "",
+        lastname: "",
+        address: "",
+        cp: "",
+        city: "",
+        country: "",
+    })
 
     const [errors, setErrors] = useState({
         email: "",
@@ -49,15 +60,32 @@ function RegisterPage() {
     const handleChangeCheckout = (event) => {
         const property = event.target.name;
         const value = event.target.value;
-        setUserDetail({...userDetail, [property]: value});
+        setFormCheckout({...formCheckout, [property]: value});
+    };
+
+    const handleChangeShippingForm = (event) => {
+        const property = event.target.name;
+        const value = event.target.value;
+        setFormShipping({
+            ...formShipping,
+            [property] : value 
+        });
     };
 
     const submitHandlerCheckout = (e) => {
         e.preventDefault();
-
+        console.log(formShipping)
+        dispatch(saveShippingData(formShipping));
     }
 
+    const [mostrarFormulario, setMostrarFormulario] = useState(true);
+
+    const handleCheckboxChange = (event) => {
+      setMostrarFormulario(event.target.checked);
+    };
+
     const goToPath = (goPath) => {
+        dispatch(saveShippingData(formShipping));
         navigate(goPath);
     };
 
@@ -101,7 +129,7 @@ function RegisterPage() {
                                 </Form.Group>
                             </Row>
                         </div>
-                        <div className="card mb-3 pb-3">
+                        <div className="card pb-3">
                             <div className="card-header">
                                 <h2 className="legend card-title">Billing Address</h2>
                             </div>
@@ -180,6 +208,92 @@ function RegisterPage() {
                             </Form.Group>
                         </Row>
                         </div>
+                        <div className='py-20px my-5'>
+                            <input type="checkbox" id="deliveryAddres" name="opcion" value="deliveryAddres" defaultChecked onChange={handleCheckboxChange}/>
+                            <label for="deliveryAddres">Billing Address same as Shipping</label><br/>
+                        </div>
+                        {!mostrarFormulario && (
+                            <div className="card mb-3 pb-3">
+                                <div className="card-header">
+                                    <h2 className="legend card-title">Shipping Address</h2>
+                                </div>
+                                <Row className="px-2">
+                                    <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formName">
+                                        <Form.Label>Name *</Form.Label>
+                                        <Form.Control
+                                            type="firstname"
+                                            placeholder="First Name"
+                                            id="firstname"
+                                            name="firstname"
+                                            value={formShipping.firstname}
+                                            onChange={handleChangeShippingForm}
+                                        />
+                                        <p style={{color: "red"}}>{errors.firstname}</p>
+                                    </Form.Group>
+
+                                    <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formLastName">
+                                        <Form.Label>Last Name *</Form.Label>
+                                        <Form.Control
+                                            type="lastname"
+                                            placeholder="Last Name"
+                                            id="lastname"
+                                            name="lastname"
+                                            value={formShipping.lastname}
+                                            onChange={handleChangeShippingForm}
+                                        />
+                                        <p style={{color: "red"}}>{errors.lastname}</p>
+                                    </Form.Group>
+                                </Row>
+                                <Row className="mb-1 px-2">
+                                    <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formAddress">
+                                        <Form.Label>Address *</Form.Label>
+                                        <Form.Control
+                                            type="address"
+                                            placeholder="Address"
+                                            id="address"
+                                            name="address"
+                                            value={formShipping.address}
+                                            onChange={handleChangeShippingForm}
+                                            />
+                                    </Form.Group>
+                                    <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formCity">
+                                        <Form.Label>City *</Form.Label>
+                                        <Form.Control
+                                            type="city"
+                                            placeholder="City"
+                                            id="city"
+                                            name="city"
+                                            value={formShipping.city}
+                                            onChange={handleChangeShippingForm}
+                                            />
+                                    </Form.Group>
+                                </Row>
+                                <Row className="mb-1 px-2">
+                                    <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formZiCode">
+                                        <Form.Label>Zip Code</Form.Label>
+                                        <Form.Control
+                                            type="cp"
+                                            placeholder="Zip Code"
+                                            id="cp"
+                                            name="cp"
+                                            value={formShipping.cp}
+                                            onChange={handleChangeShippingForm}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formCountry">
+                                        <Form.Label>Country *</Form.Label>
+                                        <Form.Control
+                                            type="country"
+                                            placeholder="Country"
+                                            id="country"
+                                            name="country"
+                                            value={formShipping.country}
+                                            onChange={handleChangeShippingForm}/>
+                                    </Form.Group>
+                                </Row>
+                            </div>
+                        )}
+                        <p className='my-3'>* Required Fields</p>
                     </div>
                     <div className='col-lg-4 col-sm-12'>
                         <div id="payments" className="card mb-3">
@@ -187,22 +301,36 @@ function RegisterPage() {
                                 <h2 className="legend card-title">Payment Options</h2>
                             </div>
                             <Form>
-                                {['radio'].map((type) => (
-                                    <div className="card-body">
-                                        <p className='text-center'>You will be redirected to Mercado Pago to make a secure payment.</p>
-                                        <div className='d-flex justify-content-center text-align center'>
-                                            <img src={mercadoPago} alt="Mercado Pago" width='50%' height="auto"/>
-                                        </div>
-                                        
+                                <div className="card-body">
+                                    <p className='text-center'>You will be redirected to Mercado Pago to make a secure payment.</p>
+                                    <div className='d-flex justify-content-center text-align center'>
+                                        <img src={mercadoPago} alt="Mercado Pago" width='50%' height="auto"/>
                                     </div>
-                                ))}
+                                </div>
+                            </Form>
+                        </div>
+                        <div id="payments" className="card mb-3">
+                            <div className="card-header">
+                                <h2 className="legend card-title">Deliveries Options</h2>
+                            </div>
+                            <Form className="card-body">
+                                <div>
+                                    <input type="radio" id="PickUp" name="opcion" value="PickUp"/>
+                                    <label for="PickUp">Pick Up</label>
+                                    <p className={s.price}><i>Free</i></p>
+                                </div>
+                                <div>
+                                    <input type="radio" id="HomeDeliveries" name="opcion" value="HomeDeliveries"/>
+                                    <label for="HomeDeliveries">Delivery</label>
+                                    <p className={s.price}><i>($19.99)</i></p>
+                                </div>
                             </Form>
                         </div>
                         <div className='d-flex flex-column align-items-center '>
-                            <Button variant="success" className='mb-2' onClick={()=>goToPath('/cart/checkout/review')}>
+                            <Button variant="success" className='mb-2' type='submit' onClick={()=>goToPath('/cart/checkout/review')}>
                                 Review Order
                             </Button>
-                            <Button variant='success' className='mb-2' type='' onClick={()=>goToPath('/cart')}>
+                            <Button variant='success' className='mb-2' onClick={()=>goToPath('/cart')}>
                                 Go back to Cart
                             </Button>
                         </div>

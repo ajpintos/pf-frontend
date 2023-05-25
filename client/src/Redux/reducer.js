@@ -3,6 +3,7 @@ import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
 import { ALL_USERS, EMAIL, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER , SET_USER } from "./types/typesUser.js";
 import { DELETE_FAVORITES, ADD_FAVORITES, GET_FAVORITES_DB } from "./types/typesFavorites";
 import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, STATUS_CHANGE_ORDER, SET_CART, ADD_CART } from "./types/typesCart";
+import { SET_SHIPPING_OPTIONS, SAVE_SHIPPING_DATA } from "./types/typesDeliveries";
 
 
 const initialState = {
@@ -19,6 +20,8 @@ const initialState = {
   categorieFilter: null,
   cart: '',
   cartDetails: [],
+  shippingOption: '',
+  shippingAddress: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -154,6 +157,18 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         favorites: action.payload,
       };
+    case SET_SHIPPING_OPTIONS: {
+      return {
+        ...state,
+        shippingOption: action.payload,
+      };
+    };
+    case SAVE_SHIPPING_DATA: {
+      return {
+        ...state,
+        shippingAddress: action.payload
+      }
+    }
     default:
       return {...state};
   };

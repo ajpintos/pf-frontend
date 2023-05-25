@@ -41,11 +41,12 @@ const FormEmail = () => {
     const handlerSubmitEmail = (e) => {
         e.preventDefault();
         dispatch(emailForgotPassword(email));
+        getToken(email);
         emailjsSend();
         navigate('/forgotpassword/changepassword');
     }
     
-const emailjsSend=()=>{
+const emailjsSend = () => {
     const serviceID = "service_e5hd1wt";
       const templateID = "template_8i1yknj";
       const key_public = "gEu_FBDo_Q0lvhmwA";
@@ -60,7 +61,19 @@ const emailjsSend=()=>{
           swal("Error!", "No  sending the message", "error")
         }
       );
-}
+};
+
+// funcion que obtiene el token del usuario
+
+    const getToken = async (email) => {
+        try {
+            const response = (await axios.get(`/users?email=${email}`)).data;
+            if (response) return response.token
+        } catch (error) {
+            alert(error.message)
+        }    
+    };
+
 
     return (
         <div className="container-fluid">
