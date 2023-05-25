@@ -33,15 +33,19 @@ function Card({
   const [isFav, setIsFav] = React.useState(false);
 
   const userLogueado = useSelector((state) => state?.userLogin);
-  const handleFavorite = () => {
+
+  const handleFavorite = async () => {
     if (isFav) {
       setIsFav(false);
       dispatch(
-        deleteFavorites({ userEmail: userLogueado.email, productId: id })
+        deleteFavorites(
+          { userEmail: userLogueado?.email, productId: id },
+          userLogueado?.email
+        )
       );
     } else {
       setIsFav(true);
-      dispatch(addFavorites({ userEmail: userLogueado.email, productId: id }));
+      dispatch(addFavorites({ userEmail: userLogueado?.email, productId: id }));
     }
   };
 
