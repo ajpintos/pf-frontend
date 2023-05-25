@@ -11,14 +11,7 @@ import accounting from 'accounting';
 import st from './Card.module.css'
 import swal from 'sweetalert';
 
-function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
-
-  // //! Función de Mercadopago
-  // const handlerMercadoPagoLink = async () => {
-  //   axios.post('/payments', {id , name , image , description , price})
-  //       .then((res) => window.location.href = res.data.response.body.init_point)
-  //       .catch((error) => console.log(error));
-  // }
+function Card({ id, name, image, description, price, tax, stock, priceFlag, datos }) {
 
   const dispatch = useDispatch();
 
@@ -65,7 +58,7 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
         dispatch(remove_FromCart(product.idProduct, cartDetails));
         unitsProduct = unitsProduct + 1;
         product = {
-          ...product, 
+          ...product,
           units: unitsProduct,
           amount: (price * unitsProduct),
           taxAmount: (price * unitsProduct) * tax,
@@ -77,23 +70,30 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
     swal("Congratulations", "Product added to cart", "success");
   };
 
+  const userLogueado = useSelector((state) => state?.userLogin);
   const handleFavorite = () => {
     if (isFav) {
       setIsFav(false);
-      dispatch(deleteFavorites(name));
+      dispatch(
+        deleteFavorites({ userEmail: userLogueado.email, productId: id })
+      );
     } else {
       setIsFav(true);
-      dispatch(addFavorites({ id, name, image, description, price, stock }));
+      dispatch(addFavorites({ userEmail: userLogueado.email, productId: id }));
     }
   };
 
   useEffect(() => {
-    state.forEach((fav) => {
-      if (fav.id === id) {
-        setIsFav(true);
+    datos?.forEach((fav) => {
+      if (fav.productId === id) {
+        if (fav.active) {
+          setIsFav(true);
+        } else {
+          setIsFav(false);
+        }
       }
     });
-  }, [state, id]);
+  }, [datos, id]);
 
   useEffect(()=>{
     localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
@@ -104,11 +104,6 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
       {name ? (
         <div className="card">
           <div className="card-body">
-          {/* {isFav ? (
-            <button onClick={handleFavorite} style={{border:0}}>❤️</button>
-          ) : (
-            <button onClick={handleFavorite}>🤍</button>
-          )} */}
             <Link to={`/detail/${id}`}>
               <img src={image} className="card-img-top img-fluid" alt={name} />
             </Link>
@@ -121,12 +116,23 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag }) {
               }
             <div className="row">
               <Button variant="btn btn-success mt-2" className="col-6 offset-3" onClick={addToCart}><AddToCartIcon/></Button>
-              {/* <Button variant="btn btn-success mt-2" className="col-6 offset-3" onClick={handlerMercadoPagoLink}><AddToCartIcon/></Button> */}
-              {isFav ? (
-            <button className={st.btnFav} onClick={handleFavorite} style={{border:0}}>❤️</button>
-          ) : (
-            <button className={st.btnFav} onClick={handleFavorite}>🤍</button>
-          )}
+              {userLogueado.email ? (
+                  isFav ? (
+                      <button
+                          className={st.btnFav}
+                          onClick={handleFavorite}
+                          style={{ border: 0 }}
+                      >
+                        ❤️
+                      </button>
+                  ) : (
+                      <button className={st.btnFav} onClick={handleFavorite}>
+                        🤍
+                      </button>
+                  )
+              ) : (
+                  ""
+              )}
             </div>
           </div>
 

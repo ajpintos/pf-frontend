@@ -27,9 +27,10 @@ import { useEffect, useState } from "react";
 axios.defaults.baseURL = "http://localhost:3001";
 
 function App() {
+  const userFavorite = useSelector((state) => state.userLogin.email);
 
   const user = useSelector(state => state.userLogin);
-  
+
   const [ whereIAm, setWhereIAm ] = useState({
     place: '',
     order: '',
@@ -64,13 +65,14 @@ function App() {
         </div>
         <NavBar/>
       </header>
+      <div className="App-header"></div>
       <Routes>
         <Route path="/" element={<LandingHome whereIAm={whereIAm} hereIAm={hereIAm} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/myaccount" element={<MyAccount />} />
-        <Route path="/detail/:id" element={<Detail whereIAm={whereIAm} hereIAm={hereIAm} />} />
+        <Route path="/detail/:id" element={<Detail whereIAm={whereIAm} email={userFavorite} hereIAm={hereIAm} />} />
         <Route path="/settings" element={<Settings />}></Route>
         <Route path="/store" element={<Store whereIAm={whereIAm} hereIAm={hereIAm} />} />
         <Route path="/store/:id" element={<Store whereIAm={whereIAm} hereIAm={hereIAm} />} />
@@ -79,8 +81,8 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/cart/checkout" element={<CheckoutPage />} />
         <Route path="/cart/checkout/review" element={<ReviewOrder />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/forgotpassword" element={<FormEmail />}/>
+        <Route path="/favorites" element={<Favorites email={userFavorite} />} />
+        <Route path="/forgotpassword" element={<FormEmail />} />
         <Route path="/forgotpassword/changepassword" element={<ChangePassword/> } />
       </Routes>
       <footer className="container-fluid" >

@@ -4,11 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
 import { cartFoundIndex, foundOrderForDetail, getCartDetail } from "../Cart/cartHelpers.js";
+import {getFavoritesDB, addFavorites, deleteFavorites} from "../../Redux/actions/actionsFavorites";
 import { AddToCartIcon } from "../Icons/Icons";
 import { add_Cart, add_ToCart, remove_FromCart, set_Cart } from "../../Redux/actions/actionsCart.js";
 import swal from 'sweetalert';
 
-const Detail = ({ whereIAm, hereIAm }) => {
+const Detail = ({ whereIAm, hereIAm, email }) => {
 
   const user = useSelector(state=>state.userLogin);
   const nameProducts = useSelector(state=>state.nameProducts);
@@ -25,6 +26,7 @@ const Detail = ({ whereIAm, hereIAm }) => {
     try {
       const Data = await axios(`/products/${id}`);
       const char = Data.data;
+      console.log(char);
       if (char) {
         setProduct(char);
       }
@@ -32,6 +34,12 @@ const Detail = ({ whereIAm, hereIAm }) => {
       swal("Error","Product not found", "error");
     }
   };
+
+  React.useEffect(() => {
+    getProductForId();
+    dispatch(getFavoritesDB(email));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, dispatch]);
 
   const validacion = (e) => {
     setCant(e.target.value);
@@ -61,7 +69,7 @@ const Detail = ({ whereIAm, hereIAm }) => {
         dispatch(remove_FromCart(product.id, cartDetails));
         unitsProduct = unitsProduct + parseInt(cant);
         productModify = {
-          ...productModify, 
+          ...productModify,
           idOrder: detailFound.idOrder,
           idOrderDetail: detailFound.idOrderDetail,
           units: unitsProduct,
@@ -125,7 +133,35 @@ const Detail = ({ whereIAm, hereIAm }) => {
     getProductForId();
     escape();
   },[]);
+  const userLogueado = useSelector((state) => state?.userLogin);
 
+  const datos = useSelector((state) => state?.favorites);
+
+  const [isFav, setIsFav] = React.useState(false);
+
+  const handleFavorite = () => {
+    if (isFav) {
+      setIsFav(false);
+      dispatch(
+          deleteFavorites({ userEmail: userLogueado.email, productId: id })
+      );
+    } else {
+      setIsFav(true);
+      dispatch(addFavorites({ userEmail: userLogueado.email, productId: id }));
+    }
+  };
+
+  useEffect(() => {
+    datos?.forEach((fav) => {
+      if (fav.productId === id) {
+        if (fav.active) {
+          setIsFav(true);
+        } else {
+          setIsFav(false);
+        }
+      }
+    });
+  }, [datos, id]);
   return (
     <div>
       <div className="row  text-center ">
@@ -165,8 +201,37 @@ const Detail = ({ whereIAm, hereIAm }) => {
               </div>
               <br />
               <div>
+              <div>
                 <button style={{ borderRadius: "1rem" }}>❤️</button>
                 <Button variant="btn btn-success mt-2" className="col-4 offset-3" onClick={returnTo} >Return {whereIAm.place === '' ? 'Home' : whereIAm.place}</Button>
+                  {userLogueado.email ? (
+                    isFav ? (
+                      <button
+                        style={{
+                          background: "none",
+                          border: "none",
+                          fontSize: "1.5rem",
+                        }}
+                        onClick={handleFavorite}
+                      >
+                        ❤️
+                      </button>
+                    ) : (
+                      <button
+                        style={{
+                          background: "none",
+                          border: "none",
+                          fontSize: "1.5rem",
+                        }}
+                        onClick={handleFavorite}
+                      >
+                        🤍
+                      </button>
+                    )
+                  ) : (
+                    ""
+                  )}
+                </div>
               </div>
             </div>
           </div>

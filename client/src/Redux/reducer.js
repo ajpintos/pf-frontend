@@ -1,8 +1,9 @@
 import { FILTER_BY_CATEGORIES, GET_ALLCATEGORIES } from "./types/typesCategories";
 import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
 import { ALL_USERS, EMAIL, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER , SET_USER } from "./types/typesUser.js";
+import { DELETE_FAVORITES, ADD_FAVORITES, GET_FAVORITES_DB } from "./types/typesFavorites";
 import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, STATUS_CHANGE_ORDER, SET_CART, ADD_CART } from "./types/typesCart";
-import { DELETE_FAVORITES, ADD_FAVORITES } from "./types/typesFavorites";
+
 
 const initialState = {
   users: [],
@@ -19,12 +20,6 @@ const initialState = {
   cart: '',
   cartDetails: [],
 };
-
-export const cartInitialState = JSON.parse(window.localStorage.getItem('cart')) || []
-
-export const updateLocalStorage = state => {
-  window.localStorage.setItem('cart', JSON.stringify(state))
-}
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -145,15 +140,20 @@ const rootReducer = (state = initialState, action) => {
     case ADD_FAVORITES: {
       return {
         ...state,
-        favorites: [...state.favorites, action.payload],
+        favorites: action.payload,
       };
     }
     case DELETE_FAVORITES:
       return {
         ...state,
-        favorites: state.favorites.filter((f) => f.name !== action.payload),
+        favorites: action.payload,
       };
-    
+
+    case GET_FAVORITES_DB:
+      return {
+        ...state,
+        favorites: action.payload,
+      };
     default:
       return {...state};
   };

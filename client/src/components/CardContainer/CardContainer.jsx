@@ -6,6 +6,7 @@ import { getProductsByName } from "../../Redux/actions/actionsProducts";
 import Container from 'react-bootstrap/Container'
 import Button from "react-bootstrap/esm/Button.js";
 import SetPages from "../Store/SetPages.jsx";
+import { getFavoritesDB } from "../../Redux/actions/actionsFavorites.js";
 
 function CardContainer({ whereIAm, hereIAm }) {
 
@@ -133,6 +134,14 @@ function CardContainer({ whereIAm, hereIAm }) {
     callApi();
   }, []);
 
+  const userLogueado = useSelector((state) => state?.userLogin.email);
+
+  useEffect(() => {
+    dispatch(getFavoritesDB(userLogueado));
+  }, []);
+
+  const datos = useSelector((state) => state.favorites);
+
   return (
     <Container fluid >
       <section className="container-fluid d-flex justify-content-center" >
@@ -162,6 +171,7 @@ function CardContainer({ whereIAm, hereIAm }) {
           tax={product.tax}
           stock={product.stock}
           priceFlag={false}
+            datos={datos}
           />
           ))}
       </section>
