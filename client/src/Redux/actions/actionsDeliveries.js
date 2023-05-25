@@ -1,15 +1,18 @@
-import { SET_SHIPPING_OPTIONS } from "../types/typesDeliveries";
+import { SET_SHIPPING_OPTIONS, SAVE_SHIPPING_DATA } from "../types/typesDeliveries";
 
 
-export const setShippingOption = (option, shippingOption) => {
-    const shipping_option = shippingOption
-    if (option === 'PickUp') {
-        shipping_option = 0.00;
-    } else if (option === 'HomeDeliveries') {
-        shipping_option = 19.99;
-    }
+export const setShippingOption = (order, shippingOption) => {
     return{
         type: SET_SHIPPING_OPTIONS,
-        payload: shipping_option,
+        payload: shippingOption,
     }
 };
+
+export const saveShippingData = (datos) => {
+    return function (dispatch){
+        return dispatch({
+            type: SAVE_SHIPPING_DATA,
+            payload: datos,
+        })
+    }
+}

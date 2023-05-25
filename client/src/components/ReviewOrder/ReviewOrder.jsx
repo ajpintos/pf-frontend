@@ -14,6 +14,9 @@ export default function ReviewOrder() {
   const cartDetails = useSelector(state => state.cartDetails)
 
   const user = useSelector(state => state.userLogin);
+  const shippingAddress = useSelector(state => state.shippingAddress)
+
+
 
   const [ formCheckout , setFormCheckout ] = useState({
       email: user.email,
@@ -25,6 +28,12 @@ export default function ReviewOrder() {
       city: user.city,
       country: user.country,
   });
+
+  const [formShipping, setFormShipping] = useState({
+    firstname: shippingAddress.firstname,
+    lastname: shippingAddress.lastname,
+
+  })
 
   const [ order, setOrder ] = useState({
     id: '',
@@ -65,6 +74,7 @@ export default function ReviewOrder() {
 
   return (
     <Container className='container-fluid'>
+        {console.log(shippingAddress)}
         <div className="container">
             <div className="row my-2">
                 <div className="col-12">
@@ -125,18 +135,21 @@ export default function ReviewOrder() {
                             </div>
                         </div>
                     </div>
+                    {shippingAddress.firstname? 
                     <div class="col-6">
                         <div class="card mb-3">
                             <div class="card-body">
                                     <label><strong>Shipping Address</strong></label>
                                     <hr />
-                                    <span>{formCheckout.firstname} {formCheckout.lastname}</span><br/>
-                                    <span>{formCheckout.address}</span><br/>
-                                    <span>{formCheckout.cp}</span><br/>
-                                    <span>{formCheckout.country} - {formCheckout.city}</span><br/>
+                                    <span>{shippingAddress.firstname} {shippingAddress.lastname}</span><br/>
+                                    <span>{shippingAddress.address}</span><br/>
+                                    <span>{shippingAddress.cp}</span><br/>
+                                    <span>{shippingAddress.country} - {shippingAddress.city}</span><br/>
                             </div>
                         </div>
-                    </div>
+                    </div> :
+                        " "
+                    }
                 </div>
                 </div>
                 <div className='col-lg-3 mb-4'>
@@ -144,6 +157,14 @@ export default function ReviewOrder() {
                         <h1 className='text-center'>Total Order</h1>
                         <table className="table bordered table-striped">
                             <tbody>
+                            <tr>
+                                <td colSpan="1" className="text-left"><strong>Subtotal: </strong></td>
+                                <td colSpan="1" className="text-right"><p>{accounting.formatMoney(`${order.amount}`)}</p></td>
+                            </tr>
+                            <tr>
+                                <td colSpan="1" className="text-left"><strong>Shipping: </strong></td>
+                                <td colSpan="1" className="text-right"><p>{accounting.formatMoney(19.99)}</p></td>
+                            </tr>
                             <tr>
                                 <td colSpan="1" className="text-left"><strong>Total: </strong></td>
                                 <td colSpan="1" className="text-right"><p>{accounting.formatMoney(`${order.totalAmount}`)}</p></td>

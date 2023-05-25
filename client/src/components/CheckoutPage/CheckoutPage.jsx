@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useResolvedPath } from 'react-router-dom';
 import axios from "axios";
 import validate from './validate.js';
 import emailjs from "@emailjs/browser";
 import s from './CheckoutPage.module.css';
 import mercadoPago from '../../assets/mercadoPago.png'
+import { saveShippingData } from '../../Redux/actions/actionsDeliveries.js';
+
 
 //CSS REACT-BOOSTRAP
 import Button from 'react-bootstrap/Button';
@@ -17,7 +19,7 @@ import Alert from 'react-bootstrap/Alert';
 
 
 function RegisterPage() {
-
+    const dispatch = useDispatch()
     const navigate = useNavigate();
 
     const user = useSelector(state => state.userLogin);
@@ -32,6 +34,15 @@ function RegisterPage() {
         city: user.city,
         country: user.country,
     });
+
+    const [formShipping, setFormShipping] = useState({
+        firstname: "",
+        lastname: "",
+        address: "",
+        cp: "",
+        city: "",
+        country: "",
+    })
 
     const [errors, setErrors] = useState({
         email: "",
@@ -49,19 +60,28 @@ function RegisterPage() {
     const handleChangeCheckout = (event) => {
         const property = event.target.name;
         const value = event.target.value;
-        setUserDetail({...userDetail, [property]: value});
+        setFormCheckout({...formCheckout, [property]: value});
     };
+
+    const handleChangeShippingForm = (event) => {
+        const {name, value} = event.target;
+        setFormShipping((prevState) => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const submitHandlerCheckout = (e) => {
+        e.preventDefault();
+        console.log(formShipping)
+        dispatch(saveShippingData(formShipping))
+    }
 
     const [mostrarFormulario, setMostrarFormulario] = useState(true);
 
     const handleCheckboxChange = (event) => {
       setMostrarFormulario(event.target.checked);
     };
-
-    const submitHandlerCheckout = (e) => {
-        e.preventDefault();
-
-    }
 
     const goToPath = (goPath) => {
         navigate(goPath);
@@ -203,7 +223,8 @@ function RegisterPage() {
                                             placeholder="First Name"
                                             id="firstname"
                                             name="firstname"
-                                            onChange={handleChangeCheckout}
+                                            value={formShipping.firstname}
+                                            onChange={handleChangeShippingForm}
                                         />
                                         <p style={{color: "red"}}>{errors.firstname}</p>
                                     </Form.Group>
@@ -215,7 +236,8 @@ function RegisterPage() {
                                             placeholder="Last Name"
                                             id="lastname"
                                             name="lastname"
-                                            onChange={handleChangeCheckout}
+                                            value={formShipping.lastname}
+                                            onChange={handleChangeShippingForm}
                                         />
                                         <p style={{color: "red"}}>{errors.lastname}</p>
                                     </Form.Group>
@@ -228,7 +250,8 @@ function RegisterPage() {
                                             placeholder="Address"
                                             id="address"
                                             name="address"
-                                            onChange={handleChangeCheckout}
+                                            value={formShipping.address}
+                                            onChange={handleChangeShippingForm}
                                             />
                                     </Form.Group>
                                     <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formCity">
@@ -238,7 +261,8 @@ function RegisterPage() {
                                             placeholder="City"
                                             id="city"
                                             name="city"
-                                            onChange={handleChangeCheckout}
+                                            value={formShipping.city}
+                                            onChange={handleChangeShippingForm}
                                             />
                                     </Form.Group>
                                 </Row>
@@ -250,7 +274,8 @@ function RegisterPage() {
                                             placeholder="Zip Code"
                                             id="cp"
                                             name="cp"
-                                            onChange={handleChangeCheckout}
+                                            value={formShipping.cp}
+                                            onChange={handleChangeShippingForm}
                                         />
                                     </Form.Group>
                                     <Form.Group as={Col} className='col-sm-12 col-lg-6' controlId="formCountry">
@@ -260,7 +285,8 @@ function RegisterPage() {
                                             placeholder="Country"
                                             id="country"
                                             name="country"
-                                            onChange={handleChangeCheckout}/>
+                                            value={formShipping.country}
+                                            onChange={handleChangeShippingForm}/>
                                     </Form.Group>
                                 </Row>
                             </div>
@@ -273,15 +299,12 @@ function RegisterPage() {
                                 <h2 className="legend card-title">Payment Options</h2>
                             </div>
                             <Form>
-                                {['radio'].map((type) => (
-                                    <div className="card-body">
-                                        <p className='text-center'>You will be redirected to Mercado Pago to make a secure payment.</p>
-                                        <div className='d-flex justify-content-center text-align center'>
-                                            <img src={mercadoPago} alt="Mercado Pago" width='50%' height="auto"/>
-                                        </div>
-                                        
+                                <div className="card-body">
+                                    <p className='text-center'>You will be redirected to Mercado Pago to make a secure payment.</p>
+                                    <div className='d-flex justify-content-center text-align center'>
+                                        <img src={mercadoPago} alt="Mercado Pago" width='50%' height="auto"/>
                                     </div>
-                                ))}
+                                </div>
                             </Form>
                         </div>
                         <div id="payments" className="card mb-3">
@@ -302,10 +325,10 @@ function RegisterPage() {
                             </Form>
                         </div>
                         <div className='d-flex flex-column align-items-center '>
-                            <Button variant="success" className='mb-2' onClick={()=>goToPath('/cart/checkout/review')}>
+                            <Button variant="success" className='mb-2' type='submit' onClick={()=>goToPath('/cart/checkout/review')}>
                                 Review Order
                             </Button>
-                            <Button variant='success' className='mb-2' type='' onClick={()=>goToPath('/cart')}>
+                            <Button variant='success' className='mb-2' onClick={()=>goToPath('/cart')}>
                                 Go back to Cart
                             </Button>
                         </div>
