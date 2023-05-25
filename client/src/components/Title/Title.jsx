@@ -28,28 +28,39 @@ function Title() {
     }
   },[])
 
-
   return (
-      <>
-        <div className="row justtify-content-center align-items-center">
-            <figure className='col-6 col-sm-5 col-md-4 col-lg-3'>
-              <img src={imgpropia} alt="Biofresh Logo" className='img-fluid w-50 p-0' />
-            </figure>
-            <Col> {user.email
-              ? <div>
-                <Link to="/myaccount" id={s.link} className="col-5 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-10">
-                  🙋‍♂️ {user.firstname}
-                </Link>
-                <Button variant="outline-danger" size="sm" onClick={handleLogout} >Logout</Button>
-              </div>
-              : <Link to="/login" id={s.link} className="col-2 col-sm-1 offset-sm-4 col-md-1 offset-md-5 col-lg-1 offset-lg-10">
-                  🙋‍♂️ Login
-                </Link>
-            } </Col>
-            <Link to='/favorites' id={s.link} className="col-2 col-sm-1 col-md-1 col-lg-1">🧡 Fav</Link>
-            <Link to='/cart' id={s.link} className="col-2 col-sm-1 col-md-1 col-lg-1">🛒 Cart</Link>
+    <div className="row justtify-content-center align-items-center ">
+      <div className='col-3'>
+        <figure className='justify-content-start'>
+          <Link to={'/'}>
+            <img src={imgpropia} alt="Biofresh Logo" className='img-fluid' width={150}/>
+          </Link>
+        </figure>
+      </div>
+      <div className="col-9 d-flex align-items-center justify-content-end" id={s.buttons}>
+        {user.email ? (
+          <div className="col-auto">
+            <Link to="/myaccount" id={s.link}  className="col-auto title-text">
+              🙋‍♂️ {user.firstname}
+            </Link>
+            <Button variant="outline-danger" className='m-1 title-text' id={s.logout} size="sm" onClick={handleLogout}>Logout</Button>
+          </div>
+        ) : (
+          <div className="col-auto">
+            <Link to="/login" id={s.link} className="col-auto title-text">
+              🙋‍♂️ Login
+            </Link>
+          </div>
+        )}
+        <div className="col-auto">
+          <Link to='/favorites' id={s.link} className="col-auto title-text">🧡 Fav</Link>
         </div>
-      </>);
+        <div className="col-auto">
+          <Link to='/cart' id={s.link} className="col-auto title-text">🛒 Cart</Link>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Title;
