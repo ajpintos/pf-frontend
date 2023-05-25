@@ -66,7 +66,6 @@ const CartPage = () => {
   const clearCart = async () => {
     if (user.email) {
       const order = cart.orderId;
-      console.log('order en clearCart ', order);
       const orderDetailDelete = await axios.delete('/orders/'+order);
     }; 
     dispatch(clear_Cart());
@@ -90,7 +89,10 @@ const CartPage = () => {
     } else {
       const cartTotal = updateTotals(cartDetails);
       dispatch(set_Cart(cartTotal));
-      localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
+      localStorage.setItem('cartDetails', JSON.stringify({
+        cart: cart,
+        details: cartDetails 
+      }));
     };
   };
 

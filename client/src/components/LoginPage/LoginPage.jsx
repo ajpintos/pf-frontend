@@ -5,6 +5,8 @@ import { userLogin , userLoginGoogle} from '../../Redux/actions/actionsUser.js';
 import { useNavigate } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 import swal from 'sweetalert';
+import { cartToUser } from '../Cart/cartHelpers.js';
+import { add_Cart, add_ToCart, clear_Cart } from '../../Redux/actions/actionsCart.js';
 
 // CSS REACT-BOOSTRAP
 import Form from "react-bootstrap/Form";
@@ -17,7 +19,6 @@ import Button from "react-bootstrap/Button";
 
 import GoogleLogin from "react-google-login";
 import { gapi } from "gapi-script";
-import { cartToUser } from '../Cart/cartHelpers.js';
 
 //! --------------------------------------
 
@@ -26,12 +27,22 @@ function LoginPage(){
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(state => state.userLogin);
+    const cartUser = useSelector(state => state.cart);
+    const cartDetailsUser = useSelector(state => state.cartDetails);
 
     const clientID = "932914293926-uo3dpst96jr8s51di1mmbhdh3j2gie6a.apps.googleusercontent.com";
    
-    const onSuccess = (response) => {
+    const onSuccess = async (response) => {
         dispatch(userLoginGoogle(response.profileObj));
-        cartToUser(response.profileObj.email);
+
+        // Agrega el carrito al user
+        const { order, cartDetails } = await cartToUser(response.profileObj.email);
+        dispatch(add_Cart(order.id));
+        dispatch(clear_Cart());
+        if ( cartDetails.length > 0 ) {
+            for (let i=0; i < cartDetails.length; i++) dispatch(add_ToCart(cartDetails[i], cartDetailsUser));
+        };
+        
         swal("Congratulations!", "Login Successfully", "success");
         navigate("/");
     }
@@ -52,7 +63,15 @@ function LoginPage(){
         const status = await dispatch(userLogin(form));
         if (status.hasOwnProperty('error')) swal("Error", "Incorrect email or password", "error");
         else {
-            cartToUser(form.email);
+
+            // Agrega el carrito al user
+            const { order, cartDetails } = await cartToUser(form.email);
+            dispatch(add_Cart(order.id));
+            dispatch(clear_Cart());
+            if ( cartDetails.length > 0 ) {
+                for (let i=0; i < cartDetails.length; i++) dispatch(add_ToCart(cartDetails[i], cartDetailsUser));
+            };
+
             swal("Congratulations!", "Login Successfully", "success");
             navigate("/");
         }

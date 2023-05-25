@@ -95,8 +95,11 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag, dato
     });
   }, [datos, id]);
 
-  useEffect(()=>{
-    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
+  useEffect(()=>{ 
+    if (cartDetails.length > 0) localStorage.setItem('cartDetails', JSON.stringify({
+      cart: cart,
+      details: cartDetails 
+    }));
   },[cartDetails]);
 
   return (
