@@ -95,8 +95,11 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag, dato
     });
   }, [datos, id]);
 
-  useEffect(()=>{
-    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
+  useEffect(()=>{ 
+    if (cartDetails.length > 0) localStorage.setItem('cartDetails', JSON.stringify({
+      cart: cart,
+      details: cartDetails 
+    }));
   },[cartDetails]);
 
   return (
@@ -109,11 +112,11 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag, dato
             </Link>
             <h5 className="card-title">{name}</h5>
             <p className="card-text mb-0">{description}</p>
-            { priceFlag &&
-              <div className="col mt-1">
+            {/* { priceFlag &&
+              <div className="col mt-1"> */}
                   <p className="col-6 offset-3" ><strong>{accounting.formatMoney(`${price}`)}</strong></p>
-              </div>
-              }
+              {/* </div>
+              } */}
             <div className="row">
               <Button variant="btn btn-success mt-2" className="col-6 offset-3" onClick={addToCart}>+ Add To Cart</Button>
               {userLogueado.email ? (

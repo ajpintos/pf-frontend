@@ -43,18 +43,6 @@ function App() {
     setWhereIAm(IAmData);
   };
 
-  const loadingCart = async () => {
-    console.log('userLogin ', user);
-    const lsUser = localStorage.getItem('user');
-    console.log('localStorage User ', lsUser);
-    const lsDetails = localStorage.getItem('detaCartDetails');
-    console.log('localStorage Details ', lsDetails);
-  };
-
-  useEffect(()=>{
-    loadingCart();
-  },[]);
-
   return (
     <div className="App">
       {/* Cabecera */}

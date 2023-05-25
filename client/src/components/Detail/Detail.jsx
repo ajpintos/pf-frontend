@@ -109,8 +109,10 @@ const Detail = ({ whereIAm, hereIAm, email }) => {
   };
 
   useEffect(()=>{
-    localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
-  },[cartDetails]);
+    if (cartDetails.length > 0) localStorage.setItem('cartDetails', JSON.stringify({
+      cart: cart,
+      details: cartDetails 
+    }));},[cartDetails]);
 
   const returnTo = () => {
     const returnWhere = whereIAm;
