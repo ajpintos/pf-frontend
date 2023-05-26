@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import registerValidate from "./validate/registerValidate.js";
 import emailjs from "@emailjs/browser";
-import styles from './RegisterPage.module.css';
 import swal from 'sweetalert';
 
 //CSS REACT-BOOSTRAP
@@ -86,11 +85,11 @@ function RegisterPage() {
 
     return (
         <div className="container-fluid">
-            <div className={styles.formContainer}>
-                <Form onSubmit={submitHandler} id="formToSend">
-                    <h2>Register</h2>
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formEmail">
+            <div className='container'>
+                <Form onSubmit={submitHandler} className='container' id="formToSend">
+                    <h2 className='mt-2'>Register</h2>
+                    <Row className="mb-1 px-2">
+                        <Form.Group className='col-xs-12 col-sm-12 col-md-4' controlId="formEmail">
                             <Form.Label>Email</Form.Label>
                             <Form.Control
                                 required
@@ -104,7 +103,7 @@ function RegisterPage() {
                             <p style={{color: "red"}}>{errors.email}</p>
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="formPassword">
+                        <Form.Group className='col-xs-12 col-sm-6 col-md-4' controlId="formPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
                                 required
@@ -115,22 +114,24 @@ function RegisterPage() {
                             />
                             <p style={{color: "red"}}>{errors.password}</p>
                         </Form.Group>
+
+                        <Form.Group className='col-xs-12 col-sm-6 col-md-4' controlId="formPasswordRepeat">
+                            <Form.Label>Repeat Password</Form.Label>
+                            <Form.Control
+                                required
+                                type="password"
+                                placeholder="Repeat Password" id="passwordRepeat" name="passwordRepeat"
+                                value={form.passwordRepeat}
+                                onChange={changeHandler}
+                            />
+                            <p style={{color: "red"}}>{errors.passwordRepeat}</p>
+                        </Form.Group>
                     </Row>
 
-                    <Form.Group as={Col} controlId="formPasswordRepeat">
-                        <Form.Label>Repeat Password</Form.Label>
-                        <Form.Control
-                            required
-                            type="password"
-                            placeholder="Repeat Password" id="passwordRepeat" name="passwordRepeat"
-                            value={form.passwordRepeat}
-                            onChange={changeHandler}
-                        />
-                        <p style={{color: "red"}}>{errors.passwordRepeat}</p>
-                    </Form.Group>
+ 
 
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formName">
+                    <Row className="mb-1 px-2">
+                        <Form.Group className='col-xs-12 col-sm-6' controlId="formName">
                             <Form.Label>First Name</Form.Label>
                             <Form.Control
                                 required
@@ -144,7 +145,7 @@ function RegisterPage() {
                             <p style={{color: "red"}}>{errors.firstname}</p>
                         </Form.Group>
 
-                        <Form.Group as={Col} className="mb-3" controlId="formLastName">
+                        <Form.Group className='col-xs-12 col-sm-6' controlId="formLastName">
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control
                                 required
@@ -158,7 +159,7 @@ function RegisterPage() {
                             <p style={{color: "red"}}>{errors.lastname}</p>
                         </Form.Group>
                     </Row>
-                    <Form.Group className="mb-3" controlId="formAddress">
+                    <Form.Group className="mb-1 px-2" as={Col} controlId="formAddress">
                         <Form.Label>Address</Form.Label>
                         <Form.Control
                             required
@@ -170,8 +171,8 @@ function RegisterPage() {
                             onChange={changeHandler}
                         />
                     </Form.Group>
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formZiCode">
+                    <Row className="mb-1 px-2">
+                        <Form.Group className='col-xs-12 col-sm-6' controlId="formZiCode">
                             <Form.Label>Zip Code</Form.Label>
                             <Form.Control
                                 required
@@ -183,7 +184,7 @@ function RegisterPage() {
                                 onChange={changeHandler}
                             />
                         </Form.Group>
-                        <Form.Group as={Col} controlId="formCity">
+                        <Form.Group className='col-xs-12 col-sm-6' controlId="formCity">
                             <Form.Label>City</Form.Label>
                             <Form.Control
                                 required
@@ -197,8 +198,8 @@ function RegisterPage() {
                         </Form.Group>
                     </Row>
 
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formCountry">
+                    <Row className="mb-1 px-2">
+                        <Form.Group className='col-xs-12 col-sm-6' controlId="formCountry">
                             <Form.Label>Country</Form.Label>
                             <Form.Control
                                 required
@@ -209,7 +210,7 @@ function RegisterPage() {
                                 value={form.country}
                                 onChange={changeHandler}/>
                         </Form.Group>
-                        <Form.Group as={Col} controlId="formPhone">
+                        <Form.Group className='col-xs-12 col-sm-6' controlId="formPhone">
                             <Form.Label>Phone</Form.Label>
                             <Form.Control
                                 required
@@ -222,7 +223,7 @@ function RegisterPage() {
                             />
                         </Form.Group>
                     </Row>
-                    <Row className='col-4 mx-auto'>
+                    <Row className='col-4 mx-auto mt-3'>
                         <Button variant="success" type="submit" className='mb-3'>
                             Register
                         </Button>
