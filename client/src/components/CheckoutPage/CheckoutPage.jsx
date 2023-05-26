@@ -6,7 +6,7 @@ import validate from './validate.js';
 import emailjs from "@emailjs/browser";
 import s from './CheckoutPage.module.css';
 import mercadoPago from '../../assets/mercadoPago.png'
-import { saveShippingData } from '../../Redux/actions/actionsDeliveries.js';
+import { refreshTotalAmount, saveShippingData, setShippingOption } from '../../Redux/actions/actionsDeliveries.js';
 
 //CSS REACT-BOOSTRAP
 import Button from 'react-bootstrap/Button';
@@ -21,6 +21,8 @@ function RegisterPage() {
     const navigate = useNavigate();
 
     const user = useSelector(state => state.userLogin);
+    const shippindOption = useSelector(state => state.shippindOption);
+
 
     const [ formCheckout , setFormCheckout ] = useState({
         email: user.email,
@@ -63,6 +65,17 @@ function RegisterPage() {
             [property] : value 
         });
     };
+
+    const handleChangeShippingMethod = (event) => {
+        const selectedShippindMethod = event.target.value;
+        dispatch(setShippingOption(selectedShippindMethod))
+
+        if(selectedShippindMethod === 'pickup') {
+            dispatch(refreshTotalAmount(0));
+        } else if (selectedShippindMethod === 'homeDelivery') {
+            dispatch(refreshTotalAmount(9.99))
+        }
+    }
 
     const submitHandlerCheckout = (e) => {
         e.preventDefault();
@@ -210,13 +223,13 @@ function RegisterPage() {
                             </div>
                             <Form className="card-body">
                                 <div>
-                                    <input type="radio" id="PickUp" name="opcion" value="PickUp"/>
-                                    <label for="PickUp">Pick Up</label>
+                                    <input type="radio" id="pickup" value="pickup" checked={shippindOption === 'pickup'} onChange={handleChangeShippingMethod}/>
+                                    <label htmlFor="pickup">Pick Up</label>
                                     <p className={s.price}><i>Free</i></p>
                                 </div>
                                 <div>
-                                    <input type="radio" id="HomeDeliveries" name="opcion" value="HomeDeliveries"/>
-                                    <label for="HomeDeliveries">Delivery</label>
+                                    <input type="radio" name="homeDelivery" value="homeDelivery" checked={shippindOption === 'homeDelivery'} onChange={handleChangeShippingMethod}/>
+                                    <label htmlFor="homeDelivery">Delivery</label>
                                     <p className={s.price}><i>($19.99)</i></p>
                                 </div>
                             </Form>
