@@ -166,90 +166,80 @@ const Detail = ({ whereIAm, hereIAm, email }) => {
     });
   }, [datos, id]);
   return (
-    <div className="container">
-      <div className="row text-center ">
-        <div className="container col-12">
-          <br/>  
-          <div className="row">
-            <div className="col-lg-6 col-12">
-              <img
-                src={product?.image}
-                alt={product?.name}
-                width="320"
-                height="320"
-              />
-            </div>
+    <div className="container-fluid">
+      <div className="row text-center mt-5 mb-5">
+        <figure className="col-lg-6 col-12">
+          <img
+            src={product?.image}
+            alt={product?.name}
+            width="320"
+            height="320"
+          />
+        </figure>
 
-            <div className="col-lg-6 col-12">
-              <h1 >{product.name}</h1>
+        <div className="col-lg-6 col-12">
+          <h1 >{product.name}</h1>
 
-              <h2>{accounting.formatMoney(`${product.price}`)}</h2>
-              <p> {product.description}</p>
-              <div className="row col-6 offset-3 " >
-              { product.averageRating > 1 ? <p class="col-1">⭐️</p> : <p class="col-1">★</p> }
-              { product.averageRating > 2 ? <p class="col-1">⭐️</p> : <p class="col-1">★</p> }
-              { product.averageRating > 5 ? <p class="col-1">⭐️</p> : <p class="col-1">★</p> }
-              { product.averageRating > 10 ? <p class="col-1">⭐️</p> : <p class="col-1">★</p> }
-              { product.averageRating > 19 ? <p class="col-1">⭐️</p> : <p class="col-1">★</p> }
-            </div>
-              <div>
-                <strong>Available:</strong>
-                <strong> {product.stock} units</strong>
-              </div>
+          <h2>{accounting.formatMoney(`${product.price}`)}</h2>
+          <p> {product.description}</p>
+          <div className="row col-6 offset-3 col-lg-9 offset-lg-4 text-center" >
+          { product.averageRating > 1 ? <p className="col-1">⭐️</p> : <p className="col-1">★</p> }
+          { product.averageRating > 2 ? <p className="col-1">⭐️</p> : <p className="col-1">★</p> }
+          { product.averageRating > 5 ? <p className="col-1">⭐️</p> : <p className="col-1">★</p> }
+          { product.averageRating > 10 ? <p className="col-1">⭐️</p> : <p className="col-1">★</p> }
+          { product.averageRating > 19 ? <p className="col-1">⭐️</p> : <p className="col-1">★</p> }
+        </div>
+          <div>
+            <strong>Available:</strong>
+            <strong> {product.stock} units</strong>
+          </div>
 
-              <div className="d-flex gap-2 justify-content-center col-12">
-                <input
-                  type="number"
-                  value={cant}
-                  min={1}
-                  max={product.stock}
-                  onChange={validacion}
-                  className="col-6"
-                  style={{ width: "45px", marginTop: "10px" }}
-                />
+          <div className="d-flex gap-2 justify-content-center col-12 mt-3">
+            <input 
+              type="number"
+              value={cant}
+              min={1}
+              max={product.stock}
+              onChange={validacion}
+              className="col-3"
+              style={{ width: "45px", marginTop: "10px" }}
+            />
 
-                <Button variant="btn btn-success mt-2" className="col-md-4 col-lg-4 col-sm-5" onClick={addToCart}>+ Add To Cart</Button>
-              </div>
-              <br />
-              <div>
-              <div className="row justify-content-center">
-                
-                <Button variant="btn btn-success mt-2" className=" col-4 " onClick={returnTo} >Return {whereIAm.place === '' ? 'Home' : whereIAm.place}</Button>
-                  {userLogueado.email ? (
-                    isFav ? (
-                      <button
-                        style={{
-                          background: "none",
-                          border: "none",
-                          fontSize: "1.5rem",
-                        }}
-                        className=""
-                        onClick={handleFavorite}
-                      >
-                        ❤️
-                      </button>
-                    ) : (
-                      <button
-                        style={{
-                          background: "none",
-                          border: "none",
-                          fontSize: "1.5rem",
-                        }}
-                        onClick={handleFavorite}
-                      >
-                        🤍
-                      </button>
-                    )
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </div>
-            </div>
+            <Button variant="btn btn-success mt-2" className="col-md-4 col-lg-3 offset-lg-2 col-sm-5 offset-1" onClick={addToCart}>+ Add To Cart</Button>
+          </div>
+          <div className="row justify-content-center mt-3">
+            <Button variant="btn btn-success mt-2" className="col-4 col-md-3 col-lg-4 col-sm-3" onClick={returnTo} >Return {whereIAm.place === '' ? 'Home' : whereIAm.place}</Button>
+            {userLogueado.email ? (
+              isFav ? (
+                <button
+                  style={{
+                    background: "none",
+                    border: "none",
+                    fontSize: "1.5rem",
+                  }}
+                  className=""
+                  onClick={handleFavorite}
+                >
+                  ❤️
+                </button>
+              ) : (
+                <button
+                  style={{
+                    background: "none",
+                    border: "none",
+                    fontSize: "1.5rem",
+                  }}
+                  onClick={handleFavorite}
+                >
+                  🤍
+                </button>
+              )
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
-      <br />
     </div>
   );
 };

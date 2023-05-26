@@ -1,4 +1,5 @@
 import { GET_RATINGS } from "../types/typesRating";
+import { getProducts } from "./actionsProducts";
 
 export const getProductsRating = (allProducts) => {
   const ratingProducts = allProducts.sort((a,b) => {

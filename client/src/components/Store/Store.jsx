@@ -227,6 +227,7 @@ export default function Store ({ whereIAm, hereIAm }) {
               price={product.price}
               tax={product.tax}
               stock={product.stock}
+              rating={product.averageRating}
               priceFlag={true}
               />
               ))}

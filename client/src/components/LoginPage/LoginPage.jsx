@@ -39,7 +39,7 @@ function LoginPage(){
         const { order, cartDetails } = await cartToUser(response.profileObj.email);
         dispatch(add_Cart(order.id));
         dispatch(clear_Cart());
-        if ( cartDetails.length > 0 ) {
+        if ( cartDetails !== null ) {
             for (let i=0; i < cartDetails.length; i++) dispatch(add_ToCart(cartDetails[i], cartDetailsUser));
         };
         
@@ -68,7 +68,7 @@ function LoginPage(){
             const { order, cartDetails } = await cartToUser(form.email);
             dispatch(add_Cart(order.id));
             dispatch(clear_Cart());
-            if ( cartDetails.length > 0 ) {
+            if ( cartDetails !== null ) {
                 for (let i=0; i < cartDetails.length; i++) dispatch(add_ToCart(cartDetails[i], cartDetailsUser));
             };
 

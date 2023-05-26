@@ -55,8 +55,10 @@ export const cartToUser = async (user) => {
   const lsUser = localStorage.getItem('user');
   const lsCartUser = localStorage.getItem('cartDetails');
   let lsCart = JSON.parse(lsCartUser);
+  console.log('lsCart en cartToUser ', lsCart);
   let orderUserFound = await foundOrderForDetail(user);
   if (lsCart !== null) {
+    if ( Array.isArray(lsCart.details) && lsCart.details !==[]) {
     if (lsCart.details.length > 0) {
       // borra todos los detalles en DB
       await axios.delete('/orders/'+orderUserFound.id);
@@ -76,28 +78,35 @@ export const cartToUser = async (user) => {
         };
       };
     };
+    }
   };
   const orderUser = await axios.get('/orders/'+orderUserFound.id);
-  const detailsUser = await axios.get('ordersDetails', { orderid: orderUserFound.id });
-  if ( detailsUser !== null && detailsUser.data.length > 0) {
-    for (let i=0; i < detailsUser.data.length; i++){
-      const product = await axios.get('/products/'+detailsUser.data[i].productId);
-      detailsUser.data[i] = {
-        ...detailsUser.data[i],
-        idOrderDetail: detailsUser.data[i].id,
-        idOrder: detailsUser.data[i].orderId,
-        idProduct: product.data.id,
-        name: product.data.name,
-        description: product.data.description,
-        image: product.data.image,
-        tax: product.data.tax,
-        stock: product.data.stock,
-        price: detailsUser.data[i].amount / detailsUser.data[i].units
-      };
-    };;
-  }
-  localStorage.removeItem('cartDetails');
-  return { order: orderUser.data, cartDetails : detailsUser.data };
+  console.log('orderUser en cartToUser ', orderUser);
+  let details_User = null;
+  // if (orderUser.amount > 0) {
+    const detailsUser = await axios.get('ordersDetails', { orderid: orderUserFound.id });
+    console.log('detailsUser en CartToUser ', detailsUser);
+    if ( detailsUser !== null && detailsUser.data.length > 0) {
+      for (let i=0; i < detailsUser.data.length; i++){
+        const product = await axios.get('/products/'+detailsUser.data[i].productId);
+        detailsUser.data[i] = {
+          ...detailsUser.data[i],
+          idOrderDetail: detailsUser.data[i].id,
+          idOrder: detailsUser.data[i].orderId,
+          idProduct: product.data.id,
+          name: product.data.name,
+          description: product.data.description,
+          image: product.data.image,
+          tax: product.data.tax,
+          stock: product.data.stock,
+          price: detailsUser.data[i].amount / detailsUser.data[i].units
+        };
+      };;
+    };
+    details_User = detailsUser.data;
+  // }
+  // localStorage.removeItem('cartDetails');
+  return { order: orderUser.data, cartDetails : details_User };
 
   // return null;
 };

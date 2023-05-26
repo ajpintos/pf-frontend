@@ -7,7 +7,6 @@ import {getCategories} from "../../Redux/actions/actionsCategories.js";
 import s from "./LandingHome.module.css";
 import table from '../../assets/img/table.jpg';
 import woman from '../../assets/img/woman.jpg';
-import { getProductsRating } from "../../Redux/actions/actionsRating.js";
 import RatingContainer from "../Rating/RatingContainer.jsx";
 
 
@@ -21,7 +20,6 @@ const Landing_home = ({ whereIAm, hereIAm }) => {
         dispatch(all_Products);
         const all_Categories = await getCategories();
         dispatch(all_Categories);
-        dispatch(getProductsRating(all_Products));
     };
 
 
@@ -39,7 +37,7 @@ const Landing_home = ({ whereIAm, hereIAm }) => {
 
       {/* Sección Cards */}
       <h2 className="col-xs-12 text-center mt-3"  >FEATURED PRODUCTS</h2>
-      <RatingContainer />
+      <RatingContainer whereIAm={whereIAm} hereIAm={hereIAm} />
 
       <div className="container-fluid" >
         <h2 className="my-3 text-center">Welcome to Biofresh</h2>

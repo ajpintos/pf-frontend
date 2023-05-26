@@ -117,7 +117,7 @@ function Card({ id, name, image, description, price, tax, stock, rating, priceFl
             <h5 className="card-title">{name}</h5>
             <p className="card-text mb-0">{description}</p>
             <p className="col-6 offset-3 mt-1" ><strong>{accounting.formatMoney(`${price}`)}</strong></p>
-            <div className="row col-6 offset-3 " >
+            <div className="row col-8 offset-4 col-md-8 offset-md-2" >
               { rating > 1 ? <p className="col-1">⭐️</p> : <p className="col-1">★</p> }
               { rating > 2 ? <p className="col-1">⭐️</p> : <p className="col-1">★</p> }
               { rating > 5 ? <p className="col-1">⭐️</p> : <p className="col-1">★</p> }

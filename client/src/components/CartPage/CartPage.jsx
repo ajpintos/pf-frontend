@@ -35,11 +35,19 @@ const CartPage = () => {
     const productFound = await getProductById(idProduct);
     const cartDetail = await getCartDetail(idProduct, cartDetails);
     if (user.email) {
-      const updateData = {
-        idDetail: cartDetail.idOrderDetail,
+      let detailData = { idDetail: cartDetail.idOrderDetail };
+      const orderDetailDelete = await axios.delete('/ordersDetails', { data: detailData });
+      // const updateData = {
+      //   idDetail: cartDetail.idOrderDetail,
+      //   units: parseInt(cant)
+      // };
+      // const orderDetailUpdate = await axios.put('/ordersDetails', updateData );
+      detailData = {
+        idOrder: cartDetail.idOrder,
+        idProduct: idProduct,
         units: parseInt(cant)
       };
-      const orderDetailUpdate = await axios.put('/ordersDetails', updateData );
+      const detailCreated = await axios.post('/ordersDetails', detailData);
     };
     dispatch(remove_FromCart(idProduct, cartDetails));
     const cart_Detail = { 

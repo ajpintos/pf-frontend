@@ -172,7 +172,7 @@ function CardContainer({ whereIAm, hereIAm }) {
           stock={product.stock}
           rating={product.averageRating}
           priceFlag={false}
-            datos={datos}
+          datos={datos}
           />
           ))}
       </section>

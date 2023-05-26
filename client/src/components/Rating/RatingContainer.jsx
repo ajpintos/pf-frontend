@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Card from "../Card/Card.jsx";
 import Container from 'react-bootstrap/Container'
 import { getProductsRating } from "../../Redux/actions/actionsRating.js";
+import { getFavoritesDB } from "../../Redux/actions/actionsFavorites.js";
 
-function RatingContainer () {
+function RatingContainer ({ whereIAm, hereIAm }) {
 
   const dispatch = useDispatch();
   const allProducts = useSelector(state => state.allProducts);
   const showProducts = useSelector(state => state.ratingProducts);
+  const cartDetails = useSelector(state => state.cartDetails);
   
 
   const loadinRating = () => {
@@ -17,7 +19,15 @@ function RatingContainer () {
 
   useEffect(()=>{
     loadinRating();
-  },[]);
+  },[allProducts, cartDetails]);
+
+  const userLogueado = useSelector((state) => state?.userLogin.email);
+
+  useEffect(() => {
+    dispatch(getFavoritesDB(userLogueado));
+  }, []);
+
+  const datos = useSelector((state) => state.favorites);
 
   return (
     <Container fluid >
@@ -35,6 +45,7 @@ function RatingContainer () {
           stock={product.stock}
           rating={product.averageRating}
           priceFlag={false}
+          datos={datos}
           />
           ))}
       </section>
