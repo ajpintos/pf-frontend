@@ -4,11 +4,10 @@ import { Link , useNavigate } from "react-router-dom";
 import imgpropia from "../../img/logo.png";
 import { useSelector , useDispatch } from 'react-redux';
 import Cart from '../Cart/Cart.jsx';
-import { userLogout , setUser } from '../../Redux/actions/actionsUser.js';
+import { userLogout , setUser, reset } from '../../Redux/actions/actionsUser.js';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import s from './Title.module.css';
-import { add_All_Cart } from '../../Redux/actions/actionsCart';
 
 function Title() {
 
@@ -16,33 +15,23 @@ function Title() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const loadingData = async () => {
+    const refresh =await userLogout();
+    dispatch(refresh);
+    const prueba =await reset();
+    dispatch(prueba);
+  };
+
   const handleLogout = () => {
-    dispatch(userLogout());
+    loadingData();
     navigate("/");
   }
 
   useEffect(() => {
     const userLocalStorage = localStorage.getItem('user');
-    const cartLS = localStorage.getItem('cartDetails');
-    console.log('cartLS ', cartLS);
     if (userLocalStorage) {
       const userLocalStorageRedux = JSON.parse(userLocalStorage);
       dispatch(setUser(userLocalStorageRedux));
-    }
-    if (cartLS) {
-      let cartCartLS = {};
-      let detailsCartLS = [];
-      // if (cartLS.cart) {
-        console.log('entro a 1');
-        const cartLocalStorage = JSON.parse(cartLS);
-        cartCartLS = cartLocalStorage.cart;
-        detailsCartLS = cartLocalStorage.details;
-        // } else {
-          //   console.log('entro a 2');
-          //   detailsCartLS = JSON.parse(cartLS);
-          // }
-          console.log(' cart y detail ', cartCartLS, detailsCartLS);
-          dispatch(add_All_Cart(cartCartLS, detailsCartLS));
     }
   },[])
 

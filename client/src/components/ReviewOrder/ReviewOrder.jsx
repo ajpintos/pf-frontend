@@ -13,8 +13,11 @@ export default function ReviewOrder() {
   const dispatch = useDispatch();
 
   const cartDetails = useSelector(state => state.cartDetails)
+  const orderCart = cartDetails[0].idOrder;
 
   const user = useSelector(state => state.userLogin);
+  const emailUser = user.email;
+
   const shippingAddress = useSelector(state => state.shippingAddress)
   const shippingAmount = useSelector(state => state.totalAmount)
 
@@ -58,7 +61,7 @@ export default function ReviewOrder() {
 
   // //! Función de Mercadopago
   const handlerMercadoPagoLink = async () => {
-    axios.post('/payments', {id: order.id , name:"Compra BioFresh" , image:"https://biofresh.shop/assets/logo-014472b5.png" , description:"Esto es una prueba" , price: order.totalAmount})
+    axios.post('/payments', {id: order.id , name:"Compra BioFresh" , image:"https://biofresh.shop/assets/logo-014472b5.png" , description:"Esto es una prueba" , price: order.totalAmount, orderId:orderCart, email: emailUser})
         .then((res) => window.location.href = res.data.response.body.init_point)
         .catch((error) => console.log(error));
   }
