@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/esm/Container'
 import accounting from 'accounting';
 import { useNavigate } from 'react-router-dom'
 import { getCartDetail, updateTotals } from '../Cart/cartHelpers'
-import { add_ToCart, clear_Cart, remove_FromCart, set_Cart } from '../../Redux/actions/actionsCart'
+import { add_All_Cart, add_ToCart, clear_Cart, remove_FromCart, set_Cart } from '../../Redux/actions/actionsCart'
 import { getProductById } from '../../Redux/actions/actionsProducts'
 import swal from 'sweetalert';
 
@@ -86,6 +86,23 @@ const CartPage = () => {
   };
 
   const cartUpdate = async () => {
+    console.log('cart 1 ', cart);
+    console.log('cartDetails 1 ',cartDetails);
+    // const cartLS = localStorage.getItem('cartDetails');
+    // console.log('cartLS ', cartLS);
+    // if (cartLS) {
+    //   let cartCartLS = {};
+    //   let detailsCartLS = [];
+    //   if (cartLS.cart) {
+    //     const cartLocalStorage = JSON.parse(cartLS);
+    //     cartCartLS = cartLocalStorage.cart;
+    //     detailsCartLS = cartLocalStorage.details;
+    //   } else {
+    //     detailsCartLS = cartLS;
+    //   }
+    //   console.log(' cart y detail ', cartCartLS, detailsCartLS);
+    //   dispatch(add_All_Cart(cartCartLS, detailsCartLS));
+    // }
     if (!cartFlag) {
       const cartTotal = {
         amount: 0,
@@ -93,18 +110,43 @@ const CartPage = () => {
         totalAmount: 0
       };
       dispatch(set_Cart(cartTotal));
-      localStorage.removeItem('cartDetails');
+      localStorage.removeItem('cartDetails', JSON.stringify({
+        cart: cart,
+        details: cartDetails 
+      }));
       setCartFlag(true);
     } else {
       const cartTotal = updateTotals(cartDetails);
       dispatch(set_Cart(cartTotal));
-      localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
+      localStorage.setItem('cartDetails', JSON.stringify({
+        cart: cart,
+        details: cartDetails 
+      }));
     };
   };
 
   useEffect(()=>{
     cartUpdate();
   },[cartDetails]);
+
+  
+  // useEffect(() => {
+  //   const cartLS = localStorage.getItem('cartDetails');
+  //   console.log('cartLS ', cartLS);
+  //   if (cartLS) {
+  //     let cartCartLS = {};
+  //     let detailsCartLS = [];
+  //     if (cartLS.cart) {
+  //       const cartLocalStorage = JSON.parse(cartLS);
+  //       cartCartLS = cartLocalStorage.cart;
+  //       detailsCartLS = cartLocalStorage.details;
+  //     } else {
+  //       detailsCartLS = cartLS;
+  //     }
+  //     console.log(' cart y detail ', cartCartLS, detailsCartLS);
+  //     dispatch(add_All_Cart(cartCartLS, detailsCartLS));
+  //   }
+  // },[])
 
   return (
     <div className='container'>
@@ -138,7 +180,7 @@ const CartPage = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    { cartDetails.map(product => {
+                    { Array.isArray(cartDetails)  &&  cartDetails.map(product => {
                     cantProduct = product.units;
                     return (
                       <tr key={product.idProduct} >
