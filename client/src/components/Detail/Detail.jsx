@@ -184,6 +184,13 @@ const Detail = ({ whereIAm, hereIAm, email }) => {
 
               <h2>${product.price}</h2>
               <p> {product.description}</p>
+              <div className="row col-6 offset-3 " >
+              { product.averageRating > 1 ? <p class="col-1">⭐️</p> : <p class="col-1">★</p> }
+              { product.averageRating > 2 ? <p class="col-1">⭐️</p> : <p class="col-1">★</p> }
+              { product.averageRating > 5 ? <p class="col-1">⭐️</p> : <p class="col-1">★</p> }
+              { product.averageRating > 10 ? <p class="col-1">⭐️</p> : <p class="col-1">★</p> }
+              { product.averageRating > 19 ? <p class="col-1">⭐️</p> : <p class="col-1">★</p> }
+            </div>
               <div>
                 <strong>Available:</strong>
                 <strong> {product.stock} units</strong>
@@ -199,7 +206,7 @@ const Detail = ({ whereIAm, hereIAm, email }) => {
                   style={{ width: "60px", marginTop: "10px" }}
                 />
 
-                <Button variant="btn btn-success mt-2 col-2" className="col-6 offset-3" onClick={addToCart}><AddToCartIcon/></Button>
+                <Button variant="btn btn-success mt-2 col-2" className="col-6 offset-3" onClick={addToCart}>Add to Cart</Button>
               </div>
               <br />
               <div>

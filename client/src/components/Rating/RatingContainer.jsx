@@ -33,6 +33,7 @@ function RatingContainer () {
           price={product.price}
           tax={product.tax}
           stock={product.stock}
+          rating={product.averageRating}
           priceFlag={false}
           />
           ))}

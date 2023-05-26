@@ -170,6 +170,7 @@ function CardContainer({ whereIAm, hereIAm }) {
           price={product.price}
           tax={product.tax}
           stock={product.stock}
+          rating={product.averageRating}
           priceFlag={false}
             datos={datos}
           />

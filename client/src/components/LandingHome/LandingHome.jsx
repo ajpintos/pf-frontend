@@ -21,6 +21,7 @@ const Landing_home = ({ whereIAm, hereIAm }) => {
         dispatch(all_Products);
         const all_Categories = await getCategories();
         dispatch(all_Categories);
+        dispatch(getProductsRating(all_Products));
     };
 
 

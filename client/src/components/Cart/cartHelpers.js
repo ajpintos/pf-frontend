@@ -87,6 +87,7 @@ export const cartToUser = async (user) => {
         idOrderDetail: detailsUser.data[i].id,
         idOrder: detailsUser.data[i].orderId,
         idProduct: product.data.id,
+        name: product.data.name,
         description: product.data.description,
         image: product.data.image,
         tax: product.data.tax,

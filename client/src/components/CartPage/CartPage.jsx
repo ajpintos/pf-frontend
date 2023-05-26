@@ -111,13 +111,13 @@ const CartPage = () => {
         <div className="row">
           <div className="col-lg-9 mb-4">
             <div className="table-responsive">
-              {cartDetails.length < 1 ? 
-                <tr>
-                  <section className="col-12">
-                    <div className="bg-secondary alert text-white">The shopping cart is currently empty. You can go back and start adding products.</div>
+              {cartDetails.length < 1 
+                ? 
+                  <section className="col-9">
+                    <p className="bg-secondary alert text-white">The shopping cart is currently empty. You can go back and start adding products.</p>
                     <Button className="btn btn-success btn-block mb-1" onClick={()=>goToPath('/store')}>Go Store</Button>
                   </section>
-                </tr> :
+                :
                 <table className="table">
                   <thead>
                     <tr>
