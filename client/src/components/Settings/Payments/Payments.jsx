@@ -25,8 +25,6 @@ const Payment = () => {
               <th>Name</th>
               <th>Status</th>
               <th>userEmail</th>
-              <th>orderId</th>
-              <th>ordersDetailId</th>
             </tr>
           </thead>
           <tbody>
@@ -36,8 +34,6 @@ const Payment = () => {
                 <td>{e.name}</td>
                 <td>{e.Status}</td>
                 <td>{e.userEmail}</td>
-                <td>{e.orderId}</td>
-                <td>{e.naordersDetailIdme}</td>
               </tr>;
             })}
           </tbody>
