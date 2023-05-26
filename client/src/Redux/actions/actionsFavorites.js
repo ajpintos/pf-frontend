@@ -15,10 +15,11 @@ export const addFavorites = (favorites) => {
   //   payload: favorites,
   // };
 };
-export const deleteFavorites = (favorites) => {
+export const deleteFavorites = (favorites,email) => {
   return async function (dispatch) {
-    const result = await axios.post("/favorites", favorites);
-    return result;
+   await axios.post("/favorites", favorites);
+    const llamado = await axios.get(`/favorites/${email}`);
+    return dispatch({ type: GET_FAVORITES_DB, payload: llamado.data });
   };
   // return {
   //   type: DELETE_FAVORITES,
