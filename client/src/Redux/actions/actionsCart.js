@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, STATUS_CHANGE_ORDER, CLEAR_CART, SET_CART, ADD_CART } from "../types/typesCart";
+import { ADD_TO_CART, REMOVE_FROM_CART, STATUS_CHANGE_ORDER, CLEAR_CART, SET_CART, ADD_CART, ADD_ALL_CART } from "../types/typesCart";
 
 
 export const add_ToCart = (product, cartDetails) => {
@@ -67,5 +67,14 @@ export const add_Cart = (idOrder) => {
     return {
         type: ADD_CART,
         payload: idOrder
+    }
+} 
+
+export const add_All_Cart = (cart, details) => {
+    return function (dispatch) {
+        return dispatch ({
+            type: ADD_ALL_CART,
+            payload: { cart: cart, cartDetails: details }
+        })
     }
 }

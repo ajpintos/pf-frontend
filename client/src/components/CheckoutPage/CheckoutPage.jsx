@@ -223,12 +223,12 @@ function RegisterPage() {
                             </div>
                             <Form className="card-body">
                                 <div>
-                                    <input type="radio" id="pickup" value="pickup" name='deliveryMethod' onSelect={shippindOption === 'pickup'} onChange={handleChangeShippingMethod}/>
+                                    <input type="radio" id="pickup" value="pickup" name='deliveryMethod' defaultChecked onClick={shippindOption === 'pickup'} onChange={handleChangeShippingMethod}/>
                                     <label htmlFor="pickup">Pick Up</label>
                                     <p className={s.price}><i>Free</i></p>
                                 </div>
                                 <div>
-                                    <input type="radio" id='homeDelivery' value="homeDelivery" name='deliveryMethod' onSelect={shippindOption === 'homeDelivery'} onChange={handleChangeShippingMethod}/>
+                                    <input type="radio" id='homeDelivery' value="homeDelivery" name='deliveryMethod'  onSelect={shippindOption === 'homeDelivery'} onChange={handleChangeShippingMethod}/>
                                     <label htmlFor="homeDelivery">Delivery</label>
                                     <p className={s.price}><i>($9.99)</i></p>
                                 </div>
