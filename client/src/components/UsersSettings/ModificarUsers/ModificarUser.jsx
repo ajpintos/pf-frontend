@@ -45,7 +45,9 @@ const ModificarUser = ({ show, handleClose, email, tipo }) => {
     if (
       form.password.length > 0 &&
       form.firstname.length > 0 &&
-      form.lastname.length > 0
+      form.lastname.length > 0 &&
+      form.address.length > 0 &&
+      form.city.length > 0
     )
       setButton(false);
     else {
@@ -62,7 +64,7 @@ const ModificarUser = ({ show, handleClose, email, tipo }) => {
           password: "",
           firstname: "",
           lastname: "",
-          adress: "",
+          address: "",
           cp: "",
           city: "",
           phone: "",
