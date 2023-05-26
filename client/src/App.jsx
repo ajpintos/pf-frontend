@@ -18,8 +18,9 @@ import Title from "./components/Title/Title.jsx";
 import FormEmail from "./components/ForgotPassword/FormEmail/FormEmail.jsx";
 import ChangePassword from "./components/ForgotPassword/ChangePassword/ChangePassword.jsx";
 import CartPage from './components/CartPage/CartPage.jsx';
-import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
-import ReviewOrder from "./components/ReviewOrder/ReviewOrder";
+import CheckoutPage from "./components/CheckoutPage/CheckoutPage.jsx";
+import ReviewOrder from "./components/ReviewOrder/ReviewOrder.jsx";
+import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -72,6 +73,7 @@ function App() {
         <Route path="/favorites" element={<Favorites email={userFavorite} />} />
         <Route path="/forgotpassword" element={<FormEmail />} />
         <Route path="/forgotpassword/changepassword" element={<ChangePassword/> } />
+        <Route path="/payments/success" element={<PaymentSuccess />} />
       </Routes>
       <footer className="container-fluid" >
         <Footer />
