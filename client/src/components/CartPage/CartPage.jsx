@@ -66,6 +66,7 @@ const CartPage = () => {
   const clearCart = async () => {
     if (user.email) {
       const order = cart.orderId;
+      console.log('order en clearCart ', order);
       const orderDetailDelete = await axios.delete('/orders/'+order);
     }; 
     dispatch(clear_Cart());
@@ -89,10 +90,7 @@ const CartPage = () => {
     } else {
       const cartTotal = updateTotals(cartDetails);
       dispatch(set_Cart(cartTotal));
-      localStorage.setItem('cartDetails', JSON.stringify({
-        cart: cart,
-        details: cartDetails 
-      }));
+      localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
     };
   };
 
@@ -101,8 +99,8 @@ const CartPage = () => {
   },[cartDetails]);
 
   return (
-    <Container className='container-fluid'>
-      <div className="container">
+    <div className='container'>
+      <div>
         <div className="row my-2">
           <div className="col-12">
             <h1 className="page-header">Shopping Cart</h1>
@@ -110,7 +108,7 @@ const CartPage = () => {
         </div>
         <div className="row">
           <div className="col-lg-9 mb-4">
-            <div className="table-responsive">
+            <div className='row'>
               {cartDetails.length < 1 ? 
                 <tr>
                   <section className="col-12">
@@ -203,7 +201,7 @@ const CartPage = () => {
           } 
         </div>
       </div>
-    </Container>
+    </div>
   )
 }
 

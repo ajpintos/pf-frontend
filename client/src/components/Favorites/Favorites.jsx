@@ -16,8 +16,8 @@ const Favorites = ({ email }) => {
 
   return (
     <Container fluid my-3 pb-3 mx-5>
-      <Row className="justify-content-md-center">
-        <Col md="auto">
+      <Row className="text-center">
+        <Col>
           <h2>Favorites</h2>
         </Col>
       </Row>
@@ -42,35 +42,6 @@ const Favorites = ({ email }) => {
           }
         })}
       </Row>
-
-      {/*   <section className="row">
-        {
-        e?.product?.map((product, index) => {
-          return (
-            <Card
-              key={index}
-              id={product?.id}
-              name={product?.name}
-              image={product?.image}
-              description={product?.description}
-              price={product?.price}
-              stock={product.stock}
-        
-            />
-          );
-        })}
-        <Row className="justify-content-md-center">
-          <Col md="auto">
-            {datos?.length < 1 ? (
-              <h4 my-3 pb-5 style={{ color: "orangered", margin: "auto" }}>
-                No favorites have been selected, go back to Home.
-              </h4>
-            ) : (
-              ""
-            )}
-          </Col>
-        </Row>
-      </section> */}
     </Container>
   );
 };

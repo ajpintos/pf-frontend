@@ -8,6 +8,7 @@ import {getFavoritesDB, addFavorites, deleteFavorites} from "../../Redux/actions
 import { AddToCartIcon } from "../Icons/Icons";
 import { add_Cart, add_ToCart, remove_FromCart, set_Cart } from "../../Redux/actions/actionsCart.js";
 import swal from 'sweetalert';
+import accounting from 'accounting';
 
 const Detail = ({ whereIAm, hereIAm, email }) => {
 
@@ -165,12 +166,12 @@ const Detail = ({ whereIAm, hereIAm, email }) => {
     });
   }, [datos, id]);
   return (
-    <div>
-      <div className="row  text-center ">
-        <div className="container ">
+    <div className="container">
+      <div className="row text-center ">
+        <div className="container col-12">
           <br/>  
           <div className="row">
-            <div className="col">
+            <div className="col-lg-6 col-12">
               <img
                 src={product?.image}
                 alt={product?.name}
@@ -179,33 +180,34 @@ const Detail = ({ whereIAm, hereIAm, email }) => {
               />
             </div>
 
-            <div className="col">
-              <h1>{product.name}</h1>
+            <div className="col-lg-6 col-12">
+              <h1 >{product.name}</h1>
 
-              <h2>${product.price}</h2>
+              <h2>{accounting.formatMoney(`${product.price}`)}</h2>
               <p> {product.description}</p>
               <div>
                 <strong>Available:</strong>
                 <strong> {product.stock} units</strong>
               </div>
 
-              <div>
+              <div className="d-flex gap-2 justify-content-center col-12">
                 <input
                   type="number"
                   value={cant}
                   min={1}
                   max={product.stock}
                   onChange={validacion}
-                  style={{ width: "60px", marginTop: "10px" }}
+                  className="col-6"
+                  style={{ width: "45px", marginTop: "10px" }}
                 />
 
-                <Button variant="btn btn-success mt-2 col-2" className="col-6 offset-3" onClick={addToCart}><AddToCartIcon/></Button>
+                <Button variant="btn btn-success mt-2" className="col-md-4 col-lg-4 col-sm-5" onClick={addToCart}>+ Add To Cart</Button>
               </div>
               <br />
               <div>
-              <div>
+              <div className="row justify-content-center">
                 
-                <Button variant="btn btn-success mt-2" className="col-4 offset-3" onClick={returnTo} >Return {whereIAm.place === '' ? 'Home' : whereIAm.place}</Button>
+                <Button variant="btn btn-success mt-2" className=" col-4 " onClick={returnTo} >Return {whereIAm.place === '' ? 'Home' : whereIAm.place}</Button>
                   {userLogueado.email ? (
                     isFav ? (
                       <button
@@ -214,6 +216,7 @@ const Detail = ({ whereIAm, hereIAm, email }) => {
                           border: "none",
                           fontSize: "1.5rem",
                         }}
+                        className=""
                         onClick={handleFavorite}
                       >
                         ❤️

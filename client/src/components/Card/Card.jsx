@@ -107,7 +107,7 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag, dato
   },[cartDetails]);
 
   return (
-    <div className="col-8 offset-2 py-1 px-3 col-sm-6 offset-sm-0 py-sm-1 px-sm-3 col-md-6 offset-md-0 py-md-1 px-md-3 col-lg-4 offset-lg-0 py-lg-1 px-lg-3 col-xl-3 offset-xl-0 py-xl-1 px-xl-3 mt-1 mb-3 text-center">
+    <div className="col-8 offset-2 py-1 col-sm-6 offset-sm-0 py-sm-1 col-md-6 offset-md-0 py-md-1 col-lg-4 offset-lg-0 py-lg-1 px-lg-3 col-xl-3 offset-xl-0 py-xl-1 px-xl-3 mt-1 mb-3 text-center">
       {name ? (
         <div className="card">
           <div className="card-body">
@@ -121,8 +121,8 @@ function Card({ id, name, image, description, price, tax, stock, priceFlag, dato
                   <p className="col-6 offset-3" ><strong>{accounting.formatMoney(`${price}`)}</strong></p>
               {/* </div>
               } */}
-            <div className="row">
-              <Button variant="btn btn-success mt-2" className="col-6 offset-3" onClick={addToCart}>+ Add To Cart</Button>
+            <div className="row justify-content-center">
+              <Button variant="btn btn-success mt-2" className="col-sm-6" onClick={addToCart}>+ Add To Cart</Button>
               {userLogueado.email ? (
                   isFav ? (
                       <button

@@ -222,9 +222,11 @@ function RegisterPage() {
                             />
                         </Form.Group>
                     </Row>
-                    <Button variant="success" type="submit">
-                        Register
-                    </Button>
+                    <Row className='col-4 mx-auto'>
+                        <Button variant="success" type="submit" className='mb-3'>
+                            Register
+                        </Button>
+                    </Row>
                 </Form>
             </div>
         </div>
