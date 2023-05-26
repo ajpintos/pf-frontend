@@ -133,7 +133,7 @@ return (
                     </Form.Group>
                 </Row>
                 <Row className='d-flex justify-content-center mb-3'>
-                    <Button className='col-2 ' variant="success" type="submit">Login</Button>
+                    <Button className='col-2' variant="success" type="submit">Login</Button>
                 </Row>
             </Form>
             <Row className="mb-3">

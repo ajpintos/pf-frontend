@@ -228,7 +228,7 @@ function RegisterPage() {
                                     <p className={s.price}><i>Free</i></p>
                                 </div>
                                 <div>
-                                    <input type="radio" value="homeDelivery" name='deliveryMethod' onSelect={shippindOption === 'homeDelivery'} onChange={handleChangeShippingMethod}/>
+                                    <input type="radio" id='homeDelivery' value="homeDelivery" name='deliveryMethod' onSelect={shippindOption === 'homeDelivery'} onChange={handleChangeShippingMethod}/>
                                     <label htmlFor="homeDelivery">Delivery</label>
                                     <p className={s.price}><i>($9.99)</i></p>
                                 </div>

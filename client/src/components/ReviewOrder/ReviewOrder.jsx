@@ -147,7 +147,7 @@ export default function ReviewOrder() {
                     <div class="col-sm-12 col-xs-12 col-lg-6" >
                         <div class="card mb-3">
                             <div class="card-body" id={s.card_container}>
-                                <label><strong>Billing and Address</strong></label>
+                                <label><strong>Billing and Shipping Address</strong></label>
                                 <hr />
                                 <span>{formCheckout.firstname} {formCheckout.lastname}</span><br/>
                                 <span>{formCheckout.address}</span><br/>
