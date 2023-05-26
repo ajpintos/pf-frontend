@@ -230,7 +230,7 @@ function RegisterPage() {
                                 <div>
                                     <input type="radio" name="homeDelivery" value="homeDelivery" checked={shippindOption === 'homeDelivery'} onChange={handleChangeShippingMethod}/>
                                     <label htmlFor="homeDelivery">Delivery</label>
-                                    <p className={s.price}><i>($19.99)</i></p>
+                                    <p className={s.price}><i>($9.99)</i></p>
                                 </div>
                             </Form>
                         </div>
