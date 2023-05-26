@@ -104,7 +104,7 @@ function RegisterPage() {
             <div>
                 <Form onSubmit={submitHandlerCheckout} id="formToSend" className='row row-cols-1 row-cols-sm-2 row-cols-lg-4'>
                     <div className='col-lg-8 col-sm-12'>
-                        <div className='card mb-3'>
+                        <div className='card mb-3' id={s.card_container}>
                             <div className="card-header">
                                 <h2 className="legend card-title">Contact</h2>
                             </div>
@@ -119,7 +119,7 @@ function RegisterPage() {
                                 </Form.Group>
                             </Row>
                         </div>
-                        <div className="card pb-3">
+                        <div className="card pb-3" id={s.card_container}>
                             <div className="card-header">
                                 <h2 className="legend card-title">Billing Address</h2>
                             </div>
@@ -157,12 +157,12 @@ function RegisterPage() {
                             </Form.Group>
                         </Row>
                         </div>
-                        <div className='py-20px my-5'>
+                        <div className='py-20px my-5' >
                             <input type="checkbox" id="deliveryAddres" name="opcion" value="deliveryAddres" defaultChecked onChange={handleCheckboxChange}/>
                             <label for="deliveryAddres">Billing Address same as Shipping</label><br/>
                         </div>
                         {!mostrarFormulario && (
-                            <div className="card mb-3 pb-3">
+                            <div className="card mb-3 pb-3" id={s.card_container}>
                                 <div className="card-header">
                                     <h2 className="legend card-title">Shipping Address</h2>
                                 </div>
@@ -204,7 +204,7 @@ function RegisterPage() {
                         <p className='my-3'>* Required Fields</p>
                     </div>
                     <div className='col-lg-4 col-sm-12'>
-                        <div id="payments" className="card mb-3">
+                        <div className="card mb-3" id={s.card_container}>
                             <div className="card-header">
                                 <h2 className="legend card-title">Payment Options</h2>
                             </div>
@@ -217,7 +217,7 @@ function RegisterPage() {
                                 </div>
                             </Form>
                         </div>
-                        <div id="payments" className="card mb-3">
+                        <div id={s.card_container} className="card mb-3">
                             <div className="card-header">
                                 <h2 className="legend card-title">Deliveries Options</h2>
                             </div>

@@ -5,6 +5,7 @@ import axios from 'axios'
 import Container from 'react-bootstrap/esm/Container'
 import accounting from 'accounting';
 import { useNavigate } from 'react-router-dom'
+import s from './ReviewOrder.module.css';
 
 export default function ReviewOrder() {
 
@@ -76,8 +77,8 @@ export default function ReviewOrder() {
             </div>
             <div className="row">
                 <div className="col-lg-9 mb-4">
-                    <div className="table-responsive">
-                        <table className="table">
+                    <div className="table-responsive mb-5">
+                        <table className="table" >
                             <thead>
                                 <tr>
                                 <th>Product</th>
@@ -119,7 +120,7 @@ export default function ReviewOrder() {
                     <div className="col-lg-12 mb-4 d-flex gap-2">
                         <div class="col-6">
                             <div class="card mb-3">
-                                <div class="card-body">
+                                <div class="card-body" id={s.card_container}>
                                     <label><strong>Billing Address</strong></label>
                                     <hr />
                                     <span>{formCheckout.firstname} {formCheckout.lastname}</span><br/>
@@ -131,7 +132,7 @@ export default function ReviewOrder() {
                         </div>
                         <div class="col-6">
                             <div class="card mb-3">
-                                <div class="card-body">
+                                <div class="card-body" id={s.card_container}>
                                     <label><strong>Shipping Address</strong></label>
                                     <hr />
                                     <span>{shippingAddress.firstname} {shippingAddress.lastname}</span><br/>
@@ -143,9 +144,9 @@ export default function ReviewOrder() {
                         </div> 
                     </div> : 
                     <div className="col-lg-12 mb-4 d-flex gap-2">
-                    <div class="col-sm-12 col-xs-12 col-lg-6">
+                    <div class="col-sm-12 col-xs-12 col-lg-6" >
                         <div class="card mb-3">
-                            <div class="card-body">
+                            <div class="card-body" id={s.card_container}>
                                 <label><strong>Billing and Address</strong></label>
                                 <hr />
                                 <span>{formCheckout.firstname} {formCheckout.lastname}</span><br/>
