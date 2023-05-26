@@ -25,7 +25,6 @@ const ModificarUser = ({ show, handleClose, email, tipo }) => {
   });
 
   form.email = email;
-  form.adminType = tipo;
 
   const loadingData = () => {
     const data = allUsers();
@@ -80,11 +79,15 @@ const ModificarUser = ({ show, handleClose, email, tipo }) => {
     }
   };
 
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState();
+
+  console.log(selectedOption);
+  console.log(form);
 
   const handleSelect = (event) => {
     const value = event.target.value;
     setSelectedOption(value);
+    form.adminType = value;
   };
 
   useEffect(() => {
@@ -208,8 +211,13 @@ const ModificarUser = ({ show, handleClose, email, tipo }) => {
             </Form.Group>
             <br />
             <br />
-
-            <Button variant="primary" type="submit" disabled={button}>
+            <h6>fill in the fields</h6>
+            <Button
+              title="fill in the fields"
+              variant="primary"
+              type="submit"
+              disabled={button}
+            >
               modify data
             </Button>
           </Form>
