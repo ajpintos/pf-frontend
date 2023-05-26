@@ -25,7 +25,6 @@ const ProductsSettings = () => {
 
   useEffect(() => {
     loadingData();
-   
   }, []);
   
  
