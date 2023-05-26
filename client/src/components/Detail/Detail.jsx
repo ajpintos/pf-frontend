@@ -182,7 +182,7 @@ const Detail = ({ whereIAm, hereIAm, email }) => {
 
           <h2>{accounting.formatMoney(`${product.price}`)}</h2>
           <p> {product.description}</p>
-          <div className="row col-6 offset-3 col-lg-9 offset-lg-4 text-center" >
+          <div className="d-flex col-12 col-md-12 justify-content-center" >
           { product.averageRating > 1 ? <p className="col-1">⭐️</p> : <p className="col-1">★</p> }
           { product.averageRating > 2 ? <p className="col-1">⭐️</p> : <p className="col-1">★</p> }
           { product.averageRating > 5 ? <p className="col-1">⭐️</p> : <p className="col-1">★</p> }
