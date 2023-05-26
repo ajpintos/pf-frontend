@@ -132,13 +132,15 @@ return (
                         />
                     </Form.Group>
                 </Row>
-                <Button variant="success" type="submit">Login</Button>
+                <Row className='d-flex justify-content-center mb-3'>
+                    <Button className='col-2' variant="success" type="submit">Login</Button>
+                </Row>
             </Form>
             <Row className="mb-3">
-                <Link to={"/forgotpassword"}>Forgot Password</Link>
+                <Button  variant="success" href={"/register"}>Register Now</Button>
             </Row>
             <Row className="mb-3">
-                <Link to={"/register"}>Register Now</Link>
+                <Button variant="warning" href={"/forgotpassword"}>Forgot Password</Button>
             </Row>
             <Row className="mb-3">
                 <GoogleLogin

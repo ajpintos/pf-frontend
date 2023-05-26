@@ -3,7 +3,7 @@ import { GET_ALLPRODUCTS, GET_PRODUCTSBYNAME } from "./types/typesProducts";
 import { ALL_USERS, EMAIL, LOGIN_USER , LOGIN_USER_GOOGLE , LOGOUT_USER , SET_USER } from "./types/typesUser.js";
 import { DELETE_FAVORITES, ADD_FAVORITES, GET_FAVORITES_DB } from "./types/typesFavorites";
 import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, STATUS_CHANGE_ORDER, SET_CART, ADD_CART } from "./types/typesCart";
-import { SET_SHIPPING_OPTIONS, SAVE_SHIPPING_DATA } from "./types/typesDeliveries";
+import { SET_SHIPPING_OPTIONS, SAVE_SHIPPING_DATA, REFRESH_TOTAL_AMOUNT } from "./types/typesDeliveries";
 import { GET_RATINGS } from "./types/typesRating";
 
 
@@ -22,6 +22,7 @@ const initialState = {
   cart: '',
   cartDetails: [],
   shippingOption: '',
+  totalAmount: 0,
   shippingAddress: [],
   ratingProducts: [],
 };
@@ -49,7 +50,6 @@ const rootReducer = (state = initialState, action) => {
         allCategories: action.payload,
       }
     };
-
     case FILTER_BY_CATEGORIES:
       return {
         ...state,
@@ -91,6 +91,7 @@ const rootReducer = (state = initialState, action) => {
         userEmail: action.payload
       }
     }
+    
     case ADD_CART: {
       return {
         ...state,
@@ -153,7 +154,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         favorites: action.payload,
       };
-
     case GET_FAVORITES_DB:
       return {
         ...state,
@@ -164,6 +164,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         shippingOption: action.payload,
       };
+    };
+    case REFRESH_TOTAL_AMOUNT: {
+      return {
+        ...state,
+        totalAmount: action.payload
+      }
     };
     case SAVE_SHIPPING_DATA: {
       return {

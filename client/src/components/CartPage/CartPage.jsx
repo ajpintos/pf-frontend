@@ -66,6 +66,7 @@ const CartPage = () => {
   const clearCart = async () => {
     if (user.email) {
       const order = cart.orderId;
+      console.log('order en clearCart ', order);
       const orderDetailDelete = await axios.delete('/orders/'+order);
     }; 
     dispatch(clear_Cart());
@@ -89,10 +90,7 @@ const CartPage = () => {
     } else {
       const cartTotal = updateTotals(cartDetails);
       dispatch(set_Cart(cartTotal));
-      localStorage.setItem('cartDetails', JSON.stringify({
-        cart: cart,
-        details: cartDetails 
-      }));
+      localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
     };
   };
 
@@ -101,8 +99,8 @@ const CartPage = () => {
   },[cartDetails]);
 
   return (
-    <Container className='container-fluid'>
-      <div className="container">
+    <div className='container'>
+      <div>
         <div className="row my-2">
           <div className="col-12">
             <h1 className="page-header">Shopping Cart</h1>
@@ -122,9 +120,9 @@ const CartPage = () => {
                   <thead>
                     <tr>
                       <th>Product</th>
-                      <th className="mob-hide"></th>
-                      <th className="mob-hide">Unit Price</th>
-                      <th className="table-qty">Qty</th>
+                      <th></th>
+                      <th>Unit Price</th>
+                      <th>Qty</th>
                       <th>Update</th>
                       <th>Delete</th>
                       <th>Subtotal</th>
@@ -137,14 +135,14 @@ const CartPage = () => {
                     return (
                       <tr key={product.idProduct} >
                         <td>
-                          <p className='h5' >{product.name}</p>
+                          <h5>{product.name}</h5>
                         </td>
-                        <td className="text-center mob-hide">
-                          <figure className='container-fluid'>
+                        <td className="text-center">
+                          <figure>
                             <img src={product.image} width={90} height={90} alt={product.name} />
                           </figure>
                         </td>
-                        <td className="mob-hide">
+                        <td>
                           <span>{accounting.formatMoney(`${product.price}`)}</span>
                         </td>
                         <td>
@@ -155,7 +153,7 @@ const CartPage = () => {
                             max={product.stock}
                             placeholder={product.units}
                             onChange={validateCant}
-                            style={{ width: "50px", marginTop: "5px" }}
+                            style={{ width: "45px"}}
                           />
                         </td>
                         <td>
@@ -203,7 +201,7 @@ const CartPage = () => {
           } 
         </div>
       </div>
-    </Container>
+    </div>
   )
 }
 

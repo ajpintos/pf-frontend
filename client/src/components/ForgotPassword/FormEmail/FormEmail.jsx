@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { emailForgotPassword } from "../../../Redux/actions/actionsUser.js";
 import styles from "./FormEmail.module.css"
 import validateFormEmail from "./validate/validateFormEmail.js";
+import axios from 'axios'
 
 // REACT-BOOSTRAP
 
@@ -17,8 +18,9 @@ import swal from 'sweetalert';
 import emailjs from "@emailjs/browser";
 
 const FormEmail = () => {
-
-    const [ email , setEmail ] = useState("")
+let inicio=false;
+    const [ email , setEmail ] = useState("");
+    const [token, setToken] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const Dom = document.getElementById("formToSend");
@@ -36,21 +38,27 @@ const FormEmail = () => {
         const value = e.target.value;
         setForm({...form, [property]: value});
         setErrors(validateFormEmail({...form, [property]: value}));
+       
     }
-
+useEffect(()=>{   
+            if(token!==''){               
+                emailjsSend(); 
+                navigate('/forgotpassword/changepassword');
+                setToken('')
+            }      
+},[token])
     const handlerSubmitEmail = (e) => {
         e.preventDefault();
         dispatch(emailForgotPassword(email));
         getToken(email);
-        emailjsSend();
-        navigate('/forgotpassword/changepassword');
+      
     }
     
-const emailjsSend = () => {
+const emailjsSend =async () => {
     const serviceID = "service_e5hd1wt";
       const templateID = "template_8i1yknj";
       const key_public = "gEu_FBDo_Q0lvhmwA";
-     emailjs.sendForm(serviceID, templateID, Dom, key_public)
+    await emailjs.sendForm(serviceID, templateID, Dom, key_public)
         .then(
         (result) => {
           console.log(result.text);
@@ -58,7 +66,8 @@ const emailjsSend = () => {
         },
         (error) => {
           console.log(error.text);
-          swal("Error!", "No  sending the message", "error")
+          swal("Error!", "No  sending the message", "error");
+        
         }
       );
 };
@@ -68,9 +77,15 @@ const emailjsSend = () => {
     const getToken = async (email) => {
         try {
             const response = (await axios.get(`/users?email=${email}`)).data;
-            if (response) return response.token
+            if (response) {
+                setToken(response.token)                            
+                return 
+            }
+
         } catch (error) {
-            alert(error.message)
+           // alert(error.message)
+            swal("Error!", "'You are not in the database. please register now", "error");
+            navigate('/login');
         }    
     };
 
@@ -85,14 +100,16 @@ const emailjsSend = () => {
                                 required
                                 type="email"
                                 placeholder="Enter email"
-                                id="email"
+                               
                                 name="email"
                                 value={email}
                                 onChange={handleChangeEmail}
                             />
-                        </Form.Group>
-                        <input type="text" name='token' value='token_por_definir' hidden='true'/>
-                    <p style={{color: "red"}}>{errors.email}</p>
+                        </Form.Group>                       
+                        <p style={{color: "red"}}>{errors.email}</p>
+                       
+                        <Form.Control type="text" name='token' readOnly hidden='true'  value={token}  />
+                        
                         <Button variant="success" type="submit" size='sm'>Submit</Button>
                 </Form> 
             </div>

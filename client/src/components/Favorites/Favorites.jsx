@@ -3,9 +3,7 @@ import Container from "react-bootstrap/Container";
 import Card from "../Card/Card.jsx";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Alert from "react-bootstrap/Alert";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getFavoritesDB } from "../../Redux/actions/actionsFavorites.js";
 
 const Favorites = ({ email }) => {
@@ -16,31 +14,10 @@ const Favorites = ({ email }) => {
 
   const datos = useSelector((state) => state?.favorites);
 
-  /*   const user = useSelector((state) => state?.userLogin);
-  const [datos, setDatos] = useState();
-  const llamado = async () => {
-    const prueba = await axios.get(`/favorites/${user?.email}`);
-    setDatos(prueba?.data);
-  }; */
-  /*  useEffect(() => {
-    llamado();
-  }, []); */
-
-  /*   const favoritos = useSelector((state) => state.favorites);
-  console.log(favoritos);  */
-
-  /*   const favorites = useSelector((state) => state.favorites);
-
-  const favorite = favorites.map((e) => {
-    return e;
-  });
-
-  console.log(favorite); */
-
   return (
     <Container fluid my-3 pb-3 mx-5>
-      <Row className="justify-content-md-center">
-        <Col md="auto">
+      <Row className="text-center">
+        <Col>
           <h2>Favorites</h2>
         </Col>
       </Row>
@@ -65,35 +42,6 @@ const Favorites = ({ email }) => {
           }
         })}
       </Row>
-
-      {/*   <section className="row">
-        {
-        e?.product?.map((product, index) => {
-          return (
-            <Card
-              key={index}
-              id={product?.id}
-              name={product?.name}
-              image={product?.image}
-              description={product?.description}
-              price={product?.price}
-              stock={product.stock}
-        
-            />
-          );
-        })}
-        <Row className="justify-content-md-center">
-          <Col md="auto">
-            {datos?.length < 1 ? (
-              <h4 my-3 pb-5 style={{ color: "orangered", margin: "auto" }}>
-                No favorites have been selected, go back to Home.
-              </h4>
-            ) : (
-              ""
-            )}
-          </Col>
-        </Row>
-      </section> */}
     </Container>
   );
 };

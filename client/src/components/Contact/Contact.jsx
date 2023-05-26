@@ -10,6 +10,7 @@ import Form from "react-bootstrap/Form";
 import emailjs from "@emailjs/browser";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Button from 'react-bootstrap/Button';
+import Row from "react-bootstrap/esm/Row";
 import Stack from "react-bootstrap/esm/Stack";
 import swal from 'sweetalert';
 
@@ -146,7 +147,7 @@ function Contact() {
                 <Form.Group className="col-md-6 col-xm-12 my-1 pb-2">
                   <FloatingLabel
                     controlId="floatingInputPhone"
-                    label="Cel Phone"
+                    label="Phone Number"
                   >
                     <Form.Control
                       type="text"
@@ -155,7 +156,7 @@ function Contact() {
                       value={form.phone}
                       maxLength="15"
                       onChange={handleChange}
-                      placeholder="Cel Phone"
+                      placeholder="Phone Number"
                       aria-label="Celular"
                     />
                   </FloatingLabel>
@@ -190,10 +191,11 @@ function Contact() {
                   </span>
                 </div>
               </Form.Group>
-
-              <Button variant="success" type="submit">
-                Send
-              </Button>
+              <Row className="justify-content-center">
+                <Button variant="success" type="submit" className="mb-3 col-3">
+                  Send
+                </Button>
+              </Row>
 
               {/* <p className={styles.error}>{errorMessage}</p>
               <p className={styles.success}>{successMessage}</p> */}

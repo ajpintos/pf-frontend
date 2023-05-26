@@ -5,6 +5,7 @@ import axios from 'axios'
 import Container from 'react-bootstrap/esm/Container'
 import accounting from 'accounting';
 import { useNavigate } from 'react-router-dom'
+import s from './ReviewOrder.module.css';
 
 export default function ReviewOrder() {
 
@@ -15,8 +16,7 @@ export default function ReviewOrder() {
 
   const user = useSelector(state => state.userLogin);
   const shippingAddress = useSelector(state => state.shippingAddress)
-
-
+  const shippingAmount = useSelector(state => state.totalAmount)
 
   const [ formCheckout , setFormCheckout ] = useState({
       email: user.email,
@@ -28,12 +28,6 @@ export default function ReviewOrder() {
       city: user.city,
       country: user.country,
   });
-
-  const [formShipping, setFormShipping] = useState({
-    firstname: shippingAddress.firstname,
-    lastname: shippingAddress.lastname,
-
-  })
 
   const [ order, setOrder ] = useState({
     id: '',
@@ -53,11 +47,12 @@ export default function ReviewOrder() {
         taxAmountO = taxAmountO + cartDetails[i].taxAmount;
         totalAmountO = totalAmountO + cartDetails[i].totalAmount;
     };
+    const total = totalAmountO + shippingAmount;
     setOrder({
       idOrder: '',
       amount: amountO,
-      taxAmount: taxAmountO,
-      totalAmount: totalAmountO,
+      shippingAmount: shippingAmount,
+      totalAmount: total,
     });
   };
 
@@ -74,7 +69,6 @@ export default function ReviewOrder() {
 
   return (
     <Container className='container-fluid'>
-        {console.log(shippingAddress)}
         <div className="container">
             <div className="row my-2">
                 <div className="col-12">
@@ -83,8 +77,8 @@ export default function ReviewOrder() {
             </div>
             <div className="row">
                 <div className="col-lg-9 mb-4">
-                    <div className="table-responsive">
-                        <table className="table">
+                    <div className="table-responsive mb-5">
+                        <table className="table" >
                             <thead>
                                 <tr>
                                 <th>Product</th>
@@ -122,35 +116,48 @@ export default function ReviewOrder() {
                             </tbody>
                         </table>
                     </div>
-                <div className="col-lg-12 mb-4 d-flex gap-2">
-                    <div class="col-6">
-                        <div class="card mb-3">
-                            <div class="card-body">
+                    {shippingAddress.firstname ?
+                    <div className="col-lg-12 mb-4 d-flex gap-2">
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-body" id={s.card_container}>
                                     <label><strong>Billing Address</strong></label>
                                     <hr />
                                     <span>{formCheckout.firstname} {formCheckout.lastname}</span><br/>
                                     <span>{formCheckout.address}</span><br/>
                                     <span>{formCheckout.cp}</span><br/>
                                     <span>{formCheckout.country} - {formCheckout.city}</span><br/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {shippingAddress.firstname? 
-                    <div class="col-6">
-                        <div class="card mb-3">
-                            <div class="card-body">
+                        <div class="col-6">
+                            <div class="card mb-3">
+                                <div class="card-body" id={s.card_container}>
                                     <label><strong>Shipping Address</strong></label>
                                     <hr />
                                     <span>{shippingAddress.firstname} {shippingAddress.lastname}</span><br/>
                                     <span>{shippingAddress.address}</span><br/>
                                     <span>{shippingAddress.cp}</span><br/>
                                     <span>{shippingAddress.country} - {shippingAddress.city}</span><br/>
+                                </div>
+                            </div>
+                        </div> 
+                    </div> : 
+                    <div className="col-lg-12 mb-4 d-flex gap-2">
+                    <div class="col-sm-12 col-xs-12 col-lg-6" >
+                        <div class="card mb-3">
+                            <div class="card-body" id={s.card_container}>
+                                <label><strong>Billing and Shipping Address</strong></label>
+                                <hr />
+                                <span>{formCheckout.firstname} {formCheckout.lastname}</span><br/>
+                                <span>{formCheckout.address}</span><br/>
+                                <span>{formCheckout.cp}</span><br/>
+                                <span>{formCheckout.country} - {formCheckout.city}</span><br/>
                             </div>
                         </div>
-                    </div> :
-                        " "
+                    </div>
+                    </div>
                     }
-                </div>
                 </div>
                 <div className='col-lg-3 mb-4'>
                     <div className="col-12">
@@ -163,7 +170,7 @@ export default function ReviewOrder() {
                             </tr>
                             <tr>
                                 <td colSpan="1" className="text-left"><strong>Shipping: </strong></td>
-                                <td colSpan="1" className="text-right"><p>{accounting.formatMoney(19.99)}</p></td>
+                                <td colSpan="1" className="text-right"><p>{accounting.formatMoney(`${shippingAmount}`)}</p></td>
                             </tr>
                             <tr>
                                 <td colSpan="1" className="text-left"><strong>Total: </strong></td>
@@ -172,7 +179,8 @@ export default function ReviewOrder() {
                             </tbody>
                         </table>
                         <div className="text-center cart-actions">
-                            <Button className="btn btn-success btn-block mb-3" onClick={handlerMercadoPagoLink}>Proceed to the Payment</Button>
+                            <Button className="btn btn-success btn-block mb-3 mx-2" onClick={handlerMercadoPagoLink}>Proceed to the Payment</Button>
+                            <Button className="btn btn-success btn-block mb-3 mx-2" onClick={() => goToPath('/cart/checkout')}>Go Back to Checkout</Button>
                         </div>
                     </div>
                 </div>
