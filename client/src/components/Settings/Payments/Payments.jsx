@@ -14,7 +14,6 @@ const Payment = () => {
         .catch((error) => console.log(error));
     }
   }, [datos]);
-
   return (
     <div>
       {datos !== undefined ? (
