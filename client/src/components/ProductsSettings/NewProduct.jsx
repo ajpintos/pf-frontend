@@ -102,7 +102,6 @@ const NewProduct = () => {
         .then((res) => {
           swal("Congratulations!", "Product added successfully!", "success");
           // setSuccessMessage("Product created successfully.");
-          loadingData();
           console.log("res  " + res);
           setForm({
             name: "",
@@ -112,7 +111,7 @@ const NewProduct = () => {
             image: "",
             categories: [],
           });
-
+          loadingData();
           setCategories(allCategories);
           setCategoriesSel([]);
         })

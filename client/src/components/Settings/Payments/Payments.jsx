@@ -15,9 +15,9 @@ const Payment = () => {
     }
   }, [datos]);
   return (
-    <div>
-      {datos !== undefined ? (
-        <Table>
+    <div className="container-fluid col-8 mt-3">
+      {datos?.length > 0 ? (
+        <Table striped size="sm" >
           <thead>
             <tr>
               <th>No.</th>
@@ -27,13 +27,15 @@ const Payment = () => {
             </tr>
           </thead>
           <tbody>
-            {datos?.map((e, index) => {
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{e.name}</td>
-                <td>{e.Status}</td>
-                <td>{e.userEmail}</td>
-              </tr>;
+            {datos.map((payment, index) => {
+              return (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{payment.name}</td>
+                  <td>{payment.status}</td>
+                  <td>{payment.userEmail}</td>
+                </tr>
+              );
             })}
           </tbody>
         </Table>
