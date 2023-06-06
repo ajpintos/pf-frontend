@@ -31,3 +31,18 @@
   margin: auto;
   list-style: circle;
 }
+.containerTeam{
+  border: 1px solid gray;
+  height: 150px;
+  border-radius: 6px;
+}
+.countainerEle{
+  border: 1px solid rgb(147, 145, 145);
+  width: 140px;
+  display: inline-block;
+  padding: 10px;
+  margin:5px;
+  border-radius: 6px;
+  
+
+}
