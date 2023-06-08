@@ -39,10 +39,11 @@ const About=()=>{
                                     <Card.Text>                        
                                         <h6> <img src={ele.flag}  alt={ele.name} height='45px'/>  {ele.country}</h6> 
                                         <div style={{fontSize:'0.7rem',textAlign:'center'}}>                    
-                                        <div><img src={emailIcon} alt='Email' height='24px'/><div>{ele.email}</div></div>
-                                        <div><img src={githubIcon} alt='Git' height='24px'/><div>{ele.git}</div></div>
-                                        <div><img src={linkedinIcon} alt='Linkedin' height='21px'/><div>{ele.linkedin}</div></div>
-                                        <p>{ele.data}</p>
+                                        {/* <div><img src={emailIcon} alt='Email' height='24px'/><div>{ele.email}</div></div> */}
+                                       
+                                        <div><a href={ele.git} target="_blank"><img src={githubIcon} alt='Git' height='21px'/></a>
+                                        <a href={ele.linkedin} target="_blank"><img src={linkedinIcon} alt='Linkedin' height='21px'/></a></div>
+                                       
                                         </div>
                                     </Card.Text>                            
                                 </Card.Body>
